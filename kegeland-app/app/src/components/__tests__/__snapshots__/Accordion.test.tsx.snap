@@ -1,0 +1,668 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Accordion-component should render correctly 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#f6f6f6",
+        }
+      }
+    >
+      <View
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "expanded": true,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Array [
+              Object {
+                "padding": 8,
+              },
+              Array [
+                Object {
+                  "backgroundColor": "#fff",
+                },
+                Object {
+                  "paddingHorizontal": 0,
+                  "paddingLeft": 8,
+                },
+                undefined,
+              ],
+            ],
+          ]
+        }
+      >
+        <View
+          pointerEvents="none"
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "margin": 8,
+                },
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                  },
+                  Object {
+                    "textAlign": "left",
+                  },
+                  Array [
+                    Object {
+                      "fontSize": 16,
+                    },
+                    Object {
+                      "color": "#00b0ff",
+                    },
+                    Array [
+                      Object {
+                        "color": "#000000",
+                      },
+                      undefined,
+                    ],
+                  ],
+                ]
+              }
+            >
+              Test accordion
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "margin": 8,
+                },
+                undefined,
+              ]
+            }
+          >
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.87)",
+                    "fontSize": 24,
+                  },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰅃
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "rgba(0, 0, 0, 0.12)",
+            "height": 0.5,
+          },
+          undefined,
+          Array [
+            Object {
+              "paddingLeft": 64,
+            },
+            undefined,
+          ],
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "paddingLeft": 64,
+          },
+          Array [
+            Object {
+              "paddingLeft": 12,
+            },
+          ],
+        ]
+      }
+    >
+      <Text>
+        Test
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Test Accordion-component should render with icon given as a component 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#f6f6f6",
+        }
+      }
+    >
+      <View
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "expanded": true,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Array [
+              Object {
+                "padding": 8,
+              },
+              Array [
+                Object {
+                  "backgroundColor": "#fff",
+                },
+                Object {
+                  "paddingHorizontal": 0,
+                  "paddingLeft": 8,
+                },
+                undefined,
+              ],
+            ],
+          ]
+        }
+      >
+        <View
+          pointerEvents="none"
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "height": 24,
+                  "width": 24,
+                },
+                Object {
+                  "justifyContent": "center",
+                },
+              ]
+            }
+          >
+            <Text
+              allowFontScaling={false}
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#0081cb",
+                    "fontSize": 30,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰅁
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "margin": 8,
+                },
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                  },
+                  Object {
+                    "textAlign": "left",
+                  },
+                  Array [
+                    Object {
+                      "fontSize": 16,
+                    },
+                    Object {
+                      "color": "#00b0ff",
+                    },
+                    Array [
+                      Object {
+                        "color": "#000000",
+                      },
+                      undefined,
+                    ],
+                  ],
+                ]
+              }
+            >
+              Test accordion
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "margin": 8,
+                },
+                undefined,
+              ]
+            }
+          >
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.87)",
+                    "fontSize": 24,
+                  },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰅃
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "rgba(0, 0, 0, 0.12)",
+            "height": 0.5,
+          },
+          undefined,
+          Array [
+            Object {
+              "paddingLeft": 64,
+            },
+            undefined,
+          ],
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "paddingLeft": 64,
+          },
+          Array [
+            Object {
+              "paddingLeft": 12,
+            },
+          ],
+        ]
+      }
+    >
+      <Text>
+        Test
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Test Accordion-component should render with icon given as string 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#f6f6f6",
+        }
+      }
+    >
+      <View
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "expanded": true,
+          }
+        }
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Array [
+              Object {
+                "padding": 8,
+              },
+              Array [
+                Object {
+                  "backgroundColor": "#fff",
+                },
+                Object {
+                  "paddingHorizontal": 0,
+                  "paddingLeft": 8,
+                },
+                undefined,
+              ],
+            ],
+          ]
+        }
+      >
+        <View
+          pointerEvents="none"
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            allowFontScaling={false}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "#00b0ff",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "alignSelf": "center",
+                  },
+                  undefined,
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            󰭕
+          </Text>
+          <View
+            style={
+              Array [
+                Object {
+                  "margin": 8,
+                },
+                Object {
+                  "flex": 1,
+                  "justifyContent": "center",
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                  },
+                  Object {
+                    "textAlign": "left",
+                  },
+                  Array [
+                    Object {
+                      "fontSize": 16,
+                    },
+                    Object {
+                      "color": "#00b0ff",
+                    },
+                    Array [
+                      Object {
+                        "color": "#000000",
+                      },
+                      undefined,
+                    ],
+                  ],
+                ]
+              }
+            >
+              Test accordion
+            </Text>
+          </View>
+          <View
+            style={
+              Array [
+                Object {
+                  "margin": 8,
+                },
+                undefined,
+              ]
+            }
+          >
+            <Text
+              accessibilityElementsHidden={true}
+              allowFontScaling={false}
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.87)",
+                    "fontSize": 24,
+                  },
+                  Array [
+                    Object {
+                      "lineHeight": 24,
+                      "transform": Array [
+                        Object {
+                          "scaleX": 1,
+                        },
+                      ],
+                    },
+                    Object {
+                      "backgroundColor": "transparent",
+                    },
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰅃
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "rgba(0, 0, 0, 0.12)",
+            "height": 0.5,
+          },
+          undefined,
+          Array [
+            Object {
+              "paddingLeft": 64,
+            },
+            undefined,
+          ],
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "paddingLeft": 64,
+          },
+          Array [
+            Object {
+              "paddingLeft": 12,
+            },
+          ],
+        ]
+      }
+    >
+      <Text>
+        Test
+      </Text>
+    </View>
+  </View>
+</View>
+`;

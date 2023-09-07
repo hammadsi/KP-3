@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Badge-component should render correctly 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Text
+    collapsable={false}
+    nativeID="animatedComponent"
+    numberOfLines={1}
+    style={
+      Object {
+        "alignSelf": "flex-end",
+        "backgroundColor": "#00b0ff",
+        "borderRadius": 10,
+        "color": "#000000",
+        "fontFamily": "System",
+        "fontSize": 10,
+        "fontWeight": "400",
+        "height": 20,
+        "lineHeight": 10,
+        "minWidth": 20,
+        "opacity": 1,
+        "overflow": "hidden",
+        "paddingHorizontal": 4,
+        "textAlign": "center",
+        "textAlignVertical": "center",
+      }
+    }
+  >
+    1
+  </Text>
+</View>
+`;

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Coin-entity should render correctly 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    resizeMode="stretch"
+    source={
+      Object {
+        "testUri": "../../../assets/femfit/gold.png",
+      }
+    }
+    style={
+      Array [
+        Object {
+          "position": "absolute",
+        },
+        Object {
+          "height": 25,
+          "left": 87.5,
+          "top": 87.5,
+          "width": 25,
+        },
+      ]
+    }
+  />
+</View>
+`;

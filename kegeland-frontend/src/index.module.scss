@@ -1,0 +1,24 @@
+.GoBack {
+  font-size: 20px;
+  padding: 8px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.h1 {
+  font-size: 50px;
+}
+
+.container {
+  display: inline-flex;
+}
+
+.content {
+  position: fixed;
+  top: 80px;
+  left: 300px;
+  padding: 8px;
+  height: 100%;
+  overflow: auto;
+  flex-grow: 1;
+}

@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test excercise renders correctly 1`] = `
+<div
+  className="css-mtoapo"
+>
+  <h1
+    className="chakra-heading css-b2bopb"
+  >
+    404
+  </h1>
+  <p
+    className="chakra-text css-yty1y5"
+  >
+    Oops, this page could not be found!
+  </p>
+  <div
+    className="css-0"
+  >
+    <button
+      className="chakra-button css-1i3cau6"
+      onClick={[Function]}
+      type="button"
+    >
+      Go back
+    </button>
+  </div>
+</div>
+`;

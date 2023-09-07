@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test ThemeSwitch-component should render correctly 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <RCTSwitch
+    accessibilityRole="switch"
+    onChange={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    onTintColor="#00b0ff"
+    style={
+      Object {
+        "height": 31,
+        "width": 51,
+      }
+    }
+    tintColor="rgba(0, 0, 0, 0.54)"
+    value={false}
+  />
+</View>
+`;

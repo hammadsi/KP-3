@@ -1,0 +1,352 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test BluetoothDeviceList-component should render correctly 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "marginVertical": 8,
+        },
+        undefined,
+      ]
+    }
+    theme={
+      Object {
+        "animation": Object {
+          "scale": 1,
+        },
+        "colors": Object {
+          "accent": "#03dac4",
+          "backdrop": "rgba(0, 0, 0, 0.5)",
+          "background": "#f6f6f6",
+          "border": "rgb(216, 216, 216)",
+          "card": "rgb(255, 255, 255)",
+          "disabled": "rgba(0, 0, 0, 0.26)",
+          "elevation": Object {
+            "elevation1": "#fff",
+          },
+          "error": "#B00020",
+          "muted": "rgba(0, 0, 0, 0.54)",
+          "notification": "#f50057",
+          "onSurface": "#000000",
+          "placeholder": "rgba(0, 0, 0, 0.54)",
+          "primary": "#00b0ff",
+          "status": Object {
+            "alert": "#ffd600",
+            "error": "#dd2c00",
+            "success": "#64dd17",
+          },
+          "surface": "#ffffff",
+          "text": "#000000",
+        },
+        "dark": false,
+        "fonts": Object {
+          "light": Object {
+            "fontFamily": "System",
+            "fontWeight": "300",
+          },
+          "medium": Object {
+            "fontFamily": "System",
+            "fontWeight": "500",
+          },
+          "regular": Object {
+            "fontFamily": "System",
+            "fontWeight": "400",
+          },
+          "thin": Object {
+            "fontFamily": "System",
+            "fontWeight": "100",
+          },
+        },
+        "roundness": 15,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flexDirection": "row",
+          "padding": 8,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignSelf": "center",
+            "marginRight": 8,
+          }
+        }
+      >
+        <Text
+          allowFontScaling={false}
+          selectable={false}
+          style={
+            Array [
+              Object {
+                "color": "#00b0ff",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "alignSelf": "center",
+                },
+                undefined,
+              ],
+              Object {
+                "fontFamily": "Material Design Icons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+              Object {},
+            ]
+          }
+        >
+          󰂯
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "flexDirection": "row",
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "flex": 1,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                },
+                Object {
+                  "textAlign": "left",
+                },
+                Array [
+                  Object {
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.87)",
+                    "fontFamily": "System",
+                    "fontWeight": "500",
+                    "writingDirection": "ltr",
+                  },
+                  Array [
+                    Object {
+                      "fontSize": 20,
+                      "letterSpacing": 0.15,
+                      "lineHeight": 30,
+                      "marginVertical": 2,
+                    },
+                    Object {
+                      "fontSize": 16,
+                      "lineHeight": 16,
+                      "marginTop": 2,
+                      "marginVertical": 0,
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            Test device
+          </Text>
+          <View
+            style={
+              Object {
+                "flexDirection": "row",
+              }
+            }
+          >
+            <Text
+              allowFontScaling={false}
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.54)",
+                    "fontSize": 8,
+                  },
+                  Array [
+                    Object {
+                      "alignSelf": "center",
+                    },
+                    Array [
+                      Object {
+                        "marginRight": 4,
+                      },
+                      Object {
+                        "color": "#ffd600",
+                      },
+                    ],
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰝥
+            </Text>
+            <Text
+              style={
+                Array [
+                  Object {
+                    "color": "#000000",
+                    "fontFamily": "System",
+                    "fontWeight": "400",
+                  },
+                  Object {
+                    "textAlign": "left",
+                  },
+                  Object {
+                    "fontSize": 12,
+                    "lineHeight": 14,
+                  },
+                ]
+              }
+            >
+              Available
+            </Text>
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "alignSelf": "center",
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                Object {
+                  "color": "#000000",
+                  "fontFamily": "System",
+                  "fontWeight": "400",
+                },
+                Object {
+                  "textAlign": "left",
+                },
+                Object {
+                  "marginRight": 4,
+                },
+              ]
+            }
+          >
+            100
+            %
+          </Text>
+          <Text
+            allowFontScaling={false}
+            selectable={false}
+            style={
+              Array [
+                Object {
+                  "color": "#64dd17",
+                  "fontSize": 20,
+                },
+                Array [
+                  Object {
+                    "alignSelf": "center",
+                  },
+                  undefined,
+                ],
+                Object {
+                  "fontFamily": "Material Design Icons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+                Object {},
+              ]
+            }
+          >
+            󰥈
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignSelf": "center",
+            "position": "relative",
+          }
+        }
+      >
+        <View
+          collapsable={false}
+        >
+          <View
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            nativeID="animatedComponent"
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <Text
+              allowFontScaling={false}
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "rgba(0, 0, 0, 0.54)",
+                    "fontSize": 24,
+                  },
+                  Array [
+                    Object {
+                      "alignSelf": "center",
+                    },
+                    undefined,
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰇙
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

@@ -1,0 +1,317 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test PageWrapper-component should render correctly 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <RNCSafeAreaView
+    edges={
+      Array [
+        "bottom",
+        "left",
+        "right",
+        "top",
+      ]
+    }
+    style={
+      Array [
+        Object {
+          "height": "100%",
+          "marginTop": 8,
+          "width": "100%",
+        },
+        Object {
+          "paddingHorizontal": 32,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "System",
+            "fontWeight": "400",
+          },
+          Object {
+            "textAlign": "left",
+          },
+          Array [
+            Object {
+              "textAlign": "left",
+            },
+            Object {
+              "color": "rgba(0, 0, 0, 0.87)",
+              "fontFamily": "System",
+              "fontWeight": "500",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "fontSize": 20,
+                "letterSpacing": 0.15,
+                "lineHeight": 30,
+                "marginVertical": 2,
+              },
+              Object {
+                "fontSize": 24,
+                "fontWeight": "bold",
+              },
+            ],
+          ],
+        ]
+      }
+    >
+      Test page
+    </Text>
+    <Text>
+      Test
+    </Text>
+  </RNCSafeAreaView>
+</View>
+`;
+
+exports[`Test PageWrapper-component should render correctly with content size = full 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <RNCSafeAreaView
+    edges={
+      Array [
+        "bottom",
+        "left",
+        "right",
+        "top",
+      ]
+    }
+    style={
+      Array [
+        Object {
+          "height": "100%",
+          "marginTop": 8,
+          "width": "100%",
+        },
+        Object {
+          "paddingHorizontal": 0,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "System",
+            "fontWeight": "400",
+          },
+          Object {
+            "textAlign": "left",
+          },
+          Array [
+            Object {
+              "textAlign": "left",
+            },
+            Object {
+              "color": "rgba(0, 0, 0, 0.87)",
+              "fontFamily": "System",
+              "fontWeight": "500",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "fontSize": 20,
+                "letterSpacing": 0.15,
+                "lineHeight": 30,
+                "marginVertical": 2,
+              },
+              Object {
+                "fontSize": 24,
+                "fontWeight": "bold",
+              },
+            ],
+          ],
+        ]
+      }
+    >
+      Test page
+    </Text>
+    <Text>
+      Test
+    </Text>
+  </RNCSafeAreaView>
+</View>
+`;
+
+exports[`Test PageWrapper-component should render correctly with content size = large 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <RNCSafeAreaView
+    edges={
+      Array [
+        "bottom",
+        "left",
+        "right",
+        "top",
+      ]
+    }
+    style={
+      Array [
+        Object {
+          "height": "100%",
+          "marginTop": 8,
+          "width": "100%",
+        },
+        Object {
+          "paddingHorizontal": 8,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "System",
+            "fontWeight": "400",
+          },
+          Object {
+            "textAlign": "left",
+          },
+          Array [
+            Object {
+              "textAlign": "left",
+            },
+            Object {
+              "color": "rgba(0, 0, 0, 0.87)",
+              "fontFamily": "System",
+              "fontWeight": "500",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "fontSize": 20,
+                "letterSpacing": 0.15,
+                "lineHeight": 30,
+                "marginVertical": 2,
+              },
+              Object {
+                "fontSize": 24,
+                "fontWeight": "bold",
+              },
+            ],
+          ],
+        ]
+      }
+    >
+      Test page
+    </Text>
+    <Text>
+      Test
+    </Text>
+  </RNCSafeAreaView>
+</View>
+`;
+
+exports[`Test PageWrapper-component should render correctly with content size = medium 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <RNCSafeAreaView
+    edges={
+      Array [
+        "bottom",
+        "left",
+        "right",
+        "top",
+      ]
+    }
+    style={
+      Array [
+        Object {
+          "height": "100%",
+          "marginTop": 8,
+          "width": "100%",
+        },
+        Object {
+          "paddingHorizontal": 16,
+        },
+        undefined,
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "System",
+            "fontWeight": "400",
+          },
+          Object {
+            "textAlign": "left",
+          },
+          Array [
+            Object {
+              "textAlign": "left",
+            },
+            Object {
+              "color": "rgba(0, 0, 0, 0.87)",
+              "fontFamily": "System",
+              "fontWeight": "500",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "fontSize": 20,
+                "letterSpacing": 0.15,
+                "lineHeight": 30,
+                "marginVertical": 2,
+              },
+              Object {
+                "fontSize": 24,
+                "fontWeight": "bold",
+              },
+            ],
+          ],
+        ]
+      }
+    >
+      Test page
+    </Text>
+    <Text>
+      Test
+    </Text>
+  </RNCSafeAreaView>
+</View>
+`;

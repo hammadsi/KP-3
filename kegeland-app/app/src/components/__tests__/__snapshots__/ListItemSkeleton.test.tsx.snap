@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test ListItemSkeleton-component should render correctly 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "marginVertical": 8,
+        "padding": 8,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "#000000",
+          "borderRadius": 11,
+          "height": 22,
+          "opacity": 0.1,
+          "width": 22,
+        }
+      }
+    >
+      <View
+        style={Object {}}
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#000000",
+          "borderRadius": 0,
+          "flex": 1,
+          "height": 22,
+          "marginLeft": 8,
+          "opacity": 0.1,
+          "width": undefined,
+        }
+      }
+    >
+      <View
+        style={Object {}}
+      />
+    </View>
+  </View>
+</View>
+`;

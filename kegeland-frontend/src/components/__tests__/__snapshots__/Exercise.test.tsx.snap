@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test excercise renders correctly 1`] = `
+Array [
+  <li
+    className="chakra-wrap__listitem css-1yp4ln"
+  >
+    <div
+      className="chakra-linkbox css-rd9efr"
+    >
+      <a
+        className="chakra-linkbox__overlay css-zpisrh"
+        href="/patient/undefined/exercise/id"
+      >
+        <div
+          className="css-0"
+        >
+          20.02.2022
+        </div>
+        <div
+          className="css-0"
+        >
+          femfit
+        </div>
+      </a>
+      <hr
+        aria-orientation="horizontal"
+        className="chakra-divider css-3f0eww"
+      />
+      <p
+        className="chakra-text css-x4lmqn"
+      />
+    </div>
+  </li>,
+  " ",
+]
+`;

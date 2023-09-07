@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test withDevice-hoc should render correctly 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    device={
+      Object {
+        "battery": 1,
+        "id": "23:32:FA:32",
+        "name": "Test device",
+        "state": "available",
+        "type": "femfit",
+      }
+    }
+    testID="MockComponent"
+  />
+</View>
+`;

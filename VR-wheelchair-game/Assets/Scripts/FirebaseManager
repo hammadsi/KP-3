@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 
 
 public class FirebaseManager : MonoBehaviour {
-    private string databaseURL = "https://YOUR_PROJECT_ID.firebaseio.com/";
+    private string databaseURL = "https://test-unity-kundestyrt.firebaseio.com/";
 
     // Send data to Firebase
     public void SendData(string path, string jsonData) {

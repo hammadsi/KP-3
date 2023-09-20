@@ -16,7 +16,7 @@ You can get started by downloading the nRF Connect SDK, which includes the Zephy
 
 ### Setting up with nRF Connect SDK v2.1.2 (Recommended)
 
-1. Clone this repository into the root directory of an existing nRF Connect SDK v2.1.2 installation. The directory path should be `C:\ncs\v2.1.2\wheelchair-ergometer-game-controller`.
+1. Copy the `wheelchair-ergometer-game-controller` into the root directory of an existing nRF Connect SDK v2.1.2 installation. The directory path should be `C:\ncs\v2.1.2\wheelchair-ergometer-game-controller`.
 
 ## Build Instructions
 

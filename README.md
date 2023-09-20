@@ -1,10 +1,9 @@
 # KP-3
 Customer Driven Project - Group 3
 
-# Wheelchair Ergometer Game Controller - To use the wheelchair as a controller
+# Wheelchair Ergometer Game Controller
 
-This project allows an Invictus Trainer to interface with a computer or smartphone using encoders and an nRF52840 microcontroller. A gameplay demo video is available, showing what the player sees on the screen.
-
+This project allows an Invictus Trainer to interface with a computer or smartphone using encoders and an nRF52840 microcontroller.
 ## Installation
 
 ### Prerequisites
@@ -137,5 +136,5 @@ CheckNetIsolation LoopbackExempt -is -n="10247LuisQuintero.ExciteOMeter_k7zc7t0y
 - If the device has never been connected to the app, press `Pair` and it will prompt connection with Windows.
 - When the device is paired it will enable the option `Continue`. If a device starting with `Polar H10 ` is detected, it will jump to configure their characteristics. Otherwise, the second screen will be opened to explore their services and characteristics.
 - Adjust the toggles according to the variables that want to collect from the sensor (HR+RRi). Note that ECG and ACC cannot be simultaneously enabled, the device stops responding to requests when busy sending both streamings.
-
+- Run the wheelchair game executable, with both the wheelchair ergonomic controller and the Polar H10-belt connected.
 

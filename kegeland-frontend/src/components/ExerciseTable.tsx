@@ -46,7 +46,8 @@ const ExerciseTable: React.FC<ExerciseTableProps> = ({
             <Button
               onClick={() =>
                 navigate(`/patients/${patientId}/exercise/${props.getValue()}`)
-              }>
+              }
+            >
               Select
             </Button>
           </Flex>

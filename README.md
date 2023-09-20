@@ -95,7 +95,7 @@ For instructions on how to set up TeraTerm, refer to the official documentation 
 
 # Connecting the Polar belt H10
 
-# **Setup `Excite-O-Meter|Devices`**
+## **Setup `Excite-O-Meter|Devices`**
 
 The `Excite-O-Meter|Devices` configures the communication interface for the physiological sensor, collects data via Bluetooth, and streams them to the Unity Editor via [LSL](https://github.com/sccn/labstreaminglayer). It is available as a Universal Windows Platform **UWP for Windows 10**. 
 

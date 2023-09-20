@@ -11043,6 +11043,26 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.69803923
       objectReference: {fileID: 0}
+    - target: {fileID: 3320935222849843145, guid: 503ff7d3bcc8c3545899cf43fd6d5c9e,
+        type: 3}
+      propertyPath: relativeSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320935222849843145, guid: 503ff7d3bcc8c3545899cf43fd6d5c9e,
+        type: 3}
+      propertyPath: lineThickness
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320935222849843145, guid: 503ff7d3bcc8c3545899cf43fd6d5c9e,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320935222849843145, guid: 503ff7d3bcc8c3545899cf43fd6d5c9e,
+        type: 3}
+      propertyPath: m_points.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503ff7d3bcc8c3545899cf43fd6d5c9e, type: 3}
 --- !u!224 &3798961426203162808 stripped
@@ -11878,6 +11898,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 0.16862746
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320935222849843145, guid: 503ff7d3bcc8c3545899cf43fd6d5c9e,
+        type: 3}
+      propertyPath: relativeSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320935222849843145, guid: 503ff7d3bcc8c3545899cf43fd6d5c9e,
+        type: 3}
+      propertyPath: lineThickness
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320935222849843145, guid: 503ff7d3bcc8c3545899cf43fd6d5c9e,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320935222849843145, guid: 503ff7d3bcc8c3545899cf43fd6d5c9e,
+        type: 3}
+      propertyPath: m_points.Array.size
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 503ff7d3bcc8c3545899cf43fd6d5c9e, type: 3}

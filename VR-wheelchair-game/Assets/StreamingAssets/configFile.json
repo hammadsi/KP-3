@@ -1,7 +1,7 @@
 {
     "logSettings": {
         "sessionId": "SessionID",
-        "mainLogFolder": "C:/Users/kenta/Downloads/VR-wheelchair-game/VR-wheelchair-game/Assets/../LogFiles_ExciteOMeter/",
+        "mainLogFolder": "C:/Users/User/Downloads/KP-3/VR-wheelchair-game/Assets/../LogFiles_ExciteOMeter/",
         "mainDebugFilename": "logDebug.txt",
         "sessionJsonFilename": "sessionData.json",
         "recordScreenshots": true,

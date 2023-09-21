@@ -125,3 +125,8 @@ In order to test, run or develop on the project, one must perform the following 
 ## 4. Testing
 
 run `yarn test` to run the tests developed for this repository.
+
+## 5. Formatting
+
+Before committing, format your files using alt+shift+F (Windows) or cmd+shift+F (Mac).
+When prettier errors occurr, run the command `prettier . --write` from the directory `KP-3/kegeland-frontend`

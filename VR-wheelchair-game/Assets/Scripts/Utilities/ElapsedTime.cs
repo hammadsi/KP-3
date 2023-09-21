@@ -19,6 +19,9 @@ public class ElapsedTime : MonoBehaviour
 
 
     private TextMeshProUGUI timerText;
+
+    private FirebaseManager firebaseManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +30,8 @@ public class ElapsedTime : MonoBehaviour
         timerCanvas.SetActive(true);
         timerText = timerCanvas.transform.Find("Timer Text").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         timerIsRunning = false;
+
+        firebaseManager = FindObjectOfType<FirebaseManager>();
     }
 
     public int getLapCount()
@@ -103,6 +108,8 @@ public class ElapsedTime : MonoBehaviour
         //        bestTime = lapTime;
         //    }
         //}
+
+        firebaseManager.SendLapTime(lapTime);
     }
 
     public void startTimer()

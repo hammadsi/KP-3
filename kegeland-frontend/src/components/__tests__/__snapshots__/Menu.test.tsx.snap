@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test manu renders correctly dark 1`] = `
+<div
+  className="chakra-stack css-7nrznn"
+>
+  <p
+    className="chakra-text css-199kdpe"
+  >
+    hello
+  </p>
+  <hr
+    aria-orientation="horizontal"
+    className="chakra-divider css-1x4iw6"
+  />
+</div>
+`;
+
+exports[`Test manu renders correctly ligth 1`] = `
+<div
+  className="chakra-stack css-7nrznn"
+>
+  <div
+    className="css-1drbkg9"
+  >
+    <div
+      className="chakra-wrap css-i6bazn"
+    >
+      <ul
+        className="chakra-wrap__list css-wah4g8"
+      >
+        <li
+          className="chakra-wrap__listitem css-70qvj9"
+        >
+          <span
+            className="chakra-avatar css-ew7jl2"
+          >
+            <div
+              aria-label="ola Nordmann"
+              className="chakra-avatar__initials css-0"
+              role="img"
+            >
+              oN
+            </div>
+          </span>
+          <p
+            className="chakra-text css-zyu9tc"
+          >
+            ola Nordmann
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr
+    aria-orientation="horizontal"
+    className="chakra-divider css-nbrn3x"
+  />
+  <p
+    className="chakra-text css-199kdpe"
+  >
+    hello
+  </p>
+  <hr
+    aria-orientation="horizontal"
+    className="chakra-divider css-nbrn3x"
+  />
+</div>
+`;

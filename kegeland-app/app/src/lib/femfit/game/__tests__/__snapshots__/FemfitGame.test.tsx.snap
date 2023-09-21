@@ -1,0 +1,208 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test FemfitGame-component should render correctly 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "zIndex": 999,
+      }
+    }
+  >
+    <Image
+      resizeMode="stretch"
+      source={
+        Object {
+          "testUri": "../../../assets/femfit/background.png",
+        }
+      }
+      style={
+        Object {
+          "bottom": 0,
+          "height": 1334,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "width": 750,
+        }
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 8,
+            "zIndex": 1000,
+          },
+          Object {
+            "backgroundColor": "#ffffff",
+            "height": 50,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#000000",
+                "fontFamily": "System",
+                "fontWeight": "400",
+              },
+              Object {
+                "textAlign": "left",
+              },
+              Object {
+                "fontSize": 20,
+                "fontWeight": "bold",
+              },
+            ]
+          }
+        >
+          0
+        </Text>
+        <Image
+          resizeMode="stretch"
+          source={
+            Object {
+              "testUri": "../../../assets/femfit/gold.png",
+            }
+          }
+          style={
+            Object {
+              "height": 25,
+              "marginLeft": 8,
+              "width": 25,
+            }
+          }
+        />
+      </View>
+      <View>
+        <RNGestureHandlerButton
+          collapsable={false}
+          delayLongPress={600}
+          enabled={true}
+          exclusive={true}
+          handlerTag={1}
+          handlerType="NativeViewGestureHandler"
+          onGestureEvent={[Function]}
+          onGestureHandlerEvent={[Function]}
+          onGestureHandlerStateChange={[Function]}
+          onHandlerStateChange={[Function]}
+          rippleColor={0}
+          touchSoundDisabled={false}
+        >
+          <View
+            accessible={true}
+            collapsable={false}
+            nativeID="animatedComponent"
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+          >
+            <Text
+              allowFontScaling={false}
+              selectable={false}
+              style={
+                Array [
+                  Object {
+                    "color": "#00b0ff",
+                    "fontSize": 28,
+                  },
+                  Array [
+                    Object {
+                      "alignSelf": "center",
+                    },
+                    undefined,
+                  ],
+                  Object {
+                    "fontFamily": "Material Design Icons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  Object {},
+                ]
+              }
+            >
+              󰍜
+            </Text>
+          </View>
+        </RNGestureHandlerButton>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "zIndex": 999,
+        }
+      }
+    >
+      <View
+        onLayout={[Function]}
+        style={
+          Array [
+            Object {
+              "flex": 1,
+            },
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+          ]
+        }
+      >
+        <View
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "flex": 1,
+            }
+          }
+        />
+        <View
+          pointerEvents="box-none"
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;

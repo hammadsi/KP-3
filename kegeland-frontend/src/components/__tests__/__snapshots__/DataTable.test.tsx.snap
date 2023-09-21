@@ -1,0 +1,212 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test DataTable renders correctly 1`] = `
+<div
+  className="css-1g4yje1"
+>
+  <div
+    className="chakra-table__container css-1bmq2rs"
+  >
+    <table
+      className="chakra-table css-1fzgmij"
+    >
+      <thead
+        className="css-0"
+      >
+        <tr
+          className="css-0"
+        >
+          <th
+            className="css-0"
+          >
+            Date
+          </th>
+          <th
+            className="css-0"
+          >
+            Sensor
+          </th>
+          <th
+            className="css-0"
+          />
+        </tr>
+      </thead>
+      <tbody
+        className="css-0"
+      >
+        <tr
+          className="css-10zoy6l"
+        >
+          <td
+            className="css-0"
+          />
+          <td
+            className="css-0"
+          />
+          <td
+            className="css-0"
+          />
+        </tr>
+        <tr
+          className="css-10zoy6l"
+        >
+          <td
+            className="css-0"
+          />
+          <td
+            className="css-0"
+          />
+          <td
+            className="css-0"
+          />
+        </tr>
+        <tr
+          className="css-10zoy6l"
+        >
+          <td
+            className="css-0"
+          />
+          <td
+            className="css-0"
+          />
+          <td
+            className="css-0"
+          />
+        </tr>
+      </tbody>
+      <tfoot
+        className="css-0"
+      >
+        <tr
+          className="css-0"
+        >
+          <th
+            className="css-0"
+          />
+          <th
+            className="css-0"
+          />
+          <th
+            className="css-0"
+          />
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div
+    className="css-166q9m"
+  >
+    <div
+      className="css-k008qs"
+    >
+      <button
+        aria-label="Go to first page"
+        className="chakra-button css-hhkm4s"
+        disabled={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPointerDown={[Function]}
+        onPointerEnter={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden={true}
+          className="chakra-icon css-nyh0wu"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <g
+            fill="currentColor"
+          >
+            <path
+              d="M10.416,12a2.643,2.643,0,0,1,.775-1.875L20.732.584a1.768,1.768,0,0,1,2.5,2.5l-8.739,8.739a.25.25,0,0,0,0,.354l8.739,8.739a1.768,1.768,0,0,1-2.5,2.5l-9.541-9.541A2.643,2.643,0,0,1,10.416,12Z"
+            />
+            <path
+              d="M.25,12a2.643,2.643,0,0,1,.775-1.875L10.566.584a1.768,1.768,0,0,1,2.5,2.5L4.327,11.823a.25.25,0,0,0,0,.354l8.739,8.739a1.768,1.768,0,0,1-2.5,2.5L1.025,13.875A2.643,2.643,0,0,1,.25,12Z"
+            />
+          </g>
+        </svg>
+      </button>
+      <button
+        aria-label="Go to previous page"
+        className="chakra-button css-p7mkev"
+        disabled={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPointerDown={[Function]}
+        onPointerEnter={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden={true}
+          className="chakra-icon css-dvq678"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      className="css-k008qs"
+    >
+      <button
+        aria-label="Go to next page"
+        className="chakra-button css-p7mkev"
+        disabled={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPointerDown={[Function]}
+        onPointerEnter={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden={true}
+          className="chakra-icon css-dvq678"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+      <button
+        aria-label="Go to last page"
+        className="chakra-button css-1e7v910"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPointerDown={[Function]}
+        onPointerEnter={[Function]}
+        type="button"
+      >
+        <svg
+          aria-hidden={true}
+          className="chakra-icon css-nyh0wu"
+          focusable={false}
+          viewBox="0 0 24 24"
+        >
+          <g
+            fill="currentColor"
+          >
+            <path
+              d="M13.584,12a2.643,2.643,0,0,1-.775,1.875L3.268,23.416a1.768,1.768,0,0,1-2.5-2.5l8.739-8.739a.25.25,0,0,0,0-.354L.768,3.084a1.768,1.768,0,0,1,2.5-2.5l9.541,9.541A2.643,2.643,0,0,1,13.584,12Z"
+            />
+            <path
+              d="M23.75,12a2.643,2.643,0,0,1-.775,1.875l-9.541,9.541a1.768,1.768,0,0,1-2.5-2.5l8.739-8.739a.25.25,0,0,0,0-.354L10.934,3.084a1.768,1.768,0,0,1,2.5-2.5l9.541,9.541A2.643,2.643,0,0,1,23.75,12Z"
+            />
+          </g>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+`;

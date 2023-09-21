@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test withSpinner should render correctly 1`] = `
+<div
+  className="css-lt6aye"
+>
+  <div
+    className="chakra-spinner css-1vk4lrc"
+  >
+    <span
+      className="css-8b45rq"
+    >
+      Loading...
+    </span>
+  </div>
+</div>
+`;
+
+exports[`test withSpinner should render correctly loding false 1`] = `[Function]`;
+
+exports[`test withSpinner should render correctly with timer 1`] = `[Function]`;

@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test Section-component should render correctly 1`] = `
+<View
+  collapsable={false}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    collapsable={false}
+    nativeID="animatedComponent"
+    style={
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderRadius": 15,
+        "margin": 10,
+        "paddingHorizontal": 10,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 3,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 4,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#000000",
+            "fontFamily": "System",
+            "fontWeight": "400",
+          },
+          Object {
+            "textAlign": "left",
+          },
+          Array [
+            Object {
+              "textAlign": "left",
+            },
+            Object {
+              "color": "rgba(0, 0, 0, 0.87)",
+              "fontFamily": "System",
+              "fontWeight": "500",
+              "writingDirection": "ltr",
+            },
+            Array [
+              Object {
+                "fontSize": 20,
+                "letterSpacing": 0.15,
+                "lineHeight": 30,
+                "marginVertical": 2,
+              },
+              Object {
+                "fontSize": 15,
+                "fontWeight": "700",
+                "paddingHorizontal": 10,
+                "paddingVertical": 5,
+              },
+            ],
+          ],
+        ]
+      }
+    >
+      Test section
+    </Text>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "rgba(0, 0, 0, 0.12)",
+            "height": 0.5,
+          },
+          undefined,
+          undefined,
+        ]
+      }
+    />
+  </View>
+</View>
+`;

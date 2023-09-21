@@ -128,5 +128,17 @@ run `yarn test` to run the tests developed for this repository.
 
 ## 5. Formatting
 
-Before committing, format your files using alt+shift+F (Windows) or cmd+shift+F (Mac).
-When prettier errors occurr, run the command `prettier . --write` from the directory `KP-3/kegeland-frontend`
+Before committing, format your files using alt+shift+F (Windows) or cmd+shift+F (Mac)
+To successfully install prettier, navigate to the directory `KP-3/kegeland-frontend` and execute the followig command
+
+```
+yarn add --dev --exact prettier
+```
+
+When prettier errors occurr, run the command
+
+```
+yarn prettier . --write
+```
+
+from the directory `KP-3/kegeland-frontend`

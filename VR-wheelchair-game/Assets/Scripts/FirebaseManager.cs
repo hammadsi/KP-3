@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Networking;
+using System.Collections;
 
 public class FirebaseManager : MonoBehaviour {
     private string databaseURL = "https://test-unity-kundestyrt.firebaseio.com/";
@@ -10,10 +11,10 @@ public class FirebaseManager : MonoBehaviour {
     }
 
     // Retrieve data from Firebase
-    public IEnumerator GetData(string path, System.Action<string> callback) {
+    //public IEnumerator GetData(string path, System.Action<string> callback) {
         // Use UnityWebRequest to get data from Firebase at the specified path
         // Invoke the callback with the retrieved data
-    }
+    //}
 
     // Function to send lap time to Firebase
     public void SendLapTime(float lapTime) {

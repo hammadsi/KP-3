@@ -18,6 +18,7 @@ public class FirebaseManager : MonoBehaviour {
 
     // Function to send lap time to Firebase
     public void SendLapTime(float lapTime) {
+        Debug.Log("Sending to Firebase");
         string path = "lapTimes/user123.json"; // Change the path as needed (e.g., different paths for different users)
         string jsonData = JsonUtility.ToJson(new { lapTime = lapTime });
 

@@ -32,6 +32,7 @@ public class ElapsedTime : MonoBehaviour
         timerIsRunning = false;
 
         firebaseManager = FindObjectOfType<FirebaseManager>();
+        Debug.Log("FirebaseManager:" + firebaseManager);
     }
 
     public int getLapCount()
@@ -78,7 +79,10 @@ public class ElapsedTime : MonoBehaviour
 
     public void newLap()
     {
+
         float lapTime = restartTimer();
+        firebaseManager.SendLapTime(lapTime);
+
         if (lapTime <= 2.0f)
         {
             Debug.Log("Best time: " + bestTime);
@@ -109,7 +113,6 @@ public class ElapsedTime : MonoBehaviour
         //    }
         //}
 
-        firebaseManager.SendLapTime(lapTime);
     }
 
     public void startTimer()

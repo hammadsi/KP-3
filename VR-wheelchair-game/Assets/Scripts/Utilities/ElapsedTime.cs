@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ExciteOMeter;
 
 using TMPro;
 public class ElapsedTime : MonoBehaviour
@@ -81,7 +82,15 @@ public class ElapsedTime : MonoBehaviour
     {
 
         float lapTime = restartTimer();
-        firebaseManager.SendLapTime(lapTime);
+        float heartRate = ReactInletUI.currentHeartRate;  // Fetch the current heart rate
+            // Check if heartRate is zero and set a mock value if necessary
+        if (heartRate == 0f)
+        {
+            heartRate = 80f;  // Any mock value you'd like to set
+        }
+        Debug.Log("Lap Time: " + lapTime + "Heart rate: " + heartRate);
+    
+        firebaseManager.SendLapAndHeartRate(lapTime, heartRate);
 
         if (lapTime <= 2.0f)
         {

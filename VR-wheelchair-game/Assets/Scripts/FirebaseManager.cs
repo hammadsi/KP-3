@@ -2,8 +2,24 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 
+[System.Serializable]
+public class LapAndHeartRateData
+{
+    public float lapTime;
+    public float heartRate;
+
+    public LapAndHeartRateData(float lapTime, float heartRate)
+    {
+        this.lapTime = lapTime;
+        this.heartRate = heartRate;
+    }
+}
+
+
+
+
 public class FirebaseManager : MonoBehaviour {
-    private string databaseURL = "https://test-unity-kundestyrt.firebaseio.com/";
+    private string databaseURL = "https://digiboard-abbfe-default-rtdb.europe-west1.firebasedatabase.app/";
 
     // Send data to Firebase
     public void SendData(string path, string jsonData) {
@@ -17,15 +33,17 @@ public class FirebaseManager : MonoBehaviour {
     //}
 
     // Function to send lap time to Firebase
-    public void SendLapTime(float lapTime) {
-        Debug.Log("Sending to Firebase");
-        string path = "lapTimes/user123.json"; // Change the path as needed (e.g., different paths for different users)
-        string jsonData = JsonUtility.ToJson(new { lapTime = lapTime });
-
+    public void SendLapAndHeartRate(float lapTime, float heartRate) 
+    {
+        string path = "lapTimes/user123.json";
+        LapAndHeartRateData data = new LapAndHeartRateData(lapTime, heartRate);
+        string jsonData = JsonUtility.ToJson(data);
         StartCoroutine(PushToDatabase(path, jsonData));
     }
 
+
     private IEnumerator PushToDatabase(string path, string jsonData) {
+        Debug.Log("Push to database method");
         string fullPath = databaseURL + path;
         UnityWebRequest request = UnityWebRequest.Put(fullPath, jsonData);
         request.method = UnityWebRequest.kHttpVerbPOST;
@@ -38,6 +56,7 @@ public class FirebaseManager : MonoBehaviour {
         } else {
             Debug.Log("Lap time sent successfully!");
         }
+        Debug.Log(jsonData);
     }
 
     // Other Firebase functions as needed...

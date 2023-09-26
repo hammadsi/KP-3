@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
+
 namespace ExciteOMeter
 {
     public class ReactInletUI : MonoBehaviour
@@ -24,6 +25,8 @@ namespace ExciteOMeter
         public Color notRecordingColor = new Color(0.95f,0.95f,0.95f);
         
         private bool currentlyConnected = false;
+        public static float currentHeartRate;
+
 
         private void Start()
         {
@@ -92,6 +95,10 @@ namespace ExciteOMeter
         
         private void DataReceived(DataType type, float timestamp, float value)
         {
+            if(type == DataType.HeartRate)
+            {
+                    currentHeartRate = value;
+            }
             if(type == dataType && valueText != null)
             {
                 valueText.text = value.ToString("F0");

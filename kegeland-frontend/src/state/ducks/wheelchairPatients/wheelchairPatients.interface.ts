@@ -47,7 +47,7 @@ export type WheelchairPatient = {
               timestamp: Date;
             }[];
           imus: {}[];
-        }[];
+        };
     }[];
 };
 

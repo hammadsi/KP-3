@@ -14,6 +14,7 @@ import { ThemeMode } from '../types';
 import Menu from './Menu';
 import UserAvatar from './UserAvatar';
 import Logo from './Logo';
+import { Link } from 'react-router-dom';
 
 type SidebarProps = {
   user: User;
@@ -45,7 +46,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
           <Logo />
         </Box>
         <Divider borderColor={isDark ? 'whiteAlpha.400' : 'blackAlpha.400'} />
-        <Menu title="Dashboard" mode={mode} head={<UserAvatar user={user} />}>
+        <Menu title="Dashboard" mode={mode} head={<Link to="/myprofile"><UserAvatar user={user} /></Link>}>
           <Menu.Item
             mode={mode}
             title="Patients"

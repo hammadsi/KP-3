@@ -14,6 +14,7 @@ import { ThemeMode } from '../types';
 import Menu from './Menu';
 import UserAvatar from './UserAvatar';
 import Logo from './Logo';
+import { useLocation } from 'react-router-dom';
 
 type SidebarProps = {
   user: User;
@@ -24,6 +25,7 @@ type SidebarProps = {
 const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
   const dispatch = useAppDispatch();
   const isDark = mode === 'dark';
+  const location = useLocation();
 
   return (
     <Box
@@ -51,24 +53,28 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
             title="Patients"
             to={'/'}
             icon={AiOutlineTeam}
+            isSelected={location.pathname === '/' || location.pathname.indexOf('/patients/') > -1}
           />
           <Menu.Item
             mode={mode}
             title="Edit Questionnaires"
             to={'/not-implemented'}
             icon={AiOutlineProfile}
+            isSelected={location.pathname === '/not-implemented'}
           />
           <Menu.Item
             mode={mode}
             title="Edit Exercises"
             to={'/not-implemented'}
             icon={AiOutlineRise}
+            isSelected={location.pathname === '/not-implemented'}
           />
           <Menu.Item
             mode={mode}
             title="Settings"
             to={'/settings'}
             icon={AiOutlineSetting}
+            isSelected={location.pathname === '/settings'}
           />
         </Menu>
         <VStack width="full" transition="bottom 200ms">

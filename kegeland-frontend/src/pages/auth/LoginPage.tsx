@@ -142,23 +142,25 @@ const LoginPage = () => {
                     />
                   </Box>
                   <Box color={'red'}>{error}</Box>
-                  <Box textAlign="right">
-                    <SubmitButton
-                      colorScheme="primary"
-                      isLoading={formProps.isSubmitting || loading}
-                      isDisabled={!formProps.isValid}>
-                      Log in
-                    </SubmitButton>
-                  </Box>
-                  {isPatient && 
-                  <Box textAlign="left">
-                    <Text color="#black">
-                      Not a member yet?
-                      <Link color="primary.600" href="/register">
-                        <b> Register!</b>
-                      </Link>
-                    </Text>
-                  </Box>}
+                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    {isPatient ? 
+                    <Box textAlign="left">
+                      <Text color="#black">
+                        Not a member yet?
+                        <Link color="primary.600" href="/register">
+                          <b> Register!</b>
+                        </Link>
+                      </Text>
+                    </Box> : <h1></h1>}
+                    <Box textAlign="right">
+                      <SubmitButton
+                        colorScheme="primary"
+                        isLoading={formProps.isSubmitting || loading}
+                        isDisabled={!formProps.isValid}>
+                        Log in
+                      </SubmitButton>
+                    </Box>
+                    </div>
                 </VStack>
               </Box>
             )}

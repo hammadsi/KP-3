@@ -7,7 +7,7 @@ import NotFoundPage from '../pages/NotFound';
 import NotImplemented from '../pages/NotImplemented';
 import PatientsPage from '../pages/PatientListPage';
 import PatientPage from '../pages/PatientPage';
-import MyProfilePage from '../pages/MyProfilePage';
+import MyProfilePage from '../pages/profile/MyProfilePage';
 
 export interface RoutePathDefinition
   extends Omit<NonIndexRouteObject, 'children'> {

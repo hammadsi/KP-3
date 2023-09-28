@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
 
-import Card from '../components/Card';
-import ExerciseGraph from '../components/ExerciseGraph';
-import QuestionnaireResults from '../components/QuestionnaireResults';
-import withLayout from '../hoc/withLayout';
-import withSpinner from '../hoc/withSpinner';
-import useExercise from '../hooks/useExercise';
+import Card from '../../components/Card';
+import ExerciseGraph from '../../components/ExerciseGraph';
+import QuestionnaireResults from '../../components/QuestionnaireResults';
+import withLayout from '../../hoc/withLayout';
+import withSpinner from '../../hoc/withSpinner';
+import useExercise from '../../hooks/useExercise';
 import {
   MdModeEdit,
 } from 'react-icons/md';

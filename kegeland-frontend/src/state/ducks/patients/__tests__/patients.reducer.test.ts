@@ -1,6 +1,6 @@
 import { store } from '../../../store';
 import { apiCaller } from '../../../../utils/apiCaller';
-import { fetchPatientById, fetchPatients } from '../patients.actions';
+import { fetchUserById, fetchPatients } from '../patients.actions';
 import { clearPatientsState, initialState } from '../patients.reducer';
 import fetchPatentByIdResponse from '../mocks/fetchPatientByIdResponse.mock';
 import fetchPatentsResponseMock from '../mocks/fetchPatientsRespnse.mock';
@@ -21,19 +21,19 @@ describe('Test patients slice', () => {
     expect(state).toEqual(initialState);
   });
 
-  it('fetchPatientByid/rejected should set state error', async () => {
+  it('fetchUserByid/rejected should set state error', async () => {
     const error = new Error('Error');
     (apiCaller as any).mockImplementation(() => Promise.reject(error));
-    await store.dispatch(fetchPatientById('123456'));
+    await store.dispatch(fetchUserById('123456'));
     const state = store.getState().patients;
     expect(state.error).toStrictEqual(error.message);
   });
 
-  it('fetchPatientById/fulfilled should set patient state', async () => {
+  it('fetchUserById/fulfilled should set patient state', async () => {
     (apiCaller as any).mockImplementation(() =>
       Promise.resolve(fetchPatentByIdResponse),
     );
-    await store.dispatch(fetchPatientById('123'));
+    await store.dispatch(fetchUserById('123'));
     const state = store.getState().patients;
     expect(state.patient).toEqual(fetchPatentByIdResponse);
     expect(state.loading).toBeFalsy();
@@ -52,10 +52,10 @@ describe('Test patients slice', () => {
     expect(state.error).toBeFalsy();
   });
 
-  it('fetchPatientById/rejected should set error', async () => {
+  it('fetchUserById/rejected should set error', async () => {
     const error = new Error('Error');
     (apiCaller as any).mockImplementation(() => Promise.reject(error));
-    await store.dispatch(fetchPatientById('123'));
+    await store.dispatch(fetchUserById('123'));
     const state = store.getState().patients;
 
     expect(state.loading).toBeFalsy();

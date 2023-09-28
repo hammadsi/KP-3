@@ -20,15 +20,9 @@ This structure allows you to manage the state for individual wheelchair patients
 
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { WheelchairPatients, WheelchairPatient } from './wheelchairPatients.interface';
-import { fetchWheelchairPatientById } from './wheelchairPatients.actions';
+import { WheelchairPatients, WheelchairPatient, WheelchairPatientsState } from './wheelchairPatients.interface';
+import { fetchWheelchairPatientById } from './wheelchairPatients.actions';;
 
-interface WheelchairPatientsState {
-  loading: boolean;
-  wheelchairPatients: WheelchairPatients | null;
-  wheelchairPatient: WheelchairPatient | null;
-  error: string | null;
-}
 
 const initialState: WheelchairPatientsState = {
   loading: false,

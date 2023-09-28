@@ -65,3 +65,10 @@ export type WheelchairPatient = {
   ];
 };
 
+export type WheelchairPatientsState = {
+  loading: boolean;
+  wheelchairPatients: WheelchairPatients | null;
+  wheelchairPatient: WheelchairPatient | null;
+  error: string | null;
+};
+

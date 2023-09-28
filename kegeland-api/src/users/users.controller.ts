@@ -26,6 +26,16 @@ export class UsersController {
   }
 
   /**
+   * Endpoint for fetching one patient by its ID
+   * @param id of patient
+   * @returns patient object
+   */
+  @Get('wheelchair-patients/:id')
+  async findPatientById(@Param('id') id: string) {
+    return this.usersService.findWheelchairPatientById(id);
+  }
+
+  /**
    * Endpoint for fetching specific user
    * @param id
    * @returns UserDetails object

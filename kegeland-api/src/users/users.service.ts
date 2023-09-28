@@ -35,6 +35,19 @@ export class UsersService {
   }
 
   /**
+   * Function for finding a specific patient by its ID
+   * @param id of patient
+   * @returns patient object
+   */
+  async findWheelchairPatientById(id: string) {
+    const snapshot = await this.firebaseService.firestore
+      .collection('patients')
+      .doc(id)
+      .get();
+    return { id, ...snapshot.data() };
+  }
+
+  /**
    * Function for getting patient workout overview
    * @param uid id of user
    * @returns object containing users full name and lsit of all sessions

@@ -22,7 +22,6 @@ export type WheelchairPatient = {
       exerciseTime: Number;
       startTime: Date;
       endTime: Date;
-      performanceMetrics: {};
       questionaires: {
         preGame: [
           {
@@ -37,12 +36,11 @@ export type WheelchairPatient = {
           },
         ];
       };
-      laps: [
+      laps:
         {
           lapTime: Number;
           timeStamp: Date;
-        },
-      ];
+        }[],
       timeSeriesData: [
         {
           heartRates: [

@@ -24,14 +24,14 @@ import { WheelchairPatients, WheelchairPatient, WheelchairPatientsState } from '
 import { fetchWheelchairPatientById } from './wheelchairPatients.actions';;
 
 
-const initialState: WheelchairPatientsState = {
+export const initialState: WheelchairPatientsState = {
   loading: false,
   wheelchairPatients: null,
   wheelchairPatient: null,
   error: null,
 };
 
-const wheelchairPatientsSlice = createSlice({
+export const wheelchairPatientsSlice = createSlice({
   name: 'wheelchairPatients',
   initialState,
   reducers: {},

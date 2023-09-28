@@ -4,6 +4,7 @@ import {
   Container,
   Heading,
   HStack,
+  Link,
   VStack,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
@@ -62,7 +63,7 @@ const RegisterPage = () => {
         firstName,
         lastName,
       },
-      roles: [UserRole.PHYSICIAN],
+      roles: [UserRole.PATIENT],
     };
     dispatch(signUpUser(payload));
   };
@@ -88,6 +89,7 @@ const RegisterPage = () => {
               {(formProps) => (
                 <Box
                   borderWidth="1px"
+                  backgroundColor='white'
                   rounded="lg"
                   shadow="1px 1px 3px rgba(0,0,0,0.3)"
                   maxWidth={800}
@@ -106,18 +108,11 @@ const RegisterPage = () => {
                       </Heading>
                     </Box>
                     <Box>
-                      <Heading as="h3" size="lg" textAlign="center">
-                        Please enter email and password to create a user.
-                      </Heading>
-                    </Box>
-                    <Box>
                       <InputControl
                         inputProps={{
                           type: 'email',
-                          placeholder: 'ola.nordmann@example.com',
                         }}
                         name="email"
-                        isRequired
                         label="Email address"
                         data-testid="email-input"
                       />
@@ -127,10 +122,9 @@ const RegisterPage = () => {
                         <InputControl
                           inputProps={{
                             type: 'text',
-                            placeholder: 'Ola',
                           }}
                           name="firstName"
-                          isRequired
+
                           label="First name"
                           data-testid="firstname-input"
                         />
@@ -139,9 +133,8 @@ const RegisterPage = () => {
                         <InputControl
                           inputProps={{
                             type: 'text',
-                            placeholder: 'Nordmann',
                           }}
-                          isRequired
+
                           label="Last name"
                           data-testid="lastname-input"
                           name="lastName"
@@ -150,27 +143,23 @@ const RegisterPage = () => {
                     </HStack>
                     <Box>
                       <InputControl
-                        isRequired
                         name="password"
                         label="Password"
                         data-testid="password-input"
                         inputProps={{
                           type: 'password',
                           autoComplete: 'new-password',
-                          placeholder: '• • • • • • • •',
                         }}
                         helperText="Create a new password."
                       />
                     </Box>
                     <Box>
                       <InputControl
-                        isRequired
                         name="confirmPassword"
                         data-testid="confirmPassword-input"
                         inputProps={{
                           type: 'password',
                           autoComplete: 'new-password',
-                          placeholder: '• • • • • • • •',
                         }}
                         helperText="Repeat your password."
                       />
@@ -184,6 +173,11 @@ const RegisterPage = () => {
                       >
                         Register user
                       </SubmitButton>
+                    </Box>
+                    <Box textAlign="left">
+                      <Link color="gray" href="/login">
+                        <b>Cancel</b>
+                      </Link>
                     </Box>
                   </VStack>
                 </Box>

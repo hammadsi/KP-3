@@ -1,5 +1,6 @@
 import {
   Box,
+  ButtonGroup,
   Center,
   Container,
   Heading,
@@ -9,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { Formik } from 'formik';
 import { InputControl, SubmitButton } from 'formik-chakra-ui';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
@@ -24,11 +25,31 @@ const validateSchema = Yup.object({
   password: Yup.string().required().label('Password'),
 });
 
+const styles = {
+  button: {
+    margin: '0 0rem',
+    padding: '0.5rem 1rem',
+    border: 'none',
+    fontSize: '20px',
+    fontWeight: 'bold',
+    minWidth: '150px',
+    borderBottom: '1px solid black'
+  },
+  buttonGroup: {
+    borderBottom: '1px solid black',
+  },
+};
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const { error, loading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const { isSignedIn } = useAppSelector((state) => state.auth);
+  const [isPatient, setIsPatient] = useState(true);
+
+  const handleChange = (boolean: boolean) => {
+    setIsPatient(boolean);
+  };
 
   const signIn = (data: LoginDTO) => {
     dispatch(signInUser(data));
@@ -50,11 +71,11 @@ const LoginPage = () => {
               signIn(values);
             }}
             initialValues={{ email: '', password: '' }}
-            validationSchema={validateSchema}
-          >
+            validationSchema={validateSchema}>
             {(formProps) => (
               <Box
                 borderWidth="1px"
+                backgroundColor='white'
                 rounded="lg"
                 shadow="1px 1px 3px rgba(0,0,0,0.3)"
                 maxWidth={800}
@@ -64,18 +85,37 @@ const LoginPage = () => {
                 onSubmit={(e: any) => {
                   e.preventDefault();
                   formProps.handleSubmit();
-                }}
-              >
+                }}>
                 <VStack spacing={5} align="stretch">
                   <Box>
                     <Heading as="h3" size="lg" textAlign="center">
                       Log in{' '}
                     </Heading>
                   </Box>
-                  <Box>
-                    <Heading as="h3" size="lg" textAlign="center">
-                      Please enter email and password to log in.
-                    </Heading>
+                  <Box textAlign="center">
+                    <ButtonGroup >
+                      <button 
+                        value="Patient" 
+                        style={{
+                          ...styles.button, 
+                          color: isPatient ? '#03a9f4' : 'black',
+                          borderBottom: isPatient ? '3px solid #03a9f4' : 'none'
+                        }} 
+                        onClick={() => handleChange(true)}
+                        >
+                        Patient
+                      </button>
+                      <button 
+                        value="Physician" 
+                        style={{
+                          ...styles.button, 
+                          color: !isPatient ? '#03a9f4' : 'black',
+                          borderBottom: !isPatient ? '3px solid #03a9f4' : 'none'
+                        }}
+                        onClick={() => handleChange(false)}>
+                        Physician
+                      </button>
+                    </ButtonGroup>
                   </Box>
                   <Box>
                     <InputControl
@@ -84,14 +124,13 @@ const LoginPage = () => {
                         placeholder: 'ola.nordmann@example.com',
                       }}
                       name="email"
-                      isRequired
+                      
                       label="Email address"
                       data-testid="email-input"
                     />
                   </Box>
                   <Box>
                     <InputControl
-                      isRequired
                       name="password"
                       label="Password"
                       data-testid="password-input"
@@ -107,11 +146,11 @@ const LoginPage = () => {
                     <SubmitButton
                       colorScheme="primary"
                       isLoading={formProps.isSubmitting || loading}
-                      isDisabled={!formProps.isValid}
-                    >
+                      isDisabled={!formProps.isValid}>
                       Log in
                     </SubmitButton>
                   </Box>
+                  {isPatient && 
                   <Box textAlign="left">
                     <Text color="#black">
                       Not a member yet?
@@ -119,7 +158,7 @@ const LoginPage = () => {
                         <b> Register!</b>
                       </Link>
                     </Text>
-                  </Box>
+                  </Box>}
                 </VStack>
               </Box>
             )}

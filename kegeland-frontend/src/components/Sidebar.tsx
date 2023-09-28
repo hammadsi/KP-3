@@ -67,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
           <Menu.Item
             mode={mode}
             title="Settings"
-            to={'/not-implemented'}
+            to={'/settings'}
             icon={AiOutlineSetting}
           />
         </Menu>

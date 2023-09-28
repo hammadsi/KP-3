@@ -1,5 +1,5 @@
 export type WheelchairPatients = {
-  patients: [WheelchairPatient];
+  patients: WheelchairPatient[];
 };
 
 export type WheelchairPatient = {
@@ -15,8 +15,7 @@ export type WheelchairPatient = {
     maxWheelchairSpeed: Number;
     averageWheelchairSpeed: Number;
   };
-  gameSessions: [
-    {
+  gameSessions:{
       sessionId: String;
       //exerciseTime should be calcuated from startTime and endTime
       exerciseTime: Number;
@@ -24,45 +23,33 @@ export type WheelchairPatient = {
       endTime: Date;
       performanceMetrics: {};
       questionaires: {
-        preGame: [
+        preGame:
           {
             question: String;
             answer: String;
-          },
-        ];
-        postGame: [
-          {
+          }[];
+        postGame: {
             question: String;
             answer: String;
-          },
-        ];
+          }[];
       };
-      laps: [
-        {
+      laps: {
           lapTime: Number;
           timeStamp: Date;
-        },
-      ];
-      timeSeriesData: [
-        {
-          heartRates: [
-            {
+        }[];
+      timeSeriesData:{
+          heartRates: {
               heartRate: Number;
               timestamp: Date;
-            },
-          ];
-          speeds: [
-            {
+            }[];
+          speeds: {
               leftSpeed: Number;
               rightSpeed: Number;
               timestamp: Date;
-            },
-          ];
-          imus: [{}];
-        },
-      ];
-    },
-  ];
+            }[];
+          imus: {}[];
+        }[];
+    }[];
 };
 
 export type WheelchairPatientsState = {

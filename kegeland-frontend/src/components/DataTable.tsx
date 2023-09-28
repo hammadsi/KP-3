@@ -39,7 +39,7 @@ export type DataTableProps<T extends object> = {
   columns: ColumnDef<T, any>[];
 };
 
-const DataTable = <T extends { object?: any, id?: string } >({ data, columns }: DataTableProps<T>) => {
+const DataTable = <T extends { id?: string } >({ data, columns }: DataTableProps<T>) => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const table = useReactTable<T>({
     data,
@@ -57,18 +57,6 @@ const DataTable = <T extends { object?: any, id?: string } >({ data, columns }: 
   });
 
   const navigate = useNavigate();
-
-  {/*]
-  const handleRowClick = (id?: string) => {
-    if(window.location.pathname === '/'){
-      navigate(`/patients/${id}`);
-    }
-    else if(window.location.pathname.startsWith('/patients')){
-      const oldPath = window.location.pathname
-      navigate(`${oldPath}/exercise/${id}`)
-    }
-  };*/}
-
   const handleRowClick = (id?: string) => {
     if (window.location.pathname === '/') {
       navigate(`/patients/${id}`);

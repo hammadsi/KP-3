@@ -1,6 +1,6 @@
 import { store } from '../../../store';
 import { apiCaller } from '../../../../utils/apiCaller';
-import { fetchUserById, fetchPatients } from '../patients.actions';
+import { fetchPatientById, fetchPatients } from '../patients.actions';
 import { clearPatientsState, initialState } from '../patients.reducer';
 import fetchPatentByIdResponse from '../mocks/fetchPatientByIdResponse.mock';
 import fetchPatentsResponseMock from '../mocks/fetchPatientsRespnse.mock';
@@ -24,7 +24,7 @@ describe('Test patients slice', () => {
   it('fetchUserByid/rejected should set state error', async () => {
     const error = new Error('Error');
     (apiCaller as any).mockImplementation(() => Promise.reject(error));
-    await store.dispatch(fetchUserById('123456'));
+    await store.dispatch(fetchPatientById('123456'));
     const state = store.getState().patients;
     expect(state.error).toStrictEqual(error.message);
   });
@@ -33,7 +33,7 @@ describe('Test patients slice', () => {
     (apiCaller as any).mockImplementation(() =>
       Promise.resolve(fetchPatentByIdResponse),
     );
-    await store.dispatch(fetchUserById('123'));
+    await store.dispatch(fetchPatientById('123'));
     const state = store.getState().patients;
     expect(state.patient).toEqual(fetchPatentByIdResponse);
     expect(state.loading).toBeFalsy();
@@ -55,7 +55,7 @@ describe('Test patients slice', () => {
   it('fetchUserById/rejected should set error', async () => {
     const error = new Error('Error');
     (apiCaller as any).mockImplementation(() => Promise.reject(error));
-    await store.dispatch(fetchUserById('123'));
+    await store.dispatch(fetchPatientById('123'));
     const state = store.getState().patients;
 
     expect(state.loading).toBeFalsy();

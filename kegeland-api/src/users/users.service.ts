@@ -49,9 +49,10 @@ export class UsersService {
   }
   
   /**
-   * Function for getting wheelchair patient data 
-   * @param uid id of user and patientData
-   * @returns object containing users full name and lsit of all sessions
+   * Function for updating wheelchair patient data 
+   * @param uid id of user 
+   * @param patientData which is the data to be updated
+   * @returns updated values
    */
   async updateWheelchairPatientData(id: string, patientData: currentPhysicalState) {
     const snapshot = await this.firebaseService.firestore

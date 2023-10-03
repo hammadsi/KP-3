@@ -18,11 +18,13 @@ This structure allows you to manage the state for individual wheelchair patients
 
 */
 
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { WheelchairPatients, WheelchairPatient, WheelchairPatientsState } from './wheelchairPatients.interface';
-import { fetchWheelchairPatientById } from './wheelchairPatients.actions';;
-
+import {
+  WheelchairPatients,
+  WheelchairPatient,
+  WheelchairPatientsState,
+} from './wheelchairPatients.interface';
+import { fetchWheelchairPatientById } from './wheelchairPatients.actions';
 
 export const initialState: WheelchairPatientsState = {
   loading: false,
@@ -41,11 +43,14 @@ export const wheelchairPatientsSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchWheelchairPatientById.fulfilled, (state, action: PayloadAction<WheelchairPatient>) => {
-        state.loading = false;
-        state.wheelchairPatient = action.payload;
-        state.error = null;
-      })
+      .addCase(
+        fetchWheelchairPatientById.fulfilled,
+        (state, action: PayloadAction<WheelchairPatient>) => {
+          state.loading = false;
+          state.wheelchairPatient = action.payload;
+          state.error = null;
+        },
+      )
       .addCase(fetchWheelchairPatientById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'An error occurred';

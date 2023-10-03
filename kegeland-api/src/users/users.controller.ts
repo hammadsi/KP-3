@@ -36,7 +36,12 @@ export class UsersController {
     return this.usersService.findWheelchairPatientById(id);
   
   }
-
+  /**
+   * Endpoint for updating patientData 
+   * @param id of patient
+   * @param patientData data to be updated
+   * @returns updated data
+   */
   @Post('wheelchair-patients/:id')
   async updatePatientData(@Param('id') id: string, @Body() patientData: currentPhysicalState) {
     return this.usersService.updateWheelchairPatientData(id, patientData);

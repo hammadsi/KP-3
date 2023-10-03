@@ -39,7 +39,10 @@ export type DataTableProps<T extends object> = {
   columns: ColumnDef<T, any>[];
 };
 
-const DataTable = <T extends { id?: string } >({ data, columns }: DataTableProps<T>) => {
+const DataTable = <T extends { id?: string }>({
+  data,
+  columns,
+}: DataTableProps<T>) => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const table = useReactTable<T>({
     data,
@@ -65,7 +68,6 @@ const DataTable = <T extends { id?: string } >({ data, columns }: DataTableProps
       navigate(newPath);
     }
   };
-  
 
   return (
     <Flex flexDirection="column" height="100%">

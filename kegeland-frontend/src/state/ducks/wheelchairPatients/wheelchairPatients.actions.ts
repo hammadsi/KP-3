@@ -10,3 +10,13 @@ export const fetchWheelchairPatientById = createAsyncThunk(
       method: 'GET',
     }),
 );
+
+export const updatePatientData = createAsyncThunk(
+  'patients/updatePatientData',
+  async (wheelchairPatient: WheelchairPatient) =>
+    apiCaller<WheelchairPatient['currentPhysicalState']>({
+      url: `wheelchairPatients/${wheelchairPatient.patientId}`,
+      method: 'POST',
+      data: wheelchairPatient.currentPhysicalState,
+    }),
+);

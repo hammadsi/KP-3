@@ -51,6 +51,21 @@ describe('Users', () => {
       await usersService.delete('_id');
       expect(spyService.firebaseAdmin.auth).toHaveBeenCalled();
     });
+    it(`findWheelchairPatientById`, async () => {
+      // Assuming you've created a mock to simulate Firestore response
+      const mockPatient = { id: 'GCvmwnERnr0NZSnomuMe', name: 'William'};
+
+      // Mock Firestore response
+      jest.spyOn(spyService.firestore.collection('patients').doc(mockPatient.id), 'get').mockResolvedValue({
+        exists: true,
+        data: () => mockPatient,
+        id: mockPatient.id
+      } as any);  // using 'as any' to avoid typing issues in mock
+
+      const res = await usersService.findWheelchairPatientById(mockPatient.id);
+      
+      expect(res).toStrictEqual(mockPatient);
+    });
   });
   afterAll(async () => {
     await app.close();

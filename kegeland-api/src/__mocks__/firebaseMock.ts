@@ -31,6 +31,7 @@ export class FirebaseMock {
   }
 
   doc(id: string) {
+    this.res = this.res || []; //Ensuring this.res is always defined (even as an empty array) before attempting to call methods on it.
     this.res = this.res.find((e) => e.id === id);
     return this;
   }

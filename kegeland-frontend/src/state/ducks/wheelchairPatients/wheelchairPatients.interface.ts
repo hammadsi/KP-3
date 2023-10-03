@@ -1,5 +1,5 @@
 export type WheelchairPatients = {
-  patients: WheelchairPatient[];
+  wheelchairPatients: WheelchairPatient[];
 };
 
 export type WheelchairPatient = {

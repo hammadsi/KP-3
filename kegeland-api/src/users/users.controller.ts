@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Delete, UseGuards, Post, Body } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
@@ -7,6 +7,7 @@ import { Roles } from '../roles/roles.decorator';
 import { RolesGuard } from '../roles/roles.guard';
 
 import { UsersService } from './users.service';
+import { currentPhysicalState } from './entities/user.entity';
 
 @ApiTags('Users')
 @Controller('users')
@@ -23,6 +24,22 @@ export class UsersController {
   @Get('patients')
   async findAllPatients() {
     return this.usersService.findAllPatients();
+  }
+
+  /**
+   * Endpoint for fetching one patient by its ID
+   * @param id of patient
+   * @returns patient object
+   */
+  @Get('wheelchair-patients/:id')
+  async findPatientById(@Param('id') id: string) {
+    return this.usersService.findWheelchairPatientById(id);
+  
+  }
+
+  @Post('wheelchair-patients/:id')
+  async updatePatientData(@Param('id') id: string, @Body() patientData: currentPhysicalState) {
+    return this.usersService.updateWheelchairPatientData(id, patientData);
   }
 
   /**
@@ -54,4 +71,5 @@ export class UsersController {
   async delete(@Param('id') id: string) {
     return this.usersService.delete(id);
   }
+
 }

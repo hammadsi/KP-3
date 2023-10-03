@@ -21,7 +21,7 @@ describe('Test patients slice', () => {
     expect(state).toEqual(initialState);
   });
 
-  it('fetchPatientByid/rejected should set state error', async () => {
+  it('fetchUserByid/rejected should set state error', async () => {
     const error = new Error('Error');
     (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(fetchPatientById('123456'));
@@ -29,7 +29,7 @@ describe('Test patients slice', () => {
     expect(state.error).toStrictEqual(error.message);
   });
 
-  it('fetchPatientById/fulfilled should set patient state', async () => {
+  it('fetchUserById/fulfilled should set patient state', async () => {
     (apiCaller as any).mockImplementation(() =>
       Promise.resolve(fetchPatentByIdResponse),
     );
@@ -52,7 +52,7 @@ describe('Test patients slice', () => {
     expect(state.error).toBeFalsy();
   });
 
-  it('fetchPatientById/rejected should set error', async () => {
+  it('fetchUserById/rejected should set error', async () => {
     const error = new Error('Error');
     (apiCaller as any).mockImplementation(() => Promise.reject(error));
     await store.dispatch(fetchPatientById('123'));

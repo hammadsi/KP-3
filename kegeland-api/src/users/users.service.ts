@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FirebaseService } from 'src/firebase/firebase.service';
+import { currentPhysicalState } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -32,6 +33,32 @@ export class UsersService {
       ...doc.data(),
     }));
     return docs;
+  }
+
+  /**
+   * Function for finding a specific patient by its ID
+   * @param id of patient
+   * @returns patient object
+   */
+  async findWheelchairPatientById(id: string) {
+    const snapshot = await this.firebaseService.firestore
+      .collection('patients')
+      .doc(id)
+      .get();
+    return { id, ...snapshot.data() };
+  }
+  
+  /**
+   * Function for getting wheelchair patient data 
+   * @param uid id of user and patientData
+   * @returns object containing users full name and lsit of all sessions
+   */
+  async updateWheelchairPatientData(id: string, patientData: currentPhysicalState) {
+    const snapshot = await this.firebaseService.firestore
+      .collection('patients')
+      .doc(id)
+      .set(patientData);
+    return { id, ...patientData};
   }
 
   /**

@@ -34,7 +34,14 @@ export const initialState: WheelchairPatientsState = {
 export const wheelchairPatientsSlice = createSlice({
   name: 'wheelchairPatients',
   initialState,
-  reducers: {},
+  reducers: {
+    clearWheelchairPatientsState: state => {
+      state.loading = false;
+      state.wheelchairPatients = null;
+      state.wheelchairPatient = null;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchWheelchairPatientById.pending, (state) => {
@@ -52,5 +59,7 @@ export const wheelchairPatientsSlice = createSlice({
       });
   },
 });
+
+export const { clearWheelchairPatientsState } = wheelchairPatientsSlice.actions;
 
 export default wheelchairPatientsSlice.reducer;

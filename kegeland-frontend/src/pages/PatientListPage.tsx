@@ -16,15 +16,12 @@ const PatientListPage: React.FC = () => {
     color: 'var(--chakra-colors-blackAlpha-800)',
     fontWeight: 'bold',
     fontSize: '24px',
-    marginBottom: '10px'
-    
-  }
+    marginBottom: '10px',
+  };
 
   return (
     <>
-      <h1 style={headingStyle}>
-        OVERVIEW OF YOUR PATIENTS
-      </h1>
+      <h1 style={headingStyle}>OVERVIEW OF YOUR PATIENTS</h1>
       <Card loading={loading} padding={0}>
         <SearchBar
           placeholder="Search for patients.."

@@ -27,8 +27,8 @@ const PatientPage: React.FC = () => {
     color: 'var(--chakra-colors-blackAlpha-800)',
     fontWeight: 'bold',
     fontSize: '24px',
-    margin: '25px 0 10px 0'   
-  }
+    margin: '25px 0 10px 0',
+  };
 
   return (
     <Box w="100%" h="100%">
@@ -74,9 +74,7 @@ const PatientPage: React.FC = () => {
           <WeeklySessionsChart sessions={data} numWeeks={12} />
         </Card>
       </Flex>
-      <h1 style={headingStyle}>
-        OVERVIEW OF THE PATIENT'S EXERCISES
-      </h1>
+      <h1 style={headingStyle}>OVERVIEW OF THE PATIENT'S EXERCISES</h1>
       <Card loading={loading} minH="36">
         <ExerciseTable sessions={data} patientId={patientId!} />
       </Card>

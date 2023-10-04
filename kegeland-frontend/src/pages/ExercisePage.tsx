@@ -1,4 +1,7 @@
 import { useParams } from 'react-router-dom';
+import { Button, Collapse } from '@chakra-ui/react';
+import { useState } from 'react';
+import { AiOutlineArrowDown } from 'react-icons/ai';
 
 import Card from '../components/Card';
 import ExerciseGraph from '../components/ExerciseGraph';
@@ -6,9 +9,6 @@ import QuestionnaireResults from '../components/QuestionnaireResults';
 import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
 import useExercise from '../hooks/useExercise';
-import { Button, Collapse } from '@chakra-ui/react';
-import { useState } from 'react';
-import { AiOutlineArrowDown } from 'react-icons/ai';
 
 type ExercisePageParams = {
   patientId: string;

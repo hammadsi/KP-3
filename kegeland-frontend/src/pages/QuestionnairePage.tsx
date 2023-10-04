@@ -1,8 +1,21 @@
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
+import { User } from '../state/ducks/auth/auth.interface';
+
+type ActiveUser = {
+  user: User;
+};
+
 const QuestionnairePage: React.FC = () => {
   const navigate = useNavigate();
+
+  const startUnitySession = () => {
+    // Logic to start Unity game
+    
+    // Navigate to home page
+    navigate('/');
+  };
 
   return (
     <Flex
@@ -19,7 +32,7 @@ const QuestionnairePage: React.FC = () => {
       {/* Insert questionnaire here */}
 
       <Box>
-        <Button marginTop={8} onClick={() => navigate('/')}>
+        <Button marginTop={8} onClick={startUnitySession}>
           Start session
         </Button>
       </Box>

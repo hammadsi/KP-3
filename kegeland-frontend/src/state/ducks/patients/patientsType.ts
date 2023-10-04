@@ -16,7 +16,7 @@ type PatientsType = {
       gameSessions: [
         {
           sessionId: String;
-          //exerciseTime should be calcuated from startTime and endTime
+          // exerciseTime should be calcuated from startTime and endTime
           exerciseTime: Number;
           startTime: Date;
           endTime: Date;

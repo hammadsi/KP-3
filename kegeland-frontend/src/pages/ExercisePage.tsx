@@ -1,4 +1,7 @@
 import { useParams } from 'react-router-dom';
+import { Button, Collapse } from '@chakra-ui/react';
+import { useState } from 'react';
+import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 
 import Card from '../components/Card';
 import ExerciseGraph from '../components/ExerciseGraph';
@@ -6,9 +9,6 @@ import QuestionnaireResults from '../components/QuestionnaireResults';
 import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
 import useExercise from '../hooks/useExercise';
-import { Button, Collapse } from '@chakra-ui/react';
-import { useState } from 'react';
-import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 
 type ExercisePageParams = {
   patientId: string;
@@ -30,13 +30,21 @@ const ExercisePage: React.FC = () => {
           <ExerciseGraph sensor={sensor!} session={session!} />
         )}
       </Card>
-      <Button onClick={() => {setVisible(!visible)}}> 
+      <Button
+        onClick={() => {
+          setVisible(!visible);
+        }}>
         {visible ? <ArrowUpIcon /> : <ArrowDownIcon />}
-        {visible ? '  Hide questionnaire results' : '  Show questionnaire results'}
-      </Button>    
+        {visible
+          ? '  Hide questionnaire results'
+          : '  Show questionnaire results'}
+      </Button>
       <Collapse in={visible}>
-        <Card loading={loading} h="100%" >
-          <QuestionnaireResults answers={answers} questionnaire={questionnaire} />
+        <Card loading={loading} h="100%">
+          <QuestionnaireResults
+            answers={answers}
+            questionnaire={questionnaire}
+          />
         </Card>
       </Collapse>
     </>

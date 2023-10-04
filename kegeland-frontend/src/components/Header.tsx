@@ -26,8 +26,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar, isSidebarOpen }) => {
       alignItems="center"
       bgColor="white"
       boxShadow="md"
-      zIndex={1000}
-    >
+      zIndex={1000}>
       <Flex
         flexDir="row"
         zIndex={999}
@@ -36,8 +35,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar, isSidebarOpen }) => {
         w="100%"
         maxW="8xl"
         justify="space-between"
-        align="stretch"
-      >
+        align="stretch">
         <Flex justify="center" align="center">
           <Icon
             as={MdMenu}
@@ -62,8 +60,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar, isSidebarOpen }) => {
               onClick={() => navigate(-1)}
               color="primary.600"
               transform="color 300ms"
-              _hover={{ cursor: 'pointer', color: 'primary.700' }}
-            >
+              _hover={{ cursor: 'pointer', color: 'primary.700' }}>
               <Icon
                 as={MdChevronLeft}
                 aria-label="Toggle sidebar"

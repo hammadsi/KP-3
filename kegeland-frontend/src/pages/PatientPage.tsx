@@ -27,28 +27,25 @@ const PatientPage: React.FC = () => {
     color: 'var(--chakra-colors-blackAlpha-800)',
     fontWeight: 'bold',
     fontSize: '24px',
-    margin: '25px 0 10px 0'   
-  }
+    margin: '25px 0 10px 0',
+  };
 
   return (
     <Box w="100%" h="100%">
       <Flex
         flexDirection={isGreaterThanLg ? 'row' : 'column'}
         flexBasis="100%"
-        flexWrap="nowrap"
-      >
+        flexWrap="nowrap">
         <Card
           marginRight={5}
           w={isGreaterThanLg ? '25%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}
-        >
+          loading={loading}>
           <Stack
             spacing={4}
             direction={isGreaterThanLg ? 'column' : 'row'}
             w="100%"
-            alignItems="flex-start"
-          >
+            alignItems="flex-start">
             <LabeledValue
               label="Workouts this week"
               value={details.sessionsThisWeek}
@@ -69,14 +66,11 @@ const PatientPage: React.FC = () => {
         <Card
           w={isGreaterThanLg ? '75%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}
-        >
+          loading={loading}>
           <WeeklySessionsChart sessions={data} numWeeks={12} />
         </Card>
       </Flex>
-      <h1 style={headingStyle}>
-        OVERVIEW OF THE PATIENT'S EXERCISES
-      </h1>
+      <h1 style={headingStyle}>OVERVIEW OF THE PATIENT'S EXERCISES</h1>
       <Card loading={loading} minH="36">
         <ExerciseTable sessions={data} patientId={patientId!} />
       </Card>

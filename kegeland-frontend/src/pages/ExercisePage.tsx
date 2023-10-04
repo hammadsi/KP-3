@@ -35,10 +35,13 @@ const ExercisePage: React.FC = () => {
         )}
       </Card>
 
-      <Button onClick={toggleButtonClick}> Show questionnaire results  </Button>    
+      <Button onClick={toggleButtonClick}> Show questionnaire results </Button>
       <Collapse in={visible}>
-        <Card loading={loading} h="100%" >
-          <QuestionnaireResults answers={answers} questionnaire={questionnaire} />
+        <Card loading={loading} h="100%">
+          <QuestionnaireResults
+            answers={answers}
+            questionnaire={questionnaire}
+          />
         </Card>
       </Collapse>
     </>

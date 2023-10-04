@@ -27,10 +27,10 @@ const MyProfilePage: React.FC = () => {
       <Card loading={loading} minH="lg">
         <div style={{display: 'flex', justifyContent: 'space-between', marginLeft: '20px', marginRight: '20px', marginBottom: '20px', padding: '10px', borderBottom: '1.5px solid gray'}}>
             <h1 style={{fontWeight: 'bold'}}>About Me</h1>  
-            <div style={{ flexDirection: 'row', display: 'flex'}}>
+            <button style={{ flexDirection: 'row', display: 'flex'}}>
               <MdModeEdit style={{marginTop: '4px', marginRight: '3px'}}/>
               <h1>Edit</h1> 
-            </div> 
+            </button> 
         </div>
         <h3>Mail Account: </h3>
         <h3>Name: </h3>

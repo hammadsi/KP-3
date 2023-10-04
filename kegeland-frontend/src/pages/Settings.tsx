@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { MdConstruction } from 'react-icons/md';
 
 import withLayout from '../hoc/withLayout';
+import withSpinner from '../hoc/withSpinner';
 
 const Settings: React.FC = () => {
   const navigate = useNavigate();
@@ -46,4 +47,4 @@ const Settings: React.FC = () => {
   );
 };
 
-export default withLayout(Settings);
+export default withLayout(withSpinner(Settings));

@@ -33,9 +33,6 @@ const Item: React.FC<MenuItemProps> = ({
       marginBottom={2}
       width="full"
       _hover={{ cursor: 'pointer' }}
-      onClick={() => {
-        !isSelected;
-      }}
       style={itemStyle}
     >
       {icon && <Icon as={icon} color="primary.600" fontSize={24} />}

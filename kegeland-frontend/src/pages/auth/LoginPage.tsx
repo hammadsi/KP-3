@@ -121,7 +121,6 @@ const LoginPage = () => {
                     <InputControl
                       inputProps={{
                         type: 'email',
-                        placeholder: 'ola.nordmann@example.com',
                       }}
                       name="email"
                       
@@ -137,7 +136,6 @@ const LoginPage = () => {
                       inputProps={{
                         type: 'password',
                         autoComplete: 'password',
-                        placeholder: '• • • • • • • •',
                       }}
                     />
                   </Box>

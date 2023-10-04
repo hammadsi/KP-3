@@ -7,6 +7,7 @@ import NotFoundPage from '../pages/NotFound';
 import NotImplemented from '../pages/NotImplemented';
 import PatientsPage from '../pages/PatientListPage';
 import PatientPage from '../pages/PatientPage';
+import GamePage from '../pages/GamePage';
 
 export interface RoutePathDefinition
   extends Omit<NonIndexRouteObject, 'children'> {
@@ -42,6 +43,11 @@ const routes: RoutePathDefinition[] = [
     title: 'Not Implemented',
     path: 'not-implemented',
     element: <NotImplemented />,
+  },
+  {
+    title: 'Game',
+    path: '/game',
+    element: <GamePage />,
   },
   {
     path: '/patients/:patientId',

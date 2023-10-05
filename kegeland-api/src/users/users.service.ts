@@ -44,11 +44,11 @@ export class UsersService {
       .collection('patients')
       .doc(id)
       .get();
-    console.log({ id, ...snapshot.data() } + "Test");
+    console.log({ id, ...snapshot.data() });
 
     //Part of a test: if return value does not fit in WheelchairPatient interface
     //return { id, ...snapshot.data() };
-    return { id };
+    return { id, ...snapshot.data()};
   }
 
   /**

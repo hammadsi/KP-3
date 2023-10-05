@@ -1,34 +1,37 @@
-// WheelchairPatientComponent.tsx
-import React from 'react';
-import useWheelchairPatientById from '../hooks/useWheelchairPatient';
+import React, { FC } from 'react';
+import { Box, Text, Spinner } from '@chakra-ui/react';
+import useWheelchairPatient from '../hooks/useWheelchairPatient';
 
-interface WheelchairPatientComponentProps {
+type WheelchairPatientProps = {
   id: string;
-}
+};
 
-const WheelchairPatientComponent: React.FC<WheelchairPatientComponentProps> = ({
-  id,
-}) => {
-  const { wheelchairPatient, loading, error } = useWheelchairPatientById(id);
-  console.log(
-    'Component render. Loading: ',
-    loading,
-    '. Error: ',
-    error,
-    '. Patient: ',
-    wheelchairPatient,
-  );
+const WheelchairPatientComponent: FC<WheelchairPatientProps> = ({ id }) => {
+  const { wheelchairPatient, loading, error } = useWheelchairPatient(id);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-  if (!wheelchairPatient) return <p>No patient found</p>;
+  if (loading) {
+    return (
+      <Box p="4" textAlign="center">
+        <Spinner />
+        <Text>Loading...</Text>
+      </Box>
+    );
+  }
+
+  if (error || !wheelchairPatient) {
+    return (
+      <Box p="4" textAlign="center">
+        <Text color="red.500">Error fetching patient data.</Text>
+      </Box>
+    );
+  }
 
   return (
-    <div>
-      <h2>Wheelchair Patient</h2>
-      <p>ID: {wheelchairPatient.patientId}</p>
-      {/* Other patient data... */}
-    </div>
+    <Box p="4">
+      <Text fontWeight="bold">Patient Details:</Text>
+      <Text>ID: {wheelchairPatient.patientId}</Text>
+      {/* Additional details can be added here as needed */}
+    </Box>
   );
 };
 

@@ -6,7 +6,7 @@ export const fetchWheelchairPatientById = createAsyncThunk(
   'patients/fetchWheelchairPatientById',
   async (id: string) =>
     apiCaller<WheelchairPatient>({
-      url: `wheelchair-patients/${id}`,
+      url: `users/wheelchair-patients/${id}`,
       method: 'GET',
     }),
 );

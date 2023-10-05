@@ -36,22 +36,6 @@ const ExerciseTable: React.FC<ExerciseTableProps> = ({
         header: 'Sensor',
         cell: (props) => capitalize(props.getValue()),
       }),
-
-      {
-        id: 'action',
-        header: undefined,
-        accessorKey: 'id',
-        cell: (props) => (
-          <Flex justifyContent="flex-end">
-            <Button
-              onClick={() =>
-                navigate(`/patients/${patientId}/exercise/${props.getValue()}`)
-              }>
-              Select
-            </Button>
-          </Flex>
-        ),
-      },
     ],
     [isGreaterThanMd],
   );

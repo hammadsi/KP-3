@@ -32,13 +32,17 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useNavigate } from 'react-router-dom';
 
 export type DataTableProps<T extends object> = {
   data: T[];
   columns: ColumnDef<T, any>[];
 };
 
-const DataTable = <T extends object>({ data, columns }: DataTableProps<T>) => {
+const DataTable = <T extends { id?: string }>({
+  data,
+  columns,
+}: DataTableProps<T>) => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const table = useReactTable<T>({
     data,
@@ -54,6 +58,17 @@ const DataTable = <T extends object>({ data, columns }: DataTableProps<T>) => {
     debugHeaders: true,
     debugColumns: false,
   });
+
+  const navigate = useNavigate();
+  const handleRowClick = (id?: string) => {
+    if (window.location.pathname === '/') {
+      navigate(`/patients/${id}`);
+    } else if (window.location.pathname.startsWith('/patients')) {
+      const newPath = `${window.location.pathname}/exercise/${id}`;
+      navigate(newPath);
+    }
+  };
+
   return (
     <Flex flexDirection="column" height="100%">
       <TableContainer height="full">
@@ -81,7 +96,10 @@ const DataTable = <T extends object>({ data, columns }: DataTableProps<T>) => {
                 _hover={{
                   backgroundColor: 'blackAlpha.50',
                   transitionDuration: '300ms',
-                }}>
+                  cursor: 'pointer',
+                }}
+                onClick={() => handleRowClick(row.original.id!)}
+              >
                 {row.getVisibleCells().map((cell) => (
                   <Td key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}

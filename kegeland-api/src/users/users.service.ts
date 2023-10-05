@@ -48,7 +48,7 @@ export class UsersService {
 
     //Part of a test: if return value does not fit in WheelchairPatient interface
     //return { id, ...snapshot.data() };
-    return { id, ...snapshot.data()};
+    return { id };
   }
 
   /**

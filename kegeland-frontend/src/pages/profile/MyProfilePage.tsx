@@ -1,8 +1,6 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import Card from '../../components/Card';
-import ExerciseGraph from '../../components/ExerciseGraph';
-import QuestionnaireResults from '../../components/QuestionnaireResults';
 import withLayout from '../../hoc/withLayout';
 import withSpinner from '../../hoc/withSpinner';
 import useExercise from '../../hooks/useExercise';
@@ -27,10 +25,12 @@ const MyProfilePage: React.FC = () => {
       <Card loading={loading} minH="lg">
         <div style={{display: 'flex', justifyContent: 'space-between', marginLeft: '20px', marginRight: '20px', marginBottom: '20px', padding: '10px', borderBottom: '1.5px solid gray'}}>
             <h1 style={{fontWeight: 'bold'}}>About Me</h1>  
-            <button style={{ flexDirection: 'row', display: 'flex'}}>
-              <MdModeEdit style={{marginTop: '4px', marginRight: '3px'}}/>
-              <h1>Edit</h1> 
-            </button> 
+            <Link to="/editprofile">
+              <button style={{ flexDirection: 'row', display: 'flex'}}>
+                <MdModeEdit style={{marginTop: '4px', marginRight: '3px'}}/>
+                <h1>Edit</h1> 
+              </button> 
+            </Link>
         </div>
         <h3>Mail Account: </h3>
         <h3>Name: </h3>

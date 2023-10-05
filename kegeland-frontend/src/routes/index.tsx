@@ -8,6 +8,7 @@ import NotImplemented from '../pages/NotImplemented';
 import PatientsPage from '../pages/PatientListPage';
 import PatientPage from '../pages/PatientPage';
 import MyProfilePage from '../pages/profile/MyProfilePage';
+import EditProfile from '../pages/profile/EditProfilePage';
 
 export interface RoutePathDefinition
   extends Omit<NonIndexRouteObject, 'children'> {
@@ -43,6 +44,11 @@ const routes: RoutePathDefinition[] = [
     title: 'MyProfile',
     path: '/myprofile',
     element: <MyProfilePage />,
+  },
+  {
+    title: 'EditProfile',
+    path: '/editprofile',
+    element: <EditProfile/>,
   },
   {
     title: 'Not Implemented',

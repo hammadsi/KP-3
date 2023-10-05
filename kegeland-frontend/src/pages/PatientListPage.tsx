@@ -13,8 +13,16 @@ const PatientListPage: React.FC = () => {
     filterData(event.target.value);
   };
 
+  const headingStyle = {
+    color: 'var(--chakra-colors-blackAlpha-800)',
+    fontWeight: 'bold',
+    fontSize: '24px',
+    marginBottom: '10px',
+  };
+
   return (
     <>
+      <h1 style={headingStyle}>OVERVIEW OF YOUR PATIENTS</h1>
       <Card loading={loading} minH="36">
         <h2>Details for Specific Patient ID: J32eTqCIGlRKE3HX2WWtPry0piy2</h2>
         <WheelchairPatientComponent id={'J32eTqCIGlRKE3HX2WWtPry0piy2'} />

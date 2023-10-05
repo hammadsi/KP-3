@@ -4,73 +4,72 @@ import { WheelchairPatient } from '../wheelchairPatients.interface';
 
 // Mock WheelchairPatient object
 const mockWheelchairPatient: WheelchairPatient = {
-    patientId: "123",
-    name: "John Doe",
-    age: 30,
-    gender: 'M',
-    currentPhysicalState: {
-      height: 175,
-      weight: 70,
-      maxHeartRate: 180,
-      averageHeartRate: 75,
-      maxWheelchairSpeed: 5,
-      averageWheelchairSpeed: 3,
-    },
-    gameSessions: [
-      {
-        sessionId: "session1",
-        startTime: new Date('2023-09-28T12:00:00'),
-        endTime: new Date('2023-09-28T13:00:00'),
-        exerciseTime: 60, // minutes, for example
-        questionaires: {
-          preGame: [
-            {
-              question: "How are you feeling?",
-              answer: "Good",
-            },
-            // ... other preGame questions ...
-          ],
-          postGame: [
-            {
-              question: "How was the session?",
-              answer: "Challenging",
-            },
-            // ... other postGame questions ...
-          ],
-        },
-        laps: [
+  patientId: '123',
+  name: 'John Doe',
+  age: 30,
+  gender: 'M',
+  currentPhysicalState: {
+    height: 175,
+    weight: 70,
+    maxHeartRate: 180,
+    averageHeartRate: 75,
+    maxWheelchairSpeed: 5,
+    averageWheelchairSpeed: 3,
+  },
+  gameSessions: [
+    {
+      sessionId: 'session1',
+      startTime: new Date('2023-09-28T12:00:00'),
+      endTime: new Date('2023-09-28T13:00:00'),
+      exerciseTime: 60, // minutes, for example
+      questionaires: {
+        preGame: [
           {
-            lapTime: 120, // seconds, for example
-            timeStamp: new Date('2023-09-28T12:15:00'),
+            question: 'How are you feeling?',
+            answer: 'Good',
           },
-          // ... other laps ...
+          // ... other preGame questions ...
         ],
-        timeSeriesData:
+        postGame: [
           {
-            heartRates: [
-              {
-                heartRate: 80,
-                timestamp: new Date('2023-09-28T12:05:00'),
-              },
-              // ... other heartRates ...
-            ],
-            speeds: [
-              {
-                leftSpeed: 3,
-                rightSpeed: 3,
-                timestamp: new Date('2023-09-28T12:05:00'),
-              },
-              // ... other speeds ...
-            ],
-            imus: [
-              {},
-              // ... other imus ...
-            ],
+            question: 'How was the session?',
+            answer: 'Challenging',
           },
-          // ... other timeSeriesData ...
+          // ... other postGame questions ...
+        ],
       },
-      // ... other gameSessions ...
-    ],
+      laps: [
+        {
+          lapTime: 120, // seconds, for example
+          timeStamp: new Date('2023-09-28T12:15:00'),
+        },
+        // ... other laps ...
+      ],
+      timeSeriesData: {
+        heartRates: [
+          {
+            heartRate: 80,
+            timestamp: new Date('2023-09-28T12:05:00'),
+          },
+          // ... other heartRates ...
+        ],
+        speeds: [
+          {
+            leftSpeed: 3,
+            rightSpeed: 3,
+            timestamp: new Date('2023-09-28T12:05:00'),
+          },
+          // ... other speeds ...
+        ],
+        imus: [
+          {},
+          // ... other imus ...
+        ],
+      },
+      // ... other timeSeriesData ...
+    },
+    // ... other gameSessions ...
+  ],
 };
 
 describe('wheelchairPatients reducer', () => {
@@ -82,7 +81,7 @@ describe('wheelchairPatients reducer', () => {
     expect(
       reducer(initialState, {
         type: fetchWheelchairPatientById.pending.type,
-      })
+      }),
     ).toEqual({
       ...initialState,
       loading: true,
@@ -97,8 +96,8 @@ describe('wheelchairPatients reducer', () => {
         {
           type: fetchWheelchairPatientById.fulfilled.type,
           payload: mockWheelchairPatient,
-        }
-      )
+        },
+      ),
     ).toEqual({
       ...initialState,
       loading: false,
@@ -116,8 +115,8 @@ describe('wheelchairPatients reducer', () => {
         {
           type: fetchWheelchairPatientById.rejected.type,
           error: { message: error },
-        }
-      )
+        },
+      ),
     ).toEqual({
       ...initialState,
       loading: false,

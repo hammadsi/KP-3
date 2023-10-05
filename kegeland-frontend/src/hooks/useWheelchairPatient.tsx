@@ -7,11 +7,11 @@ const useWheelchairPatientById = (id: string) => {
   const dispatch = useAppDispatch();
 
   const { wheelchairPatient, loading, error } = useAppSelector(
-    (state) => state.wheelchairPatients
+    (state) => state.wheelchairPatients,
   );
 
   useEffect(() => {
-    console.log("useEffect triggered with id: ", id);
+    console.log('useEffect triggered with id: ', id);
     dispatch(fetchWheelchairPatientById(id));
   }, [dispatch, id]);
 

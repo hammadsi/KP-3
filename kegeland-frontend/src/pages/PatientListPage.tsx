@@ -6,13 +6,11 @@ import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
 import usePatientList from '../hooks/usePatientList';
 
-
 const PatientListPage: React.FC = () => {
   const { patients, loading, filterData } = usePatientList();
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     filterData(event.target.value);
-  
   };
 
   return (

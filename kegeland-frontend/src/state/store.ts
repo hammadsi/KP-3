@@ -34,7 +34,7 @@ export const rootReducer = combineReducers({
   sensors: sensorReducer,
   sessions: sessionsReducer,
   questionnaires: questionnairesReducer,
-  wheelchairPatients: wheelchairPatientsReducer
+  wheelchairPatients: wheelchairPatientsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

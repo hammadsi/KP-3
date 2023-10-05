@@ -2,9 +2,12 @@ import {
   Box,
   Center,
   Container,
+  FormControl,
+  FormLabel,
   Heading,
   HStack,
   Link,
+  Select,
   VStack,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
@@ -23,6 +26,10 @@ type FormData = {
   firstName: string;
   lastName: string;
   email: string;
+  gender: string;
+  birthofdate: string;
+  height: number;
+  weight: number;
   password: string;
   confirmPassword: string;
 };
@@ -32,6 +39,10 @@ const validationSchema = Yup.object({
   firstName: Yup.string().required().label('First name'),
   lastName: Yup.string().required().label('Last name'),
   password: Yup.string().required().label('Password'),
+  // gender: Yup.string().required().label('Gender'),
+  birthofdate: Yup.string().required().label('Birth of Date'),
+  height: Yup.number().required().label('Height'),
+  weight: Yup.number().required().label('Weight'),
   confirmPassword: Yup.string().when('password', {
     is: (val: string | any[]) => !!(val && val.length > 0),
     then: Yup.string().oneOf(
@@ -55,7 +66,7 @@ const RegisterPage = () => {
   }, [navigate, isSignedIn]);
 
   const register = (data: FormData) => {
-    const { firstName, lastName, email, password } = data;
+    const { firstName, lastName, email, password, gender,  } = data;
     const payload: RegisterDTO = {
       email,
       password,
@@ -82,6 +93,9 @@ const RegisterPage = () => {
                 password: '',
                 firstName: '',
                 lastName: '',
+                birthofdate: '',
+                height: '',
+                weight: '',
                 confirmPassword: '',
               }}
               validationSchema={validationSchema}
@@ -141,6 +155,52 @@ const RegisterPage = () => {
                         />
                       </Box>
                     </HStack>
+                    <HStack w="100%">
+                      <Box style={{marginRight: '14%'}}>
+                        <FormControl id="gender">
+                          <FormLabel>Gender</FormLabel>
+                          <Select name="gender" placeholder="Select gender">
+                              <option value="" disabled selected hidden>Select gender</option>
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
+                          </Select>
+                        </FormControl>
+                      </Box>
+                      <Box>
+                        <InputControl
+                          inputProps={{
+                            type: 'date',
+                          }}
+                          label="Birth of Date"
+                          data-testid="lastname-input"
+                          name="birthofdate"
+                        />
+                      </Box>
+                    </HStack>
+                    <HStack justifyContent="space-between" w="100%">
+                      <Box>
+                        <InputControl
+                          inputProps={{
+                            type: 'number',
+                          }}
+                          name="height"
+
+                          label="Height (cm)"
+                          data-testid="firstname-input"
+                        />
+                      </Box>
+                      <Box>
+                        <InputControl
+                          inputProps={{
+                            type: 'number',
+                          }}
+
+                          label="Weight (kg)"
+                          data-testid="lastname-input"
+                          name="weight"
+                        />
+                      </Box>
+                    </HStack>
                     <Box>
                       <InputControl
                         name="password"
@@ -179,6 +239,7 @@ const RegisterPage = () => {
                         >
                           Register user
                         </SubmitButton>
+                        <button onClick={(event: React.MouseEvent<HTMLButtonElement>) => {console.log(formProps.values)}}>Test</button>
                       </Box>
                     </div>
                   </VStack>

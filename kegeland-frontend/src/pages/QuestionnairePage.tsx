@@ -1,20 +1,18 @@
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { User } from '../state/ducks/auth/auth.interface';
-
-type ActiveUser = {
-  user: User;
+type ExercisePageParams = {
+  patientId: string;
+  exerciseId: string;
 };
 
 const QuestionnairePage: React.FC = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
+  //const { patientId, exerciseId } = useParams<ExercisePageParams>();
 
   const startUnitySession = () => {
-    // Logic to start Unity game
-    
-    // Navigate to home page
-    navigate('/');
+    // Open the Unity game using the custom URI scheme
+    window.location.href = `VRWheelchairSim://`;
   };
 
   return (

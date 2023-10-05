@@ -1,0 +1,12 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\VRWheelchairSim]
+@="URL:VRWheelchairSim"
+"URL Protocol"=""
+
+[HKEY_CLASSES_ROOT\VRWheelchairSim\shell]
+
+[HKEY_CLASSES_ROOT\VRWheelchairSim\shell\open]
+
+[HKEY_CLASSES_ROOT\VRWheelchairSim\shell\open\command]
+@="\"C:\\Users\\User\\Downloads\\KP-3\\WheelchairExe\\VR-wheelchair-sim.exe\" \"%1\""

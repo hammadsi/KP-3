@@ -84,12 +84,11 @@ const RegisterPage = () => {
                 lastName: '',
                 confirmPassword: '',
               }}
-              validationSchema={validationSchema}
-            >
+              validationSchema={validationSchema}>
               {(formProps) => (
                 <Box
                   borderWidth="1px"
-                  backgroundColor='white'
+                  backgroundColor="white"
                   rounded="lg"
                   shadow="1px 1px 3px rgba(0,0,0,0.3)"
                   maxWidth={800}
@@ -99,8 +98,7 @@ const RegisterPage = () => {
                   onSubmit={(e: any) => {
                     e.preventDefault();
                     formProps.handleSubmit();
-                  }}
-                >
+                  }}>
                   <VStack spacing={5} align="stretch">
                     <Box>
                       <Heading as="h3" size="lg" textAlign="center">
@@ -111,6 +109,7 @@ const RegisterPage = () => {
                       <InputControl
                         inputProps={{
                           type: 'email',
+                          placeholder: 'ola.nordmann@example.com',
                         }}
                         name="email"
                         label="Email address"
@@ -122,9 +121,9 @@ const RegisterPage = () => {
                         <InputControl
                           inputProps={{
                             type: 'text',
+                            placeholder: 'Ola',
                           }}
                           name="firstName"
-
                           label="First name"
                           data-testid="firstname-input"
                         />
@@ -133,8 +132,8 @@ const RegisterPage = () => {
                         <InputControl
                           inputProps={{
                             type: 'text',
+                            placeholder: 'Nordmann',
                           }}
-
                           label="Last name"
                           data-testid="lastname-input"
                           name="lastName"
@@ -148,6 +147,7 @@ const RegisterPage = () => {
                         data-testid="password-input"
                         inputProps={{
                           type: 'password',
+                          placeholder: '• • • • • • • •',
                           autoComplete: 'new-password',
                         }}
                         helperText="Create a new password."
@@ -159,14 +159,19 @@ const RegisterPage = () => {
                         data-testid="confirmPassword-input"
                         inputProps={{
                           type: 'password',
+                          placeholder: '• • • • • • • •',
                           autoComplete: 'new-password',
                         }}
                         helperText="Repeat your password."
                       />
                     </Box>
                     <Box color={'red'}>{error}</Box>
-                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <Box textAlign="left">
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                      }}>
+                      <Box textAlign="left" marginTop="9px">
                         <Link color="grey" href="/login">
                           <b>Cancel</b>
                         </Link>
@@ -175,8 +180,7 @@ const RegisterPage = () => {
                         <SubmitButton
                           colorScheme="primary"
                           isLoading={formProps.isSubmitting || loading}
-                          isDisabled={!formProps.isValid}
-                        >
+                          isDisabled={!formProps.isValid}>
                           Register user
                         </SubmitButton>
                       </Box>

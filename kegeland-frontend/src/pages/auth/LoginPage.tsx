@@ -33,7 +33,7 @@ const styles = {
     fontSize: '20px',
     fontWeight: 'bold',
     minWidth: '150px',
-    borderBottom: '1px solid black'
+    borderBottom: '1px solid black',
   },
   buttonGroup: {
     borderBottom: '1px solid black',
@@ -75,7 +75,7 @@ const LoginPage = () => {
             {(formProps) => (
               <Box
                 borderWidth="1px"
-                backgroundColor='white'
+                backgroundColor="white"
                 rounded="lg"
                 shadow="1px 1px 3px rgba(0,0,0,0.3)"
                 maxWidth={800}
@@ -93,24 +93,27 @@ const LoginPage = () => {
                     </Heading>
                   </Box>
                   <Box textAlign="center">
-                    <ButtonGroup >
-                      <button 
-                        value="Patient" 
+                    <ButtonGroup>
+                      <button
+                        value="Patient"
                         style={{
-                          ...styles.button, 
+                          ...styles.button,
                           color: isPatient ? '#03a9f4' : 'black',
-                          borderBottom: isPatient ? '3px solid #03a9f4' : 'none'
-                        }} 
-                        onClick={() => handleChange(true)}
-                        >
+                          borderBottom: isPatient
+                            ? '3px solid #03a9f4'
+                            : 'none',
+                        }}
+                        onClick={() => handleChange(true)}>
                         Patient
                       </button>
-                      <button 
-                        value="Physician" 
+                      <button
+                        value="Physician"
                         style={{
-                          ...styles.button, 
+                          ...styles.button,
                           color: !isPatient ? '#03a9f4' : 'black',
-                          borderBottom: !isPatient ? '3px solid #03a9f4' : 'none'
+                          borderBottom: !isPatient
+                            ? '3px solid #03a9f4'
+                            : 'none',
                         }}
                         onClick={() => handleChange(false)}>
                         Physician
@@ -124,7 +127,6 @@ const LoginPage = () => {
                         placeholder: 'ola.nordmann@example.com',
                       }}
                       name="email"
-                      
                       label="Email address"
                       data-testid="email-input"
                     />
@@ -142,16 +144,23 @@ const LoginPage = () => {
                     />
                   </Box>
                   <Box color={'red'}>{error}</Box>
-                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    {isPatient ? 
-                    <Box textAlign="left">
-                      <Text color="#black">
-                        Not a member yet?
-                        <Link color="primary.600" href="/register">
-                          <b> Register!</b>
-                        </Link>
-                      </Text>
-                    </Box> : <h1></h1>}
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                    }}>
+                    {isPatient ? (
+                      <Box textAlign="left">
+                        <Text color="#black">
+                          Not a member yet?
+                          <Link color="primary.600" href="/register">
+                            <b> Register!</b>
+                          </Link>
+                        </Text>
+                      </Box>
+                    ) : (
+                      <h1></h1>
+                    )}
                     <Box textAlign="right">
                       <SubmitButton
                         colorScheme="primary"
@@ -160,7 +169,7 @@ const LoginPage = () => {
                         Log in
                       </SubmitButton>
                     </Box>
-                    </div>
+                  </div>
                 </VStack>
               </Box>
             )}

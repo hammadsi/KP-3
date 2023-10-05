@@ -31,7 +31,7 @@ export class UsersController {
    * @returns patient object
    */
   @Get('wheelchair-patients/:id')
-  async findPatientById(@Param('id') id: string) {
+  async findWheelchairPatientById(@Param('id') id: string) {
     return this.usersService.findWheelchairPatientById(id);
   }
 

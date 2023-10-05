@@ -11,6 +11,7 @@ const useWheelchairPatientById = (id: string) => {
   );
 
   useEffect(() => {
+    console.log("useEffect triggered with id: ", id);
     dispatch(fetchWheelchairPatientById(id));
   }, [dispatch, id]);
 

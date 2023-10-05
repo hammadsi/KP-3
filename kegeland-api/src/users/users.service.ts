@@ -37,14 +37,18 @@ export class UsersService {
   /**
    * Function for finding a specific patient by its ID
    * @param id of patient
-   * @returns patient object
+   * @returns patient id
    */
   async findWheelchairPatientById(id: string) {
     const snapshot = await this.firebaseService.firestore
       .collection('patients')
       .doc(id)
       .get();
-    return { id, ...snapshot.data() };
+    console.log({ id, ...snapshot.data() } + "Test");
+
+    //Part of a test: if return value does not fit in WheelchairPatient interface
+    //return { id, ...snapshot.data() };
+    return { id, ...snapshot.data()};
   }
 
   /**

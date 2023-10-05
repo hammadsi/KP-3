@@ -8,6 +8,7 @@ interface WheelchairPatientComponentProps {
 
 const WheelchairPatientComponent: React.FC<WheelchairPatientComponentProps> = ({ id }) => {
   const { wheelchairPatient, loading, error } = useWheelchairPatientById(id);
+  console.log("Component render. Loading: ", loading, ". Error: ", error, ". Patient: ", wheelchairPatient);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;

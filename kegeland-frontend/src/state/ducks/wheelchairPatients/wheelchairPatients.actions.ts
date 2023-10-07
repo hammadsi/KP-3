@@ -3,10 +3,12 @@ import { apiCaller } from '../../../utils/apiCaller';
 import { WheelchairPatient } from './wheelchairPatients.interface';
 
 export const fetchWheelchairPatientById = createAsyncThunk(
-  'patients/fetchWheelchairPatientById',
+  'wheelchairpatients/fetchWheelchairPatientById',
   async (id: string) =>
     apiCaller<WheelchairPatient>({
-      url: `users/wheelchair-patients/${id}`,
+      url: `wheelchairPatients/${id}`,
       method: 'GET',
     }),
 );
+
+

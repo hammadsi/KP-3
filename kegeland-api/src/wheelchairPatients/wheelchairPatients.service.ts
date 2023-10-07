@@ -1,8 +1,7 @@
-import { Injectable } from '@nestjs/common';
-// import { map } from 'lodash';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { map } from 'lodash';
 import { FirebaseService } from 'src/firebase/firebase.service';
-
-// import { timestamp } from '../utils/timestamp';
+import { timestamp } from '../utils/timestamp';
 
 @Injectable()
 export class WheelchairPatientsService {
@@ -14,14 +13,19 @@ export class WheelchairPatientsService {
    * @returns patient id
    */
    async findWheelchairPatientById(id: string) {
-    const snapshot = await this.firebaseService.firestore
-      .collection('patients')
-      .doc(id)
-      .get();
-    console.log({ id, ...snapshot.data() });
-
-    //Part of a test: if return value does not fit in WheelchairPatient interface
-    //return { id, ...snapshot.data() };
-    return { id, ...snapshot.data()};
+    try {
+      const snapshot = await this.firebaseService.firestore
+        .collection('patients')
+        .doc(id)
+        .get();
+        
+      if (!snapshot.exists) {
+        throw new NotFoundException(`Patient with ID ${id} not found`);
+      }
+      return { id, ...snapshot.data()};
+    } catch (error) {
+      throw new InternalServerErrorException(error.message);
+    }
   }
+  
 }

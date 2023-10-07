@@ -1,23 +1,16 @@
-import {
-    Controller,
-    Get,
-    Post,
-    Put,
-    Delete,
-    Body,
-    Param,
-    Query,
-    UseGuards,
-  } from '@nestjs/common';
-  import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-  
-  import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
-  import { RolesGuard } from '../roles/roles.guard';
-  import { WheelchairPatientsService } from './wheelchairPatients.service';
+import { Controller, Get, Param, Delete, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+
+import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
+import { Role } from '../roles/enums/role.enum';
+import { Roles } from '../roles/roles.decorator';
+import { RolesGuard } from '../roles/roles.guard';
+import { WheelchairPatientsService } from './wheelchairPatients.service';
   
   @ApiTags('WheelchairPatients')
   @Controller('wheelchairPatients')
   @ApiBearerAuth('access-token')
+  @Roles(Role.PATIENT, Role.PHYSICIAN,)
   @UseGuards(FirebaseAuthGuard, RolesGuard)
   export class WheelchairPatientsController {
     constructor(private readonly wheelchairPatientsService: WheelchairPatientsService) {}
@@ -26,7 +19,7 @@ import {
    * @param id of patient
    * @returns patient object
    */
-    @Get('wheelchair-patients/:id')
+    @Get(':id')
     async findWheelchairPatientById(@Param('id') id: string) {
         return this.wheelchairPatientsService.findWheelchairPatientById(id);
     }

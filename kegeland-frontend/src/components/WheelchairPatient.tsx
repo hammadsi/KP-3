@@ -1,38 +1,40 @@
-import React, { FC } from 'react';
-import { Box, Text, Spinner } from '@chakra-ui/react';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 
-type WheelchairPatientProps = {
-  id: string;
-};
-
-const WheelchairPatientComponent: FC<WheelchairPatientProps> = ({ id }) => {
-  const { wheelchairPatient, loading, error } = useWheelchairPatient(id);
-
+const WheelchairPatientComponent = () => {
+  const { wheelchairPatient, error, loading } = useWheelchairPatient('2P9gfi0u1foJiyoK3ovJ');
+  
   if (loading) {
+    return <p>Loading...</p>;
+  }
+  
+  if (error) {
+    console.error(error);
+    return <p>Error: {error}</p>;
+  }
+  
+  if (wheelchairPatient) {
+    const { name, age, gender, currentPhysicalState } = wheelchairPatient;
+    const { height, weight, maxHeartRate, averageHeartRate, maxWheelchairSpeed, averageWheelchairSpeed } = currentPhysicalState;
+
     return (
-      <Box p="4" textAlign="center">
-        <Spinner />
-        <Text>Loading...</Text>
-      </Box>
+      <div>
+        <h2>Patient Details</h2>
+        <p><strong>Name:</strong> {name}</p>
+        <p><strong>Age:</strong> {age}</p>
+        <p><strong>Gender:</strong> {gender}</p>
+        
+        <h3>Current Physical State</h3>
+        <p><strong>Height:</strong> {height}</p>
+        <p><strong>Weight:</strong> {weight}</p>
+        <p><strong>Max Heart Rate:</strong> {maxHeartRate}</p>
+        <p><strong>Average Heart Rate:</strong> {averageHeartRate}</p>
+        <p><strong>Max Wheelchair Speed:</strong> {maxWheelchairSpeed}</p>
+        <p><strong>Average Wheelchair Speed:</strong> {averageWheelchairSpeed}</p>
+      </div>
     );
   }
 
-  if (error || !wheelchairPatient) {
-    return (
-      <Box p="4" textAlign="center">
-        <Text color="red.500">Error fetching patient data.</Text>
-      </Box>
-    );
-  }
-
-  return (
-    <Box p="4">
-      <Text fontWeight="bold">Patient Details:</Text>
-      <Text>ID: {wheelchairPatient.patientId}</Text>
-      {/* Additional details can be added here as needed */}
-    </Box>
-  );
+  return <p>No patient found.</p>;
 };
 
 export default WheelchairPatientComponent;

@@ -16,7 +16,7 @@ export type WheelchairPatient = {
 
 export type GameSession = {
   sessionId: string;
-  exerciseTime: number;  // Calculated from startTime and endTime
+  exerciseTime: number; // Calculated from startTime and endTime
   startTime: Date;
   endTime: Date;
   questionaires: {
@@ -40,7 +40,7 @@ export type Lap = {
 export type TimeSeriesData = {
   heartRates: HeartRate[];
   speeds: Speed[];
-  imus: IMUData[];  // Define the IMUData type based on actual data structure
+  imus: IMUData[]; // Define the IMUData type based on actual data structure
 };
 
 export type HeartRate = {

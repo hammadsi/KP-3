@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import { apiCaller } from '../../../utils/apiCaller';
+
 import { WheelchairPatient } from './wheelchairPatients.interface';
 
 export const fetchWheelchairPatientById = createAsyncThunk(
@@ -10,5 +12,3 @@ export const fetchWheelchairPatientById = createAsyncThunk(
       method: 'GET',
     }),
 );
-
-

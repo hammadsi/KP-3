@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+
 import { fetchWheelchairPatientById } from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
 import { clearWheelchairPatientsState } from '../state/ducks/wheelchairPatients/wheelchairPatients.reducer';
+
 import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
 
@@ -15,15 +17,17 @@ const useWheelchairPatient = (patientId: string) => {
     setError(null);
 
     // Only fetch new patient data if the ID changes, or if the data isn't present in the state
-    if (!wheelchairPatients.wheelchairPatient || wheelchairPatients.wheelchairPatient.id !== patientId) {
-      dispatch(fetchWheelchairPatientById(patientId))
-        .catch((e: Error) => {
-          setError(`Failed to fetch patient: ${e.message}`);
-        });
+    if (
+      !wheelchairPatients.wheelchairPatient ||
+      wheelchairPatients.wheelchairPatient.id !== patientId
+    ) {
+      dispatch(fetchWheelchairPatientById(patientId)).catch((e: Error) => {
+        setError(`Failed to fetch patient: ${e.message}`);
+      });
     }
   }, [dispatch, patientId, wheelchairPatients.wheelchairPatient]);
 
-  //NOTE: without a dedicated useEffect for clean-up, an infinite loop of API-calls will be triggered
+  // NOTE: without a dedicated useEffect for clean-up, an infinite loop of API-calls will be triggered
   useEffect(() => {
     // Cleanup on unmount only
     return () => {
@@ -33,12 +37,24 @@ const useWheelchairPatient = (patientId: string) => {
 
   useEffect(() => {
     // Ensure local loading state is only false when the data corresponds to the requested ID
-    if (loading && !wheelchairPatients.loading && wheelchairPatients.wheelchairPatient?.id === patientId) {
+    if (
+      loading &&
+      !wheelchairPatients.loading &&
+      wheelchairPatients.wheelchairPatient?.id === patientId
+    ) {
       setLoading(false);
-    } else if (!loading && (wheelchairPatients.loading || wheelchairPatients.wheelchairPatient?.id !== patientId)) {
+    } else if (
+      !loading &&
+      (wheelchairPatients.loading ||
+        wheelchairPatients.wheelchairPatient?.id !== patientId)
+    ) {
       setLoading(true);
     }
-  }, [loading, wheelchairPatients.loading, wheelchairPatients.wheelchairPatient]);
+  }, [
+    loading,
+    wheelchairPatients.loading,
+    wheelchairPatients.wheelchairPatient,
+  ]);
 
   return {
     wheelchairPatient: wheelchairPatients.wheelchairPatient,
@@ -46,6 +62,5 @@ const useWheelchairPatient = (patientId: string) => {
     loading,
   };
 };
-
 
 export default useWheelchairPatient;

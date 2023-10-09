@@ -6,7 +6,7 @@ import { clearWheelchairPatientsState } from '../state/ducks/wheelchairPatients/
 import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
 
-const useWheelchairPatient = (patientId: string) => {
+const useWheelchairPatient = (patientId?: string) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -18,14 +18,16 @@ const useWheelchairPatient = (patientId: string) => {
 
     // Only fetch new patient data if the ID changes, or if the data isn't present in the state
     if (
-      !wheelchairPatients.wheelchairPatient ||
-      wheelchairPatients.wheelchairPatient.id !== patientId
+      patientId &&
+      (!wheelchairPatients.wheelchairPatient ||
+      wheelchairPatients.wheelchairPatient.id !== patientId)
     ) {
       dispatch(fetchWheelchairPatientById(patientId)).catch((e: Error) => {
         setError(`Failed to fetch patient: ${e.message}`);
       });
     }
-  }, [dispatch, patientId, wheelchairPatients.wheelchairPatient]);
+}, [dispatch, patientId, wheelchairPatients.wheelchairPatient]);
+
 
   // NOTE: without a dedicated useEffect for clean-up, an infinite loop of API-calls will be triggered
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Delete, UseGuards, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Delete, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
@@ -7,7 +7,6 @@ import { Roles } from '../roles/roles.decorator';
 import { RolesGuard } from '../roles/roles.guard';
 
 import { UsersService } from './users.service';
-import { currentPhysicalState } from './entities/user.entity';
 
 @ApiTags('Users')
 @Controller('users')
@@ -55,5 +54,4 @@ export class UsersController {
   async delete(@Param('id') id: string) {
     return this.usersService.delete(id);
   }
-
 }

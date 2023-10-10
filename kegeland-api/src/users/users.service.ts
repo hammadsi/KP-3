@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { FirebaseService } from 'src/firebase/firebase.service';
-import { currentPhysicalState } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {

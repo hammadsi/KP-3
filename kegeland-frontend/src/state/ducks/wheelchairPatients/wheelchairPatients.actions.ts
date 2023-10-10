@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { apiCaller } from '../../../utils/apiCaller';
-import { WheelchairPatient } from './wheelchairPatients.interface';
+import { UpdateWheelchairPatientData, WheelchairPatient } from './wheelchairPatients.interface';
 
 export const fetchWheelchairPatientById = createAsyncThunk(
   'wheelchairpatients/fetchWheelchairPatientById',
@@ -13,10 +13,10 @@ export const fetchWheelchairPatientById = createAsyncThunk(
 
 export const updatePatientData = createAsyncThunk(
   'wheelchairpatients/updatePatientData',
-  async (wheelchairPatient: WheelchairPatient) =>
-    apiCaller<WheelchairPatient['currentPhysicalState']>({
-      url: `wheelchairPatients/${wheelchairPatient.id}`,
-      method: 'POST',
-      data: wheelchairPatient.currentPhysicalState,
+  async (updatedData: UpdateWheelchairPatientData) =>
+    apiCaller<UpdateWheelchairPatientData>({
+      url: `wheelchairPatients/${updatedData.pid}`,
+      method: 'PUT',
+      data: updatedData.currentPhysicalState,
     }),
 );

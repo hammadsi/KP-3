@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 import { Formik } from 'formik';
 import { InputControl, SubmitButton } from 'formik-chakra-ui';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 
 import { signUpUser } from '../../state/ducks/auth/auth.actions';
 import { RegisterDTO, UserRole } from '../../state/ducks/auth/auth.interface';
@@ -27,7 +27,7 @@ type FormData = {
   lastName: string;
   email: string;
   gender: string;
-  birthofdate: string;
+  birthofdate: Date;
   height: number;
   weight: number;
   password: string;
@@ -66,7 +66,7 @@ const RegisterPage = () => {
   }, [navigate, isSignedIn]);
 
   const register = (data: FormData) => {
-    const { firstName, lastName, email, password, gender,  } = data;
+    const { firstName, lastName, email, password, gender, birthofdate, height, weight } = data;
     const payload: RegisterDTO = {
       email,
       password,
@@ -74,6 +74,10 @@ const RegisterPage = () => {
         firstName,
         lastName,
       },
+      gender,
+      birthofdate,
+      height,
+      weight,
       roles: [UserRole.PATIENT],
     };
     dispatch(signUpUser(payload));
@@ -88,22 +92,23 @@ const RegisterPage = () => {
               onSubmit={async (values) => {
                 register(values);
               }}
+
               initialValues={{
                 email: '',
                 password: '',
                 firstName: '',
                 lastName: '',
-                birthofdate: '',
-                height: '',
-                weight: '',
+                birthofdate: new Date(),
+                gender: '',
+                height: 0,
+                weight: 0,
                 confirmPassword: '',
               }}
-              validationSchema={validationSchema}
-            >
+              validationSchema={validationSchema}>
               {(formProps) => (
                 <Box
                   borderWidth="1px"
-                  backgroundColor='white'
+                  backgroundColor="white"
                   rounded="lg"
                   shadow="1px 1px 3px rgba(0,0,0,0.3)"
                   maxWidth={800}
@@ -113,8 +118,7 @@ const RegisterPage = () => {
                   onSubmit={(e: any) => {
                     e.preventDefault();
                     formProps.handleSubmit();
-                  }}
-                >
+                  }}>
                   <VStack spacing={5} align="stretch">
                     <Box>
                       <Heading as="h3" size="lg" textAlign="center">
@@ -138,7 +142,6 @@ const RegisterPage = () => {
                             type: 'text',
                           }}
                           name="firstName"
-
                           label="First name"
                           data-testid="firstname-input"
                         />
@@ -148,7 +151,6 @@ const RegisterPage = () => {
                           inputProps={{
                             type: 'text',
                           }}
-
                           label="Last name"
                           data-testid="lastname-input"
                           name="lastName"
@@ -156,15 +158,20 @@ const RegisterPage = () => {
                       </Box>
                     </HStack>
                     <HStack w="100%">
-                      <Box style={{marginRight: '14%'}}>
-                        <FormControl id="gender">
-                          <FormLabel>Gender</FormLabel>
-                          <Select name="gender" placeholder="Select gender">
-                              <option value="" disabled selected hidden>Select gender</option>
-                              <option value="male">Male</option>
-                              <option value="female">Female</option>
-                          </Select>
-                        </FormControl>
+                      <Box style={{ marginRight: '14%' }}>
+                      <FormControl id="gender">
+                        <FormLabel>Gender</FormLabel>
+                        <Select
+                          name="gender"
+                          onChange={(e) => formProps.setFieldValue('gender', e.target.value)}
+                        >
+                          <option value="" disabled>
+                            Select gender
+                          </option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </Select>
+                      </FormControl>
                       </Box>
                       <Box>
                         <InputControl
@@ -184,7 +191,6 @@ const RegisterPage = () => {
                             type: 'number',
                           }}
                           name="height"
-
                           label="Height (cm)"
                           data-testid="firstname-input"
                         />
@@ -194,7 +200,6 @@ const RegisterPage = () => {
                           inputProps={{
                             type: 'number',
                           }}
-
                           label="Weight (kg)"
                           data-testid="lastname-input"
                           name="weight"
@@ -225,8 +230,12 @@ const RegisterPage = () => {
                       />
                     </Box>
                     <Box color={'red'}>{error}</Box>
-                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <Box textAlign="left">
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                      }}>
+                      <Box textAlign="left">
                         <Link color="grey" href="/login">
                           <b>Cancel</b>
                         </Link>
@@ -235,11 +244,17 @@ const RegisterPage = () => {
                         <SubmitButton
                           colorScheme="primary"
                           isLoading={formProps.isSubmitting || loading}
-                          isDisabled={!formProps.isValid}
-                        >
+                          isDisabled={!formProps.isValid}>
                           Register user
                         </SubmitButton>
-                        <button onClick={(event: React.MouseEvent<HTMLButtonElement>) => {console.log(formProps.values)}}>Test</button>
+                        <button
+                          onClick={(
+                            event: React.MouseEvent<HTMLButtonElement>,
+                          ) => {
+                            console.log(formProps.values);
+                          }}>
+                          Test
+                        </button>
                       </Box>
                     </div>
                   </VStack>

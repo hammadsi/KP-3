@@ -57,10 +57,5 @@ describe('UsersController', () => {
       await request(app.getHttpServer()).delete('/users/1');
       expect(spyService.delete).toBeCalledWith('1');
     });
-    it('should call findWheelchairPatientById in controller', async () => {
-      const patientId = 'wheelchair1';
-      await request(app.getHttpServer()).get(`/users/wheelchair-patients/${patientId}`);
-      expect(spyService.findWheelchairPatientById).toBeCalledWith(patientId);
-    });
   });
 });

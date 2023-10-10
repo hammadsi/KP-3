@@ -6,7 +6,10 @@ import {
   isRejectedAction,
 } from '../../../utils/thunk.utils';
 
-import { fetchWheelchairPatientById, updatePatientData } from './wheelchairPatients.actions';
+import {
+  fetchWheelchairPatientById,
+  updatePatientData,
+} from './wheelchairPatients.actions';
 import { WheelchairPatientsState } from './wheelchairPatients.interface';
 
 export const initialState: WheelchairPatientsState = {
@@ -34,7 +37,8 @@ const wheelchairPatientsSlice = createSlice({
       })
       .addCase(updatePatientData.fulfilled, (state, action) => {
         if (state.wheelchairPatient) {
-          state.wheelchairPatient.currentPhysicalState = action.payload.currentPhysicalState;
+          state.wheelchairPatient.currentPhysicalState =
+            action.payload.currentPhysicalState;
         }
       })
       .addMatcher(

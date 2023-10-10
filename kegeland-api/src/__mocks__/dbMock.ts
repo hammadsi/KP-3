@@ -2,7 +2,7 @@ import { timestamp } from 'src/utils/timestamp';
 export const dbMock = {
   patients: [
     {
-      patientId: "p1",
+      id: "p1",
       name: "John Doe",
       age: 30,
       gender: 'M',

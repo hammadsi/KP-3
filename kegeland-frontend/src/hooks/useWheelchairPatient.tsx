@@ -8,7 +8,10 @@ import { clearWheelchairPatientsState } from '../state/ducks/wheelchairPatients/
 
 import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
-import { UpdateWheelchairPatientData, WheelchairPatient } from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
+import {
+  UpdateWheelchairPatientData,
+  WheelchairPatient,
+} from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
 
 const useWheelchairPatient = (patientId?: string) => {
   const dispatch = useAppDispatch();
@@ -34,17 +37,15 @@ const useWheelchairPatient = (patientId?: string) => {
 
   // Handle patient data update
   const updatePatientDataById = async (
-    updatedData: UpdateWheelchairPatientData
+    updatedData: UpdateWheelchairPatientData,
   ) => {
     // Dispatch the update action
     dispatch(updatePatientData(updatedData));
 
     // Refetch the patient data to ensure it's updated in the state
-    dispatch(fetchWheelchairPatientById(updatedData.pid)).catch(
-      (e: Error) => {
-        setError(`Failed to update patient data: ${e.message}`);
-      }
-    );
+    dispatch(fetchWheelchairPatientById(updatedData.pid)).catch((e: Error) => {
+      setError(`Failed to update patient data: ${e.message}`);
+    });
   };
 
   // NOTE: without a dedicated useEffect for clean-up, an infinite loop of API-calls will be triggered

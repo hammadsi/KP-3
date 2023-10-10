@@ -1,6 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { apiCaller } from '../../../utils/apiCaller';
-import { UpdateWheelchairPatientData, WheelchairPatient } from './wheelchairPatients.interface';
+import {
+  UpdateWheelchairPatientData,
+  WheelchairPatient,
+} from './wheelchairPatients.interface';
 
 export const fetchWheelchairPatientById = createAsyncThunk(
   'wheelchairpatients/fetchWheelchairPatientById',

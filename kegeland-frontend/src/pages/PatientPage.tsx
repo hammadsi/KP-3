@@ -1,4 +1,4 @@
-import { Button, Box, Flex, Stack, useMediaQuery, Center } from '@chakra-ui/react';
+import { Button, Button, Box, Flex, Stack, useMediaQuery, Center, Center } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import {
   AiOutlineClockCircle,
@@ -29,14 +29,19 @@ const PatientPage: React.FC = () => {
     fontSize: '24px',
     margin: '25px 0 10px 0',
   };
+
+  const startUnitySession = () => {
+    // Open the Unity game using the custom URI scheme
+ ,
+  };
 <<<<<<< HEAD
 =======
 
   const startUnitySession = () => {
     // Open the Unity game using the custom URI scheme
-    window.location.href = `VRWheelchairSim:// -patientID ${patientId}`;
+    window.location.href = `VRWheelchairSim:// -patientID ${patientId}`;window.location.href = `VRWheelchairSim:// -patientID ${patientId}`;
   };
->>>>>>> origin/21-fetch-from-firestoreDB
+>>>>>>> origin/21-fetch-from-firestoreDB;
 
   return (
     <Box w="100%" h="100%">
@@ -44,15 +49,18 @@ const PatientPage: React.FC = () => {
         flexDirection={isGreaterThanLg ? 'row' : 'column'}
         flexBasis="100%"
         flexWrap="nowrap">
+        flexWrap="nowrap">
         <Card
           marginRight={5}
           w={isGreaterThanLg ? '25%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
           loading={loading}>
+          loading={loading}>
           <Stack
             spacing={4}
             direction={isGreaterThanLg ? 'column' : 'row'}
             w="100%"
+            alignItems="flex-start">
             alignItems="flex-start">
             <LabeledValue
               label="Workouts this week"
@@ -75,9 +83,11 @@ const PatientPage: React.FC = () => {
           w={isGreaterThanLg ? '75%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
           loading={loading}>
+          loading={loading}>
           <WeeklySessionsChart sessions={data} numWeeks={12} />
         </Card>
       </Flex>
+      <h1 style={headingStyle}>OVERVIEW OF THE PATIENT'S EXERCISES</h1>
       <h1 style={headingStyle}>OVERVIEW OF THE PATIENT'S EXERCISES</h1>
       <Card loading={loading} minH="36">
         <ExerciseTable sessions={data} patientId={patientId!} />
@@ -85,7 +95,11 @@ const PatientPage: React.FC = () => {
       <Button w="100%" marginTop={8} onClick={startUnitySession}>
         Start session
       </Button>
+      <Button w="100%" marginTop={8} onClick={startUnitySession}>
+        Start session
+      </Button>
     </Box>
+    
     
   );
 };

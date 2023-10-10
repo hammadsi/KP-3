@@ -22,6 +22,7 @@ public class ElapsedTime : MonoBehaviour
     private TextMeshProUGUI timerText;
 
     private FirebaseManager firebaseManager;
+    private DataCollector dataCollector;
 
     // Start is called before the first frame update
     void Start()
@@ -77,20 +78,15 @@ public class ElapsedTime : MonoBehaviour
         startTimer();
         return;
     }
+    public float getElapsedTime()
+    {
+        return elapsedTime;
+    }
 
     public void newLap()
     {
 
         float lapTime = restartTimer();
-        float heartRate = ReactInletUI.currentHeartRate;  // Fetch the current heart rate
-            // Check if heartRate is zero and set a mock value if necessary
-        if (heartRate == 0f)
-        {
-            heartRate = 80f;  // Any mock value you'd like to set
-        }
-        Debug.Log("Lap Time: " + lapTime + "Heart rate: " + heartRate);
-    
-        firebaseManager.SendLapAndHeartRate(lapTime, heartRate);
 
         if (lapTime <= 2.0f)
         {

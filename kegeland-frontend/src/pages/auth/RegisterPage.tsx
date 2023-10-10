@@ -74,10 +74,6 @@ const RegisterPage = () => {
         firstName,
         lastName,
       },
-      gender,
-      birthofdate,
-      height,
-      weight,
       roles: [UserRole.PATIENT],
     };
     dispatch(signUpUser(payload));
@@ -129,6 +125,7 @@ const RegisterPage = () => {
                       <InputControl
                         inputProps={{
                           type: 'email',
+                          placeholder: 'ola.nordmann@example.com',
                         }}
                         name="email"
                         label="Email address"
@@ -140,6 +137,7 @@ const RegisterPage = () => {
                         <InputControl
                           inputProps={{
                             type: 'text',
+                            placeholder: 'Ola',
                           }}
                           name="firstName"
                           label="First name"
@@ -150,6 +148,7 @@ const RegisterPage = () => {
                         <InputControl
                           inputProps={{
                             type: 'text',
+                            placeholder: 'Nordmann',
                           }}
                           label="Last name"
                           data-testid="lastname-input"
@@ -213,6 +212,7 @@ const RegisterPage = () => {
                         data-testid="password-input"
                         inputProps={{
                           type: 'password',
+                          placeholder: '• • • • • • • •',
                           autoComplete: 'new-password',
                         }}
                         helperText="Create a new password."
@@ -224,6 +224,7 @@ const RegisterPage = () => {
                         data-testid="confirmPassword-input"
                         inputProps={{
                           type: 'password',
+                          placeholder: '• • • • • • • •',
                           autoComplete: 'new-password',
                         }}
                         helperText="Repeat your password."
@@ -235,7 +236,7 @@ const RegisterPage = () => {
                         display: 'flex',
                         justifyContent: 'space-between',
                       }}>
-                      <Box textAlign="left">
+                      <Box textAlign="left" marginTop="9px">
                         <Link color="grey" href="/login">
                           <b>Cancel</b>
                         </Link>

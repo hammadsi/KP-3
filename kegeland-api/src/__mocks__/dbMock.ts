@@ -1,5 +1,65 @@
 import { timestamp } from 'src/utils/timestamp';
 export const dbMock = {
+  patients: [
+    {
+      patientId: "p1",
+      name: "John Doe",
+      age: 30,
+      gender: 'M',
+      currentPhysicalState: {
+        height: 180,
+        weight: 75,
+        maxHeartRate: 180,
+        averageHeartRate: 80,
+        maxWheelchairSpeed: 10,
+        averageWheelchairSpeed: 5,
+      },
+      gameSessions: [
+        {
+          sessionId: "s1",
+          exerciseTime: 60,
+          startTime: timestamp(),
+          endTime: timestamp(),
+          questionaires: {
+            preGame: [
+              {
+                question: "How do you feel?",
+                answer: "Good",
+              }
+            ],
+            postGame: [
+              {
+                question: "How do you feel now?",
+                answer: "Tired",
+              }
+            ]
+          },
+          laps: [
+            {
+              lapTime: 15,
+              timeStamp: timestamp(),
+            }
+          ],
+          timeSeriesData: {
+            heartRates: [
+              {
+                heartRate: 80,
+                timestamp: timestamp(),
+              }
+            ],
+            speeds: [
+              {
+                leftSpeed: 5,
+                rightSpeed: 5,
+                timestamp: timestamp(),
+              }
+            ],
+            imus: [],
+          }
+        }
+      ],
+    }
+  ],
   userDetails: [
     {
       id: '_id',

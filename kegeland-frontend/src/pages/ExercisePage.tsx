@@ -1,4 +1,7 @@
 import { useParams } from 'react-router-dom';
+import { Button, Collapse } from '@chakra-ui/react';
+import { useState } from 'react';
+import { AiOutlineArrowDown } from 'react-icons/ai';
 
 import Card from '../components/Card';
 import ExerciseGraph from '../components/ExerciseGraph';
@@ -18,6 +21,11 @@ const ExercisePage: React.FC = () => {
     patientId!,
     exerciseId!,
   );
+  const [visible, setVisible] = useState(false);
+
+  const toggleButtonClick = () => {
+    setVisible(!visible);
+  };
 
   return (
     <>
@@ -27,9 +35,15 @@ const ExercisePage: React.FC = () => {
         )}
       </Card>
 
-      <Card loading={loading} h="100%">
-        <QuestionnaireResults answers={answers} questionnaire={questionnaire} />
-      </Card>
+      <Button onClick={toggleButtonClick}> Show questionnaire results </Button>
+      <Collapse in={visible}>
+        <Card loading={loading} h="100%">
+          <QuestionnaireResults
+            answers={answers}
+            questionnaire={questionnaire}
+          />
+        </Card>
+      </Collapse>
     </>
   );
 };

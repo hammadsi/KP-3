@@ -3,19 +3,19 @@ import { apiCaller } from '../../../utils/apiCaller';
 import { WheelchairPatient } from './wheelchairPatients.interface';
 
 export const fetchWheelchairPatientById = createAsyncThunk(
-  'patients/fetchWheelchairPatientById',
+  'wheelchairpatients/fetchWheelchairPatientById',
   async (id: string) =>
     apiCaller<WheelchairPatient>({
-      url: `wheelchair-patients/${id}`,
+      url: `wheelchairPatients/${id}`,
       method: 'GET',
     }),
 );
 
 export const updatePatientData = createAsyncThunk(
-  'patients/updatePatientData',
+  'wheelchairpatients/updatePatientData',
   async (wheelchairPatient: WheelchairPatient) =>
     apiCaller<WheelchairPatient['currentPhysicalState']>({
-      url: `wheelchairPatients/${wheelchairPatient.patientId}`,
+      url: `wheelchairPatients/${wheelchairPatient.id}`,
       method: 'POST',
       data: wheelchairPatient.currentPhysicalState,
     }),

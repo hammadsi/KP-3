@@ -27,27 +27,6 @@ export class UsersController {
   }
 
   /**
-   * Endpoint for fetching one patient by its ID
-   * @param id of patient
-   * @returns patient object
-   */
-  @Get('wheelchair-patients/:id')
-  async findPatientById(@Param('id') id: string) {
-    return this.usersService.findWheelchairPatientById(id);
-  
-  }
-  /**
-   * Endpoint for updating patientData 
-   * @param id of patient
-   * @param patientData data to be updated
-   * @returns updated data
-   */
-  @Post('wheelchair-patients/:id')
-  async updatePatientData(@Param('id') id: string, @Body() patientData: currentPhysicalState) {
-    return this.usersService.updateWheelchairPatientData(id, patientData);
-  }
-
-  /**
    * Endpoint for fetching specific user
    * @param id
    * @returns UserDetails object

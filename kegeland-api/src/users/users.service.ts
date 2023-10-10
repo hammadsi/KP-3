@@ -36,33 +36,6 @@ export class UsersService {
   }
 
   /**
-   * Function for finding a specific patient by its ID
-   * @param id of patient
-   * @returns patient object
-   */
-  async findWheelchairPatientById(id: string) {
-    const snapshot = await this.firebaseService.firestore
-      .collection('patients')
-      .doc(id)
-      .get();
-    return { id, ...snapshot.data() };
-  }
-  
-  /**
-   * Function for updating wheelchair patient data 
-   * @param uid id of user 
-   * @param patientData which is the data to be updated
-   * @returns updated values
-   */
-  async updateWheelchairPatientData(id: string, patientData: currentPhysicalState) {
-    const snapshot = await this.firebaseService.firestore
-      .collection('patients')
-      .doc(id)
-      .set(patientData);
-    return { id, ...patientData};
-  }
-
-  /**
    * Function for getting patient workout overview
    * @param uid id of user
    * @returns object containing users full name and lsit of all sessions

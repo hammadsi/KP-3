@@ -85,7 +85,7 @@ class Speed {
   timestamp: Date;
 }
 
-class GameSession {
+export class GameSession {
   @Expose()
   @IsString()
   sessionId: string;

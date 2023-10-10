@@ -11,7 +11,7 @@ const useWheelchairPatient = (patientId?: string) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { wheelchairPatients } = useAppSelector((state) => state);
-
+  
   useEffect(() => {
     // Reset error state upon new request
     setError(null);

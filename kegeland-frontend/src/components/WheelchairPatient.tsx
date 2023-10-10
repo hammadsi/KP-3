@@ -19,7 +19,7 @@ const WheelchairPatientComponent = () => {
   }
 
   if (wheelchairPatient) {
-    const { name, age, gender, currentPhysicalState } = wheelchairPatient;
+    const { name, age, gender, currentPhysicalState, gameSessions } = wheelchairPatient;
     const {
       height,
       weight,
@@ -28,7 +28,7 @@ const WheelchairPatientComponent = () => {
       maxWheelchairSpeed,
       averageWheelchairSpeed,
     } = currentPhysicalState;
-
+    
     return (
       <div>
         <h2>Patient Details</h2>
@@ -61,6 +61,24 @@ const WheelchairPatientComponent = () => {
         <p>
           <strong>Average Wheelchair Speed:</strong> {averageWheelchairSpeed}
         </p>
+
+        {gameSessions && gameSessions.length > 0 ? (
+          <>
+            <h3>Game Sessions</h3>
+            {gameSessions.map((session, index) => (
+              <div key={session.sessionId}>
+                <h4>Session {index + 1}</h4>
+                <p><strong>Session ID:</strong> {session.sessionId}</p>
+                <p><strong>Start Time:</strong> {new Date(session.startTime).toLocaleString()}</p>
+                <p><strong>End Time:</strong> {new Date(session.endTime).toLocaleString()}</p>
+                <p><strong>Exercise Time:</strong> {session.exerciseTime}</p>
+                {/* Add more properties as per requirement */}
+              </div>
+            ))}
+          </>
+        ) : (
+          <p>No game sessions found.</p>
+        )}
       </div>
     );
   }

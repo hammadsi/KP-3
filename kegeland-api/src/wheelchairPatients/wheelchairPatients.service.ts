@@ -1,7 +1,6 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
-import { map } from 'lodash';
+import { GameSession } from './entities/wheelchairPatient.entity'
 import { FirebaseService } from 'src/firebase/firebase.service';
-import { timestamp } from '../utils/timestamp';
 
 @Injectable()
 export class WheelchairPatientsService {
@@ -10,7 +9,7 @@ export class WheelchairPatientsService {
    /**
    * Function for finding a specific patient by its ID
    * @param id of patient
-   * @returns patient id
+   * @returns patient data along with their gameSessions
    */
    async findWheelchairPatientById(id: string) {
     try {
@@ -22,10 +21,22 @@ export class WheelchairPatientsService {
       if (!snapshot.exists) {
         throw new NotFoundException(`Patient with ID ${id} not found`);
       }
-      return { id, ...snapshot.data()};
+
+      // Fetching gameSessions sub-collection
+      const gameSessions: GameSession[] = [];
+      const sessionsSnapshot = await this.firebaseService.firestore
+        .collection('patients')
+        .doc(id)
+        .collection('gameSessions')
+        .get();
+
+      sessionsSnapshot.forEach(doc => {
+        gameSessions.push({sessionId: doc.id, ...doc.data()} as GameSession);
+      });
+
+      return { id, ...snapshot.data(), gameSessions};
     } catch (error) {
       throw new InternalServerErrorException(error.message);
     }
   }
-  
 }

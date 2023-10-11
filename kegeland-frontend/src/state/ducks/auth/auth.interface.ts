@@ -1,3 +1,5 @@
+import { WheelchairPatient } from '../wheelchairPatients/wheelchairPatients.interface';
+
 export enum UserRole {
   PATIENT = 'patient',
   PHYSICIAN = 'physician',
@@ -46,8 +48,13 @@ export type LoginResponse = {
   tokens: AuthTokens;
 };
 
-export type RegisterDTO = LoginDTO & UserDetails;
+export type RegisterDTO = LoginDTO &
+  UserDetails & {
+    wheelchairPatient: WheelchairPatient;
+  };
 
-export type RegisterResponse = LoginResponse;
+export type RegisterResponse = LoginResponse & {
+  wheelchairPatient: WheelchairPatient;
+};
 
 export type ResetPasswordDTO = Pick<LoginDTO, 'email'>;

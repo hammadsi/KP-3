@@ -66,7 +66,9 @@ export class AuthService {
    * @returns id of registered user, or throws error
    */
   async register(registerCredentials: RegisterCredentialsDto) {
-    const { email, password, ...details } = registerCredentials;
+    const { email, password, wheelchairPatient, ...details } =
+      registerCredentials;
+    const { id, ...wheelchairPatientDetails } = wheelchairPatient;
 
     // Create new user and set custom roles
     const userId = await this.firebaseService.firebaseAdmin
@@ -87,6 +89,16 @@ export class AuthService {
       .collection('userDetails')
       .doc(userId)
       .set({ ...details, email })
+      .catch((err) => {
+        if (err instanceof Error) {
+          throw new InternalServerErrorException(err.message);
+        }
+        throw new InternalServerErrorException();
+      });
+    await this.firebaseService.firestore
+      .collection('patients')
+      .doc(userId)
+      .set({ ...wheelchairPatientDetails })
       .catch((err) => {
         if (err instanceof Error) {
           throw new InternalServerErrorException(err.message);
@@ -151,3 +163,4 @@ export class AuthService {
       });
   }
 }
+

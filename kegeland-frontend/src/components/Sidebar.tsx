@@ -2,6 +2,7 @@ import { Box, Button, Divider, ScaleFade, VStack } from '@chakra-ui/react';
 import {
   AiOutlineProfile,
   AiOutlineTeam,
+  AiOutlinePlayCircle,
   AiOutlineRise,
   AiOutlineSetting,
 } from 'react-icons/ai';
@@ -50,6 +51,12 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
             title="Patients"
             to={'/'}
             icon={AiOutlineTeam}
+          />
+          <Menu.Item
+            mode={mode}
+            title="Game"
+            to={'/game'}
+            icon={AiOutlinePlayCircle}
           />
           <Menu.Item
             mode={mode}

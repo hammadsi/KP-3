@@ -1,6 +1,7 @@
 import Card from '../components/Card';
 import PatientsTable from '../components/PatientsTable';
 import SearchBar from '../components/SearchBar';
+import WheelchairPatientComponent from '../components/WheelchairPatient';
 import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
 import usePatientList from '../hooks/usePatientList';
@@ -12,6 +13,13 @@ const PatientListPage: React.FC = () => {
     filterData(event.target.value);
   };
 
+  const headingStyle = {
+    color: 'var(--chakra-colors-blackAlpha-800)',
+    fontWeight: 'bold',
+    fontSize: '24px',
+    marginBottom: '10px',
+  };
+
   return (
     <>
       <Card loading={loading} padding={0}>
@@ -19,6 +27,11 @@ const PatientListPage: React.FC = () => {
           placeholder="Search for patients.."
           onChange={handleSearch}
         />
+      </Card>
+
+      <Card loading={loading}>
+        <h2 style={headingStyle}>Wheelchair Patient Info:</h2>
+        <WheelchairPatientComponent />
       </Card>
 
       <Card loading={loading} minH="36">

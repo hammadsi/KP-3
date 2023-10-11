@@ -83,8 +83,7 @@ const RegisterPage = () => {
                 lastName: '',
                 confirmPassword: '',
               }}
-              validationSchema={validationSchema}
-            >
+              validationSchema={validationSchema}>
               {(formProps) => (
                 <Box
                   borderWidth="1px"
@@ -97,8 +96,7 @@ const RegisterPage = () => {
                   onSubmit={(e: any) => {
                     e.preventDefault();
                     formProps.handleSubmit();
-                  }}
-                >
+                  }}>
                   <VStack spacing={5} align="stretch">
                     <Box>
                       <Heading as="h3" size="lg" textAlign="center">
@@ -180,8 +178,7 @@ const RegisterPage = () => {
                       <SubmitButton
                         colorScheme="primary"
                         isLoading={formProps.isSubmitting || loading}
-                        isDisabled={!formProps.isValid}
-                      >
+                        isDisabled={!formProps.isValid}>
                         Register user
                       </SubmitButton>
                     </Box>

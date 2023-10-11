@@ -39,7 +39,7 @@ const PatientPage: React.FC = () => {
 
   const startUnitySession = () => {
     // Open the Unity game using the custom URI scheme
-    window.location.href = `VRWheelchairSim:// -patientID ${patientId}`;
+    window.location.href = `VRWheelchairSim:// -patientID ${patientId} -bearerToken ${localStorage.getItem('id_token')}`;
   };
 
   return (

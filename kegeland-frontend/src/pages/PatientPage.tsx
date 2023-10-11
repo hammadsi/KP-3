@@ -1,4 +1,11 @@
-import { Button, Box, Flex, Stack, useMediaQuery, Center } from '@chakra-ui/react';
+import {
+  Button,
+  Box,
+  Flex,
+  Stack,
+  useMediaQuery,
+  Center,
+} from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import {
   AiOutlineClockCircle,
@@ -32,7 +39,9 @@ const PatientPage: React.FC = () => {
 
   const startUnitySession = () => {
     // Open the Unity game using the custom URI scheme
-    window.location.href = `VRWheelchairSim:// -patientID ${patientId} -bearerToken ${localStorage.getItem('id_token')}`;
+    window.location.href = `VRWheelchairSim:// -patientID ${patientId} -bearerToken ${localStorage.getItem(
+      'id_token',
+    )}`;
   };
 
   return (
@@ -83,7 +92,6 @@ const PatientPage: React.FC = () => {
         Start session
       </Button>
     </Box>
-    
   );
 };
 

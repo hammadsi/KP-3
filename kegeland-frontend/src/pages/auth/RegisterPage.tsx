@@ -2,13 +2,16 @@ import {
   Box,
   Center,
   Container,
+  FormControl,
+  FormLabel,
   Heading,
   HStack,
+  Link,
+  Select,
   VStack,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { Formik } from 'formik';
-import { InputControl, SubmitButton } from 'formik-chakra-ui';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,11 +20,17 @@ import { RegisterDTO, UserRole } from '../../state/ducks/auth/auth.interface';
 import { clearError } from '../../state/ducks/auth/auth.reducer';
 import useAppSelector from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
+import { InputControl, SubmitButton } from 'formik-chakra-ui';
 
+type Gender = 'M' | 'F' | 'O';
 type FormData = {
   firstName: string;
   lastName: string;
   email: string;
+  gender: Gender;
+  birthofdate: Date;
+  height: number;
+  weight: number;
   password: string;
   confirmPassword: string;
 };
@@ -54,7 +63,16 @@ const RegisterPage = () => {
   }, [navigate, isSignedIn]);
 
   const register = (data: FormData) => {
-    const { firstName, lastName, email, password } = data;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      gender,
+      birthofdate,
+      height,
+      weight,
+    } = data;
     const payload: RegisterDTO = {
       email,
       password,
@@ -62,7 +80,22 @@ const RegisterPage = () => {
         firstName,
         lastName,
       },
-      roles: [UserRole.PHYSICIAN],
+      roles: [UserRole.PATIENT],
+      wheelchairPatient: {
+        age: 0,
+        gender,
+        currentPhysicalState: {
+          height,
+          weight,
+          maxHeartRate: 0,
+          averageHeartRate: 0,
+          maxWheelchairSpeed: 0,
+          averageWheelchairSpeed: 0,
+        },
+        gameSessions: [],
+        id: '',
+        name: `${firstName} ${lastName}`,
+      },
     };
     dispatch(signUpUser(payload));
   };
@@ -81,6 +114,10 @@ const RegisterPage = () => {
                 password: '',
                 firstName: '',
                 lastName: '',
+                birthofdate: new Date(),
+                gender: 'O' as Gender,
+                height: 0,
+                weight: 0,
                 confirmPassword: '',
               }}
               validationSchema={validationSchema}>
@@ -146,6 +183,57 @@ const RegisterPage = () => {
                         />
                       </Box>
                     </HStack>
+                    <HStack w="100%">
+                      <Box style={{ marginRight: '14%' }}>
+                        <FormControl id="gender">
+                          <FormLabel>Gender</FormLabel>
+                          <Select
+                            name="gender"
+                            onChange={(e) =>
+                              formProps.setFieldValue('gender', e.target.value)
+                            }>
+                            <option value="O" disabled>
+                              Select gender
+                            </option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                            <option value="O">Other</option>
+                          </Select>
+                        </FormControl>
+                      </Box>
+                      <Box>
+                        <InputControl
+                          inputProps={{
+                            type: 'date',
+                          }}
+                          label="Birth of Date"
+                          data-testid="lastname-input"
+                          name="birthofdate"
+                        />
+                      </Box>
+                    </HStack>
+                    <HStack justifyContent="space-between" w="100%">
+                      <Box>
+                        <InputControl
+                          inputProps={{
+                            type: 'number',
+                          }}
+                          name="height"
+                          label="Height (cm)"
+                          data-testid="firstname-input"
+                        />
+                      </Box>
+                      <Box>
+                        <InputControl
+                          inputProps={{
+                            type: 'number',
+                          }}
+                          label="Weight (kg)"
+                          data-testid="lastname-input"
+                          name="weight"
+                        />
+                      </Box>
+                    </HStack>
                     <Box>
                       <InputControl
                         isRequired
@@ -174,14 +262,25 @@ const RegisterPage = () => {
                       />
                     </Box>
                     <Box color={'red'}>{error}</Box>
-                    <Box textAlign="right">
-                      <SubmitButton
-                        colorScheme="primary"
-                        isLoading={formProps.isSubmitting || loading}
-                        isDisabled={!formProps.isValid}>
-                        Register user
-                      </SubmitButton>
-                    </Box>
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                      }}>
+                      <Box textAlign="left" marginTop="9px">
+                        <Link color="grey" href="/login">
+                          <b>Cancel</b>
+                        </Link>
+                      </Box>
+                      <Box textAlign="right">
+                        <SubmitButton
+                          colorScheme="primary"
+                          isLoading={formProps.isSubmitting || loading}
+                          isDisabled={!formProps.isValid}>
+                          Register user
+                        </SubmitButton>
+                      </Box>
+                    </div>
                   </VStack>
                 </Box>
               )}

@@ -9,7 +9,7 @@ import {
   IsEnum 
 } from 'class-validator';
 
-enum Gender {
+export enum Gender {
   M = 'M',
   F = 'F',
   O = 'O'

@@ -15,8 +15,13 @@ public class GameSession
 [Serializable]
 public class Lap
 {
-    public float lapTime;
-    public string timestamp;
+    public float lapTime { get; set; }
+    public string timestamp { get; set; }
+
+    public override string ToString()
+    {
+        return $"Lap Time: {lapTime}, Timestamp: {timestamp}";
+    }
 }
 
 [Serializable]

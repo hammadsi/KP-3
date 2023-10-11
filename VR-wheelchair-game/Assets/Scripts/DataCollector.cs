@@ -28,6 +28,11 @@ public class DataCollector : MonoBehaviour
     {
         Lap newLap = new Lap { lapTime = lapTime, timestamp = DateTime.UtcNow.ToString("o") };
         gameSession.laps.Add(newLap);
+        Debug.Log("Printing gameSession laps: ");
+        foreach (Lap lap in gameSession.laps)
+        {
+            Debug.Log(lap); // Calls lap.ToString() implicitly
+        }  
     }
 
     private IEnumerator CollectHeartRate()

@@ -12,13 +12,13 @@ public class CheckpointManager : MonoBehaviour
     private float coolDownTime = 1.0f; // Set an appropriate cool down time
     private float lastLapTime;
 
-    private DataCollector dataCollector;
 
 
     // Start is called before the first frame update
     void Start()
     {
         elapsedTimeScript = timerObject.GetComponent<ElapsedTime>();
+
         int numChildren = gameObject.transform.childCount;
         //int numChildren = 2;
         hasReachedCheckpoint = new List<bool>(numChildren);
@@ -43,10 +43,12 @@ public class CheckpointManager : MonoBehaviour
 
     private void clearCheckpoints()
     {
+        Debug.Log("Clearing checkpoints");
         for (int i = 0; i < hasReachedCheckpoint.Count; i++)
         {
             hasReachedCheckpoint[i] = false;
         }
+        printCheckpoints(); // Print the status after clearing to ensure it's cleared
     }
 
     private void printCheckpoints()
@@ -65,10 +67,8 @@ public class CheckpointManager : MonoBehaviour
     public void checkpointReached(int checkPointIndex)
     {
         Debug.Log("Checkpoint " + checkPointIndex + " reached");
-        printCheckpoints();
-        
-        hasReachedCheckpoint[checkPointIndex] = true;
 
+        printCheckpoints();
         if (checkPointIndex == 0)
         {
             if (firstLap) 
@@ -82,14 +82,14 @@ public class CheckpointManager : MonoBehaviour
                 if (hasCompletedLap() && Time.time - lastLapTime >= coolDownTime)
                 {
                     Debug.Log("Lap completed");
-                    float lapTime = elapsedTimeScript.getElapsedTime(); // Assuming you have a method to get the elapsed time
-                    dataCollector.AddLapData(lapTime); // Log the lap time here
                     elapsedTimeScript.newLap();
-                    clearCheckpoints();
                     lastLapTime = Time.time; // Update last lap time after lap completion
+
                 }
             }
-            clearCheckpoints(); // Reset checkpoints here if necessary, but be careful not to reset them twice
+            clearCheckpoints();
         }
+        hasReachedCheckpoint[checkPointIndex] = true;
+
     }
 }

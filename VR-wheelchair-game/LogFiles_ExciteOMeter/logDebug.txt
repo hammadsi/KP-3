@@ -190,3 +190,278 @@ datetime,Event
 230927090148.489,New App Execution
 datetime,Event
 231005141537.276,New App Execution
+datetime,Event
+231010100413.531,New App Execution
+231010100427.749,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010100437.749,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231010113610.539,New App Execution
+231010113650.814,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010113700.813,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010113710.813,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010113720.810,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010113730.806,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010113740.805,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010113750.804,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231010114335.634,New App Execution
+231010114400.116,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114410.115,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114420.115,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114430.112,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114440.111,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114450.116,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114500.115,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114510.117,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114520.119,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114530.114,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114540.116,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114550.118,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114600.118,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114610.114,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114620.109,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114630.112,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114640.109,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114650.114,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114700.110,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114710.108,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114720.112,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114730.112,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114740.112,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114750.112,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114800.108,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114810.112,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114820.115,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114830.116,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114840.117,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114850.121,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114900.123,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114910.126,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114920.123,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114930.122,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114940.125,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010114950.125,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010115000.125,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010115010.125,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010115037.984,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231010115142.656,New App Execution
+231010115209.301,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010115219.300,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010115229.300,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231010115309.850,New App Execution
+datetime,Event
+231010115338.408,New App Execution
+231010115401.127,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010115411.129,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010115421.137,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010115431.135,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231010120500.069,New App Execution
+datetime,Event
+231010120524.588,New App Execution
+231010120546.313,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010120556.313,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010120606.312,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010120616.307,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231010120752.897,New App Execution
+231010120810.541,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010120820.535,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010120830.530,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231010120840.533,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011103119.720,New App Execution
+231011103145.929,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011103154.974,New App Execution
+231011103213.689,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011103223.687,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011103233.686,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011103412.940,New App Execution
+231011103426.202,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011103436.197,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011103446.195,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011103613.484,New App Execution
+231011103634.615,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011103644.611,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011105014.097,New App Execution
+231011105039.394,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011105049.405,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011105059.583,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011105109.564,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011105448.716,New App Execution
+231011105507.937,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011105517.932,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011105915.009,New App Execution
+231011105930.684,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011105940.684,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011110119.350,New App Execution
+231011110132.549,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110142.549,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110152.549,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110202.549,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110212.546,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110222.549,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110232.545,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110242.550,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110252.545,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110302.543,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110312.543,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110322.546,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110332.541,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110342.545,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110352.546,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110402.547,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110412.548,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110422.546,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110432.549,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110442.548,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110452.556,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110502.554,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110512.557,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110522.557,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110532.555,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110542.553,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110552.552,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110602.548,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110612.550,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110622.547,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110632.552,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110642.549,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110652.543,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110702.542,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110712.544,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110722.551,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110732.545,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110742.544,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110752.547,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110802.548,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110812.549,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110822.552,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110832.551,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110842.545,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110852.542,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110902.542,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110912.537,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110922.540,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110932.537,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110942.533,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011110952.529,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011111002.526,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011111012.523,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011111022.523,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011111032.526,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011111042.529,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011111052.533,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011111102.529,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011111112.524,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011111122.520,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011112317.512,New App Execution
+231011112331.987,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011112341.988,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011112538.053,New App Execution
+231011112551.207,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011112601.208,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011112611.212,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011112751.766,New App Execution
+231011112805.734,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011112815.733,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011113023.064,New App Execution
+231011113036.449,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113046.444,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113056.449,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011113324.297,New App Execution
+231011113337.799,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113347.802,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011113449.902,New App Execution
+231011113504.584,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113514.580,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011113649.245,New App Execution
+231011113703.113,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113713.116,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113723.112,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113733.109,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113743.105,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113753.102,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113803.099,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113813.103,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113823.102,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011113906.944,New App Execution
+231011113921.602,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113931.597,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113941.601,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011113951.607,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114001.608,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114011.612,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114021.614,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114031.610,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114041.607,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114051.610,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114101.607,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114111.604,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114121.599,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114131.598,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114141.596,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114151.601,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114201.597,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114211.593,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114221.591,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114231.595,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114241.598,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114251.600,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011114332.370,New App Execution
+231011114348.767,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114358.766,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011114551.196,New App Execution
+231011114605.370,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114615.373,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011114713.715,New App Execution
+231011114730.928,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114740.924,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114750.920,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114800.928,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114810.928,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011114820.925,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011115217.990,New App Execution
+231011115231.607,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011115241.611,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011115251.610,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011115301.611,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011115311.610,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011115321.610,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011115331.611,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011115416.899,New App Execution
+231011115431.623,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011115441.618,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011115710.805,New App Execution
+231011115739.271,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011115749.272,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011115759.283,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231011115916.829,New App Execution
+231011115930.574,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011115940.574,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011115950.576,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231011120000.583,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN

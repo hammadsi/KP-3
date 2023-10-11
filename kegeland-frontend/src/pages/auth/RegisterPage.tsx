@@ -2,19 +2,15 @@ import {
   Box,
   Center,
   Container,
-  FormControl,
-  FormLabel,
   Heading,
   HStack,
-  Link,
-  Select,
   VStack,
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { Formik } from 'formik';
 import { InputControl, SubmitButton } from 'formik-chakra-ui';
 import * as Yup from 'yup';
-import { Form, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { signUpUser } from '../../state/ducks/auth/auth.actions';
 import { RegisterDTO, UserRole } from '../../state/ducks/auth/auth.interface';
@@ -26,10 +22,6 @@ type FormData = {
   firstName: string;
   lastName: string;
   email: string;
-  gender: string;
-  birthofdate: Date;
-  height: number;
-  weight: number;
   password: string;
   confirmPassword: string;
 };
@@ -39,10 +31,6 @@ const validationSchema = Yup.object({
   firstName: Yup.string().required().label('First name'),
   lastName: Yup.string().required().label('Last name'),
   password: Yup.string().required().label('Password'),
-  // gender: Yup.string().required().label('Gender'),
-  birthofdate: Yup.string().required().label('Birth of Date'),
-  height: Yup.number().required().label('Height'),
-  weight: Yup.number().required().label('Weight'),
   confirmPassword: Yup.string().when('password', {
     is: (val: string | any[]) => !!(val && val.length > 0),
     then: Yup.string().oneOf(
@@ -66,7 +54,7 @@ const RegisterPage = () => {
   }, [navigate, isSignedIn]);
 
   const register = (data: FormData) => {
-    const { firstName, lastName, email, password, gender, birthofdate, height, weight } = data;
+    const { firstName, lastName, email, password } = data;
     const payload: RegisterDTO = {
       email,
       password,
@@ -74,7 +62,7 @@ const RegisterPage = () => {
         firstName,
         lastName,
       },
-      roles: [UserRole.PATIENT],
+      roles: [UserRole.PHYSICIAN],
     };
     dispatch(signUpUser(payload));
   };
@@ -88,23 +76,17 @@ const RegisterPage = () => {
               onSubmit={async (values) => {
                 register(values);
               }}
-
               initialValues={{
                 email: '',
                 password: '',
                 firstName: '',
                 lastName: '',
-                birthofdate: new Date(),
-                gender: '',
-                height: 0,
-                weight: 0,
                 confirmPassword: '',
               }}
               validationSchema={validationSchema}>
               {(formProps) => (
                 <Box
                   borderWidth="1px"
-                  backgroundColor="white"
                   rounded="lg"
                   shadow="1px 1px 3px rgba(0,0,0,0.3)"
                   maxWidth={800}
@@ -122,12 +104,18 @@ const RegisterPage = () => {
                       </Heading>
                     </Box>
                     <Box>
+                      <Heading as="h3" size="lg" textAlign="center">
+                        Please enter email and password to create a user.
+                      </Heading>
+                    </Box>
+                    <Box>
                       <InputControl
                         inputProps={{
                           type: 'email',
                           placeholder: 'ola.nordmann@example.com',
                         }}
                         name="email"
+                        isRequired
                         label="Email address"
                         data-testid="email-input"
                       />
@@ -140,6 +128,7 @@ const RegisterPage = () => {
                             placeholder: 'Ola',
                           }}
                           name="firstName"
+                          isRequired
                           label="First name"
                           data-testid="firstname-input"
                         />
@@ -150,114 +139,49 @@ const RegisterPage = () => {
                             type: 'text',
                             placeholder: 'Nordmann',
                           }}
+                          isRequired
                           label="Last name"
                           data-testid="lastname-input"
                           name="lastName"
                         />
                       </Box>
                     </HStack>
-                    <HStack w="100%">
-                      <Box style={{ marginRight: '14%' }}>
-                      <FormControl id="gender">
-                        <FormLabel>Gender</FormLabel>
-                        <Select
-                          name="gender"
-                          onChange={(e) => formProps.setFieldValue('gender', e.target.value)}
-                        >
-                          <option value="" disabled>
-                            Select gender
-                          </option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                        </Select>
-                      </FormControl>
-                      </Box>
-                      <Box>
-                        <InputControl
-                          inputProps={{
-                            type: 'date',
-                          }}
-                          label="Birth of Date"
-                          data-testid="lastname-input"
-                          name="birthofdate"
-                        />
-                      </Box>
-                    </HStack>
-                    <HStack justifyContent="space-between" w="100%">
-                      <Box>
-                        <InputControl
-                          inputProps={{
-                            type: 'number',
-                          }}
-                          name="height"
-                          label="Height (cm)"
-                          data-testid="firstname-input"
-                        />
-                      </Box>
-                      <Box>
-                        <InputControl
-                          inputProps={{
-                            type: 'number',
-                          }}
-                          label="Weight (kg)"
-                          data-testid="lastname-input"
-                          name="weight"
-                        />
-                      </Box>
-                    </HStack>
                     <Box>
                       <InputControl
+                        isRequired
                         name="password"
                         label="Password"
                         data-testid="password-input"
                         inputProps={{
                           type: 'password',
-                          placeholder: '• • • • • • • •',
                           autoComplete: 'new-password',
+                          placeholder: '• • • • • • • •',
                         }}
                         helperText="Create a new password."
                       />
                     </Box>
                     <Box>
                       <InputControl
+                        isRequired
                         name="confirmPassword"
                         data-testid="confirmPassword-input"
                         inputProps={{
                           type: 'password',
-                          placeholder: '• • • • • • • •',
                           autoComplete: 'new-password',
+                          placeholder: '• • • • • • • •',
                         }}
                         helperText="Repeat your password."
                       />
                     </Box>
                     <Box color={'red'}>{error}</Box>
-                    <div
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                      }}>
-                      <Box textAlign="left" marginTop="9px">
-                        <Link color="grey" href="/login">
-                          <b>Cancel</b>
-                        </Link>
-                      </Box>
-                      <Box textAlign="right">
-                        <SubmitButton
-                          colorScheme="primary"
-                          isLoading={formProps.isSubmitting || loading}
-                          isDisabled={!formProps.isValid}>
-                          Register user
-                        </SubmitButton>
-                        <button
-                          onClick={(
-                            event: React.MouseEvent<HTMLButtonElement>,
-                          ) => {
-                            console.log(formProps.values);
-                          }}>
-                          Test
-                        </button>
-                      </Box>
-                    </div>
+                    <Box textAlign="right">
+                      <SubmitButton
+                        colorScheme="primary"
+                        isLoading={formProps.isSubmitting || loading}
+                        isDisabled={!formProps.isValid}>
+                        Register user
+                      </SubmitButton>
+                    </Box>
                   </VStack>
                 </Box>
               )}

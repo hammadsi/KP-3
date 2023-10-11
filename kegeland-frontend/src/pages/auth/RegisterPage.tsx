@@ -279,14 +279,6 @@ const RegisterPage = () => {
                           isDisabled={!formProps.isValid}>
                           Register user
                         </SubmitButton>
-                        <button
-                          onClick={(
-                            event: React.MouseEvent<HTMLButtonElement>,
-                          ) => {
-                            console.log(formProps.values);
-                          }}>
-                          Test
-                        </button>
                       </Box>
                     </div>
                   </VStack>

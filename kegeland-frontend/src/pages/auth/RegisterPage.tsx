@@ -12,15 +12,15 @@ import {
 } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { Formik } from 'formik';
-import { InputControl, SubmitButton } from 'formik-chakra-ui';
 import * as Yup from 'yup';
-import { Form, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { signUpUser } from '../../state/ducks/auth/auth.actions';
 import { RegisterDTO, UserRole } from '../../state/ducks/auth/auth.interface';
 import { clearError } from '../../state/ducks/auth/auth.reducer';
 import useAppSelector from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
+import { InputControl, SubmitButton } from 'formik-chakra-ui';
 
 type Gender = 'M' | 'F' | 'O';
 type FormData = {
@@ -40,10 +40,6 @@ const validationSchema = Yup.object({
   firstName: Yup.string().required().label('First name'),
   lastName: Yup.string().required().label('Last name'),
   password: Yup.string().required().label('Password'),
-  // gender: Yup.string().required().label('Gender'),
-  birthofdate: Yup.string().required().label('Birth of Date'),
-  height: Yup.number().required().label('Height'),
-  weight: Yup.number().required().label('Weight'),
   confirmPassword: Yup.string().when('password', {
     is: (val: string | any[]) => !!(val && val.length > 0),
     then: Yup.string().oneOf(
@@ -128,7 +124,6 @@ const RegisterPage = () => {
               {(formProps) => (
                 <Box
                   borderWidth="1px"
-                  backgroundColor="white"
                   rounded="lg"
                   shadow="1px 1px 3px rgba(0,0,0,0.3)"
                   maxWidth={800}
@@ -146,12 +141,18 @@ const RegisterPage = () => {
                       </Heading>
                     </Box>
                     <Box>
+                      <Heading as="h3" size="lg" textAlign="center">
+                        Please enter email and password to create a user.
+                      </Heading>
+                    </Box>
+                    <Box>
                       <InputControl
                         inputProps={{
                           type: 'email',
                           placeholder: 'ola.nordmann@example.com',
                         }}
                         name="email"
+                        isRequired
                         label="Email address"
                         data-testid="email-input"
                       />
@@ -164,6 +165,7 @@ const RegisterPage = () => {
                             placeholder: 'Ola',
                           }}
                           name="firstName"
+                          isRequired
                           label="First name"
                           data-testid="firstname-input"
                         />
@@ -174,6 +176,7 @@ const RegisterPage = () => {
                             type: 'text',
                             placeholder: 'Nordmann',
                           }}
+                          isRequired
                           label="Last name"
                           data-testid="lastname-input"
                           name="lastName"
@@ -233,25 +236,27 @@ const RegisterPage = () => {
                     </HStack>
                     <Box>
                       <InputControl
+                        isRequired
                         name="password"
                         label="Password"
                         data-testid="password-input"
                         inputProps={{
                           type: 'password',
-                          placeholder: '• • • • • • • •',
                           autoComplete: 'new-password',
+                          placeholder: '• • • • • • • •',
                         }}
                         helperText="Create a new password."
                       />
                     </Box>
                     <Box>
                       <InputControl
+                        isRequired
                         name="confirmPassword"
                         data-testid="confirmPassword-input"
                         inputProps={{
                           type: 'password',
-                          placeholder: '• • • • • • • •',
                           autoComplete: 'new-password',
+                          placeholder: '• • • • • • • •',
                         }}
                         helperText="Repeat your password."
                       />

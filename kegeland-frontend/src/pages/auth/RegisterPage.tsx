@@ -22,11 +22,12 @@ import { clearError } from '../../state/ducks/auth/auth.reducer';
 import useAppSelector from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
 
+type Gender = 'M' | 'F' | 'O';
 type FormData = {
   firstName: string;
   lastName: string;
   email: string;
-  gender: string;
+  gender: Gender;
   birthofdate: Date;
   height: number;
   weight: number;
@@ -66,7 +67,16 @@ const RegisterPage = () => {
   }, [navigate, isSignedIn]);
 
   const register = (data: FormData) => {
-    const { firstName, lastName, email, password, gender, birthofdate, height, weight } = data;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      gender,
+      birthofdate,
+      height,
+      weight,
+    } = data;
     const payload: RegisterDTO = {
       email,
       password,
@@ -75,6 +85,21 @@ const RegisterPage = () => {
         lastName,
       },
       roles: [UserRole.PATIENT],
+      wheelchairPatient: {
+        age: 0,
+        gender,
+        currentPhysicalState: {
+          height,
+          weight,
+          maxHeartRate: 0,
+          averageHeartRate: 0,
+          maxWheelchairSpeed: 0,
+          averageWheelchairSpeed: 0,
+        },
+        gameSessions: [],
+        id: '',
+        name: `${firstName} ${lastName}`,
+      },
     };
     dispatch(signUpUser(payload));
   };
@@ -88,14 +113,13 @@ const RegisterPage = () => {
               onSubmit={async (values) => {
                 register(values);
               }}
-
               initialValues={{
                 email: '',
                 password: '',
                 firstName: '',
                 lastName: '',
                 birthofdate: new Date(),
-                gender: '',
+                gender: 'O' as Gender,
                 height: 0,
                 weight: 0,
                 confirmPassword: '',
@@ -158,19 +182,21 @@ const RegisterPage = () => {
                     </HStack>
                     <HStack w="100%">
                       <Box style={{ marginRight: '14%' }}>
-                      <FormControl id="gender">
-                        <FormLabel>Gender</FormLabel>
-                        <Select
-                          name="gender"
-                          onChange={(e) => formProps.setFieldValue('gender', e.target.value)}
-                        >
-                          <option value="" disabled>
-                            Select gender
-                          </option>
-                          <option value="Male">Male</option>
-                          <option value="Female">Female</option>
-                        </Select>
-                      </FormControl>
+                        <FormControl id="gender">
+                          <FormLabel>Gender</FormLabel>
+                          <Select
+                            name="gender"
+                            onChange={(e) =>
+                              formProps.setFieldValue('gender', e.target.value)
+                            }>
+                            <option value="O" disabled>
+                              Select gender
+                            </option>
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                            <option value="O">Other</option>
+                          </Select>
+                        </FormControl>
                       </Box>
                       <Box>
                         <InputControl

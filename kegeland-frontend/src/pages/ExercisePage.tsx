@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { Button, Collapse } from '@chakra-ui/react';
 import { useState } from 'react';
-import { AiOutlineArrowDown } from 'react-icons/ai';
 
 import Card from '../components/Card';
 import ExerciseGraph from '../components/ExerciseGraph';

@@ -14,13 +14,13 @@ import { useEffect } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import { InputControl, SubmitButton } from 'formik-chakra-ui';
 
 import { signUpUser } from '../../state/ducks/auth/auth.actions';
 import { RegisterDTO, UserRole } from '../../state/ducks/auth/auth.interface';
 import { clearError } from '../../state/ducks/auth/auth.reducer';
 import useAppSelector from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
-import { InputControl, SubmitButton } from 'formik-chakra-ui';
 
 type Gender = 'M' | 'F' | 'O';
 type FormData = {

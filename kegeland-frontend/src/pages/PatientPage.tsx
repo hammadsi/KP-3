@@ -1,11 +1,4 @@
-import {
-  Button,
-  Box,
-  Flex,
-  Stack,
-  useMediaQuery,
-  Center,
-} from '@chakra-ui/react';
+import { Button, Box, Flex, Stack, useMediaQuery } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import {
   AiOutlineClockCircle,

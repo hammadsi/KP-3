@@ -4,7 +4,7 @@ import { WheelchairPatient } from '../wheelchairPatients.interface';
 
 // Mock WheelchairPatient object
 const mockWheelchairPatient: WheelchairPatient = {
-  patientId: '123',
+  id: '123',
   name: 'John Doe',
   age: 30,
   gender: 'M',

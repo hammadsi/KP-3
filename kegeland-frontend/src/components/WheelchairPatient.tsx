@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import { RootState } from '../state/store';
+import PatientUpdateForm from './EditWheelchairPatient';
 
 const WheelchairPatientComponent = () => {
   // Access the auth state from Redux store
@@ -19,7 +20,10 @@ const WheelchairPatientComponent = () => {
   }
 
   if (wheelchairPatient) {
-    const { name, age, gender, currentPhysicalState } = wheelchairPatient;
+    const { id, name, age, gender, currentPhysicalState } = wheelchairPatient;
+    if (currentPhysicalState === undefined) {
+      return <p>Current physical state is undefined.</p>;
+    }
     const {
       height,
       weight,
@@ -28,6 +32,7 @@ const WheelchairPatientComponent = () => {
       maxWheelchairSpeed,
       averageWheelchairSpeed,
     } = currentPhysicalState;
+
 
     return (
       <div>
@@ -61,6 +66,7 @@ const WheelchairPatientComponent = () => {
         <p>
           <strong>Average Wheelchair Speed:</strong> {averageWheelchairSpeed}
         </p>
+        <PatientUpdateForm patientId={id} />
       </div>
     );
   }

@@ -49,7 +49,7 @@ const routes: RoutePathDefinition[] = [
   {
     title: 'EditProfile',
     path: '/editprofile',
-    element: <EditProfile/>,
+    element: <EditProfile />,
   },
   {
     title: 'Not Implemented',

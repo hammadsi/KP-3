@@ -12,7 +12,6 @@ const PatientListPage: React.FC = () => {
     filterData(event.target.value);
   };
 
-
   return (
     <>
       <Card loading={loading} padding={0}>

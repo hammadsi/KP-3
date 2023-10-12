@@ -2,17 +2,15 @@ import { useEffect, useState } from 'react';
 
 import { fetchWheelchairPatientById } from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
 import { clearWheelchairPatientsState } from '../state/ducks/wheelchairPatients/wheelchairPatients.reducer';
+import { UserRole } from '../state/ducks/auth/auth.interface';
 
 import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
-import { UserRole } from '../state/ducks/auth/auth.interface';
-
-
 
 const useAuth = () => {
   const dispatch = useAppDispatch();
   const { authUser, userDetails, isSignedIn } = useAppSelector(
-    (state) => state.auth
+    (state) => state.auth,
   );
   const [ready, setReady] = useState(false);
 

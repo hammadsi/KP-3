@@ -5,13 +5,13 @@ import {
   updatePatientData,
 } from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
 import { clearWheelchairPatientsState } from '../state/ducks/wheelchairPatients/wheelchairPatients.reducer';
-
-import useAppDispatch from './useAppDispatch';
-import useAppSelector from './useAppSelector';
 import {
   UpdateWheelchairPatientData,
   WheelchairPatient,
 } from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
+
+import useAppDispatch from './useAppDispatch';
+import useAppSelector from './useAppSelector';
 
 const useWheelchairPatient = (patientId?: string) => {
   const dispatch = useAppDispatch();

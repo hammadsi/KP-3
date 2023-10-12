@@ -13,6 +13,7 @@ export const adminMock = {
 
 export class FirebaseMock {
   db = {
+    patients: [new FirebaseDocMock('_id', firebaseDbMock.patients[0])],
     userDetails: [new FirebaseDocMock('_id', firebaseDbMock.userDetails[0])],
     sessions: [new FirebaseDocMock('_id', firebaseDbMock.sessions[0])],
     sensors: [new FirebaseDocMock('_id', firebaseDbMock.sensors[0])],
@@ -27,10 +28,34 @@ export class FirebaseMock {
   collection(name: string) {
     this.res = this.db[name];
     this.docs = this.res;
+    this.res.forEach((data: any) => this.handleSubCollections(name, data));
+    return this;
+  }
+  
+  handleSubCollections(name: string, data: any) {
+    if (name === 'patients' && data.gameSessions) {
+      data.getCollection = (subName: string) => {
+        if (subName === 'gameSessions') {
+          return {
+            where: (field: string, condition: string, value: string) => this.where(field, condition, value),
+            get: () => ({ docs: data.gameSessions }),
+          };
+        }
+      };
+    }
+  }
+
+  collectionGroup(name: string) {
+    this.res = Object.values(this.db)
+      .flat()
+      .filter((doc: any) => doc.entries && doc.entries[name])
+      .map((doc: any) => doc.entries[name]);
+    this.docs = this.res.flat();
     return this;
   }
 
   doc(id: string) {
+    this.res = this.res || []; //Ensuring this.res is always defined (even as an empty array) before attempting to call methods on it.
     this.res = this.res.find((e) => e.id === id);
     return this;
   }
@@ -101,6 +126,7 @@ class FirebaseDocMock {
     this.id = id;
     this.entries = dat;
   }
+
   data() {
     return this.entries;
   }

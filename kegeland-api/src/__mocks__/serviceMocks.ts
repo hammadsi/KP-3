@@ -5,6 +5,10 @@ export const usersServiceMock = {
   delete: jest.fn((x) => x),
 };
 
+export const wheelchairPatientsServiceMock = {
+  findWheelchairPatientById: jest.fn((x) => x),
+}
+
 export const sessionsServiceMock = {
   findOne: jest.fn((x) => x),
   findAll: jest.fn((x) => x),

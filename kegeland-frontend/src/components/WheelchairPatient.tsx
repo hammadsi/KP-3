@@ -21,6 +21,9 @@ const WheelchairPatientComponent = () => {
 
   if (wheelchairPatient) {
     const { id, name, age, gender, currentPhysicalState } = wheelchairPatient;
+    if (currentPhysicalState === undefined) {
+      return <p>Current physical state is undefined.</p>;
+    }
     const {
       height,
       weight,
@@ -29,6 +32,7 @@ const WheelchairPatientComponent = () => {
       maxWheelchairSpeed,
       averageWheelchairSpeed,
     } = currentPhysicalState;
+
 
     return (
       <div>

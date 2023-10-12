@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
 import useWheelchairPatient from '../../hooks/useWheelchairPatient';
 import { User } from '../../state/ducks/auth/auth.interface';
-import { renderName } from '../../utils/renderName';
 
 type UserProps = {
   user: User;
@@ -24,7 +23,18 @@ const MyProfilePage: React.FC<UserProps> = ({user}) => {
   // Now TypeScript knows that authUser.id is defined, so no error should be thrown here
   const { wheelchairPatient, loading } = useWheelchairPatient(authUser?.id);
 
-  
+
+  const setGender = (gender: string) => {
+    if (gender === "M") {
+      return "Male"
+    } 
+    if (gender === "F") {
+      return "Female"
+    }
+    return "Other"
+  }
+
+
   if (wheelchairPatient) {
     const { name, age, gender, currentPhysicalState } = wheelchairPatient;
     const {
@@ -52,14 +62,14 @@ const MyProfilePage: React.FC<UserProps> = ({user}) => {
           </h2>
           <div style={{width: "50%", float:"left", textAlign: 'right', paddingRight: '20px'}}>
             <h3 style={{fontWeight:'bold'}}>Mail Account </h3>
-            <h3 style={{fontWeight:'bold'}}>Name </h3>
+            <h3 style={{fontWeight:'bold'}}>Name</h3>
             <h3 style={{fontWeight:'bold'}}>Gender </h3>
             <h3 style={{fontWeight:'bold'}}>Age </h3>
           </div>
           <div style={{width: "50%", float:"right", textAlign: 'left', paddingLeft: '20px'}}>
-            <h3>ingen</h3>
+            <h3>{authUser?.email}</h3>
             <h3>{name}</h3>
-            <h3>{gender}</h3>
+            <h3>{setGender(gender)}</h3>
             <h3>{age || age === 0 ? age : '-'}</h3>
           </div>
           <h2 style={{fontSize: '30px', width: '620px', marginBottom: '0.5em', marginTop: '4.5em'}}>

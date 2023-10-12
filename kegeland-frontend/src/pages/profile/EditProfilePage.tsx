@@ -1,18 +1,14 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, Stack, FormControl, FormLabel, Select } from '@chakra-ui/react';
-
 import Card from '../../components/Card';
 import withLayout from '../../hoc/withLayout';
 import withSpinner from '../../hoc/withSpinner';
 import useWheelchairPatient from '../../hooks/useWheelchairPatient';
+import useAuth from '../../hooks/useAuth';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state/store';
 import { Input } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { type } from 'os';
-
-
-
 
 type Gender = 'M' | 'F' | 'O';
 
@@ -25,14 +21,13 @@ type FormData = {
   weight: number;
 };
 
-
-
-
 const EditProfilePage = () => {
 
     const { authUser } = useSelector((state: RootState) => state.auth);
 
-    const { wheelchairPatient, error, loading } = useWheelchairPatient(authUser?.id);
+    const { wheelchairPatient, loading } = useWheelchairPatient(authUser?.id);
+
+    const { userDetails } = useAuth();
 
     const navigate = useNavigate();
 
@@ -40,22 +35,33 @@ const EditProfilePage = () => {
       // TODO: Implement update logic
       // Send data to API
       // navigate to '/myprofile';
+      console.log(data);
     };
 
     useEffect(() => {
       if (wheelchairPatient) {
-        const { name, age, gender, currentPhysicalState } = wheelchairPatient;
+        const { gender, currentPhysicalState } = wheelchairPatient;
           setFormData({
-              firstName: name || '',
-              lastName: name || '',
+              ...formData,
               gender: gender || 'M',
               birthofdate: new Date(),
               height: currentPhysicalState.height || 0,
               weight: currentPhysicalState.weight || 0,
           });
       }
-  }, [wheelchairPatient]);
+    }, [wheelchairPatient]);
 
+
+    useEffect(() => {
+      if (userDetails) {
+        const { firstName, lastName } = userDetails.name;
+        setFormData({
+          ...formData,
+          firstName: firstName || '',
+          lastName: lastName || '',
+        });
+      }
+    }, [userDetails]);
     
   
     const [formData, setFormData] = useState<FormData>({
@@ -131,9 +137,7 @@ const EditProfilePage = () => {
             <Stack spacing={10} direction="row" mt={6}>
               <FormControl id="gender">
                 <FormLabel>Gender</FormLabel>
-                <Select
-                  name="gender"
-                  onChange={handleChange}>
+                <Select name="gender" value={formData.gender} onChange={handleChange}>
                   <option value="M">Male</option>
                   <option value="F">Female</option>
                   <option value="O">Other</option>

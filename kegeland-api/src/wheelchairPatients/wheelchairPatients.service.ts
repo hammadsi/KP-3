@@ -6,12 +6,52 @@ import { FirebaseService } from 'src/firebase/firebase.service';
 export class WheelchairPatientsService {
   constructor(private readonly firebaseService: FirebaseService) {}
 
-   /**
+  /**
+   * Convert Firebase's seconds and nanoseconds timestamp format into a standard JavaScript Date
+   * @param firebaseTimestamp - the timestamp from Firebase
+   * @returns - JavaScript Date object
+   */
+  private convertToJsDate(firebaseTimestamp): Date {
+    if (firebaseTimestamp && 'seconds' in firebaseTimestamp) {
+        return new Date(firebaseTimestamp.seconds * 1000);
+    } else {
+        // Return null or a default date if firebaseTimestamp is not defined properly
+        return null;
+    }
+}
+
+  /**
+   * Transform all Firebase timestamps in a game session into JavaScript Date objects
+   * @param session - a game session with potential Firebase timestamps
+   * @returns - game session with JavaScript Date timestamps
+   */
+  private transformGameSessionTimestamps(session: GameSession): GameSession {
+    session.startTime = this.convertToJsDate(session.startTime);
+    session.endTime = this.convertToJsDate(session.endTime);
+    if (session.laps) {
+      session.laps.forEach(lap => {
+        lap.timeStamp = this.convertToJsDate(lap.timeStamp);
+      });
+    }
+    if (session.heartRates) {
+      session.heartRates.forEach(hr => {
+        hr.timestamp = this.convertToJsDate(hr.timestamp);
+      });
+    }
+    if (session.speeds) {
+      session.speeds.forEach(speed => {
+        speed.timestamp = this.convertToJsDate(speed.timestamp);
+      });
+    }
+    return session;
+  }
+
+  /**
    * Function for finding a specific patient by its ID
    * @param id of patient
    * @returns patient data along with their gameSessions
    */
-   async findWheelchairPatientById(id: string) {
+  async findWheelchairPatientById(id: string) {
     try {
       const snapshot = await this.firebaseService.firestore
         .collection('patients')
@@ -31,10 +71,11 @@ export class WheelchairPatientsService {
         .get();
 
       sessionsSnapshot.forEach(doc => {
-        gameSessions.push({sessionId: doc.id, ...doc.data()} as GameSession);
+        let gameSession = {sessionId: doc.id, ...doc.data()} as GameSession;
+        gameSessions.push(this.transformGameSessionTimestamps(gameSession));
       });
 
-      return { id, ...snapshot.data(), gameSessions};
+      return { id, ...snapshot.data(), gameSessions };
     } catch (error) {
       throw new InternalServerErrorException(error.message);
     }

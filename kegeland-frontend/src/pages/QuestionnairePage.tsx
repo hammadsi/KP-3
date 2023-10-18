@@ -7,8 +7,8 @@ type ExercisePageParams = {
 };
 
 const QuestionnairePage: React.FC = () => {
-  //const navigate = useNavigate();
-  //const { patientId, exerciseId } = useParams<ExercisePageParams>();
+  // const navigate = useNavigate();
+  // const { patientId, exerciseId } = useParams<ExercisePageParams>();
 
   const startUnitySession = () => {
     // Open the Unity game using the custom URI scheme

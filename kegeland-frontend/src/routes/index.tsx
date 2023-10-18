@@ -7,6 +7,8 @@ import NotFoundPage from '../pages/NotFound';
 import NotImplemented from '../pages/NotImplemented';
 import PatientsPage from '../pages/PatientListPage';
 import PatientPage from '../pages/PatientPage';
+import MyProfilePage from '../pages/profile/MyProfilePage';
+import EditProfile from '../pages/profile/EditProfilePage';
 import GamePage from '../pages/GamePage';
 
 export interface RoutePathDefinition
@@ -38,6 +40,16 @@ const routes: RoutePathDefinition[] = [
     title: 'Register',
     path: '/register',
     element: <RegisterPage />,
+  },
+  {
+    title: 'MyProfile',
+    path: '/myprofile',
+    element: <MyProfilePage />,
+  },
+  {
+    title: 'EditProfile',
+    path: '/editprofile',
+    element: <EditProfile />,
   },
   {
     title: 'Not Implemented',

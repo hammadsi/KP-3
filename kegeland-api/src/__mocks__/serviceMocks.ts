@@ -3,7 +3,12 @@ export const usersServiceMock = {
   findOne: jest.fn((x) => x),
   getPatientOverview: jest.fn((x) => x),
   delete: jest.fn((x) => x),
+  findWheelchairPatientById: jest.fn(),
 };
+
+export const wheelchairPatientsServiceMock = {
+  findWheelchairPatientById: jest.fn((x) => x),
+}
 
 export const sessionsServiceMock = {
   findOne: jest.fn((x) => x),

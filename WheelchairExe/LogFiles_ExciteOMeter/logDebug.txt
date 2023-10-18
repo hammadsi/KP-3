@@ -1,6 +1,4 @@
-datetime,Event
-231005142424.177,New App Execution
-datetime,Event
+
 231005144458.819,New App Execution
 datetime,Event
 231005151832.987,New App Execution

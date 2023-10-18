@@ -36,17 +36,17 @@ const QuestionnairePage: React.FC = () => {
       padding="20px"
       overflowY="hidden"
     >
-      <Text fontSize={26} fontWeight="semibold" color="gray.600" marginBottom="20px">
+      <Text fontSize={26} fontWeight="semibold" color="gray.600" marginBottom={4}>
         Pre Questionnaire {/* Insert name here */}
       </Text>
 
       {/* Insert questionnaire here. */
       sliderValues.map((sliderValue, index) => (
-        <Card key={index} minW="lg" padding="30px">
+        <Card key={index} minW="lg" paddingTop={4} paddingBottom={8}>
           <Text fontSize={16} fontWeight="semibold" color="gray.600">
             How are you feeling? {/* Insert question here */}
           </Text>
-          <Grid templateColumns="repeat(5,1fr)" marginTop="20px">
+          <Grid templateColumns="repeat(5,1fr)" marginTop={2}>
             <GridItem colStart={1} h="10">
               <Text as='i'>
                 Uncontrollable {/* Insert minVal here */}
@@ -64,8 +64,8 @@ const QuestionnairePage: React.FC = () => {
         </Card>
       ))}
       <Box>
-        <Button marginTop="20px" isDisabled={!areAllSlidersFilled} onClick={startUnitySession}>
-          Start session
+        <Button marginTop={4} isDisabled={!areAllSlidersFilled} onClick={startUnitySession}>
+          Start game {/* Insert "End session" on the post-questionnaire */}
         </Button>
       </Box>
     </Flex>

@@ -34,7 +34,7 @@ export type Questionaire = {
 
 export type Lap = {
   lapTime: number;
-  timeStamp: Date;
+  timestamp: Date;
 };
 
 export type TimeSeriesData = {

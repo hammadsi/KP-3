@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import { RootState } from '../state/store';
 
@@ -7,7 +8,9 @@ const WheelchairPatientComponent = () => {
   const { authUser } = useSelector((state: RootState) => state.auth);
 
   // Now TypeScript knows that authUser.id is defined, so no error should be thrown here
-  const { wheelchairPatient, error, loading } = useWheelchairPatient(authUser?.id);
+  const { wheelchairPatient, error, loading } = useWheelchairPatient(
+    authUser?.id,
+  );
 
   if (loading) {
     return <p>Loading...</p>;
@@ -19,7 +22,8 @@ const WheelchairPatientComponent = () => {
   }
 
   if (wheelchairPatient) {
-    const { name, age, gender, currentPhysicalState, gameSessions } = wheelchairPatient;
+    const { name, age, gender, currentPhysicalState, gameSessions } =
+      wheelchairPatient;
     const {
       height,
       weight,
@@ -28,7 +32,7 @@ const WheelchairPatientComponent = () => {
       maxWheelchairSpeed,
       averageWheelchairSpeed,
     } = currentPhysicalState;
-    
+
     return (
       <div>
         <h2>Patient Details</h2>
@@ -68,10 +72,20 @@ const WheelchairPatientComponent = () => {
             {gameSessions.map((session, index) => (
               <div key={session.sessionId}>
                 <h4>Session {index + 1}</h4>
-                <p><strong>Session ID:</strong> {session.sessionId}</p>
-                <p><strong>Start Time:</strong> {new Date(session.startTime).toLocaleString()}</p>
-                <p><strong>End Time:</strong> {new Date(session.endTime).toLocaleString()}</p>
-                <p><strong>Exercise Time:</strong> {session.exerciseTime}</p>
+                <p>
+                  <strong>Session ID:</strong> {session.sessionId}
+                </p>
+                <p>
+                  <strong>Start Time:</strong>{' '}
+                  {new Date(session.startTime).toLocaleString()}
+                </p>
+                <p>
+                  <strong>End Time:</strong>{' '}
+                  {new Date(session.endTime).toLocaleString()}
+                </p>
+                <p>
+                  <strong>Exercise Time:</strong> {session.exerciseTime}
+                </p>
                 {/* Add more properties as per requirement */}
               </div>
             ))}

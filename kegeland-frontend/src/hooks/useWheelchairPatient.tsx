@@ -11,7 +11,7 @@ const useWheelchairPatient = (patientId?: string) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { wheelchairPatients } = useAppSelector((state) => state);
-  
+
   useEffect(() => {
     // Reset error state upon new request
     setError(null);
@@ -20,14 +20,13 @@ const useWheelchairPatient = (patientId?: string) => {
     if (
       patientId &&
       (!wheelchairPatients.wheelchairPatient ||
-      wheelchairPatients.wheelchairPatient.id !== patientId)
+        wheelchairPatients.wheelchairPatient.id !== patientId)
     ) {
       dispatch(fetchWheelchairPatientById(patientId)).catch((e: Error) => {
         setError(`Failed to fetch patient: ${e.message}`);
       });
     }
-}, [dispatch, patientId, wheelchairPatients.wheelchairPatient]);
-
+  }, [dispatch, patientId, wheelchairPatients.wheelchairPatient]);
 
   // NOTE: without a dedicated useEffect for clean-up, an infinite loop of API-calls will be triggered
   useEffect(() => {

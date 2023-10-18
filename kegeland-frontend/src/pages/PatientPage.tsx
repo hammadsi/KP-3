@@ -1,4 +1,11 @@
-import { Button, Box, Flex, Stack, useMediaQuery, Center } from '@chakra-ui/react';
+import {
+  Button,
+  Box,
+  Flex,
+  Stack,
+  useMediaQuery,
+  Center,
+} from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import {
   AiOutlineClockCircle,
@@ -83,7 +90,6 @@ const PatientPage: React.FC = () => {
         Start session
       </Button>
     </Box>
-    
   );
 };
 

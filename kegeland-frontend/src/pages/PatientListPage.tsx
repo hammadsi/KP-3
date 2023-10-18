@@ -11,7 +11,7 @@ const PatientListPage: React.FC = () => {
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     filterData(event.target.value);
   };
-
+  
   const headingStyle = {
     color: 'var(--chakra-colors-blackAlpha-800)',
     fontWeight: 'bold',

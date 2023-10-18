@@ -70,3 +70,5 @@ type PatientsType = {
     },
   ];
 };
+
+export {};

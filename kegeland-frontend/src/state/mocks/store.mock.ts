@@ -19,6 +19,7 @@ import { isFSA } from '@reduxjs/toolkit/src/createAction';
 import { rootReducer, RootState } from '../store';
 import { initialState as authState } from '../ducks/auth/auth.reducer';
 import { initialState as patientsState } from '../ducks/patients/patients.reducer';
+import { initialState as wheelchairPatientsState } from '../ducks/wheelchairPatients/wheelchairPatients.reducer';
 import { initialState as questionnairesState } from '../ducks/questionnaires/questionnaires.reducer';
 import { initialState as sensorsState } from '../ducks/sensors/sensors.reducer';
 import { initialState as sessionState } from '../ducks/sessions/sessions.reducer';
@@ -36,6 +37,7 @@ export const initialStore: MockState = {
   sensors: sensorsState,
   sessions: sessionState,
   settings: settingsState,
+  wheelchairPatients: wheelchairPatientsState,
 };
 export function mockStore(initialState: MockState = initialStore) {
   const actions: ActionHistory = [];

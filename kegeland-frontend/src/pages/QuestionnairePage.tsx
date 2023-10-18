@@ -1,8 +1,19 @@
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+type ExercisePageParams = {
+  patientId: string;
+  exerciseId: string;
+};
 
 const QuestionnairePage: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  // const { patientId, exerciseId } = useParams<ExercisePageParams>();
+
+  const startUnitySession = () => {
+    // Open the Unity game using the custom URI scheme
+    window.location.href = `VRWheelchairSim://`;
+  };
 
   return (
     <Flex
@@ -19,7 +30,7 @@ const QuestionnairePage: React.FC = () => {
       {/* Insert questionnaire here */}
 
       <Box>
-        <Button marginTop={8} onClick={() => navigate('/')}>
+        <Button marginTop={8} onClick={startUnitySession}>
           Start session
         </Button>
       </Box>

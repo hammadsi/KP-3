@@ -15,6 +15,7 @@ import { LoginCredentialsDto } from '../dto/login-credentials.dto';
 import { RegisterCredentialsDto } from '../dto/register-credentials.dto';
 import { ResetPasswordDto } from '../dto/reset-password.dto';
 import { RefreshTokenDto } from '../dto/refresh-token.dto';
+import { Gender } from 'src/wheelchairPatients/entities/wheelchairPatient.entity';
 
 describe('QuestionnairesController', () => {
   let authController: AuthController;
@@ -72,6 +73,21 @@ describe('QuestionnairesController', () => {
         password: 'password',
         name: { firstName: 'Bruker', lastName: 'Brukarson' },
         roles: [Role.PATIENT],
+        wheelchairPatient: {
+          age: 0,
+          gender: Gender.M,
+          currentPhysicalState: {
+            height: 120,
+            weight: 50,
+            maxHeartRate: 0,
+            averageHeartRate: 0,
+            maxWheelchairSpeed: 0,
+            averageWheelchairSpeed: 0,
+          },
+          gameSessions: [],
+          id: '',
+          name: `Bruker Brukarson`,
+        },
       };
       await request(app.getHttpServer()).post('/auth/register').send(body);
       expect(spyService.register).toBeCalledWith(body);
@@ -83,6 +99,21 @@ describe('QuestionnairesController', () => {
         password: 'pp',
         name: { firstName: 'Bruker', lastName: 'Brukarson' },
         roles: [Role.PATIENT],
+        wheelchairPatient: {
+          age: 0,
+          gender: Gender.M,
+          currentPhysicalState: {
+            height: 120,
+            weight: 50,
+            maxHeartRate: 0,
+            averageHeartRate: 0,
+            maxWheelchairSpeed: 0,
+            averageWheelchairSpeed: 0,
+          },
+          gameSessions: [],
+          id: '',
+          name: `Bruker Brukarson`,
+        },
       };
       await request(app.getHttpServer())
         .post('/auth/register')
@@ -121,3 +152,4 @@ describe('QuestionnairesController', () => {
     });
   });
 });
+

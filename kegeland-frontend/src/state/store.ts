@@ -18,6 +18,7 @@ import questionnairesReducer from './ducks/questionnaires/questionnaires.reducer
 import { sensorReducer } from './ducks/sensors/sensors.reducer';
 import sessionsReducer from './ducks/sessions/sessions.reducer';
 import settingsReducer from './ducks/settings/settings.reducer';
+import wheelchairPatientsReducer from './ducks/wheelchairPatients/wheelchairPatients.reducer';
 
 const persistConfig = {
   key: 'root',
@@ -33,6 +34,7 @@ export const rootReducer = combineReducers({
   sensors: sensorReducer,
   sessions: sessionsReducer,
   questionnaires: questionnairesReducer,
+  wheelchairPatients: wheelchairPatientsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

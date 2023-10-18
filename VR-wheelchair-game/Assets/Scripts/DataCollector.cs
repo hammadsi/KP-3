@@ -29,10 +29,10 @@ public class DataCollector : MonoBehaviour
         Lap newLap = new Lap { lapTime = lapTime, timestamp = DateTime.UtcNow.ToString("o") };
         gameSession.laps.Add(newLap);
         Debug.Log("Printing gameSession laps: ");
-        foreach (Lap lap in gameSession.laps)
-        {
-            Debug.Log(lap); // Calls lap.ToString() implicitly
-        }  
+        //foreach (Lap lap in gameSession.laps)
+        //{
+        //    Debug.Log(lap); // Calls lap.ToString() implicitly
+        //}  
     }
 
     private IEnumerator CollectHeartRate()
@@ -43,7 +43,8 @@ public class DataCollector : MonoBehaviour
 
             HeartRateData newData = new HeartRateData { heartRate = (int)heartRate, timestamp = DateTime.UtcNow.ToString("o") };
             gameSession.timeSeriesData.heartRates.Add(newData);
-
+            //foreach (HeartRateData hr in gameSession.timeSeriesData.heartRates )
+            //Debug.Log(hr);
             yield return new WaitForSeconds(heartRateInterval); // Wait for the defined interval
         }
     }

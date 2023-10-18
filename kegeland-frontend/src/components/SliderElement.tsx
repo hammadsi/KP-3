@@ -1,21 +1,32 @@
 import { Slider, SliderMark, SliderTrack, SliderFilledTrack, SliderThumb, Box } from "@chakra-ui/react"
-import React from "react"
-import { MdGraphicEq } from "react-icons/md";
+import React, { useEffect, useState } from "react"
+interface SliderElementProps {
+  onSliderChange: (value: number) => void;
+}
 
-const SliderElement = () => {
-    const [sliderValue, setSliderValue] = React.useState(5)
-    const [showTooltip, setShowTooltip] = React.useState(false)
+const SliderElement: React.FC<SliderElementProps> = ({ onSliderChange }) => {
+  const [sliderValue, setSliderValue] = useState(0);
+
+  function handleSliderChange(v: number){
+    setSliderValue(v);
+    if(onSliderChange){
+      onSliderChange(v);
+    }
+  }
+
+  useEffect(() => {
+    console.log(sliderValue);
+  }, [sliderValue]);
+
     return (
       <Slider
         id='slider'
-        defaultValue={3}
+        defaultValue={0}
         min={1}
         max={5}
-        colorScheme='blue'
-        onChange={(v: React.SetStateAction<number>) => setSliderValue(v)}
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
+        onChange={handleSliderChange}
         step={1}
+        size="lg"
       >
         <SliderMark value={1} mt='3' ml='-1' mb='10' fontSize='m'>
           1

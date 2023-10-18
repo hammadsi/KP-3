@@ -76,19 +76,84 @@ const WheelchairPatientComponent = () => {
                   <strong>Session ID:</strong> {session.sessionId}
                 </p>
                 <p>
-                  <strong>Start Time:</strong>{' '}
-                  {new Date(session.startTime).toLocaleString()}
+                  <strong>Start Time:</strong> {new Date(session.startTime).toLocaleString()}
                 </p>
                 <p>
-                  <strong>End Time:</strong>{' '}
-                  {new Date(session.endTime).toLocaleString()}
+                  <strong>End Time:</strong> {new Date(session.endTime).toLocaleString()}
                 </p>
                 <p>
                   <strong>Exercise Time:</strong> {session.exerciseTime}
                 </p>
-                {/* Add more properties as per requirement */}
+
+                <h5>Pre-Game Questionnaires</h5>
+                <ul>
+                  {Array.isArray(session.questionaires?.preGame) ? (
+                    session.questionaires.preGame.map((q, qIndex) => (
+                      <li key={qIndex}>
+                        Q: {q.question} | A: {q.answer}
+                      </li>
+                    ))
+                  ) : (
+                    <li>No Pre-Game Questionnaires available.</li>
+                  )}
+                </ul>
+
+                <h5>Post-Game Questionnaires</h5>
+                <ul>
+                  {Array.isArray(session.questionaires?.postGame) ? (
+                    session.questionaires.postGame.map((q, qIndex) => (
+                      <li key={qIndex}>
+                        Q: {q.question} | A: {q.answer}
+                      </li>
+                    ))
+                  ) : (
+                    <li>No Post-Game Questionnaires available.</li>
+                  )}
+                </ul>
+
+                <h5>Laps</h5>
+                <ul>
+                  {Array.isArray(session.laps) ? (
+                    session.laps.map((lap, lapIndex) => (
+                      <li key={lapIndex}>
+                        Lap Time: {lap.lapTime} seconds | Timestamp: {new Date(lap.timeStamp).toLocaleString()}
+                      </li>
+                    ))
+                  ) : (
+                    <li>No Laps data available.</li>
+                  )}
+                </ul>
+
+                <h5>Heart Rates</h5>
+                <ul>
+                  {Array.isArray(session.timeSeriesData?.heartRates) ? (
+                    session.timeSeriesData.heartRates.map((hr, hrIndex) => (
+                      <li key={hrIndex}>
+                        Heart Rate: {hr.heartRate} bpm | Timestamp: {new Date(hr.timestamp).toLocaleString()}
+                      </li>
+                    ))
+                  ) : (
+                    <li>No Heart Rates data available.</li>
+                  )}
+                </ul>
+
+                <h5>Speeds</h5>
+                <ul>
+                  {Array.isArray(session.timeSeriesData?.speeds) ? (
+                    session.timeSeriesData.speeds.map((speed, speedIndex) => (
+                      <li key={speedIndex}>
+                        Left Speed: {speed.leftSpeed} | Right Speed: {speed.rightSpeed} | Timestamp: {new Date(speed.timestamp).toLocaleString()}
+                      </li>
+                    ))
+                  ) : (
+                    <li>No Speed data available.</li>
+                  )}
+                </ul>
+
+                {/* ... And so on for other data fields in the session. */}
               </div>
             ))}
+
           </>
         ) : (
           <p>No game sessions found.</p>

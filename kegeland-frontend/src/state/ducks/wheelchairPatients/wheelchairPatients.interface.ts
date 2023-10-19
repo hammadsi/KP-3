@@ -18,9 +18,9 @@ export type CurrentPhysicalState = {
 
 export type GameSession = {
   sessionId: string;
-  exerciseTime: number; // Calculated from startTime and endTime
   startTime: Date;
   endTime: Date;
+  exerciseTime: number;
   questionaires: {
     preGame: Questionaire[];
     postGame: Questionaire[];
@@ -34,7 +34,7 @@ export type Questionaire = {
   answer: string;
 };
 
-export type Lap = {
+export  type Lap = {
   lapTime: number;
   timeStamp: Date;
 };
@@ -71,3 +71,5 @@ export type UpdateWheelchairPatientData = {
   pid: WheelchairPatient['id'];
   currentPhysicalState: CurrentPhysicalState;
 };
+
+export type NewGameSession = Omit<GameSession, 'sessionId'>;

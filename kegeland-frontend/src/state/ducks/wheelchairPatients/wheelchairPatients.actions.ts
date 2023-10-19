@@ -3,6 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { apiCaller } from '../../../utils/apiCaller';
 
 import {
+  GameSession,
+  NewGameSession,
   UpdateWheelchairPatientData,
   WheelchairPatient,
 } from './wheelchairPatients.interface';
@@ -23,5 +25,15 @@ export const updatePatientData = createAsyncThunk(
       url: `wheelchairPatients/${updatedData.pid}`,
       method: 'PUT',
       data: updatedData.currentPhysicalState,
+    }),
+);  
+
+export const addGameSessionToPatient = createAsyncThunk(
+  'wheelchairpatients/addGameSessionToPatient',
+  async (payload: { patientId: string, gameSession: NewGameSession }) =>
+    apiCaller<GameSession>({
+      url: `wheelchairPatients/${payload.patientId}/gameSessions`,
+      method: 'POST',
+      data: payload.gameSession,
     }),
 );

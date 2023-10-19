@@ -1,7 +1,7 @@
 export type WheelchairPatient = {
   id: string;
   name: string;
-  age: number;
+  birthdate: string;
   gender: 'M' | 'F' | 'O';
   currentPhysicalState: CurrentPhysicalState;
   gameSessions: GameSession[];

@@ -143,8 +143,8 @@ export class WheelchairPatientEntity {
   name: string;
 
   @Expose()
-  @IsNumber()
-  age: number;
+  @IsString()
+  birthdate: string;
 
   @Expose()
   @IsEnum(Gender)

@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Button,
   Box,
@@ -37,8 +38,17 @@ const PatientPage: React.FC = () => {
     margin: '25px 0 10px 0',
   };
 
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setUploadedFile(file);
+      console.log("File uploaded:", file.name);
+    }
+  };
+
   const startUnitySession = () => {
-    // Open the Unity game using the custom URI scheme
     window.location.href = `VRWheelchairSim:// -patientID ${patientId} -bearerToken ${localStorage.getItem(
       'id_token',
     )}`;
@@ -91,6 +101,16 @@ const PatientPage: React.FC = () => {
       <Button w="100%" marginTop={8} onClick={startUnitySession}>
         Start session
       </Button>
+      <Center marginTop={4}>
+        <input
+          type="file"
+          id="imuData"
+          name="imuData"
+          accept=".csv"
+          onChange={handleFileUpload}
+        />
+        <label htmlFor="imuData">Upload IMU Data (CSV)</label>
+      </Center>
     </Box>
   );
 };

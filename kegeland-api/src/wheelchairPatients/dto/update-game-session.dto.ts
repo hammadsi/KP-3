@@ -46,6 +46,22 @@ class SpeedDto {
     timestamp: Date;
 }
 
+class TimeSeriesDataDto {
+    @IsOptional()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => HeartRateDto)
+    heartRates?: HeartRateDto[];
+  
+    @IsOptional()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => SpeedDto)
+    speeds?: SpeedDto[];
+  
+    // Add other fields like IMUData if necessary.
+  }
+
 export class UpdateGameSessionDto {
     @IsOptional()
     @IsDate()
@@ -80,14 +96,7 @@ export class UpdateGameSessionDto {
     laps?: LapDto[];
 
     @IsOptional()
-    @IsArray()
-    @ValidateNested({ each: true })
-    @Type(() => HeartRateDto)
-    heartRates?: HeartRateDto[];
-
-    @IsOptional()
-    @IsArray()
-    @ValidateNested({ each: true })
-    @Type(() => SpeedDto)
-    speeds?: SpeedDto[];
+    @ValidateNested()
+    @Type(() => TimeSeriesDataDto)
+    timeSeriesData?: TimeSeriesDataDto;
 }

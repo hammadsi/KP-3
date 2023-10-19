@@ -117,7 +117,7 @@ export class WheelchairPatientsService {
             timeStamp: firestore.Timestamp.fromDate(lap.timeStamp),
           };
         }) || [],
-        heartRates: gameSession.heartRates?.map(hr => {
+        heartRates: gameSession.timeSeriesData.heartRates?.map(hr => {
           if (!(hr.timestamp instanceof Date)) {
               throw new Error("hr.timestamp is not a valid Date object");
           }
@@ -126,7 +126,7 @@ export class WheelchairPatientsService {
             timestamp: firestore.Timestamp.fromDate(hr.timestamp),
           };
         }) || [],
-        speeds: gameSession.speeds?.map(speed => {
+        speeds: gameSession.timeSeriesData.speeds?.map(speed => {
           if (!(speed.timestamp instanceof Date)) {
               throw new Error("speed.timestamp is not a valid Date object");
           }

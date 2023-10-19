@@ -24,11 +24,13 @@ const Exercise: React.FC<ExerciseProps> = ({ date, id, sensor }) => {
         p={['12', '12']}
         bg="gray.100"
         borderRadius={20}
-        pb="4">
+        pb="4"
+      >
         <LinkOverlay
           href={'/patient/' + patientId + '/exercise/' + id}
           display="flex-center"
-          justifyContent="space-between">
+          justifyContent="space-between"
+        >
           <Box>{date}</Box>
           <Box>{sensor}</Box>
         </LinkOverlay>

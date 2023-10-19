@@ -120,7 +120,8 @@ const RegisterPage = () => {
                 weight: 0,
                 confirmPassword: '',
               }}
-              validationSchema={validationSchema}>
+              validationSchema={validationSchema}
+            >
               {(formProps) => (
                 <Box
                   borderWidth="1px"
@@ -133,7 +134,8 @@ const RegisterPage = () => {
                   onSubmit={(e: any) => {
                     e.preventDefault();
                     formProps.handleSubmit();
-                  }}>
+                  }}
+                >
                   <VStack spacing={5} align="stretch">
                     <Box>
                       <Heading as="h3" size="lg" textAlign="center">
@@ -191,7 +193,8 @@ const RegisterPage = () => {
                             name="gender"
                             onChange={(e) =>
                               formProps.setFieldValue('gender', e.target.value)
-                            }>
+                            }
+                          >
                             <option value="O" disabled>
                               Select gender
                             </option>
@@ -266,7 +269,8 @@ const RegisterPage = () => {
                       style={{
                         display: 'flex',
                         justifyContent: 'space-between',
-                      }}>
+                      }}
+                    >
                       <Box textAlign="left" marginTop="9px">
                         <Link color="grey" href="/login">
                           <b>Cancel</b>
@@ -276,7 +280,8 @@ const RegisterPage = () => {
                         <SubmitButton
                           colorScheme="primary"
                           isLoading={formProps.isSubmitting || loading}
-                          isDisabled={!formProps.isValid}>
+                          isDisabled={!formProps.isValid}
+                        >
                           Register user
                         </SubmitButton>
                       </Box>

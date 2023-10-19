@@ -12,7 +12,7 @@ const PatientListPage: React.FC = () => {
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     filterData(event.target.value);
   };
-  
+
   const headingStyle = {
     color: 'var(--chakra-colors-blackAlpha-800)',
     fontWeight: 'bold',
@@ -23,7 +23,7 @@ const PatientListPage: React.FC = () => {
   return (
     <>
       <Card loading={loading} minH="36">
-        <AddGameSession/>
+        <AddGameSession />
       </Card>
 
       <h1 style={headingStyle}>OVERVIEW OF YOUR PATIENTS</h1>

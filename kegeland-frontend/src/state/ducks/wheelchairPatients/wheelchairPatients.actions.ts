@@ -26,7 +26,7 @@ export const updatePatientData = createAsyncThunk(
       method: 'PUT',
       data: updatedData.currentPhysicalState,
     }),
-);  
+);
 
 export const addEmptyGameSession = createAsyncThunk(
   'wheelchairpatients/addEmptyGameSession',
@@ -39,8 +39,12 @@ export const addEmptyGameSession = createAsyncThunk(
 
 export const updateGameSession = createAsyncThunk(
   'wheelchairpatients/updateGameSession',
-  async (payload: { patientId: string; sessionId: string; sessionData: GameSessionData }) =>
-  apiCaller<GameSession>({
+  async (payload: {
+    patientId: string;
+    sessionId: string;
+    sessionData: GameSessionData;
+  }) =>
+    apiCaller<GameSession>({
       url: `wheelchairPatients/${payload.patientId}/gameSessions/${payload.sessionId}`,
       method: 'PUT',
       data: payload.sessionData,

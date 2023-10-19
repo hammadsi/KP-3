@@ -34,7 +34,7 @@ export type Questionaire = {
   answer: string;
 };
 
-export  type Lap = {
+export type Lap = {
   lapTime: number;
   timeStamp: Date;
 };
@@ -88,4 +88,4 @@ export type GameSessionData = {
   };
   laps: Lap[];
   timeSeriesData: TimeSeriesData;
-}
+};

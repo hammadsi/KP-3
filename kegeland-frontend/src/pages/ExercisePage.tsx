@@ -34,7 +34,8 @@ const ExercisePage: React.FC = () => {
       <Button
         onClick={() => {
           setVisible(!visible);
-        }}>
+        }}
+      >
         {visible ? <ArrowUpIcon /> : <ArrowDownIcon />}
         {visible
           ? '  Hide questionnaire results'

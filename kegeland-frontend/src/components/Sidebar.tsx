@@ -40,7 +40,8 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
       maxW="300px"
       boxShadow="md"
       zIndex={1001}
-      transition="width 200ms, top 50ms">
+      transition="width 200ms, top 50ms"
+    >
       <ScaleFade in={isOpen}>
         <Box paddingY={2}>
           <Logo />
@@ -53,7 +54,8 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
             <Link to="/myprofile">
               <UserAvatar user={user} />
             </Link>
-          }>
+          }
+        >
           <Menu.Item
             mode={mode}
             title="Patients"
@@ -92,7 +94,8 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
             transition="all 300ms"
             color="primary.600"
             _hover={{ color: 'primary.300' }}
-            onClick={() => dispatch(signOutUser())}>
+            onClick={() => dispatch(signOutUser())}
+          >
             Sign out
           </Button>
         </VStack>

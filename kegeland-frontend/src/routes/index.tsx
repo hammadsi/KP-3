@@ -13,6 +13,7 @@ import EditProfile from '../pages/profile/EditProfilePage';
 import GamePage from '../pages/GamePage';
 import { UserRole } from '../state/ducks/auth/auth.interface';
 import ProtectedRoutes from '../components/ProtectedRoutes';
+import useAppSelector from '../hooks/useAppSelector';
 
 export interface RoutePathDefinition extends Omit<NonIndexRouteObject, 'children'> {
   title?: string;
@@ -28,11 +29,20 @@ export type RoutePath = {
   match: PathMatch<string>;
 };
 
+function HomeRouter() {
+  const { userDetails } = useAppSelector((state) => state.auth);
+  console.log(userDetails?.roles[0])
+  if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
+    return <PatientsPage />;
+  } 
+  return <PatientPage />;
+}
+
 const routes: RoutePathDefinition[] = [
   {
     title: 'Home',             
     path: '/',
-    element: <PatientsPage />,
+    element: <HomeRouter />,
   },
   {
     title: 'Login',          

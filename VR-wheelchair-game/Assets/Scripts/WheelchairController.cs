@@ -29,6 +29,27 @@ public class WheelchairController : MonoBehaviour
     public float CurrentBreakForce = 0;
     public float CurrentTurnAngle = 0;
 
+    private Vector2 joystick;
+    private bool controller = false;
+
+    private float leftWheelSpeed;
+    private float rightWheelSpeed;
+    private float deadZoneRadius = 0.1f;  // Adjustments probably needed
+
+    float wheelchairWidth = 0.5f;  // Adjust based on actual wheelchair width
+    float maxWheelSpeed = 10f;    // Maximum wheel speed, adjustments probably needed
+
+
+
+
+   void Start()
+    {
+        if (ErgometerInputDevice.current != null)
+        {
+        controller = true;
+        joystick = ErgometerInputDevice.current.leftStick.ReadValue();
+        }
+    }
     public void Update()
     {
         if (gameObject.transform.localRotation.eulerAngles.z > 90f && gameObject.transform.localRotation.eulerAngles.z < 180f)
@@ -42,8 +63,10 @@ public class WheelchairController : MonoBehaviour
 
    private void FixedUpdate()
     {
-      
-
+        if (controller)
+            {
+                WheelSpeedLoop();
+            }
         CurrentAcceleration = Acceleration * Input.GetAxis("Vertical");
         
 
@@ -79,6 +102,30 @@ public class WheelchairController : MonoBehaviour
         trans.rotation = rotation;
     }
 
-    
+    private float RestoreJoystickValue(Vector2 joystickInput, float deadZoneRadius)
+{
+    float r = joystickInput.magnitude;
+
+    if (r <= deadZoneRadius)
+    {
+        return 0f;
+    }
+    else
+    {
+        return (r - deadZoneRadius) / (1 - deadZoneRadius);
+    }
+}
+
+    private void WheelSpeedLoop()
+    {
+    Vector2 rawJoystick = ErgometerInputDevice.current.leftStick.ReadValue();
+    float restoredMagnitude = RestoreJoystickValue(rawJoystick, deadZoneRadius);
+    Vector2 restoredJoystick = rawJoystick.normalized * restoredMagnitude;
+
+
+    leftWheelSpeed = maxWheelSpeed * (restoredJoystick.y + (wheelchairWidth / 2) * restoredJoystick.x);
+    rightWheelSpeed = maxWheelSpeed * (restoredJoystick.y - (wheelchairWidth / 2) * restoredJoystick.x);
+    }
+
 
 }

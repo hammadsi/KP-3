@@ -1,12 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import {
-  Button,
-  Stack,
-  FormControl,
-  FormLabel,
-  Select,
-  Input,
-} from '@chakra-ui/react';
+import { Button, Stack, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 

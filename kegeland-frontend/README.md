@@ -135,10 +135,14 @@ To successfully install prettier, navigate to the directory `KP-3/kegeland-front
 yarn add --dev --exact prettier
 ```
 
-When prettier errors occurr, run the command
+When Prettier/ESlint errors occurr, run the commands
 
 ```
 yarn prettier . --write
+
+yarn prettier --write "src/**/*.{js,jsx,ts,tsx}"
+
+yarn eslint --fix "src/**/*.{js,jsx,ts,tsx}"
 ```
 
 from the directory `KP-3/kegeland-frontend`

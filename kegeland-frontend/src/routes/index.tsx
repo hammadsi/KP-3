@@ -8,12 +8,17 @@ import NotImplemented from '../pages/NotImplemented';
 import PatientsPage from '../pages/PatientListPage';
 import PatientPage from '../pages/PatientPage';
 import Settings from '../pages/Settings';
+import MyProfilePage from '../pages/profile/MyProfilePage';
+import EditProfile from '../pages/profile/EditProfilePage';
+import GamePage from '../pages/GamePage';
+import { UserRole } from '../state/ducks/auth/auth.interface';
+import ProtectedRoutes from '../components/ProtectedRoutes';
 
-export interface RoutePathDefinition
-  extends Omit<NonIndexRouteObject, 'children'> {
+export interface RoutePathDefinition extends Omit<NonIndexRouteObject, 'children'> {
   title?: string;
   children?: RoutePathDefinition[];
   path: string;
+  allowedRoles?: UserRole[];
 }
 
 export type RoutePath = {
@@ -25,33 +30,64 @@ export type RoutePath = {
 
 const routes: RoutePathDefinition[] = [
   {
-    title: 'Home',
+    title: 'Home',             
     path: '/',
     element: <PatientsPage />,
   },
   {
-    title: 'Login',
+    title: 'Login',          
     path: '/login',
     element: <LoginPage />,
   },
   {
-    title: 'Register',
+    title: 'Register',        
     path: '/register',
     element: <RegisterPage />,
   },
   {
-    title: 'Not Implemented',
+    title: 'MyProfile',          
+    path: '/myprofile',
+    element: (
+      <ProtectedRoutes allowedRoles={[UserRole.PATIENT]}>
+        <MyProfilePage />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    title: 'EditProfile',       
+    path: '/editprofile',
+    element: (
+      <ProtectedRoutes allowedRoles={[UserRole.PATIENT]}>
+        <MyProfilePage />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    title: 'Not Implemented',   
     path: 'not-implemented',
     element: <NotImplemented />,
   },
   {
-    title: 'Settings',
+    title: 'Settings',      
     path: 'settings',
     element: <Settings />,
   },
   {
-    path: '/patients/:patientId',
-    element: <Outlet />,
+    title: 'Game',             
+    path: '/game',
+    element: (
+      <ProtectedRoutes allowedRoles={[UserRole.PATIENT]}>
+        <GamePage />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: '/patients/:patientId',   // kun fysio
+    element:(
+      <ProtectedRoutes allowedRoles={[UserRole.PHYSICIAN]}>
+        <Outlet />
+      </ProtectedRoutes>
+    ),
     children: [
       {
         title: 'Patient',
@@ -66,10 +102,11 @@ const routes: RoutePathDefinition[] = [
     ],
   },
   {
-    title: '404',
+    title: '404',             // begge
     path: '*',
     element: <NotFoundPage />,
   },
 ];
+
 
 export default routes;

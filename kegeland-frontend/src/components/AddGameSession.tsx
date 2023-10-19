@@ -39,7 +39,7 @@ const mockWheelchairPatient: WheelchairPatient = {
       laps: [
         {
           lapTime: 120, // in seconds
-          timeStamp: new Date('2023-10-18T12:20:00'),
+          timestamp: new Date('2023-10-18T12:20:00'),
         },
       ],
       timeSeriesData: {

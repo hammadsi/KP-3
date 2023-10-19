@@ -3,7 +3,6 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import { capitalize } from 'lodash';
 import moment from 'moment';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { LeanSession } from '../state/ducks/sessions/sessions.interface';
 
@@ -14,12 +13,8 @@ type ExerciseTableProps = {
   patientId: string;
 };
 
-const ExerciseTable: React.FC<ExerciseTableProps> = ({
-  sessions,
-  patientId,
-}) => {
+const ExerciseTable: React.FC<ExerciseTableProps> = ({ sessions }) => {
   const [isGreaterThanMd] = useMediaQuery('(min-width: 48em)');
-  const navigate = useNavigate();
 
   const columnHelper = createColumnHelper<LeanSession>();
   const columns = React.useMemo<ColumnDef<LeanSession, any>[]>(

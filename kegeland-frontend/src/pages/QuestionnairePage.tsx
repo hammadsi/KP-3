@@ -51,8 +51,7 @@ const QuestionnairePage: React.FC = () => {
       alignItems="center"
       textAlign="center"
       flexDirection="column"
-      padding="20px"
-      overflowY="hidden">
+    >
       <Text
         fontSize={26}
         fontWeight="semibold"

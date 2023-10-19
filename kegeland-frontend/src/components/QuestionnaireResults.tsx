@@ -56,7 +56,8 @@ const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({
               isGreaterThanLg ? 'repeat(2, 1fr)' : 'repeat(1, 1fr)'
             }
             gap={5}
-            marginBottom={5}>
+            marginBottom={5}
+          >
             {questionnaire.questions.map((item, qidx) => (
               <GridItem key={qidx} paddingX={2}>
                 <Text fontSize={18} fontWeight="normal">
@@ -68,14 +69,16 @@ const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({
                     fontWeight="semibold"
                     fontStyle="italic"
                     fontSize={14}
-                    marginLeft={getMinValOffset(item.minVal)}>
+                    marginLeft={getMinValOffset(item.minVal)}
+                  >
                     {item.minVal}
                   </Text>
                   <Text
                     fontWeight="semibold"
                     fontStyle="italic"
                     fontSize={14}
-                    marginRight={getMaxValOffset(item.maxVal)}>
+                    marginRight={getMaxValOffset(item.maxVal)}
+                  >
                     {item.maxVal}
                   </Text>
                 </Flex>
@@ -86,7 +89,8 @@ const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({
                       alignItems="center"
                       paddingRight={8}
                       key={`${qidx}-${idx}`}
-                      _first={{ marginBottom: 2 }}>
+                      _first={{ marginBottom: 2 }}
+                    >
                       <Text width={20} fontWeight="medium" letterSpacing={0.5}>
                         {idx ? 'After' : 'Before'}
                       </Text>

@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Button, Collapse } from '@chakra-ui/react';
 import { useState } from 'react';
-import { AiOutlineArrowDown } from 'react-icons/ai';
+import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 
 import Card from '../components/Card';
 import ExerciseGraph from '../components/ExerciseGraph';
@@ -23,10 +23,6 @@ const ExercisePage: React.FC = () => {
   );
   const [visible, setVisible] = useState(false);
 
-  const toggleButtonClick = () => {
-    setVisible(!visible);
-  };
-
   return (
     <>
       <Card loading={loading} minH="lg">
@@ -34,8 +30,16 @@ const ExercisePage: React.FC = () => {
           <ExerciseGraph sensor={sensor!} session={session!} />
         )}
       </Card>
-
-      <Button onClick={toggleButtonClick}> Show questionnaire results </Button>
+      <Button
+        onClick={() => {
+          setVisible(!visible);
+        }}
+      >
+        {visible ? <ArrowUpIcon /> : <ArrowDownIcon />}
+        {visible
+          ? '  Hide questionnaire results'
+          : '  Show questionnaire results'}
+      </Button>
       <Collapse in={visible}>
         <Card loading={loading} h="100%">
           <QuestionnaireResults

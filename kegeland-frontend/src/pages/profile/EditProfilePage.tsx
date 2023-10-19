@@ -1,12 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import {
-  Button,
-  Stack,
-  FormControl,
-  FormLabel,
-  Select,
-  Input,
-} from '@chakra-ui/react';
+import { Button, Stack, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
@@ -96,7 +89,8 @@ const EditProfilePage = () => {
             marginBottom: '20px',
             padding: '10px',
             borderBottom: '1.5px solid gray',
-          }}>
+          }}
+        >
           <h1 style={{ fontWeight: 'bold' }}>About Me</h1>
         </div>
         <div style={{ marginLeft: '20%', marginRight: '20%' }}>

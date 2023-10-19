@@ -25,7 +25,8 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ user, mode }) => {
         <Text
           paddingLeft={1}
           fontWeight={'semibold'}
-          color={isDark ? 'gray.200' : 'gray.700'}>
+          color={isDark ? 'gray.200' : 'gray.700'}
+        >
           {renderName(user.name)}
         </Text>
       </WrapItem>

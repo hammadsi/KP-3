@@ -1,40 +1,34 @@
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Heading,
-  Text,
-  Wrap,
-  WrapItem,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { Button, Center, Flex, Text } from '@chakra-ui/react';
+import { useState } from 'react';
+import session from 'redux-persist/lib/storage/session';
 
 import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
+
 import QuestionnairePage from './QuestionnairePage';
-import { useState } from 'react';
-import session from 'redux-persist/lib/storage/session';
 
 const GamePage: React.FC = () => {
   const [sessionStarted, setSessionStarted] = useState(false);
 
   const handleStartSession = () => {
     setSessionStarted(true);
-  }
+  };
   return (
     <Center>
-     {sessionStarted ? (
+      {sessionStarted ? (
         <QuestionnairePage />
       ) : (
-        <Flex 
+        <Flex
           flexDirection="column"
           justifyContent="center"
           alignItems="center"
-          textAlign="center"
-        >
-          <Text fontSize={26} fontWeight="semibold" color="gray.600" marginTop={8}>
-            Welcome to THE GAME. 
+          textAlign="center">
+          <Text
+            fontSize={26}
+            fontWeight="semibold"
+            color="gray.600"
+            marginTop={8}>
+            Welcome to THE GAME.
           </Text>
           <Text fontSize={20} fontWeight="semibold" color="gray.600" margin={8}>
             To start the session, click on the button below

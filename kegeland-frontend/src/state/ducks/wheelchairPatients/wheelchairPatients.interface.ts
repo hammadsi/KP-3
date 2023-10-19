@@ -31,7 +31,7 @@ export type GameSession = {
 
 export type Questionaire = {
   question: string;
-  type: 'T' | 'N'; // T for text and N for number
+  type: 'freeText' | 'scale' | 'radio';
   answer: string;
 };
 

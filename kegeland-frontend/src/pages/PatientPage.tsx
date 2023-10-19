@@ -45,6 +45,7 @@ const PatientPage: React.FC = () => {
     if (file) {
       setUploadedFile(file);
       console.log("File uploaded:", file.name);
+        // TODO: Process imu file
     }
   };
 

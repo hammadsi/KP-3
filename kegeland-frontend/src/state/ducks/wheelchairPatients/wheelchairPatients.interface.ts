@@ -72,4 +72,20 @@ export type UpdateWheelchairPatientData = {
   currentPhysicalState: CurrentPhysicalState;
 };
 
-export type NewGameSession = Omit<GameSession, 'sessionId'>;
+export type UpdateGameSessionData = {
+  patientId: string;
+  sessionId: string;
+  sessionData: GameSessionData;
+};
+
+export type GameSessionData = {
+  startTime: Date;
+  endTime: Date;
+  exerciseTime: number;
+  questionaires: {
+    preGame: Questionaire[];
+    postGame: Questionaire[];
+  };
+  laps: Lap[];
+  timeSeriesData: TimeSeriesData;
+}

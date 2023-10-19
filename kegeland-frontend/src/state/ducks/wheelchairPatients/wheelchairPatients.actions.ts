@@ -4,7 +4,7 @@ import { apiCaller } from '../../../utils/apiCaller';
 
 import {
   GameSession,
-  NewGameSession,
+  GameSessionData,
   UpdateWheelchairPatientData,
   WheelchairPatient,
 } from './wheelchairPatients.interface';
@@ -28,12 +28,21 @@ export const updatePatientData = createAsyncThunk(
     }),
 );  
 
-export const addGameSessionToPatient = createAsyncThunk(
-  'wheelchairpatients/addGameSessionToPatient',
-  async (payload: { patientId: string, gameSession: NewGameSession }) =>
+export const addEmptyGameSession = createAsyncThunk(
+  'wheelchairpatients/addEmptyGameSession',
+  async (patientId: string) =>
     apiCaller<GameSession>({
-      url: `wheelchairPatients/${payload.patientId}/gameSessions`,
+      url: `wheelchairPatients/${patientId}/gameSessions`,
       method: 'POST',
-      data: payload.gameSession,
+    }),
+);
+
+export const updateGameSession = createAsyncThunk(
+  'wheelchairpatients/updateGameSession',
+  async (payload: { patientId: string; sessionId: string; sessionData: GameSessionData }) =>
+  apiCaller<GameSession>({
+      url: `wheelchairPatients/${payload.patientId}/gameSessions/${payload.sessionId}`,
+      method: 'PUT',
+      data: payload.sessionData,
     }),
 );

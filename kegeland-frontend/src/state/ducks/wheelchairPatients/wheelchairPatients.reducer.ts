@@ -7,8 +7,9 @@ import {
 } from '../../../utils/thunk.utils';
 
 import {
-  addGameSessionToPatient,
+  addEmptyGameSession,
   fetchWheelchairPatientById,
+  updateGameSession,
   updatePatientData,
 } from './wheelchairPatients.actions';
 import { WheelchairPatientsState } from './wheelchairPatients.interface';
@@ -42,12 +43,22 @@ const wheelchairPatientsSlice = createSlice({
             action.payload.currentPhysicalState;
         }
       })
-      .addCase(addGameSessionToPatient.fulfilled, (state, action) => {
+      .addCase(addEmptyGameSession.fulfilled, (state, action) => {
         if (state.wheelchairPatient) {
           if (!state.wheelchairPatient.gameSessions) {
             state.wheelchairPatient.gameSessions = [];
           }
           state.wheelchairPatient.gameSessions.push(action.payload);
+        }
+      })
+      .addCase(updateGameSession.fulfilled, (state, action) => {
+        if (state.wheelchairPatient) {
+          const sessionIndex = state.wheelchairPatient.gameSessions.findIndex(
+            (session) => session.sessionId === action.payload.sessionId
+          );
+          if (sessionIndex > -1) {
+            state.wheelchairPatient.gameSessions[sessionIndex] = action.payload;
+          }
         }
       })
       .addMatcher(

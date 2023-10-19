@@ -4,8 +4,8 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { FirebaseService } from 'src/firebase/firebase.service';
-import { Timestamp } from '@firebase/firestore-types';
-import { NewGameSessionDto } from './dto/new-game-session.dto';
+import { firestore } from 'firebase-admin';
+import { UpdateGameSessionDto } from './dto/update-game-session.dto';
 import { UpdatePhysicalStateDto } from './dto/update-physicalstate.dto';
 
 @Injectable()
@@ -50,45 +50,99 @@ export class WheelchairPatientsService {
   }
 
   /**
-   * Function for adding a new game session to a specific wheelchair patient
+   * Function for adding a new empty game session to a specific wheelchair patient
    * @param id ID of the wheelchair patient
-   * @param gameSession Data for the new game session
-   * @returns The ID and data of the newly created game session
+   * @returns The ID of the newly created game session
    */
-  async addGameSessionToPatient(id: string, gameSession: NewGameSessionDto) {
+  async addEmptyGameSessionToPatient(id: string) {
     try {
       const gameSessionsCollection = this.firebaseService.firestore
         .collection('patients')
         .doc(id)
         .collection('gameSessions');
-  
-      // Transform Date objects to Firestore Timestamps
-      const transformedSession = {
-        ...gameSession,
-        startTime: Timestamp.fromDate(gameSession.startTime),
-        endTime: Timestamp.fromDate(gameSession.endTime),
-        laps: gameSession.laps?.map(lap => ({
-          ...lap,
-          timeStamp: Timestamp.fromDate(lap.timeStamp),
-        })) || [],
-        heartRates: gameSession.heartRates?.map(hr => ({
-          ...hr,
-          timestamp: Timestamp.fromDate(hr.timestamp),
-        })) || [],
-        speeds: gameSession.speeds?.map(speed => ({
-          ...speed,
-          timestamp: Timestamp.fromDate(speed.timestamp),
-        })) || [],
-        createdAt: Timestamp.now(),
+
+      const newSession = {
+        createdAt: firestore.Timestamp.now(),
       };
-  
-      const newSessionRef = await gameSessionsCollection.add(transformedSession);
-      const newSessionSnapshot = await newSessionRef.get();
-  
-      return { id: newSessionRef.id, ...newSessionSnapshot.data() };
+
+      const newSessionRef = await gameSessionsCollection.add(newSession);
+
+      return { id: newSessionRef.id };
     } catch (error) {
       throw new InternalServerErrorException(error.message);
     }
-  }  
+  }
+
+  /**
+   * Function for updating a game session of a specific wheelchair patient
+   * @param patientId ID of the wheelchair patient
+   * @param sessionId ID of the game session to update
+   * @param gameSession Data to update the game session with
+   */
+  async updateGameSession(patientId: string, sessionId: string, gameSession: UpdateGameSessionDto) {
+    console.log(gameSession.startTime);
+    console.log("test");
+    try {
+      // Verify that startTime and endTime are valid Date instances
+      if (!(gameSession.startTime instanceof Date)) {
+          throw new Error("startTime is not a valid Date object");
+      }
+      if (!(gameSession.endTime instanceof Date)) {
+          throw new Error("endTime is not a valid Date object");
+      }
+      
+      const gameSessionDoc = this.firebaseService.firestore
+        .collection('patients')
+        .doc(patientId)
+        .collection('gameSessions')
+        .doc(sessionId);
+
+      // Check if the document exists
+      const docSnapshot = await gameSessionDoc.get();
+      if (!docSnapshot.exists) {
+        throw new NotFoundException(`Game session with ID ${sessionId} not found`);
+      }
+
+      // Transform Date objects to Firestore Timestamps
+      const transformedSession = {
+        ...gameSession,
+        startTime: firestore.Timestamp.fromDate(gameSession.startTime),
+        endTime: firestore.Timestamp.fromDate(gameSession.endTime),
+        laps: gameSession.laps?.map(lap => {
+          if (!(lap.timeStamp instanceof Date)) {
+              throw new Error("lap.timeStamp is not a valid Date object");
+          }
+          return {
+            ...lap,
+            timeStamp: firestore.Timestamp.fromDate(lap.timeStamp),
+          };
+        }) || [],
+        heartRates: gameSession.heartRates?.map(hr => {
+          if (!(hr.timestamp instanceof Date)) {
+              throw new Error("hr.timestamp is not a valid Date object");
+          }
+          return {
+            ...hr,
+            timestamp: firestore.Timestamp.fromDate(hr.timestamp),
+          };
+        }) || [],
+        speeds: gameSession.speeds?.map(speed => {
+          if (!(speed.timestamp instanceof Date)) {
+              throw new Error("speed.timestamp is not a valid Date object");
+          }
+          return {
+            ...speed,
+            timestamp: firestore.Timestamp.fromDate(speed.timestamp),
+          };
+        }) || [],
+      };
+
+      await gameSessionDoc.update(transformedSession);
+
+      return { sessionId, ...transformedSession };
+    } catch (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+  }
 }
 

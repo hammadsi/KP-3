@@ -1,80 +1,93 @@
 import { 
+    IsOptional,
     IsNumber, 
     IsString, 
     IsArray, 
     ValidateNested, 
     IsDate 
-  } from 'class-validator';
-  import { Type } from 'class-transformer';
-  
-  class QuestionDto {
+} from 'class-validator';
+import { Type } from 'class-transformer';
+
+class QuestionDto {
     @IsString()
     question: string;
-  
+
     @IsString()
     answer: string;
-  }
-  
-  class LapDto {
+}
+
+class LapDto {
     @IsNumber()
     lapTime: number;
-  
+
     @IsDate()
+    @Type(() => Date)
     timeStamp: Date;
-  }
-  
-  class HeartRateDto {
+}
+
+class HeartRateDto {
     @IsNumber()
     heartRate: number;
-  
+
     @IsDate()
+    @Type(() => Date)
     timestamp: Date;
-  }
-  
-  class SpeedDto {
+}
+
+class SpeedDto {
     @IsNumber()
     leftSpeed: number;
-  
+
     @IsNumber()
     rightSpeed: number;
-  
+
     @IsDate()
+    @Type(() => Date)
     timestamp: Date;
-  }
-  
-  export class NewGameSessionDto {
+}
+
+export class UpdateGameSessionDto {
+    @IsOptional()
     @IsDate()
-    startTime: Date;
-  
+    @Type(() => Date)
+    startTime?: Date;
+
+    @IsOptional()
     @IsDate()
-    endTime: Date;
-  
+    @Type(() => Date)
+    endTime?: Date;
+
+    @IsOptional()
     @IsNumber()
-    exerciseTime: number;
-  
+    exerciseTime?: number;
+
+    @IsOptional()
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => QuestionDto)
-    preGame: QuestionDto[];
-  
+    preGame?: QuestionDto[];
+
+    @IsOptional()
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => QuestionDto)
-    postGame: QuestionDto[];
-  
+    postGame?: QuestionDto[];
+
+    @IsOptional()
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => LapDto)
-    laps: LapDto[];
-  
+    laps?: LapDto[];
+
+    @IsOptional()
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => HeartRateDto)
-    heartRates: HeartRateDto[];
-  
+    heartRates?: HeartRateDto[];
+
+    @IsOptional()
     @IsArray()
     @ValidateNested({ each: true })
     @Type(() => SpeedDto)
-    speeds: SpeedDto[];
-  }
-  
+    speeds?: SpeedDto[];
+}

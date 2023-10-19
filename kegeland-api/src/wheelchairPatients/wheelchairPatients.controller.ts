@@ -7,7 +7,7 @@ import { Roles } from '../roles/roles.decorator';
 import { RolesGuard } from '../roles/roles.guard';
 import { WheelchairPatientsService } from './wheelchairPatients.service';
 import { UpdatePhysicalStateDto } from './dto/update-physicalstate.dto';
-import { NewGameSessionDto } from './dto/new-game-session.dto';
+import { UpdateGameSessionDto } from './dto/update-game-session.dto';
 
 @ApiTags('WheelchairPatients')
 @Controller('wheelchairPatients')
@@ -43,17 +43,31 @@ export class WheelchairPatientsController {
   }
   
   /**
-   * Endpoint for adding a game session
+   * Endpoint for creating an empty game session
    * @param id of patient
-   * @param gameSession data of a game session to add
-   * @returns the ID and data of the newly added game session
+   * @returns the ID of the newly created game session
    */
   @Post(':id/gameSessions')
-  async addGameSession(
-    @Param('id') id: string,
-    @Body() gameSession: NewGameSessionDto,
+  async addEmptyGameSession(@Param('id') id: string) {
+    return this.wheelchairPatientsService.addEmptyGameSessionToPatient(id);
+  }
+
+  /**
+   * Endpoint for updating an existing game session's attributes
+   * @param patientId ID of the patient
+   * @param sessionId ID of the game session to update
+   * @param gameSession Data to update the game session with
+   * @returns updated game session data
+   */
+  @Put(':patientId/gameSessions/:sessionId')
+  async updateGameSession(
+    @Param('patientId') patientId: string,
+    @Param('sessionId') sessionId: string,
+    @Body() gameSession: UpdateGameSessionDto,
   ) {
-    return this.wheelchairPatientsService.addGameSessionToPatient(id, gameSession);
+    console.log("test");
+    console.log(gameSession.startTime);
+    return this.wheelchairPatientsService.updateGameSession(patientId, sessionId, gameSession);
   }
 }
 

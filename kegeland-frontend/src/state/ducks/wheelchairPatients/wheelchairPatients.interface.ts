@@ -3,15 +3,17 @@ export type WheelchairPatient = {
   name: string;
   age: number;
   gender: 'M' | 'F' | 'O';
-  currentPhysicalState: {
-    height: number;
-    weight: number;
-    maxHeartRate: number;
-    averageHeartRate: number;
-    maxWheelchairSpeed: number;
-    averageWheelchairSpeed: number;
-  };
+  currentPhysicalState: CurrentPhysicalState;
   gameSessions: GameSession[];
+};
+
+export type CurrentPhysicalState = {
+  height: number;
+  weight: number;
+  maxHeartRate: number;
+  averageHeartRate: number;
+  maxWheelchairSpeed: number;
+  averageWheelchairSpeed: number;
 };
 
 export type GameSession = {
@@ -63,4 +65,9 @@ export type WheelchairPatientsState = {
   wheelchairPatient: WheelchairPatient | undefined;
   data: WheelchairPatient[];
   error: string | undefined;
+};
+
+export type UpdateWheelchairPatientData = {
+  pid: WheelchairPatient['id'];
+  currentPhysicalState: CurrentPhysicalState;
 };

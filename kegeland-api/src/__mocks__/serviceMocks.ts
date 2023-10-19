@@ -6,6 +6,10 @@ export const usersServiceMock = {
   findWheelchairPatientById: jest.fn(),
 };
 
+export const wheelchairPatientsServiceMock = {
+  findWheelchairPatientById: jest.fn((x) => x),
+}
+
 export const sessionsServiceMock = {
   findOne: jest.fn((x) => x),
   findAll: jest.fn((x) => x),

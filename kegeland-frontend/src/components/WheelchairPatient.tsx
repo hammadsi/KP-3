@@ -1,10 +1,15 @@
 import { useSelector } from 'react-redux';
+
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import { RootState } from '../state/store';
 
 const WheelchairPatientDetailsComponent = () => {
   const { authUser } = useSelector((state: RootState) => state.auth);
-  const { wheelchairPatient, error, loading } = useWheelchairPatient(authUser?.id);
+
+  // Now TypeScript knows that authUser.id is defined, so no error should be thrown here
+  const { wheelchairPatient, error, loading } = useWheelchairPatient(
+    authUser?.id,
+  );
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;

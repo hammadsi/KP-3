@@ -21,7 +21,7 @@ public class ElapsedTime : MonoBehaviour
 
     private TextMeshProUGUI timerText;
 
-    private FirebaseManager firebaseManager;
+    private DataCollector dataCollector;
 
     // Start is called before the first frame update
     void Start()
@@ -31,9 +31,8 @@ public class ElapsedTime : MonoBehaviour
         timerCanvas.SetActive(true);
         timerText = timerCanvas.transform.Find("Timer Text").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         timerIsRunning = false;
+        dataCollector = FindObjectOfType<DataCollector>();
 
-        firebaseManager = FindObjectOfType<FirebaseManager>();
-        Debug.Log("FirebaseManager:" + firebaseManager);
     }
 
     public int getLapCount()
@@ -77,20 +76,16 @@ public class ElapsedTime : MonoBehaviour
         startTimer();
         return;
     }
+    public float getElapsedTime()
+    {
+        return elapsedTime;
+    }
 
     public void newLap()
     {
 
         float lapTime = restartTimer();
-        float heartRate = ReactInletUI.currentHeartRate;  // Fetch the current heart rate
-            // Check if heartRate is zero and set a mock value if necessary
-        if (heartRate == 0f)
-        {
-            heartRate = 80f;  // Any mock value you'd like to set
-        }
-        Debug.Log("Lap Time: " + lapTime + "Heart rate: " + heartRate);
-    
-        firebaseManager.SendLapAndHeartRate(lapTime, heartRate);
+        dataCollector.AddLapData(lapTime); // Log the lap time here
 
         if (lapTime <= 2.0f)
         {
@@ -121,12 +116,13 @@ public class ElapsedTime : MonoBehaviour
         //        bestTime = lapTime;
         //    }
         //}
-
+        return;
     }
 
     public void startTimer()
     {
         timerIsRunning = true;
+        return;
     }
 
     private float restartTimer()

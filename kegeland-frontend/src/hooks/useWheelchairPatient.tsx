@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { fetchWheelchairPatientById } from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
+import {
+  fetchWheelchairPatientById,
+  updatePatientData,
+} from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
 import { clearWheelchairPatientsState } from '../state/ducks/wheelchairPatients/wheelchairPatients.reducer';
+import { UpdateWheelchairPatientData } from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
 
 import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
@@ -27,6 +31,19 @@ const useWheelchairPatient = (patientId?: string) => {
       });
     }
   }, [dispatch, patientId, wheelchairPatients.wheelchairPatient]);
+
+  // Handle patient data update
+  const updatePatientDataById = async (
+    updatedData: UpdateWheelchairPatientData,
+  ) => {
+    // Dispatch the update action
+    dispatch(updatePatientData(updatedData));
+
+    // Refetch the patient data to ensure it's updated in the state
+    dispatch(fetchWheelchairPatientById(updatedData.pid)).catch((e: Error) => {
+      setError(`Failed to update patient data: ${e.message}`);
+    });
+  };
 
   // NOTE: without a dedicated useEffect for clean-up, an infinite loop of API-calls will be triggered
   useEffect(() => {
@@ -61,6 +78,7 @@ const useWheelchairPatient = (patientId?: string) => {
     wheelchairPatient: wheelchairPatients.wheelchairPatient,
     error: error || wheelchairPatients.error,
     loading,
+    updatePatientData: updatePatientDataById, // Include the update function in the returned object
   };
 };
 

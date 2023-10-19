@@ -2,7 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { apiCaller } from '../../../utils/apiCaller';
 
-import { WheelchairPatient } from './wheelchairPatients.interface';
+import {
+  UpdateWheelchairPatientData,
+  WheelchairPatient,
+} from './wheelchairPatients.interface';
 
 export const fetchWheelchairPatientById = createAsyncThunk(
   'wheelchairpatients/fetchWheelchairPatientById',
@@ -10,5 +13,15 @@ export const fetchWheelchairPatientById = createAsyncThunk(
     apiCaller<WheelchairPatient>({
       url: `wheelchairPatients/${id}`,
       method: 'GET',
+    }),
+);
+
+export const updatePatientData = createAsyncThunk(
+  'wheelchairpatients/updatePatientData',
+  async (updatedData: UpdateWheelchairPatientData) =>
+    apiCaller<UpdateWheelchairPatientData>({
+      url: `wheelchairPatients/${updatedData.pid}`,
+      method: 'PUT',
+      data: updatedData.currentPhysicalState,
     }),
 );

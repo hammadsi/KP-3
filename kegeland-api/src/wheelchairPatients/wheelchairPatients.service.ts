@@ -1,6 +1,7 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { GameSession } from './entities/wheelchairPatient.entity'
 import { FirebaseService } from 'src/firebase/firebase.service';
+import { UpdatePhysicalStateDto } from './dto/update-physicalstate.dto';
 
 @Injectable()
 export class WheelchairPatientsService {
@@ -57,7 +58,7 @@ export class WheelchairPatientsService {
         .collection('patients')
         .doc(id)
         .get();
-        
+
       if (!snapshot.exists) {
         throw new NotFoundException(`Patient with ID ${id} not found`);
       }
@@ -80,4 +81,21 @@ export class WheelchairPatientsService {
       throw new InternalServerErrorException(error.message);
     }
   }
+
+  /**
+   * Function for updating wheelchair patient data
+   * @param uid id of user
+   * @param data which is the data to be updated
+   * @returns updated values
+   */
+  async updateWheelchairPatientData(id: string, data: UpdatePhysicalStateDto) {
+    await this.firebaseService.firestore
+      .collection('patients')
+      .doc(id)
+      .update({
+        currentPhysicalState: data,
+      });
+    return { id, ...data };
+  }
 }
+

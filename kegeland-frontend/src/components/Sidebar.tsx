@@ -6,6 +6,7 @@ import {
   AiOutlineRise,
   AiOutlineSetting,
 } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 import { User } from '../state/ducks/auth/auth.interface';
 import useAppDispatch from '../hooks/useAppDispatch';
@@ -45,7 +46,14 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
           <Logo />
         </Box>
         <Divider borderColor={isDark ? 'whiteAlpha.400' : 'blackAlpha.400'} />
-        <Menu title="Dashboard" mode={mode} head={<UserAvatar user={user} />}>
+        <Menu
+          title="Dashboard"
+          mode={mode}
+          head={
+            <Link to="/myprofile">
+              <UserAvatar user={user} />
+            </Link>
+          }>
           <Menu.Item
             mode={mode}
             title="Patients"

@@ -1,8 +1,6 @@
 import Card from '../components/Card';
 import PatientsTable from '../components/PatientsTable';
 import SearchBar from '../components/SearchBar';
-import WheelchairPatientComponent from '../components/WheelchairPatient';
-import GameSessions from '../components/GameSessions';
 import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
 import usePatientList from '../hooks/usePatientList';
@@ -23,21 +21,12 @@ const PatientListPage: React.FC = () => {
 
   return (
     <>
+      <h1 style={headingStyle}>OVERVIEW OF YOUR PATIENTS</h1>
       <Card loading={loading} padding={0}>
         <SearchBar
           placeholder="Search for patients.."
           onChange={handleSearch}
         />
-      </Card>
-
-      <Card loading={loading}>
-        <h2 style={headingStyle}>Wheelchair Patient Info:</h2>
-        <WheelchairPatientComponent />
-      </Card>
-
-      <Card loading={loading}>
-        <h2 style={headingStyle}>GameSessions Info:</h2>
-        <GameSessions />
       </Card>
 
       <Card loading={loading} minH="36">

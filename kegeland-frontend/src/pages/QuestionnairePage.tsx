@@ -1,7 +1,8 @@
-import { Box, Button, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
-import SliderElement from '../components/SliderElement';
-import React, { useState } from 'react';
-import Card from '../components/Card';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import SliderQuestion from '../components/SliderQuestion';
+import FreeTextQuestion from '../components/FreeTextQuestion';
+import { useState } from 'react';
+import RadioQuestion from '../components/RadioQuestion';
 
 type ExercisePageParams = {
   patientId: string;
@@ -9,16 +10,10 @@ type ExercisePageParams = {
 };
 
 const QuestionnairePage: React.FC = () => {
-  const sliderCount = 3; // The number of sliders you have
-  const [sliderValues, setSliderValues] = useState(Array(sliderCount).fill(0));
 
-  const handleSliderChange = (index: number, newValue: number) => {
-    const newSliderValues = [...sliderValues];
-    newSliderValues[index] = newValue;
-    setSliderValues(newSliderValues);
-  };
-
-  const areAllSlidersFilled = sliderValues.every(value => value > 0);
+  const [radioAnswer, setRadioAnswer] = useState('');
+  const [sliderAnswer, setSliderAnswer] = useState(0);
+  const [freeTextAnswer, setFreeTextAnswer] = useState('');
 
   const startUnitySession = () => {
     // Open the Unity game using the custom URI scheme
@@ -26,6 +21,25 @@ const QuestionnairePage: React.FC = () => {
     /* Insert PUT here to send answers to questionnaire based on sessionID and userID */
     /* Insert GET here to get the post questionnaire */
   };
+
+  function checkIfAllIsFIlled(): boolean {
+    if(radioAnswer.length < 1 || sliderAnswer < 1 || freeTextAnswer.length < 1){
+      return false;
+    }
+    return true;
+  };
+  
+  const handleRadioCallBack = (childData: string) => {
+    setRadioAnswer(childData);
+  }
+
+  const handleSliderCallBack = (childData: number) => {
+    setSliderAnswer(childData);
+  }
+
+  const handleFreeTextCallBack = (childData: string) => {
+    setFreeTextAnswer(childData);
+  }
 
   return (
     <Flex
@@ -39,32 +53,12 @@ const QuestionnairePage: React.FC = () => {
       <Text fontSize={26} fontWeight="semibold" color="gray.600" marginBottom={4}>
         Pre Questionnaire {/* Insert name here */}
       </Text>
-
-      {/* Insert questionnaire here. */
-      sliderValues.map((sliderValue, index) => (
-        <Card key={index} minW="lg" paddingTop={4} paddingBottom={8}>
-          <Text fontSize={16} fontWeight="semibold" color="gray.600">
-            How are you feeling? {/* Insert question here */}
-          </Text>
-          <Grid templateColumns="repeat(5,1fr)" marginTop={2}>
-            <GridItem colStart={1} h="10">
-              <Text as='i'>
-                Uncontrollable {/* Insert minVal here */}
-              </Text>
-            </GridItem>
-            <GridItem colStart={5} h="10">
-              <Text as='i'>
-                Controllable {/* Insert minVal here */}
-              </Text>
-            </GridItem>
-          </Grid>
-          <SliderElement
-            onSliderChange={value => handleSliderChange(index, value)}
-          />
-        </Card>
-      ))}
+      {/* Insert all of the questions here */}
+      <RadioQuestion question={'Are you a wheelchair user?'} parentCallBack={handleRadioCallBack} />
+      <SliderQuestion question={'On a scale from 1 to 5, what is your current level of fitness?'} parentCallBack={handleSliderCallBack}/>
+      <FreeTextQuestion question={'Do you have any other comments?'} parentCallBack={handleFreeTextCallBack} />
       <Box>
-        <Button marginTop={4} isDisabled={!areAllSlidersFilled} onClick={startUnitySession}>
+        <Button isDisabled={!checkIfAllIsFIlled()} marginTop={4} onClick={startUnitySession}>
           Start game {/* Insert "End session" on the post-questionnaire */}
         </Button>
       </Box>

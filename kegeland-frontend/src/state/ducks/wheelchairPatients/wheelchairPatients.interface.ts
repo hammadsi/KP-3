@@ -31,6 +31,7 @@ export type GameSession = {
 
 export type Questionaire = {
   question: string;
+  type: 'T' | 'N'; // T for text and N for number
   answer: string;
 };
 

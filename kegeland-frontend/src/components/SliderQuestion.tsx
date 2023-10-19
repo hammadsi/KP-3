@@ -1,25 +1,31 @@
-import { Slider, SliderMark, SliderTrack, SliderFilledTrack, SliderThumb, Box } from "@chakra-ui/react"
-import React, { useEffect, useState } from "react"
-interface SliderElementProps {
-  onSliderChange: (value: number) => void;
+import React, { useEffect, useState } from 'react';
+import { Slider, SliderFilledTrack, SliderMark, SliderThumb, SliderTrack, Text } from '@chakra-ui/react';
+import Card from './Card';
+
+interface SliderQuestionProps {
+    question: string;
+		parentCallBack: Function;
 }
+  
+const SliderQuestion: React.FC<SliderQuestionProps> = ({ question, parentCallBack }) => {
+	
+	const handleSliderChange = (value: number) => {
+		parentCallBack(value);
+		setSliderValue(value);
+	};
 
-const SliderElement: React.FC<SliderElementProps> = ({ onSliderChange }) => {
-  const [sliderValue, setSliderValue] = useState(0);
-
-  function handleSliderChange(v: number){
-    setSliderValue(v);
-    if(onSliderChange){
-      onSliderChange(v);
-    }
-  }
+	const [sliderValue, setSliderValue] = useState(0);
 
   useEffect(() => {
     console.log(sliderValue);
   }, [sliderValue]);
 
-    return (
-      <Slider
+	return (
+		<Card minW="lg" paddingTop={4} paddingBottom={8} textAlign={'left'}>
+			<Text fontSize={16} fontWeight="semibold" color="gray.600" paddingBottom={2} marginStart={0}>
+				{question}
+			</Text>
+			<Slider
         id='slider'
         defaultValue={0}
         min={1}
@@ -48,7 +54,8 @@ const SliderElement: React.FC<SliderElementProps> = ({ onSliderChange }) => {
         </SliderTrack>
         <SliderThumb boxSize={5} bg="blue.200" />
       </Slider>
-    )
-  };
+		</Card>
+	);
+};
 
-  export default SliderElement;
+export default SliderQuestion;

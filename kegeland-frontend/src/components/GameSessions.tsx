@@ -5,12 +5,18 @@ import { RootState } from '../state/store';
 
 const GameSessions: React.FC = () => {
   const { authUser } = useSelector((state: RootState) => state.auth);
-  const { wheelchairPatient, error, loading } = useWheelchairPatient(authUser?.id);
+  const { wheelchairPatient, error, loading } = useWheelchairPatient(
+    authUser?.id,
+  );
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
-  if (!wheelchairPatient || !wheelchairPatient.gameSessions || wheelchairPatient.gameSessions.length === 0) {
+  if (
+    !wheelchairPatient ||
+    !wheelchairPatient.gameSessions ||
+    wheelchairPatient.gameSessions.length === 0
+  ) {
     return <p>No game sessions found.</p>;
   }
 
@@ -24,10 +30,12 @@ const GameSessions: React.FC = () => {
             <strong>Session ID:</strong> {session.sessionId}
           </p>
           <p>
-            <strong>Start Time:</strong> {new Date(session.startTime).toLocaleString()}
+            <strong>Start Time:</strong>{' '}
+            {new Date(session.startTime).toLocaleString()}
           </p>
           <p>
-            <strong>End Time:</strong> {new Date(session.endTime).toLocaleString()}
+            <strong>End Time:</strong>{' '}
+            {new Date(session.endTime).toLocaleString()}
           </p>
           <p>
             <strong>Exercise Time:</strong> {session.exerciseTime}
@@ -64,7 +72,8 @@ const GameSessions: React.FC = () => {
             {Array.isArray(session.laps) ? (
               session.laps.map((lap, lapIndex) => (
                 <li key={lapIndex}>
-                  Lap Time: {lap.lapTime} seconds | Timestamp: {new Date(lap.timestamp).toLocaleString()}
+                  Lap Time: {lap.lapTime} seconds | Timestamp:{' '}
+                  {new Date(lap.timestamp).toLocaleString()}
                 </li>
               ))
             ) : (
@@ -77,7 +86,8 @@ const GameSessions: React.FC = () => {
             {Array.isArray(session.timeSeriesData?.heartRates) ? (
               session.timeSeriesData.heartRates.map((hr, hrIndex) => (
                 <li key={hrIndex}>
-                  Heart Rate: {hr.heartRate} bpm | Timestamp: {new Date(hr.timestamp).toLocaleString()}
+                  Heart Rate: {hr.heartRate} bpm | Timestamp:{' '}
+                  {new Date(hr.timestamp).toLocaleString()}
                 </li>
               ))
             ) : (
@@ -90,7 +100,9 @@ const GameSessions: React.FC = () => {
             {Array.isArray(session.timeSeriesData?.speeds) ? (
               session.timeSeriesData.speeds.map((speed, speedIndex) => (
                 <li key={speedIndex}>
-                  Left Speed: {speed.leftSpeed} | Right Speed: {speed.rightSpeed} | Timestamp: {new Date(speed.timestamp).toLocaleString()}
+                  Left Speed: {speed.leftSpeed} | Right Speed:{' '}
+                  {speed.rightSpeed} | Timestamp:{' '}
+                  {new Date(speed.timestamp).toLocaleString()}
                 </li>
               ))
             ) : (

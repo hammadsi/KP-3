@@ -5,10 +5,7 @@ import {
   updatePatientData,
 } from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
 import { clearWheelchairPatientsState } from '../state/ducks/wheelchairPatients/wheelchairPatients.reducer';
-import {
-  UpdateWheelchairPatientData,
-  WheelchairPatient,
-} from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
+import { UpdateWheelchairPatientData } from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
 
 import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';

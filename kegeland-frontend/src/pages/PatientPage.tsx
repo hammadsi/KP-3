@@ -44,10 +44,52 @@ const PatientPage: React.FC = () => {
     const file = e.target.files?.[0];
     if (file) {
       setUploadedFile(file);
-      console.log("File uploaded:", file.name);
-        // TODO: Process imu file
+  
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const text = event?.target?.result?.toString();
+  
+        if (!text) {
+          console.error("Could not read file.");
+          return;
+        }
+  
+        const lines = text.split('\n');
+
+        // Currently holds the IMU, push it to firestore when API is ready
+        const imuData = [];
+  
+        // Skip the header row
+        for (let i = 1; i < lines.length; i++) {
+          const line = lines[i];
+          const parts = line.split(',');
+  
+          if (parts.length === 7) {
+            const [timeStamp, x_accel, x_gyro, y_accel, y_gyro, z_accel, z_gyro] = parts;
+            imuData.push({
+              timeStamp: parseFloat(timeStamp),
+              x_accel: parseFloat(x_accel),
+              x_gyro: parseFloat(x_gyro),
+              y_accel: parseFloat(y_accel),
+              y_gyro: parseFloat(y_gyro),
+              z_accel: parseFloat(z_accel),
+              z_gyro: parseFloat(z_gyro)
+            });
+          }
+        }
+  
+        console.log("Parsed IMU data:", imuData);
+        // TODO: Update the Firestore with Update calls to the API when endpoints are ready.
+      };
+  
+      reader.onerror = function(event) {
+        console.error("An error occurred while reading the file:", event);
+      };
+  
+      reader.readAsText(file);
     }
   };
+  
 
   const startUnitySession = () => {
     window.location.href = `VRWheelchairSim:// -patientID ${patientId} -bearerToken ${localStorage.getItem(

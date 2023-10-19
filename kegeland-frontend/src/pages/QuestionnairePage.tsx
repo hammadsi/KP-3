@@ -1,10 +1,4 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
-import { useNavigate, useParams } from 'react-router-dom';
-
-type ExercisePageParams = {
-  patientId: string;
-  exerciseId: string;
-};
 
 const QuestionnairePage: React.FC = () => {
   // const navigate = useNavigate();
@@ -22,7 +16,8 @@ const QuestionnairePage: React.FC = () => {
       justifyContent="center"
       alignItems="center"
       textAlign="center"
-      flexDirection="column">
+      flexDirection="column"
+    >
       <Text fontSize={26} fontWeight="semibold" color="gray.600">
         Questionnaire Title
       </Text>

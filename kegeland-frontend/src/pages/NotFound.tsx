@@ -10,7 +10,8 @@ const NotFoundPage: React.FC = () => {
       justifyContent="center"
       alignItems="center"
       textAlign="center"
-      flexDirection="column">
+      flexDirection="column"
+    >
       <Heading fontSize="9xl" as="h1" color="gray.700">
         404
       </Heading>

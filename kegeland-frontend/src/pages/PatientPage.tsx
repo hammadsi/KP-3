@@ -1,11 +1,4 @@
-import {
-  Button,
-  Box,
-  Flex,
-  Stack,
-  useMediaQuery,
-  Center,
-} from '@chakra-ui/react';
+import { Button, Box, Flex, Stack, useMediaQuery } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import {
   AiOutlineClockCircle,
@@ -49,17 +42,20 @@ const PatientPage: React.FC = () => {
       <Flex
         flexDirection={isGreaterThanLg ? 'row' : 'column'}
         flexBasis="100%"
-        flexWrap="nowrap">
+        flexWrap="nowrap"
+      >
         <Card
           marginRight={5}
           w={isGreaterThanLg ? '25%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}>
+          loading={loading}
+        >
           <Stack
             spacing={4}
             direction={isGreaterThanLg ? 'column' : 'row'}
             w="100%"
-            alignItems="flex-start">
+            alignItems="flex-start"
+          >
             <LabeledValue
               label="Workouts this week"
               value={details.sessionsThisWeek}
@@ -80,11 +76,12 @@ const PatientPage: React.FC = () => {
         <Card
           w={isGreaterThanLg ? '75%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}>
+          loading={loading}
+        >
           <WeeklySessionsChart sessions={data} numWeeks={12} />
         </Card>
       </Flex>
-      <h1 style={headingStyle}>OVERVIEW OF THE PATIENT'S EXERCISES</h1>
+      <h1 style={headingStyle}>OVERVIEW OF THE PATIENT&apos;S EXERCISES</h1>
       <Card loading={loading} minH="36">
         <ExerciseTable sessions={data} patientId={patientId!} />
       </Card>

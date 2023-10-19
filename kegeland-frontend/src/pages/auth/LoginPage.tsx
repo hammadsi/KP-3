@@ -50,7 +50,8 @@ const LoginPage = () => {
               signIn(values);
             }}
             initialValues={{ email: '', password: '' }}
-            validationSchema={validateSchema}>
+            validationSchema={validateSchema}
+          >
             {(formProps) => (
               <Box
                 borderWidth="1px"
@@ -63,7 +64,8 @@ const LoginPage = () => {
                 onSubmit={(e: any) => {
                   e.preventDefault();
                   formProps.handleSubmit();
-                }}>
+                }}
+              >
                 <VStack spacing={5} align="stretch">
                   <Box>
                     <Heading as="h3" size="lg" textAlign="center">
@@ -105,7 +107,8 @@ const LoginPage = () => {
                     <SubmitButton
                       colorScheme="primary"
                       isLoading={formProps.isSubmitting || loading}
-                      isDisabled={!formProps.isValid}>
+                      isDisabled={!formProps.isValid}
+                    >
                       Log in
                     </SubmitButton>
                   </Box>

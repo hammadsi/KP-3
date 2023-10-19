@@ -1,4 +1,4 @@
-import { Controller, Get, Param, UseGuards, Body, Put } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards, Body, Put, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 import { FirebaseAuthGuard } from '../firebase/firebase-auth.guard';
@@ -7,6 +7,7 @@ import { Roles } from '../roles/roles.decorator';
 import { RolesGuard } from '../roles/roles.guard';
 import { WheelchairPatientsService } from './wheelchairPatients.service';
 import { UpdatePhysicalStateDto } from './dto/update-physicalstate.dto';
+import { NewGameSessionDto } from './dto/new-game-session.dto';
 
 @ApiTags('WheelchairPatients')
 @Controller('wheelchairPatients')
@@ -39,6 +40,20 @@ export class WheelchairPatientsController {
     @Body() data: UpdatePhysicalStateDto,
   ) {
     return this.wheelchairPatientsService.updateWheelchairPatientData(id, data);
+  }
+  
+  /**
+   * Endpoint for adding a game session
+   * @param id of patient
+   * @param gameSession data of a game session to add
+   * @returns the ID and data of the newly added game session
+   */
+  @Post(':id/gameSessions')
+  async addGameSession(
+    @Param('id') id: string,
+    @Body() gameSession: NewGameSessionDto,
+  ) {
+    return this.wheelchairPatientsService.addGameSessionToPatient(id, gameSession);
   }
 }
 

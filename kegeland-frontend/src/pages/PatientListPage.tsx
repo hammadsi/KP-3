@@ -4,6 +4,7 @@ import SearchBar from '../components/SearchBar';
 import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
 import usePatientList from '../hooks/usePatientList';
+import AddGameSession from '../components/AddGameSession';
 
 const PatientListPage: React.FC = () => {
   const { patients, loading, filterData } = usePatientList();
@@ -21,6 +22,10 @@ const PatientListPage: React.FC = () => {
 
   return (
     <>
+      <Card loading={loading} minH="36">
+        <AddGameSession/>
+      </Card>
+
       <h1 style={headingStyle}>OVERVIEW OF YOUR PATIENTS</h1>
       <Card loading={loading} padding={0}>
         <SearchBar

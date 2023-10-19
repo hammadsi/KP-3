@@ -38,13 +38,10 @@ const PatientPage: React.FC = () => {
     margin: '25px 0 10px 0',
   };
 
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setUploadedFile(file);
-  
+
       const reader = new FileReader();
       reader.onload = function(event) {
         const text = event?.target?.result?.toString();

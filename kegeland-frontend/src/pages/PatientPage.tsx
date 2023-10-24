@@ -13,6 +13,7 @@ import usePatient from '../hooks/usePatient';
 import WeeklySessionsChart from '../components/WeeklySessionsChart';
 import ExerciseTable from '../components/ExerciseTable';
 import withSpinner from '../hoc/withSpinner';
+import DisplayGameSessionsDemo from '../components/DisplayGameSessionsDemo';
 
 type PatientPageParams = {
   patientId: string;
@@ -78,6 +79,12 @@ const PatientPage: React.FC = () => {
         </Card>
       </Flex>
       <h1 style={headingStyle}>OVERVIEW OF THE PATIENT&apos;S EXERCISES</h1>
+
+      {/** Only for the Demo */}
+      <Card loading={loading} minH="36">
+        <DisplayGameSessionsDemo />
+      </Card>
+
       <Card loading={loading} minH="36">
         <ExerciseTable sessions={data} patientId={patientId!} />
       </Card>

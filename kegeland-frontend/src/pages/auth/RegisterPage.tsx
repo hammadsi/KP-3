@@ -28,7 +28,7 @@ type FormData = {
   lastName: string;
   email: string;
   gender: Gender;
-  birthofdate: string;
+  birthdate: string;
   height: number;
   weight: number;
   password: string;
@@ -63,7 +63,7 @@ const RegisterPage = () => {
   }, [navigate, isSignedIn]);
 
   const register = (data: FormData) => {
-    const { firstName, lastName, email, password, gender, height, weight } =
+    const { firstName, lastName, email, password, gender, birthdate, height, weight } =
       data;
     const payload: RegisterDTO = {
       email,
@@ -74,7 +74,7 @@ const RegisterPage = () => {
       },
       roles: [UserRole.PATIENT],
       wheelchairPatient: {
-        birthdate: birthofdate,
+        birthdate: birthdate,
         gender,
         currentPhysicalState: {
           height,
@@ -106,14 +106,13 @@ const RegisterPage = () => {
                 password: '',
                 firstName: '',
                 lastName: '',
-                birthofdate: '',
+                birthdate: '',
                 gender: 'O' as Gender,
                 height: 0,
                 weight: 0,
                 confirmPassword: '',
               }}
-              validationSchema={validationSchema}
-            >
+              validationSchema={validationSchema}>
               {(formProps) => (
                 <Box
                   borderWidth="1px"
@@ -126,8 +125,7 @@ const RegisterPage = () => {
                   onSubmit={(e: any) => {
                     e.preventDefault();
                     formProps.handleSubmit();
-                  }}
-                >
+                  }}>
                   <VStack spacing={5} align="stretch">
                     <Box>
                       <Heading as="h3" size="lg" textAlign="center">
@@ -185,8 +183,7 @@ const RegisterPage = () => {
                             name="gender"
                             onChange={(e) =>
                               formProps.setFieldValue('gender', e.target.value)
-                            }
-                          >
+                            }>
                             <option value="O" disabled>
                               Select gender
                             </option>
@@ -201,9 +198,9 @@ const RegisterPage = () => {
                           inputProps={{
                             type: 'date',
                           }}
-                          label="Birth of Date"
+                          label="Date of birth"
                           data-testid="lastname-input"
-                          name="birthofdate"
+                          name="birthdate"
                         />
                       </Box>
                     </HStack>
@@ -261,8 +258,7 @@ const RegisterPage = () => {
                       style={{
                         display: 'flex',
                         justifyContent: 'space-between',
-                      }}
-                    >
+                      }}>
                       <Box textAlign="left" marginTop="9px">
                         <Link color="grey" href="/login">
                           <b>Cancel</b>
@@ -272,8 +268,7 @@ const RegisterPage = () => {
                         <SubmitButton
                           colorScheme="primary"
                           isLoading={formProps.isSubmitting || loading}
-                          isDisabled={!formProps.isValid}
-                        >
+                          isDisabled={!formProps.isValid}>
                           Register user
                         </SubmitButton>
                       </Box>

@@ -46,20 +46,17 @@ const PatientPage: React.FC = () => {
       <Flex
         flexDirection={isGreaterThanLg ? 'row' : 'column'}
         flexBasis="100%"
-        flexWrap="nowrap"
-      >
+        flexWrap="nowrap">
         <Card
           marginRight={5}
           w={isGreaterThanLg ? '25%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}
-        >
+          loading={loading}>
           <Stack
             spacing={4}
             direction={isGreaterThanLg ? 'column' : 'row'}
             w="100%"
-            alignItems="flex-start"
-          >
+            alignItems="flex-start">
             <LabeledValue
               label="Workouts this week"
               value={details.sessionsThisWeek}
@@ -80,8 +77,7 @@ const PatientPage: React.FC = () => {
         <Card
           w={isGreaterThanLg ? '75%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}
-        >
+          loading={loading}>
           <WeeklySessionsChart sessions={data} numWeeks={12} />
         </Card>
       </Flex>

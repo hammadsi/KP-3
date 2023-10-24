@@ -8,11 +8,6 @@ import withLayout from '../../hoc/withLayout';
 import withSpinner from '../../hoc/withSpinner';
 import { RootState } from '../../state/store';
 import useWheelchairPatient from '../../hooks/useWheelchairPatient';
-import { User } from '../../state/ducks/auth/auth.interface';
-
-type UserProps = {
-  user: User;
-};
 
 const formatBirthDate = (birthdate: string) => {
   const parsedDate = parse(birthdate, 'yyyy-MM-dd', new Date());
@@ -22,7 +17,7 @@ const formatBirthDate = (birthdate: string) => {
   return formattedDate;
 };
 
-const MyProfilePage: React.FC<UserProps> = ({ user }) => {
+const MyProfilePage: React.FC = () => {
   const { authUser } = useSelector((state: RootState) => state.auth);
 
   // Now TypeScript knows that authUser.id is defined, so no error should be thrown here

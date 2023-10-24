@@ -63,8 +63,16 @@ const RegisterPage = () => {
   }, [navigate, isSignedIn]);
 
   const register = (data: FormData) => {
-    const { firstName, lastName, email, password, gender, birthdate, height, weight } =
-      data;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      gender,
+      birthdate,
+      height,
+      weight,
+    } = data;
     const payload: RegisterDTO = {
       email,
       password,
@@ -74,7 +82,7 @@ const RegisterPage = () => {
       },
       roles: [UserRole.PATIENT],
       wheelchairPatient: {
-        birthdate: birthdate,
+        birthdate,
         gender,
         currentPhysicalState: {
           height,

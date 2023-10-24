@@ -28,7 +28,7 @@ type FormData = {
   lastName: string;
   email: string;
   gender: Gender;
-  birthofdate: Date;
+  birthofdate: string;
   height: number;
   weight: number;
   password: string;
@@ -74,7 +74,7 @@ const RegisterPage = () => {
       },
       roles: [UserRole.PATIENT],
       wheelchairPatient: {
-        age: 0,
+        birthdate: birthofdate,
         gender,
         currentPhysicalState: {
           height,
@@ -106,7 +106,7 @@ const RegisterPage = () => {
                 password: '',
                 firstName: '',
                 lastName: '',
-                birthofdate: new Date(),
+                birthofdate: '',
                 gender: 'O' as Gender,
                 height: 0,
                 weight: 0,

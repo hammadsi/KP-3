@@ -74,7 +74,7 @@ describe('QuestionnairesController', () => {
         name: { firstName: 'Bruker', lastName: 'Brukarson' },
         roles: [Role.PATIENT],
         wheelchairPatient: {
-          age: 0,
+          birthdate: "2021-01-01",
           gender: Gender.M,
           currentPhysicalState: {
             height: 120,
@@ -100,7 +100,7 @@ describe('QuestionnairesController', () => {
         name: { firstName: 'Bruker', lastName: 'Brukarson' },
         roles: [Role.PATIENT],
         wheelchairPatient: {
-          age: 0,
+          birthdate: "2021-01-01",
           gender: Gender.M,
           currentPhysicalState: {
             height: 120,

@@ -1,7 +1,7 @@
 export type WheelchairPatient = {
   id: string;
   name: string;
-  age: number;
+  birthdate: string;
   gender: 'M' | 'F' | 'O';
   currentPhysicalState: CurrentPhysicalState;
   gameSessions: GameSession[];
@@ -18,9 +18,9 @@ export type CurrentPhysicalState = {
 
 export type GameSession = {
   sessionId: string;
-  exerciseTime: number; // Calculated from startTime and endTime
   startTime: Date;
   endTime: Date;
+  exerciseTime: number;
   questionaires: {
     preGame: Questionaire[];
     postGame: Questionaire[];
@@ -71,4 +71,22 @@ export type WheelchairPatientsState = {
 export type UpdateWheelchairPatientData = {
   pid: WheelchairPatient['id'];
   currentPhysicalState: CurrentPhysicalState;
+};
+
+export type UpdateGameSessionData = {
+  patientId: string;
+  sessionId: string;
+  sessionData: GameSessionData;
+};
+
+export type GameSessionData = {
+  startTime: Date;
+  endTime: Date;
+  exerciseTime: number;
+  questionaires: {
+    preGame: Questionaire[];
+    postGame: Questionaire[];
+  };
+  laps: Lap[];
+  timeSeriesData: TimeSeriesData;
 };

@@ -13,6 +13,8 @@ import usePatient from '../hooks/usePatient';
 import WeeklySessionsChart from '../components/WeeklySessionsChart';
 import ExerciseTable from '../components/ExerciseTable';
 import withSpinner from '../hoc/withSpinner';
+import useAppSelector from '../hooks/useAppSelector';
+import { UserRole } from '../state/ducks/auth/auth.interface';
 
 type PatientPageParams = {
   patientId: string;
@@ -22,6 +24,7 @@ const PatientPage: React.FC = () => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const { patientId } = useParams<PatientPageParams>();
   const { data, details, loading } = usePatient(patientId || '');
+  const { userDetails } = useAppSelector((state) => state.auth);
 
   const headingStyle = {
     color: 'var(--chakra-colors-blackAlpha-800)',
@@ -81,9 +84,11 @@ const PatientPage: React.FC = () => {
       <Card loading={loading} minH="36">
         <ExerciseTable sessions={data} patientId={patientId!} />
       </Card>
-      <Button w="100%" marginTop={8} onClick={startUnitySession}>
-        Start session
-      </Button>
+      {userDetails?.roles.includes(UserRole.PHYSICIAN) && (
+        <Button w="100%" marginTop={8} onClick={startUnitySession}>
+          Start session
+        </Button>
+      )}
     </Box>
   );
 };

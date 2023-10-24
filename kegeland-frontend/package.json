@@ -29,6 +29,7 @@
     "chartjs-adapter-moment": "^1.0.0",
     "chartjs-plugin-zoom": "^1.2.1",
     "cypress": "^11.0.1",
+    "date-fns": "^2.30.0",
     "dayjs": "^1.11.6",
     "formik": "^2.2.9",
     "formik-chakra-ui": "^1.6.0",

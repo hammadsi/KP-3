@@ -7,9 +7,13 @@ import NotFoundPage from '../pages/NotFound';
 import NotImplemented from '../pages/NotImplemented';
 import PatientsPage from '../pages/PatientListPage';
 import PatientPage from '../pages/PatientPage';
+import Settings from '../pages/Settings';
 import MyProfilePage from '../pages/profile/MyProfilePage';
-import EditProfile from '../pages/profile/EditProfilePage';
 import GamePage from '../pages/GamePage';
+import { UserRole } from '../state/ducks/auth/auth.interface';
+import ProtectedRoutes from '../components/ProtectedRoutes';
+import useAppSelector from '../hooks/useAppSelector';
+import EditProfilePage from '../pages/profile/EditProfilePage';
 import PostQuestionnairePage from '../pages/PostQuestionnairePage';
 import PreQuestionnairePage from '../pages/PreQuestionnairePage';
 
@@ -18,6 +22,7 @@ export interface RoutePathDefinition
   title?: string;
   children?: RoutePathDefinition[];
   path: string;
+  allowedRoles?: UserRole[];
 }
 
 export type RoutePath = {
@@ -27,11 +32,20 @@ export type RoutePath = {
   match: PathMatch<string>;
 };
 
+function HomeRouter() {
+  const { userDetails } = useAppSelector((state) => state.auth);
+  console.log(userDetails?.roles[0]);
+  if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
+    return <PatientsPage />;
+  }
+  return <PatientPage />;
+}
+
 const routes: RoutePathDefinition[] = [
   {
     title: 'Home',
     path: '/',
-    element: <PatientsPage />,
+    element: <HomeRouter />,
   },
   {
     title: 'Login',
@@ -46,12 +60,20 @@ const routes: RoutePathDefinition[] = [
   {
     title: 'MyProfile',
     path: '/myprofile',
-    element: <MyProfilePage />,
+    element: (
+      <ProtectedRoutes allowedRoles={[UserRole.PATIENT]}>
+        <MyProfilePage />
+      </ProtectedRoutes>
+    ),
   },
   {
     title: 'EditProfile',
     path: '/editprofile',
-    element: <EditProfile />,
+    element: (
+      <ProtectedRoutes allowedRoles={[UserRole.PATIENT]}>
+        <EditProfilePage />
+      </ProtectedRoutes>
+    ),
   },
   {
     title: 'Not Implemented',
@@ -59,12 +81,21 @@ const routes: RoutePathDefinition[] = [
     element: <NotImplemented />,
   },
   {
+    title: 'Settings',
+    path: 'settings',
+    element: <Settings />,
+  },
+  {
     path: '/game',
-    element: <Outlet />,
+    element: (
+      <ProtectedRoutes allowedRoles={[UserRole.PATIENT]}>
+        <Outlet />
+      </ProtectedRoutes>
+    ),
     children: [
       {
         title: 'Game',
-        path: '',
+        path: '/game',
         element: <GamePage />,
       },
       {
@@ -81,7 +112,11 @@ const routes: RoutePathDefinition[] = [
   },
   {
     path: '/patients/:patientId',
-    element: <Outlet />,
+    element: (
+      <ProtectedRoutes allowedRoles={[UserRole.PHYSICIAN]}>
+        <Outlet />
+      </ProtectedRoutes>
+    ),
     children: [
       {
         title: 'Patient',

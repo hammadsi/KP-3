@@ -16,7 +16,7 @@ const WheelchairPatientDetailsComponent = () => {
 
   if (!wheelchairPatient) return <p>No patient found.</p>;
 
-  const { name, age, gender, currentPhysicalState } = wheelchairPatient;
+  const { name, birthdate, gender, currentPhysicalState } = wheelchairPatient;
   const {
     height,
     weight,
@@ -33,7 +33,7 @@ const WheelchairPatientDetailsComponent = () => {
         <strong>Name:</strong> {name}
       </p>
       <p>
-        <strong>Age:</strong> {age}
+        <strong>Age:</strong> {birthdate}
       </p>
       <p>
         <strong>Gender:</strong> {gender}

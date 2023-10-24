@@ -28,7 +28,7 @@ type FormData = {
   lastName: string;
   email: string;
   gender: Gender;
-  birthofdate: Date;
+  birthdate: string;
   height: number;
   weight: number;
   password: string;
@@ -63,8 +63,16 @@ const RegisterPage = () => {
   }, [navigate, isSignedIn]);
 
   const register = (data: FormData) => {
-    const { firstName, lastName, email, password, gender, height, weight } =
-      data;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      gender,
+      birthdate,
+      height,
+      weight,
+    } = data;
     const payload: RegisterDTO = {
       email,
       password,
@@ -74,7 +82,7 @@ const RegisterPage = () => {
       },
       roles: [UserRole.PATIENT],
       wheelchairPatient: {
-        age: 0,
+        birthdate,
         gender,
         currentPhysicalState: {
           height,
@@ -106,7 +114,7 @@ const RegisterPage = () => {
                 password: '',
                 firstName: '',
                 lastName: '',
-                birthofdate: new Date(),
+                birthdate: '',
                 gender: 'O' as Gender,
                 height: 0,
                 weight: 0,
@@ -198,9 +206,9 @@ const RegisterPage = () => {
                           inputProps={{
                             type: 'date',
                           }}
-                          label="Birth of Date"
+                          label="Date of birth"
                           data-testid="lastname-input"
-                          name="birthofdate"
+                          name="birthdate"
                         />
                       </Box>
                     </HStack>

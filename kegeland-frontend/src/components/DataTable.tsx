@@ -98,8 +98,7 @@ const DataTable = <T extends { id?: string }>({
                   transitionDuration: '300ms',
                   cursor: 'pointer',
                 }}
-                onClick={() => handleRowClick(row.original.id!)}
-              >
+                onClick={() => handleRowClick(row.original.id!)}>
                 {row.getVisibleCells().map((cell) => (
                   <Td key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -130,8 +129,7 @@ const DataTable = <T extends { id?: string }>({
         justifyContent="space-between"
         justifySelf="end"
         m={4}
-        alignItems="center"
-      >
+        alignItems="center">
         <Flex>
           <Tooltip label="First Page">
             <IconButton
@@ -169,8 +167,7 @@ const DataTable = <T extends { id?: string }>({
               value={table.getState().pagination.pageSize}
               onChange={(e) => {
                 table.setPageSize(Number(e.target.value));
-              }}
-            >
+              }}>
               {[10, 20, 30, 40, 50].map((pageSize) => (
                 <option key={pageSize} value={pageSize}>
                   Show {pageSize}

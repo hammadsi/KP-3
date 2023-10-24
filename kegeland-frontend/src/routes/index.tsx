@@ -41,8 +41,8 @@ const routes: RoutePathDefinition[] = [
     path: '/register',
     element: <RegisterPage />,
   },
-  //Results in error
-  /**{
+  // Results in error
+  /** {
     title: 'MyProfile',
     path: '/myprofile',
     element: <MyProfilePage />,

@@ -16,8 +16,7 @@ const QuestionnairePage: React.FC = () => {
       justifyContent="center"
       alignItems="center"
       textAlign="center"
-      flexDirection="column"
-    >
+      flexDirection="column">
       <Text fontSize={26} fontWeight="semibold" color="gray.600">
         Questionnaire Title
       </Text>

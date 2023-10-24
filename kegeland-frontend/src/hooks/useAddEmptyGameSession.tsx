@@ -1,5 +1,7 @@
 import { useState } from 'react';
+
 import { addEmptyGameSession } from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
+
 import useAppDispatch from './useAppDispatch';
 
 const useAddEmptyGameSession = () => {

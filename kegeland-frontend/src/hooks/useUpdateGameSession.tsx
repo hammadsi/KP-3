@@ -1,6 +1,8 @@
 import { useState } from 'react';
+
 import { updateGameSession } from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
 import { UpdateGameSessionData } from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
+
 import useAppDispatch from './useAppDispatch';
 
 const useUpdateGameSession = () => {

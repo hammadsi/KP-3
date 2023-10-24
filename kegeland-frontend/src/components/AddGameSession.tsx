@@ -7,7 +7,7 @@ import { WheelchairPatient } from '../state/ducks/wheelchairPatients/wheelchairP
 const mockWheelchairPatient: WheelchairPatient = {
   id: '2P9gfi0u1foJiyoK3ovJ',
   name: 'John Doe',
-  age: 35,
+  birthdate: "1990-01-01",
   gender: 'M',
   currentPhysicalState: {
     height: 175, // in cm
@@ -128,7 +128,7 @@ const AddGameSession: React.FC = () => {
   return (
     <div>
       <h1>{mockWheelchairPatient.name}</h1>
-      <p>Age: {mockWheelchairPatient.age}</p>
+      <p>Age: {mockWheelchairPatient.birthdate}</p>
       <p>Gender: {mockWheelchairPatient.gender}</p>
       {/* Render other details similarly */}
 

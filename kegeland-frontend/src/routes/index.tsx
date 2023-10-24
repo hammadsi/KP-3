@@ -7,15 +7,20 @@ import NotFoundPage from '../pages/NotFound';
 import NotImplemented from '../pages/NotImplemented';
 import PatientsPage from '../pages/PatientListPage';
 import PatientPage from '../pages/PatientPage';
+import Settings from '../pages/Settings';
 import MyProfilePage from '../pages/profile/MyProfilePage';
 import EditProfile from '../pages/profile/EditProfilePage';
 import GamePage from '../pages/GamePage';
+import { UserRole } from '../state/ducks/auth/auth.interface';
+import ProtectedRoutes from '../components/ProtectedRoutes';
+import useAppSelector from '../hooks/useAppSelector';
+import EditProfilePage from '../pages/profile/EditProfilePage';
 
-export interface RoutePathDefinition
-  extends Omit<NonIndexRouteObject, 'children'> {
+export interface RoutePathDefinition extends Omit<NonIndexRouteObject, 'children'> {
   title?: string;
   children?: RoutePathDefinition[];
   path: string;
+  allowedRoles?: UserRole[];
 }
 
 export type RoutePath = {
@@ -25,47 +30,75 @@ export type RoutePath = {
   match: PathMatch<string>;
 };
 
+function HomeRouter() {
+  const { userDetails } = useAppSelector((state) => state.auth);
+  console.log(userDetails?.roles[0])
+  if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
+    return <PatientsPage />;
+  } 
+  return <PatientPage />;
+}
+
 const routes: RoutePathDefinition[] = [
   {
-    title: 'Home',
+    title: 'Home',             
     path: '/',
-    element: <PatientsPage />,
+    element: <HomeRouter />,
   },
   {
-    title: 'Login',
+    title: 'Login',          
     path: '/login',
     element: <LoginPage />,
   },
   {
-    title: 'Register',
+    title: 'Register',        
     path: '/register',
     element: <RegisterPage />,
   },
-  // Results in error
-  /** {
-    title: 'MyProfile',
+  {
+    title: 'MyProfile',          
     path: '/myprofile',
-    element: <MyProfilePage />,
+    element: (
+      <ProtectedRoutes allowedRoles={[UserRole.PATIENT]}>
+        <MyProfilePage />
+      </ProtectedRoutes>
+    ),
   },
-  */
   {
-    title: 'EditProfile',
+    title: 'EditProfile',       
     path: '/editprofile',
-    element: <EditProfile />,
+    element: (
+      <ProtectedRoutes allowedRoles={[UserRole.PATIENT]}>
+        <EditProfilePage />
+      </ProtectedRoutes>
+    ),
   },
   {
-    title: 'Not Implemented',
+    title: 'Not Implemented',   
     path: 'not-implemented',
     element: <NotImplemented />,
   },
   {
-    title: 'Game',
-    path: '/game',
-    element: <GamePage />,
+    title: 'Settings',      
+    path: 'settings',
+    element: <Settings />,
   },
   {
-    path: '/patients/:patientId',
-    element: <Outlet />,
+    title: 'Game',             
+    path: '/game',
+    element: (
+      <ProtectedRoutes allowedRoles={[UserRole.PATIENT]}>
+        <GamePage />
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: '/patients/:patientId',  
+    element:(
+      <ProtectedRoutes allowedRoles={[UserRole.PHYSICIAN]}>
+        <Outlet />
+      </ProtectedRoutes>
+    ),
     children: [
       {
         title: 'Patient',
@@ -80,10 +113,11 @@ const routes: RoutePathDefinition[] = [
     ],
   },
   {
-    title: '404',
+    title: '404',           
     path: '*',
     element: <NotFoundPage />,
   },
 ];
+
 
 export default routes;

@@ -14,6 +14,8 @@ import { UserRole } from '../state/ducks/auth/auth.interface';
 import ProtectedRoutes from '../components/ProtectedRoutes';
 import useAppSelector from '../hooks/useAppSelector';
 import EditProfilePage from '../pages/profile/EditProfilePage';
+import PostQuestionnairePage from '../pages/PostQuestionnairePage';
+import PreQuestionnairePage from '../pages/PreQuestionnairePage';
 
 export interface RoutePathDefinition
   extends Omit<NonIndexRouteObject, 'children'> {
@@ -84,13 +86,29 @@ const routes: RoutePathDefinition[] = [
     element: <Settings />,
   },
   {
-    title: 'Game',
     path: '/game',
     element: (
       <ProtectedRoutes allowedRoles={[UserRole.PATIENT]}>
-        <GamePage />
+        <Outlet />
       </ProtectedRoutes>
     ),
+    children: [
+      {
+        title: 'Game',
+        path: '/game',
+        element: <GamePage />,
+      },
+      {
+        title: 'Pre',
+        path: '/game/pre',
+        element: <PreQuestionnairePage />,
+      },
+      {
+        title: 'Post',
+        path: '/game/post',
+        element: <PostQuestionnairePage />,
+      },
+    ],
   },
   {
     path: '/patients/:patientId',

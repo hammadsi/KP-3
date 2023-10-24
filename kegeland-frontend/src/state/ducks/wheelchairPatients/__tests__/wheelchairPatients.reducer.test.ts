@@ -6,7 +6,7 @@ import { WheelchairPatient } from '../wheelchairPatients.interface';
 const mockWheelchairPatient: WheelchairPatient = {
   id: '123',
   name: 'John Doe',
-  age: 30,
+  birthdate: '2000-09-28T12:00:00',
   gender: 'M',
   currentPhysicalState: {
     height: 175,

@@ -1,9 +1,8 @@
 import { VStack, Text, Divider, HStack, Icon, Box } from '@chakra-ui/react';
-import { ComponentProps } from 'react';
+import React, { ComponentProps } from 'react';
 import { IconType } from 'react-icons/lib';
 import { Link, useLocation } from 'react-router-dom';
 
-import React from 'react';
 import { ThemeMode } from '../types';
 
 type MenuItemProps = {
@@ -33,8 +32,7 @@ const Item: React.FC<MenuItemProps> = ({
       marginBottom={2}
       width="full"
       _hover={{ cursor: 'pointer' }}
-      style={itemStyle}
-    >
+      style={itemStyle}>
       {icon && <Icon as={icon} color="primary.600" fontSize={24} />}
       <Link to={to}>
         <Text

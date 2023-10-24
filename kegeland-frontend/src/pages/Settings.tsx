@@ -6,7 +6,6 @@ import {
   Text,
   Wrap,
   WrapItem,
-  useMediaQuery,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { MdConstruction } from 'react-icons/md';
@@ -24,8 +23,7 @@ const Settings: React.FC = () => {
       justifyContent="center"
       alignItems="center"
       textAlign="center"
-      flexDirection="column"
-    >
+      flexDirection="column">
       <Heading fontSize="9xl" as="h1">
         <Wrap align="center" color="gray.700">
           <WrapItem>

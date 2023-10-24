@@ -7,7 +7,7 @@ import { WheelchairPatient } from '../state/ducks/wheelchairPatients/wheelchairP
 const mockWheelchairPatient: WheelchairPatient = {
   id: '2P9gfi0u1foJiyoK3ovJ',
   name: 'John Doe',
-  birthdate: "1990-01-01",
+  birthdate: '1990-01-01',
   gender: 'M',
   currentPhysicalState: {
     height: 175, // in cm

@@ -5,7 +5,7 @@ import {
   AiOutlinePlayCircle,
   AiOutlineRise,
   AiOutlineSetting,
-  AiOutlineFund
+  AiOutlineFund,
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
@@ -62,7 +62,10 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
                 title="Patients"
                 to={'/'}
                 icon={AiOutlineTeam}
-                isSelected={window.location.pathname ==='/' || window.location.pathname.startsWith('/patient')}
+                isSelected={
+                  window.location.pathname === '/' ||
+                  window.location.pathname.startsWith('/patient')
+                }
               />
               <Menu.Item
                 mode={mode}
@@ -87,7 +90,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
                 title="Exercises"
                 to={'/'}
                 icon={AiOutlineFund}
-                isSelected={window.location.pathname === ('/')}
+                isSelected={window.location.pathname === '/'}
               />
               <Menu.Item
                 mode={mode}

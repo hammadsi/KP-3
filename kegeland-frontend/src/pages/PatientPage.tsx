@@ -13,7 +13,6 @@ import usePatient from '../hooks/usePatient';
 import WeeklySessionsChart from '../components/WeeklySessionsChart';
 import ExerciseTable from '../components/ExerciseTable';
 import withSpinner from '../hoc/withSpinner';
-import useAppDispatch from '../hooks/useAppDispatch';
 import useAppSelector from '../hooks/useAppSelector';
 import { UserRole } from '../state/ducks/auth/auth.interface';
 
@@ -25,7 +24,7 @@ const PatientPage: React.FC = () => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const { patientId } = useParams<PatientPageParams>();
   const { data, details, loading } = usePatient(patientId || '');
-  const { userDetails } = useAppSelector((state) => state.auth,);
+  const { userDetails } = useAppSelector((state) => state.auth);
 
   const headingStyle = {
     color: 'var(--chakra-colors-blackAlpha-800)',

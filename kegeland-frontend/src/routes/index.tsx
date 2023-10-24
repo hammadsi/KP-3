@@ -10,6 +10,8 @@ import PatientPage from '../pages/PatientPage';
 import MyProfilePage from '../pages/profile/MyProfilePage';
 import EditProfile from '../pages/profile/EditProfilePage';
 import GamePage from '../pages/GamePage';
+import PostQuestionnairePage from '../pages/PostQuestionnairePage';
+import PreQuestionnairePage from '../pages/PreQuestionnairePage';
 
 export interface RoutePathDefinition
   extends Omit<NonIndexRouteObject, 'children'> {
@@ -57,9 +59,25 @@ const routes: RoutePathDefinition[] = [
     element: <NotImplemented />,
   },
   {
-    title: 'Game',
     path: '/game',
-    element: <GamePage />,
+    element: <Outlet />,
+    children: [
+      {
+        title: 'Game',
+        path: '',
+        element: <GamePage />,
+      },
+      {
+        title: 'Pre',
+        path: '/game/pre',
+        element: <PreQuestionnairePage />,
+      },
+      {
+        title: 'Post',
+        path: '/game/post',
+        element: <PostQuestionnairePage />,
+      },
+    ],
   },
   {
     path: '/patients/:patientId',

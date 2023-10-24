@@ -1,16 +1,15 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import SliderQuestion from '../components/SliderQuestion';
 import FreeTextQuestion from '../components/FreeTextQuestion';
 import RadioQuestion from '../components/RadioQuestion';
+import withLayout from '../hoc/withLayout';
+import withSpinner from '../hoc/withSpinner';
 
-type ExercisePageParams = {
-  patientId: string;
-  exerciseId: string;
-};
-
-const QuestionnairePage: React.FC = () => {
+const PreQuestionnairePage: React.FC = () => {
+  const navigate = useNavigate();
   const [radioAnswer, setRadioAnswer] = useState('');
   const [sliderAnswer, setSliderAnswer] = useState(0);
   const [freeTextAnswer, setFreeTextAnswer] = useState('');
@@ -20,6 +19,7 @@ const QuestionnairePage: React.FC = () => {
     window.location.href = `VRWheelchairSim://`;
     /* Insert PUT here to send answers to questionnaire based on sessionID and userID */
     /* Insert GET here to get the post questionnaire */
+    navigate('/game/post');
   };
 
   function checkIfAllIsFIlled(): boolean {
@@ -50,14 +50,13 @@ const QuestionnairePage: React.FC = () => {
       justifyContent="center"
       alignItems="center"
       textAlign="center"
-      flexDirection="column"
-    >
+      flexDirection="column">
       <Text
         fontSize={26}
         fontWeight="semibold"
         color="gray.600"
         marginBottom={4}>
-        Pre Questionnaire {/* Insert name here */}
+        Pre Questionnaire
       </Text>
       {/* Insert all of the questions here */}
       <RadioQuestion
@@ -79,11 +78,11 @@ const QuestionnairePage: React.FC = () => {
           isDisabled={!checkIfAllIsFIlled()}
           marginTop={4}
           onClick={startUnitySession}>
-          Start game {/* Insert "End session" on the post-questionnaire */}
+          Start game
         </Button>
       </Box>
     </Flex>
   );
 };
 
-export default QuestionnairePage;
+export default withLayout(withSpinner(PreQuestionnairePage, 300));

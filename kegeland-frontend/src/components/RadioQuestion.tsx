@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import { Radio, RadioGroup, Stack, Text } from '@chakra-ui/react';
+import React from 'react';
 
 import Card from './Card';
 
@@ -18,10 +18,6 @@ const RadioQuestion: React.FC<RadioQuestionProps> = ({
   };
 
   const [radioValue, setRadioValue] = React.useState('');
-
-  useEffect(() => {
-    console.log(radioValue);
-  }, [radioValue]);
 
   return (
     <Card minW="lg" paddingTop={4} paddingBottom={8} textAlign={'left'}>

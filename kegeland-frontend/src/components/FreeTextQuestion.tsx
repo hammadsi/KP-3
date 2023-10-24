@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Input, Text } from '@chakra-ui/react';
 
 import Card from './Card';
@@ -14,14 +14,7 @@ const FreeTextQuestion: React.FC<FreeTextQuestionProps> = ({
 }) => {
   const handleAnswerChange = (answer: string) => {
     parentCallBack(answer);
-    setFreeTextAnswer(answer);
   };
-
-  const [freeTextanswer, setFreeTextAnswer] = useState('');
-
-  useEffect(() => {
-    console.log(freeTextanswer);
-  }, [freeTextanswer]);
 
   return (
     <Card minW="lg" paddingTop={4} paddingBottom={8} textAlign={'left'}>

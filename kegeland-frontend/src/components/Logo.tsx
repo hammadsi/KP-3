@@ -8,8 +8,7 @@ const Logo: React.FC = () => {
       letterSpacing={3}
       textTransform="uppercase"
       fontWeight="thin"
-      color="primary.700"
-    >
+      color="primary.700">
       <span style={{ fontWeight: '600' }}>NTNU</span> Physiotherapy
     </Heading>
   );

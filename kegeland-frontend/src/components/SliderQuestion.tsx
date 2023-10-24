@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   Slider,
   SliderFilledTrack,
@@ -21,14 +21,7 @@ const SliderQuestion: React.FC<SliderQuestionProps> = ({
 }) => {
   const handleSliderChange = (value: number) => {
     parentCallBack(value);
-    setSliderValue(value);
   };
-
-  const [sliderValue, setSliderValue] = useState(0);
-
-  useEffect(() => {
-    console.log(sliderValue);
-  }, [sliderValue]);
 
   return (
     <Card minW="lg" paddingTop={4} paddingBottom={8} textAlign={'left'}>

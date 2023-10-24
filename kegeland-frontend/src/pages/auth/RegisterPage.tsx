@@ -63,7 +63,7 @@ const RegisterPage = () => {
   }, [navigate, isSignedIn]);
 
   const register = (data: FormData) => {
-    const { firstName, lastName, email, password, gender, height, weight } =
+    const { firstName, lastName, email, password, gender, birthofdate, height, weight } =
       data;
     const payload: RegisterDTO = {
       email,

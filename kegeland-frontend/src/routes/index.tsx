@@ -14,6 +14,7 @@ import GamePage from '../pages/GamePage';
 import { UserRole } from '../state/ducks/auth/auth.interface';
 import ProtectedRoutes from '../components/ProtectedRoutes';
 import useAppSelector from '../hooks/useAppSelector';
+import EditProfilePage from '../pages/profile/EditProfilePage';
 
 export interface RoutePathDefinition extends Omit<NonIndexRouteObject, 'children'> {
   title?: string;
@@ -68,7 +69,7 @@ const routes: RoutePathDefinition[] = [
     path: '/editprofile',
     element: (
       <ProtectedRoutes allowedRoles={[UserRole.PATIENT]}>
-        <MyProfilePage />
+        <EditProfilePage />
       </ProtectedRoutes>
     ),
   },
@@ -92,7 +93,7 @@ const routes: RoutePathDefinition[] = [
     ),
   },
   {
-    path: '/patients/:patientId',   // kun fysio
+    path: '/patients/:patientId',  
     element:(
       <ProtectedRoutes allowedRoles={[UserRole.PHYSICIAN]}>
         <Outlet />
@@ -112,7 +113,7 @@ const routes: RoutePathDefinition[] = [
     ],
   },
   {
-    title: '404',             // begge
+    title: '404',           
     path: '*',
     element: <NotFoundPage />,
   },

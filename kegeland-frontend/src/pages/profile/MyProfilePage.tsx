@@ -1,13 +1,23 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MdModeEdit } from 'react-icons/md';
 import { useSelector } from 'react-redux';
+import { format, parse } from 'date-fns';
 
 import Card from '../../components/Card';
 import withLayout from '../../hoc/withLayout';
 import withSpinner from '../../hoc/withSpinner';
 import { RootState } from '../../state/store';
 import useWheelchairPatient from '../../hooks/useWheelchairPatient';
+import { User } from '../../state/ducks/auth/auth.interface';
 
+
+const formatBirthDate = (birthdate: string) => {
+  const parsedDate = parse(birthdate, 'yyyy-MM-dd', new Date());
+
+  // Format the parsed date as "DD.MM.YYYY"
+  const formattedDate = format(parsedDate, 'dd.MM.yyyy');
+  return formattedDate;
+};
 
 const MyProfilePage: React.FC = () => {
   const { authUser } = useSelector((state: RootState) => state.auth);
@@ -26,7 +36,7 @@ const MyProfilePage: React.FC = () => {
   };
 
   if (wheelchairPatient) {
-    const { name, age, gender, currentPhysicalState } = wheelchairPatient;
+    const { name, birthdate, gender, currentPhysicalState } = wheelchairPatient;
     const {
       height,
       weight,
@@ -47,7 +57,8 @@ const MyProfilePage: React.FC = () => {
               marginBottom: '20px',
               padding: '10px',
               borderBottom: '1.5px solid gray',
-            }}>
+            }}
+          >
             <h1 style={{ fontWeight: 'bold' }}>About Me</h1>
             <Link to="/editprofile">
               <button style={{ flexDirection: 'row', display: 'flex' }}>
@@ -57,9 +68,11 @@ const MyProfilePage: React.FC = () => {
             </Link>
           </div>
           <h2
-            style={{ fontSize: '30px', width: '620px', marginBottom: '0.5em' }}>
+            style={{ fontSize: '30px', width: '620px', marginBottom: '0.5em' }}
+          >
             <span
-              style={{ borderBottom: '1px solid gray', paddingBottom: '2px' }}>
+              style={{ borderBottom: '1px solid gray', paddingBottom: '2px' }}
+            >
               Personal Details
             </span>
           </h2>
@@ -69,11 +82,12 @@ const MyProfilePage: React.FC = () => {
               float: 'left',
               textAlign: 'right',
               paddingRight: '20px',
-            }}>
+            }}
+          >
             <h3 style={{ fontWeight: 'bold' }}>Mail Account </h3>
             <h3 style={{ fontWeight: 'bold' }}>Name</h3>
             <h3 style={{ fontWeight: 'bold' }}>Gender </h3>
-            <h3 style={{ fontWeight: 'bold' }}>Age </h3>
+            <h3 style={{ fontWeight: 'bold' }}>Date of birth </h3>
           </div>
           <div
             style={{
@@ -81,11 +95,12 @@ const MyProfilePage: React.FC = () => {
               float: 'right',
               textAlign: 'left',
               paddingLeft: '20px',
-            }}>
+            }}
+          >
             <h3>{authUser?.email}</h3>
             <h3>{name}</h3>
             <h3>{setGender(gender)}</h3>
-            <h3>{age || age === 0 ? age : '-'}</h3>
+            <h3>{formatBirthDate(birthdate)}</h3>
           </div>
           <h2
             style={{
@@ -93,9 +108,11 @@ const MyProfilePage: React.FC = () => {
               width: '620px',
               marginBottom: '0.5em',
               marginTop: '4.5em',
-            }}>
+            }}
+          >
             <span
-              style={{ borderBottom: '1px solid gray', paddingBottom: '2px' }}>
+              style={{ borderBottom: '1px solid gray', paddingBottom: '2px' }}
+            >
               Current Physical State
             </span>
           </h2>
@@ -105,7 +122,8 @@ const MyProfilePage: React.FC = () => {
               float: 'left',
               textAlign: 'right',
               paddingRight: '20px',
-            }}>
+            }}
+          >
             <h3 style={{ fontWeight: 'bold' }}>Height </h3>
             <h3 style={{ fontWeight: 'bold' }}>Weight </h3>
             <h3 style={{ fontWeight: 'bold' }}>Max Heart Rate </h3>
@@ -119,7 +137,8 @@ const MyProfilePage: React.FC = () => {
               float: 'right',
               textAlign: 'left',
               paddingLeft: '20px',
-            }}>
+            }}
+          >
             <h3>{height || height === 0 ? height + ' cm' : '-'}</h3>
             <h3>{weight || weight === 0 ? weight + ' kg' : '-'}</h3>
             <h3>{maxHeartRate || maxHeartRate === 0 ? maxHeartRate : '-'}</h3>

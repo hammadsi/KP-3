@@ -28,12 +28,14 @@ const mockWheelchairPatient: WheelchairPatient = {
           {
             question: 'How do you feel?',
             answer: 'Good',
+            type: 'freeText',
           },
         ],
         postGame: [
           {
             question: 'How tired are you?',
             answer: 'Moderate',
+            type: 'freeText',
           },
         ],
       },

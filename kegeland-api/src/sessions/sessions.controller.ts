@@ -32,15 +32,20 @@ export class SessionsController {
   constructor(private readonly sessionsService: SessionsService) {}
 
   /**
-   * Endpoint for fetching specific session by its ID
-   * @param id of session
+   * Endpoint for fetching specific session by patientID and exerciseID
+   * @param patientID of the patient
+   * @param exerciseID of the exercise
    * @returns Session object
    */
-  @Get(':id')
+  @Get(':patientID/gameSessions/:exerciseID')
   @Roles(Role.PATIENT, Role.PHYSICIAN)
-  async findOne(@Param('id') id: string) {
-    return this.sessionsService.findOne(id);
+  async findOne(
+    @Param('patientID') patientID: string,
+    @Param('exerciseID') exerciseID: string
+  ) {
+    return this.sessionsService.findOneByPatientAndExercise(patientID, exerciseID);
   }
+
 
   /**
    * Endpoint for fetching all sessions based on query parameters

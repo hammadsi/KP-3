@@ -16,12 +16,16 @@ type ExercisePageParams = {
 };
 
 const ExercisePage: React.FC = () => {
-  const { patientId, exerciseId } = useParams<ExercisePageParams>();
-  const { answers, questionnaire, sensor, session, loading } = useExercise(
+  const patientId = "2P9gfi0u1foJiyoK3ovJ";
+  const exerciseId = "28ceabH5I9zm1BguEbcB";
+
+  const { sensor, session, loading } = useExercise(
     patientId!,
     exerciseId!,
   );
   const [visible, setVisible] = useState(false);
+
+  console.log(sensor, session)
 
   return (
     <>
@@ -29,6 +33,7 @@ const ExercisePage: React.FC = () => {
         {sensor && session && (
           <ExerciseGraph sensor={sensor!} session={session!} />
         )}
+        {patientId}
       </Card>
       <Button
         onClick={() => {
@@ -42,10 +47,7 @@ const ExercisePage: React.FC = () => {
       </Button>
       <Collapse in={visible}>
         <Card loading={loading} h="100%">
-          <QuestionnaireResults
-            answers={answers}
-            questionnaire={questionnaire}
-          />
+          123
         </Card>
       </Collapse>
     </>

@@ -38,19 +38,7 @@ export type RoutePath = {
 };
 
 function HomeRouter() {
-  const { userDetails, isSignedIn } = useAppSelector((state) => state.auth);
-  const { authUser } = useSelector((state: RootState) => state.auth);
-  const { wheelchairPatient } = useWheelchairPatient(authUser?.id);
-
-  if (
-    isSignedIn &&
-    userDetails?.roles.includes(UserRole.PATIENT) &&
-    wheelchairPatient === undefined
-  ) {
-    const dispatch = useAppDispatch();
-    dispatch(signOutUser());
-    return <LoginPage />;
-  }
+  const { userDetails } = useAppSelector((state) => state.auth);
 
   if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
     return <PatientsPage />;

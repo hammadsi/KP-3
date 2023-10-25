@@ -42,7 +42,7 @@ function HomeRouter() {
   const { authUser } = useSelector((state: RootState) => state.auth);
   const { wheelchairPatient } = useWheelchairPatient(authUser?.id,);
 
-  if (isSignedIn && wheelchairPatient === undefined) {
+  if (isSignedIn && userDetails?.roles.includes(UserRole.PATIENT) && wheelchairPatient === undefined) {
     const dispatch = useAppDispatch();
     dispatch(signOutUser());
     return <LoginPage />;

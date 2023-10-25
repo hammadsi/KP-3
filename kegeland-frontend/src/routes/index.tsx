@@ -1,4 +1,5 @@
 import { NonIndexRouteObject, Outlet, PathMatch } from 'react-router-dom';
+import { AsyncThunkAction } from '@reduxjs/toolkit';
 
 import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
@@ -16,6 +17,8 @@ import useAppSelector from '../hooks/useAppSelector';
 import EditProfilePage from '../pages/profile/EditProfilePage';
 import PostQuestionnairePage from '../pages/PostQuestionnairePage';
 import PreQuestionnairePage from '../pages/PreQuestionnairePage';
+import { signOutUser } from '../state/ducks/auth/auth.actions';
+import useAppDispatch from '../hooks/useAppDispatch';
 
 export interface RoutePathDefinition
   extends Omit<NonIndexRouteObject, 'children'> {
@@ -33,12 +36,20 @@ export type RoutePath = {
 };
 
 function HomeRouter() {
-  const { userDetails } = useAppSelector((state) => state.auth);
-  console.log(userDetails?.roles[0]);
+  const { userDetails, isSignedIn } = useAppSelector((state) => state.auth);
+  console.log('isSignedIn', isSignedIn);
+  console.log('userDetails', userDetails);
   if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
     return <PatientsPage />;
+  } else if (userDetails?.roles.includes(UserRole.PATIENT)) {
+    return <PatientPage />;
   }
-  return <PatientPage />;
+  if (isSignedIn && !userDetails) {
+    const dispatch = useAppDispatch();
+    dispatch(signOutUser());
+    return <LoginPage />;
+  }
+  return <LoginPage />;
 }
 
 const routes: RoutePathDefinition[] = [

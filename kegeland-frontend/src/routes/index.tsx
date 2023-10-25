@@ -21,6 +21,7 @@ import { signOutUser } from '../state/ducks/auth/auth.actions';
 import useAppDispatch from '../hooks/useAppDispatch';
 import { RootState } from '../state/store';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
+import WheelChairPage from '../pages/WheelChairPage';
 
 export interface RoutePathDefinition
   extends Omit<NonIndexRouteObject, 'children'> {
@@ -63,6 +64,11 @@ const routes: RoutePathDefinition[] = [
     title: 'Register',
     path: '/register',
     element: <RegisterPage />,
+  },
+  {
+    title: 'wheelchair',
+    path: '/wheelchair',
+    element: <WheelChairPage />,
   },
   {
     title: 'MyProfile',

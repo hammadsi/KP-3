@@ -110,6 +110,13 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
             icon={AiOutlineSetting}
             isSelected={window.location.pathname === '/settings'}
           />
+          <Menu.Item
+            mode={mode}
+            title="See exercise"
+            to={'/wheelchair'}
+            icon={AiOutlineSetting}
+            isSelected={window.location.pathname === '/wheelchair'}
+          />
         </Menu>
         <VStack width="full" transition="bottom 200ms">
           <Button

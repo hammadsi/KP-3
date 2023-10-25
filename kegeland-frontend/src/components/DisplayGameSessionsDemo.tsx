@@ -52,7 +52,7 @@ const DisplayGameSessionsDemo: React.FC = () => {
     <div>
       <h3>Game Sessions</h3>
       {wheelchairPatient.gameSessions.map((session, index) => (
-        <div key={session.sessionId}>
+        <div key={session.id}>
           <h4>Session {index + 1}</h4>
           <table style={tableStyle}>
             <thead>
@@ -65,7 +65,7 @@ const DisplayGameSessionsDemo: React.FC = () => {
             </thead>
             <tbody>
               <tr style={index % 2 === 1 ? alternatingRowStyle : {}}>
-                <td style={cellStyle}>{session.sessionId}</td>
+                <td style={cellStyle}>{session.id}</td>
                 <td style={cellStyle}>
                   {new Date(session.startTime).toLocaleString()}
                 </td>

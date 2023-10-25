@@ -62,8 +62,7 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({
             href={exportSessionAsCsv(sensor.labels, session.data)}
             download={`${sensor.name.toLowerCase()}_${session.id}.csv`}
             target="_blank"
-            rel="noreferrer"
-          >
+            rel="noreferrer">
             <IconButton
               aria-label="Download exercise data"
               icon={<MdDownload />}

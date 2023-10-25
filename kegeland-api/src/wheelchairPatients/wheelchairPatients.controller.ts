@@ -55,19 +55,19 @@ export class WheelchairPatientsController {
   /**
    * Endpoint for updating an existing game session's attributes
    * @param patientId ID of the patient
-   * @param sessionId ID of the game session to update
+   * @param id ID of the game session to update
    * @param gameSession Data to update the game session with
    * @returns updated game session data
    */
-  @Put(':patientId/gameSessions/:sessionId')
+  @Put(':patientId/gameSessions/:id')
   async updateGameSession(
     @Param('patientId') patientId: string,
-    @Param('sessionId') sessionId: string,
+    @Param('id') id: string,
     @Body() gameSession: UpdateGameSessionDto,
   ) {
     console.log("test");
     console.log(gameSession.startTime);
-    return this.wheelchairPatientsService.updateGameSession(patientId, sessionId, gameSession);
+    return this.wheelchairPatientsService.updateGameSession(patientId, id, gameSession);
   }
 }
 

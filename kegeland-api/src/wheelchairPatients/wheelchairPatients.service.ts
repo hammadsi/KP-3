@@ -74,7 +74,7 @@ export class WheelchairPatientsService {
         .get();
 
       sessionsSnapshot.forEach(doc => {
-        let gameSession = {sessionId: doc.id, ...doc.data()} as GameSession;
+        let gameSession = {id: doc.id, ...doc.data()} as GameSession;
         gameSessions.push(this.transformGameSessionTimestamps(gameSession));
       });
 
@@ -127,10 +127,10 @@ export class WheelchairPatientsService {
   /**
    * Function for updating a game session of a specific wheelchair patient
    * @param patientId ID of the wheelchair patient
-   * @param sessionId ID of the game session to update
+   * @param id ID of the game session to update
    * @param gameSession Data to update the game session with
    */
-  async updateGameSession(patientId: string, sessionId: string, gameSession: UpdateGameSessionDto) {
+  async updateGameSession(patientId: string, id: string, gameSession: UpdateGameSessionDto) {
     console.log(gameSession.startTime);
     console.log("test");
     try {
@@ -146,12 +146,12 @@ export class WheelchairPatientsService {
         .collection('patients')
         .doc(patientId)
         .collection('gameSessions')
-        .doc(sessionId);
+        .doc(id);
 
       // Check if the document exists
       const docSnapshot = await gameSessionDoc.get();
       if (!docSnapshot.exists) {
-        throw new NotFoundException(`Game session with ID ${sessionId} not found`);
+        throw new NotFoundException(`Game session with ID ${id} not found`);
       }
 
       // Transform Date objects to Firestore Timestamps
@@ -190,7 +190,7 @@ export class WheelchairPatientsService {
 
       await gameSessionDoc.update(transformedSession);
 
-      return { sessionId, ...transformedSession };
+      return { id, ...transformedSession };
     } catch (error) {
       throw new InternalServerErrorException(error.message);
     }

@@ -5,6 +5,7 @@ import {
   AiOutlineStock,
   AiOutlineCalendar,
 } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 
 import Card from '../components/Card';
 import LabeledValue from '../components/LabeledValue';
@@ -16,6 +17,9 @@ import withSpinner from '../hoc/withSpinner';
 import DisplayGameSessionsDemo from '../components/DisplayGameSessionsDemo';
 import useAppSelector from '../hooks/useAppSelector';
 import { UserRole } from '../state/ducks/auth/auth.interface';
+import { RootState } from '../state/store';
+import useWheelchairPatient from '../hooks/useWheelchairPatient';
+import { GameSession } from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
 
 type PatientPageParams = {
   patientId: string;
@@ -25,7 +29,13 @@ const PatientPage: React.FC = () => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const { patientId } = useParams<PatientPageParams>();
   const { data, details, loading } = usePatient(patientId || '');
+  const { authUser } = useSelector((state: RootState) => state.auth);
+  const { wheelchairPatient, error } = useWheelchairPatient(authUser?.id);
   const { userDetails } = useAppSelector((state) => state.auth);
+
+  const sessions = wheelchairPatient?.gameSessions
+    ? wheelchairPatient.gameSessions
+    : ([] as GameSession[]);
 
   const headingStyle = {
     color: 'var(--chakra-colors-blackAlpha-800)',
@@ -46,20 +56,17 @@ const PatientPage: React.FC = () => {
       <Flex
         flexDirection={isGreaterThanLg ? 'row' : 'column'}
         flexBasis="100%"
-        flexWrap="nowrap"
-      >
+        flexWrap="nowrap">
         <Card
           marginRight={5}
           w={isGreaterThanLg ? '25%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}
-        >
+          loading={loading}>
           <Stack
             spacing={4}
             direction={isGreaterThanLg ? 'column' : 'row'}
             w="100%"
-            alignItems="flex-start"
-          >
+            alignItems="flex-start">
             <LabeledValue
               label="Workouts this week"
               value={details.sessionsThisWeek}
@@ -80,9 +87,8 @@ const PatientPage: React.FC = () => {
         <Card
           w={isGreaterThanLg ? '75%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}
-        >
-          <WeeklySessionsChart sessions={data} numWeeks={12} />
+          loading={loading}>
+          <WeeklySessionsChart sessions={sessions} numWeeks={12} />
         </Card>
       </Flex>
       <h1 style={headingStyle}>OVERVIEW OF THE PATIENT&apos;S EXERCISES</h1>
@@ -93,7 +99,7 @@ const PatientPage: React.FC = () => {
       </Card>
 
       <Card loading={loading} minH="36">
-        <ExerciseTable sessions={data} patientId={patientId!} />
+        <ExerciseTable sessions={sessions} patientId={patientId!} />
       </Card>
       {userDetails?.roles.includes(UserRole.PHYSICIAN) && (
         <Button w="100%" marginTop={8} onClick={startUnitySession}>

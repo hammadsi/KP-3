@@ -4,20 +4,23 @@ import { capitalize } from 'lodash';
 import moment from 'moment';
 import React from 'react';
 
-import { LeanSession } from '../state/ducks/sessions/sessions.interface';
+import {
+  LeanSession,
+  ViewSession,
+} from '../state/ducks/sessions/sessions.interface';
 
 import DataTable from './DataTable';
 
 type ExerciseTableProps = {
-  sessions: LeanSession[];
+  sessions: ViewSession[];
   patientId: string;
 };
 
 const ExerciseTable: React.FC<ExerciseTableProps> = ({ sessions }) => {
   const [isGreaterThanMd] = useMediaQuery('(min-width: 48em)');
 
-  const columnHelper = createColumnHelper<LeanSession>();
-  const columns = React.useMemo<ColumnDef<LeanSession, any>[]>(
+  const columnHelper = createColumnHelper<ViewSession>();
+  const columns = React.useMemo<ColumnDef<ViewSession, any>[]>(
     () => [
       ...(isGreaterThanMd
         ? [

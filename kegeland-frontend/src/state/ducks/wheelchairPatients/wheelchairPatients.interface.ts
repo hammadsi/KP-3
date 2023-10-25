@@ -17,7 +17,8 @@ export type CurrentPhysicalState = {
 };
 
 export type GameSession = {
-  sessionId: string;
+  createdAt: number;
+  id: string;
   startTime: Date;
   endTime: Date;
   exerciseTime: number;
@@ -75,7 +76,7 @@ export type UpdateWheelchairPatientData = {
 
 export type UpdateGameSessionData = {
   patientId: string;
-  sessionId: string;
+  id: string;
   sessionData: GameSessionData;
 };
 

@@ -16,13 +16,13 @@ import {
 export const uploadAnswers = createAsyncThunk(
   'questions/uploadAnswers',
   async (data: UploadAnswersDto) => {
-    const {sessionId, questionnaireId, answers} = data;
+    const {id, questionnaireId, answers} = data;
     const promises: Promise<void>[] = [];
     for (const answer of answers) {
       const promise = apiCaller<void>({
         url: `questionnaires/${questionnaireId}/answers`,
         method: 'POST',
-        data: {sessionId, ...answer},
+        data: {id, ...answer},
       });
       promises.push(promise);
     }

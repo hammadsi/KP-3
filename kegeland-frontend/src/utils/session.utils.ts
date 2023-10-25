@@ -1,9 +1,12 @@
 import { groupBy, reduce } from 'lodash';
 import moment from 'moment';
 
-import { LeanSession } from '../state/ducks/sessions/sessions.interface';
+import {
+  LeanSession,
+  ViewSession,
+} from '../state/ducks/sessions/sessions.interface';
 
-export const groupByWeek = (sessions: LeanSession[], numWeeks: number) => {
+export const groupByWeek = (sessions: ViewSession[], numWeeks: number) => {
   const currWeek = moment().week();
   const data = reduce(
     Array(numWeeks),
@@ -25,7 +28,7 @@ export const groupByWeek = (sessions: LeanSession[], numWeeks: number) => {
   return data;
 };
 
-export const getNumSessionsThisWeek = (sessions: LeanSession[]) => {
+export const getNumSessionsThisWeek = (sessions: ViewSession[]) => {
   const currWeek = moment().week();
   const grouped = groupBy(sessions, (session) =>
     moment(session.createdAt).week(),
@@ -36,7 +39,7 @@ export const getNumSessionsThisWeek = (sessions: LeanSession[]) => {
   return 0;
 };
 
-export const getLastSessionTimeDelta = (sessions: LeanSession[]) => {
+export const getLastSessionTimeDelta = (sessions: ViewSession[]) => {
   if (sessions.length > 0) {
     return moment(sessions[0].createdAt).fromNow();
   }

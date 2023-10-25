@@ -19,7 +19,7 @@ const mockWheelchairPatient: WheelchairPatient = {
   },
   gameSessions: [
     {
-      sessionId: '28ceabH5I9zm1BguEbcB',
+      id: '28ceabH5I9zm1BguEbcB',
       startTime: new Date(),
       endTime: new Date(),
       exerciseTime: 3600, // in seconds
@@ -95,7 +95,7 @@ const AddGameSession: React.FC = () => {
     if (latestSession) {
       updateSession({
         patientId: mockWheelchairPatient.id,
-        sessionId: latestSession.sessionId,
+        id: latestSession.id,
         sessionData: latestSession,
       });
     } else {
@@ -135,8 +135,7 @@ const AddGameSession: React.FC = () => {
       <button
         onClick={handleAddSession}
         disabled={addLoading}
-        style={addLoading ? buttonDisabledStyle : buttonStyle}
-      >
+        style={addLoading ? buttonDisabledStyle : buttonStyle}>
         Add Empty Game Session
       </button>
       {addError && <p>Error: {addError}</p>}
@@ -144,8 +143,7 @@ const AddGameSession: React.FC = () => {
       <button
         onClick={handleUpdateSession}
         disabled={updateLoading}
-        style={updateLoading ? buttonDisabledStyle : buttonStyle}
-      >
+        style={updateLoading ? buttonDisabledStyle : buttonStyle}>
         Update Game Session
       </button>
       {updateError && <p>Error: {updateError}</p>}

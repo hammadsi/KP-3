@@ -25,10 +25,10 @@ const GameSessions: React.FC = () => {
     <div>
       <h3>Game Sessions</h3>
       {wheelchairPatient.gameSessions.map((session, index) => (
-        <div key={session.sessionId}>
+        <div key={session.id}>
           <h4>Session {index + 1}</h4>
           <p>
-            <strong>Session ID:</strong> {session.sessionId}
+            <strong>Session ID:</strong> {session.id}
           </p>
           <p>
             <strong>Start Time:</strong>{' '}

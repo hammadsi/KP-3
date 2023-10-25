@@ -43,7 +43,7 @@ const useCurrentSession = (hasQuestionnaire: boolean) => {
             uploadAnswers({
               answers,
               questionnaireId: questionnaire!.id,
-              sessionId: id,
+              id: id,
             }),
           );
         }

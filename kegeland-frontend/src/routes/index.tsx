@@ -1,5 +1,5 @@
 import { NonIndexRouteObject, Outlet, PathMatch } from 'react-router-dom';
-import { AsyncThunkAction } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
 
 import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
@@ -19,6 +19,8 @@ import PostQuestionnairePage from '../pages/PostQuestionnairePage';
 import PreQuestionnairePage from '../pages/PreQuestionnairePage';
 import { signOutUser } from '../state/ducks/auth/auth.actions';
 import useAppDispatch from '../hooks/useAppDispatch';
+import { RootState } from '../state/store';
+import useWheelchairPatient from '../hooks/useWheelchairPatient';
 
 export interface RoutePathDefinition
   extends Omit<NonIndexRouteObject, 'children'> {
@@ -37,17 +39,19 @@ export type RoutePath = {
 
 function HomeRouter() {
   const { userDetails, isSignedIn } = useAppSelector((state) => state.auth);
-  console.log('isSignedIn', isSignedIn);
-  console.log('userDetails', userDetails);
+  const { authUser } = useSelector((state: RootState) => state.auth);
+  const { wheelchairPatient } = useWheelchairPatient(authUser?.id,);
+
+  if (isSignedIn && wheelchairPatient === undefined) {
+    const dispatch = useAppDispatch();
+    dispatch(signOutUser());
+    return <LoginPage />;
+  }
+
   if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
     return <PatientsPage />;
   } else if (userDetails?.roles.includes(UserRole.PATIENT)) {
     return <PatientPage />;
-  }
-  if (isSignedIn && !userDetails) {
-    const dispatch = useAppDispatch();
-    dispatch(signOutUser());
-    return <LoginPage />;
   }
   return <LoginPage />;
 }

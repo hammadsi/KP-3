@@ -23,7 +23,8 @@ const FreeTextQuestion: React.FC<FreeTextQuestionProps> = ({
         fontWeight="semibold"
         color="gray.600"
         paddingBottom={2}
-        marginStart={0}>
+        marginStart={0}
+      >
         {question}
       </Text>
       <Input type="text" onChange={(e) => handleAnswerChange(e.target.value)} />

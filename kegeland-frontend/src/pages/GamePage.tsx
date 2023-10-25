@@ -16,12 +16,14 @@ const GamePage: React.FC = () => {
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        textAlign="center">
+        textAlign="center"
+      >
         <Text
           fontSize={26}
           fontWeight="semibold"
           color="gray.600"
-          marginTop={8}>
+          marginTop={8}
+        >
           Welcome to THE GAME.
         </Text>
         <Text fontSize={20} fontWeight="semibold" color="gray.600" margin={8}>

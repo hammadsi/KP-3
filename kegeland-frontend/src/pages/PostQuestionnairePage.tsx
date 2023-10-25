@@ -46,12 +46,14 @@ const PostQuestionnairePage: React.FC = () => {
       justifyContent="center"
       alignItems="center"
       textAlign="center"
-      flexDirection="column">
+      flexDirection="column"
+    >
       <Text
         fontSize={26}
         fontWeight="semibold"
         color="gray.600"
-        marginBottom={4}>
+        marginBottom={4}
+      >
         Post Questionnaire
       </Text>
       {/* Insert all of the questions here */}
@@ -76,7 +78,8 @@ const PostQuestionnairePage: React.FC = () => {
         <Button
           isDisabled={!checkIfAllIsFIlled()}
           marginTop={4}
-          onClick={endSession}>
+          onClick={endSession}
+        >
           End session
         </Button>
       </Box>

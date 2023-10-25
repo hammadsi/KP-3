@@ -4,9 +4,16 @@ import {
     IsString, 
     IsArray, 
     ValidateNested, 
-    IsDate 
+    IsDate, 
+    IsEnum
 } from 'class-validator';
 import { Type } from 'class-transformer';
+
+export enum QuestionType {
+    freeText = 'freeText',
+    scale = 'scale',
+    radio = 'radio'
+}
 
 class QuestionDto {
     @IsString()
@@ -14,6 +21,9 @@ class QuestionDto {
 
     @IsString()
     answer: string;
+
+    @IsEnum(QuestionType)
+    type: QuestionType;
 }
 
 class LapDto {

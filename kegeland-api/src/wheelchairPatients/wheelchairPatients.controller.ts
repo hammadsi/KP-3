@@ -65,8 +65,6 @@ export class WheelchairPatientsController {
     @Param('id') id: string,
     @Body() gameSession: UpdateGameSessionDto,
   ) {
-    console.log("test");
-    console.log(gameSession.startTime);
     return this.wheelchairPatientsService.updateGameSession(patientId, id, gameSession);
   }
 }

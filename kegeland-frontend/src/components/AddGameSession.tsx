@@ -24,7 +24,7 @@ const mockWheelchairPatient: WheelchairPatient = {
       startTime: new Date(),
       endTime: new Date(),
       exerciseTime: 3600, // in seconds
-      questionaires: {
+      questionnaires: {
         preGame: [
           {
             question: 'How tired are you?',

@@ -15,6 +15,12 @@ export enum Gender {
   O = 'O'
 }
 
+export enum QuestionType {
+  freeText = 'freeText',
+  scale = 'scale',
+  radio = 'radio'
+}
+
 class CurrentPhysicalState {
   @Expose()
   @IsNumber()
@@ -49,6 +55,10 @@ class Question {
   @Expose()
   @IsString()
   answer: string;
+
+  @Expose()
+  @IsEnum(QuestionType)
+  type: QuestionType;
 }
 
 class Lap {
@@ -103,16 +113,11 @@ export class GameSession {
   exerciseTime: number;
 
   @Expose()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => Question)
-  preGame: Question[];
-
-  @Expose()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => Question)
-  postGame: Question[];
+  @IsOptional()
+  questionnaires?: {
+    preGame: Question[];
+    postGame: Question[];
+  };
 
   @Expose()
   @IsArray()

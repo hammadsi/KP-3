@@ -44,8 +44,8 @@ const GameSessions: React.FC = () => {
 
           <h5>Pre-Game Questionnaires</h5>
           <ul>
-            {Array.isArray(session.questionaires?.preGame) ? (
-              session.questionaires.preGame.map((q, qIndex) => (
+            {Array.isArray(session.questionnaires?.preGame) ? (
+              session.questionnaires.preGame.map((q, qIndex) => (
                 <li key={qIndex}>
                   Q: {q.question} | A: {q.answer}
                 </li>
@@ -57,8 +57,8 @@ const GameSessions: React.FC = () => {
 
           <h5>Post-Game Questionnaires</h5>
           <ul>
-            {Array.isArray(session.questionaires?.postGame) ? (
-              session.questionaires.postGame.map((q, qIndex) => (
+            {Array.isArray(session.questionnaires?.postGame) ? (
+              session.questionnaires.postGame.map((q, qIndex) => (
                 <li key={qIndex}>
                   Q: {q.question} | A: {q.answer}
                 </li>

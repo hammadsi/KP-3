@@ -131,8 +131,6 @@ export class WheelchairPatientsService {
    * @param gameSession Data to update the game session with
    */
   async updateGameSession(patientId: string, id: string, gameSession: UpdateGameSessionDto) {
-    console.log(gameSession.startTime);
-    console.log("test");
     try {
       // Verify that startTime and endTime are valid Date instances
       if (!(gameSession.startTime instanceof Date)) {
@@ -154,11 +152,17 @@ export class WheelchairPatientsService {
         throw new NotFoundException(`Game session with ID ${id} not found`);
       }
 
+      // Transforming Questionnaires
+      const transformedQuestionnaires = {
+        preGame: gameSession.questionnaires?.preGame || [],
+        postGame: gameSession.questionnaires?.postGame || []
+      };
       // Transform Date objects to Firestore Timestamps
       const transformedSession = {
         ...gameSession,
         startTime: firestore.Timestamp.fromDate(gameSession.startTime),
         endTime: firestore.Timestamp.fromDate(gameSession.endTime),
+        exerciseTime: gameSession.exerciseTime || 0,
         laps: gameSession.laps?.map(lap => {
           if (!(lap.timeStamp instanceof Date)) {
               throw new Error("lap.timeStamp is not a valid Date object");
@@ -188,7 +192,10 @@ export class WheelchairPatientsService {
         }) || [],
       };
 
-      await gameSessionDoc.update(transformedSession);
+      await gameSessionDoc.update({
+        ...transformedSession,
+        questionnaires: transformedQuestionnaires,
+      });
 
       return { id, ...transformedSession };
     } catch (error) {

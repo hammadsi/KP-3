@@ -22,14 +22,14 @@ export type GameSession = {
   endTime: Date;
   exerciseTime: number;
   questionnaires: {
-    preGame: Questionaire[];
-    postGame: Questionaire[];
+    preGame: Question[];
+    postGame: Question[];
   };
   laps: Lap[];
   timeSeriesData: TimeSeriesData;
 };
 
-export type Questionaire = {
+export type Question = {
   question: string;
   type: 'freeText' | 'scale' | 'radio';
   answer: string;
@@ -84,8 +84,8 @@ export type GameSessionData = {
   endTime: Date;
   exerciseTime: number;
   questionnaires: {
-    preGame: Questionaire[];
-    postGame: Questionaire[];
+    preGame: Question[];
+    postGame: Question[];
   };
   laps: Lap[];
   timeSeriesData: TimeSeriesData;

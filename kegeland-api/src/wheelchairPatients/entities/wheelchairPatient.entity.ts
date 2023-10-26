@@ -98,7 +98,7 @@ class Speed {
 export class GameSession {
   @Expose()
   @IsString()
-  sessionId: string;
+  id: string;
 
   @Expose()
   @IsDate()

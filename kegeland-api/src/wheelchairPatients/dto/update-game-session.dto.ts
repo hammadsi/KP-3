@@ -74,6 +74,10 @@ class TimeSeriesDataDto {
 
   export class UpdateGameSessionDto {
     @IsOptional()
+    @IsNumber()
+    createdAt?: number;
+
+    @IsOptional()
     @IsDate()
     @Type(() => Date)
     startTime?: Date;

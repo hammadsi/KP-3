@@ -19,15 +19,16 @@ const mockWheelchairPatient: WheelchairPatient = {
   },
   gameSessions: [
     {
-      sessionId: '28ceabH5I9zm1BguEbcB',
+      createdAt: Date.now(),
+      id: '28ceabH5I9zm1BguEbcB',
       startTime: new Date(),
       endTime: new Date(),
       exerciseTime: 3600, // in seconds
       questionnaires: {
         preGame: [
           {
-            question: 'How do you feel?',
-            answer: 'Good',
+            question: 'How tired are you?',
+            answer: 'Not tired',
             type: 'freeText',
           },
         ],
@@ -89,15 +90,11 @@ const AddGameSession: React.FC = () => {
       mockWheelchairPatient.gameSessions[
         mockWheelchairPatient.gameSessions.length - 1
       ];
-    console.log(
-      'Is startTime a Date?',
-      latestSession.startTime instanceof Date,
-    );
 
     if (latestSession) {
       updateSession({
         patientId: mockWheelchairPatient.id,
-        sessionId: latestSession.sessionId,
+        id: latestSession.id,
         sessionData: latestSession,
       });
     } else {

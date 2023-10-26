@@ -1,5 +1,4 @@
 import { NonIndexRouteObject, Outlet, PathMatch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
@@ -17,10 +16,6 @@ import useAppSelector from '../hooks/useAppSelector';
 import EditProfilePage from '../pages/profile/EditProfilePage';
 import PostQuestionnairePage from '../pages/PostQuestionnairePage';
 import PreQuestionnairePage from '../pages/PreQuestionnairePage';
-import { signOutUser } from '../state/ducks/auth/auth.actions';
-import useAppDispatch from '../hooks/useAppDispatch';
-import { RootState } from '../state/store';
-import useWheelchairPatient from '../hooks/useWheelchairPatient';
 
 export interface RoutePathDefinition
   extends Omit<NonIndexRouteObject, 'children'> {

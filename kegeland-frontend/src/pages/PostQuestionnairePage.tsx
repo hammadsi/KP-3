@@ -28,7 +28,7 @@ const PostQuestionnairePage: React.FC = () => {
 
   const endSession = async () => {
     const currentSession = wheelchairPatient?.gameSessions.find(
-      (session) => session.sessionId === sessionId,
+      (session) => session.id === sessionId,
     );
 
     if (currentSession && authUser) {
@@ -55,7 +55,7 @@ const PostQuestionnairePage: React.FC = () => {
 
       const updateData = {
         patientId: authUser.id,
-        sessionId,
+        id: sessionId,
         sessionData: {
           ...currentSession,
           questionnaires: questionnaireData,

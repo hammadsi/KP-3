@@ -4,7 +4,7 @@ export default class Answer {
   @IsString()
   userId: string;
   @IsString()
-  sessionId: string;
+  id: string;
   @IsNumber()
   answeredAt: number;
   @IsArray()

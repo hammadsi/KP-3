@@ -1,13 +1,13 @@
 export const answers = [
   {
     userId: 'userId',
-    sessionId: 'sessionId',
+    id: 'id',
     createdAt: 1379274839,
     answers: [5],
   },
   {
     userId: 'userId',
-    sessionId: 'sessionId',
+    id: 'id',
     createdAt: 1379274839,
     answers: [1],
   },

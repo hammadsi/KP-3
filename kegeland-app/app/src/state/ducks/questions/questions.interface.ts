@@ -25,7 +25,7 @@ export interface QuestionsState {
 }
 
 export type UploadAnswersDto = {
-  sessionId: string;
+  id: string;
   questionnaireId: string;
   answers: Answer[];
 };

@@ -29,9 +29,8 @@ const PreQuestionnairePage: React.FC = () => {
   const startUnitySession = async () => {
     // Fetch the current session by id from the wheelchairPatient's array of gameSessions
     const currentSession = wheelchairPatient?.gameSessions.find(
-      (session) => session.sessionId === sessionId,
+      (session) => session.id === sessionId,
     );
-    console.log('Current session id', currentSession?.sessionId);
 
     const questionnaireData = {
       preGame: [
@@ -61,12 +60,11 @@ const PreQuestionnairePage: React.FC = () => {
       );
     }
 
-    console.log('Questionnaire data', questionnaireData);
     // Update the session
     if (currentSession) {
       const updateData = {
         patientId: authUser.id,
-        sessionId: currentSession.sessionId,
+        id: currentSession.id,
         sessionData: {
           ...currentSession,
           questionnaires: questionnaireData, // Update this part with the questionnaire answers

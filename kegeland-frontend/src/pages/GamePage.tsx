@@ -11,7 +11,7 @@ import { GameSessionData } from '../state/ducks/wheelchairPatients/wheelchairPat
 
 const GamePage: React.FC = () => {
   const navigate = useNavigate();
-  const { addGameSession, loading, error } = useAddEmptyGameSession();
+  const { addGameSession, error } = useAddEmptyGameSession();
   const { authUser } = useSelector((state: RootState) => state.auth);
   const { updateSession } = useUpdateGameSession();
 
@@ -20,10 +20,10 @@ const GamePage: React.FC = () => {
       if (authUser) {
         // Create a new game session first
         const sessionId = await addGameSession(authUser?.id);
-        console.log('Session id', sessionId);
 
         // Default payload for the game session
         const defaultSessionData = {
+          createdAt: Date.now(),
           startTime: new Date(), // Using the current time as the default
           endTime: new Date(), // You can adjust this according to your needs
           exerciseTime: 0, // Default exercise time
@@ -43,7 +43,7 @@ const GamePage: React.FC = () => {
         if (sessionId) {
           await updateSession({
             patientId: authUser!.id, // Assuming authUser.id is the patient ID
-            sessionId,
+            id: sessionId,
             sessionData: defaultSessionData,
           });
         } else {

@@ -63,7 +63,7 @@ describe('Test questionnaires slice', () => {
     await store.dispatch(
       fetchQuestionnaireAnswers({
         questionnaireId: '9x7rPmACKqoE48EUh3Ds',
-        sessionId: '123',
+        id: '123',
       }),
     );
     const state = store.getState().questionnaires;
@@ -78,7 +78,7 @@ describe('Test questionnaires slice', () => {
     await store.dispatch(
       fetchQuestionnaireAnswers({
         questionnaireId: '9x7rPmACKqoE48EUh3Ds',
-        sessionId: '123',
+        id: '123',
       }),
     );
     const state = store.getState().questionnaires;

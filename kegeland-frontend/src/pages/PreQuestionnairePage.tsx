@@ -12,7 +12,6 @@ import withSpinner from '../hoc/withSpinner';
 
 import useUpdateGameSession from '../hooks/useUpdateGameSession';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
-import GameSessions from '../components/GameSessions';
 
 const PreQuestionnairePage: React.FC = () => {
   const location = useLocation();
@@ -28,20 +27,49 @@ const PreQuestionnairePage: React.FC = () => {
   const { wheelchairPatient } = useWheelchairPatient(
     authUser?.id,
   );
+  const { updateSession } = useUpdateGameSession();
 
-  console.log('Passed on session id from GamePage', sessionId);
 
-  const startUnitySession = () => {
+  const startUnitySession = async () => {
     
     //Fetch the current session by id from the wheelchairPatient's array of gameSessions
     const currentSession = wheelchairPatient?.gameSessions.find(session => session.sessionId === sessionId);
     console.log('Current session id', currentSession?.sessionId);
 
-    // Open the Unity game using the custom URI scheme
-    window.location.href = `VRWheelchairSim://`;
-    /* Insert PUT here to send answers to questionnaire based on sessionID and userID */
-    /* Insert GET here to get the post questionnaire */
-    navigate('/game/post');
+    const questionnaireData = {
+      preGame: [
+        { question: 'Are you a wheelchair user?', type: 'radio' as 'radio', answer: radioAnswer },
+        { question: 'On a scale from 1 to 5, what is your current level of fitness?', type: 'scale' as 'scale', answer: sliderAnswer.toString() },
+        { question: 'Do you have any other comments?', type: 'freeText' as 'freeText', answer: freeTextAnswer }
+      ],
+      postGame: [] // Assuming it's empty for now, since post-game questions might be filled later
+    };
+
+    if (typeof authUser === 'undefined') {
+      throw new Error("patientId is undefined, but it's required for updating the session data.");
+    }
+
+    console.log('Questionnaire data', questionnaireData);
+      // Update the session
+    if (currentSession) {
+
+      const updateData = {
+        patientId: authUser.id,
+        sessionId: currentSession.sessionId,
+        sessionData: {
+          ...currentSession,
+          questionnaires: questionnaireData // Update this part with the questionnaire answers
+        }
+      };
+
+      try {
+        await updateSession(updateData);
+        window.location.href = `VRWheelchairSim://`;
+        navigate('/game/post');
+      } catch (error) {
+        console.error('Error updating session:', error);
+      }
+    }
   };
 
   function checkIfAllIsFIlled(): boolean {

@@ -1,4 +1,5 @@
 import { NonIndexRouteObject, Outlet, PathMatch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
@@ -16,6 +17,10 @@ import useAppSelector from '../hooks/useAppSelector';
 import EditProfilePage from '../pages/profile/EditProfilePage';
 import PostQuestionnairePage from '../pages/PostQuestionnairePage';
 import PreQuestionnairePage from '../pages/PreQuestionnairePage';
+import { signOutUser } from '../state/ducks/auth/auth.actions';
+import useAppDispatch from '../hooks/useAppDispatch';
+import { RootState } from '../state/store';
+import useWheelchairPatient from '../hooks/useWheelchairPatient';
 
 export interface RoutePathDefinition
   extends Omit<NonIndexRouteObject, 'children'> {
@@ -34,11 +39,13 @@ export type RoutePath = {
 
 function HomeRouter() {
   const { userDetails } = useAppSelector((state) => state.auth);
-  console.log(userDetails?.roles[0]);
+
   if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
     return <PatientsPage />;
+  } else if (userDetails?.roles.includes(UserRole.PATIENT)) {
+    return <PatientPage />;
   }
-  return <PatientPage />;
+  return <LoginPage />;
 }
 
 const routes: RoutePathDefinition[] = [

@@ -72,7 +72,7 @@ class TimeSeriesDataDto {
     // Add other fields like IMUData if necessary.
   }
 
-export class UpdateGameSessionDto {
+  export class UpdateGameSessionDto {
     @IsOptional()
     @IsDate()
     @Type(() => Date)
@@ -88,16 +88,10 @@ export class UpdateGameSessionDto {
     exerciseTime?: number;
 
     @IsOptional()
-    @IsArray()
-    @ValidateNested({ each: true })
-    @Type(() => QuestionDto)
-    preGame?: QuestionDto[];
-
-    @IsOptional()
-    @IsArray()
-    @ValidateNested({ each: true })
-    @Type(() => QuestionDto)
-    postGame?: QuestionDto[];
+    questionnaires?: {
+      preGame: QuestionDto[];
+      postGame: QuestionDto[];
+    };
 
     @IsOptional()
     @IsArray()
@@ -110,3 +104,4 @@ export class UpdateGameSessionDto {
     @Type(() => TimeSeriesDataDto)
     timeSeriesData?: TimeSeriesDataDto;
 }
+

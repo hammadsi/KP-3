@@ -65,7 +65,7 @@ const PreQuestionnairePage: React.FC = () => {
       try {
         await updateSession(updateData);
         window.location.href = `VRWheelchairSim://`;
-        navigate('/game/post');
+        navigate('/game/post', { state: { sessionId: sessionId } });
       } catch (error) {
         console.error('Error updating session:', error);
       }

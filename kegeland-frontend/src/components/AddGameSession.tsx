@@ -29,12 +29,14 @@ const mockWheelchairPatient: WheelchairPatient = {
           {
             question: 'How tired are you?',
             answer: 'Not tired',
+            type: 'freeText',
           },
         ],
         postGame: [
           {
             question: 'How tired are you?',
             answer: 'Moderate',
+            type: 'freeText',
           },
         ],
       },
@@ -88,10 +90,6 @@ const AddGameSession: React.FC = () => {
       mockWheelchairPatient.gameSessions[
         mockWheelchairPatient.gameSessions.length - 1
       ];
-    console.log(
-      'Is startTime a Date?',
-      latestSession.startTime instanceof Date,
-    );
 
     if (latestSession) {
       updateSession({

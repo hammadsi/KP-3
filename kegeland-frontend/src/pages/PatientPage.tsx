@@ -5,6 +5,7 @@ import {
   AiOutlineStock,
   AiOutlineCalendar,
 } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 
 import Card from '../components/Card';
 import LabeledValue from '../components/LabeledValue';
@@ -16,10 +17,9 @@ import useAppSelector from '../hooks/useAppSelector';
 import { UserRole } from '../state/ducks/auth/auth.interface';
 import FemfitExerciseTable from '../components/FemfitExerciseTable';
 import WheelchairExerciseTable from '../components/WheelchairExerciseTable';
-import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
-import { GameSession } from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
+import { ViewSession } from '../state/ducks/sessions/sessions.interface';
 
 type PatientPageParams = {
   patientId: string;
@@ -28,14 +28,19 @@ type PatientPageParams = {
 const PatientPage: React.FC = () => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const { patientId } = useParams<PatientPageParams>();
-  const { data, details, loading } = usePatient(patientId || '');
+  const { data, details: femfitDetails, loading } = usePatient(patientId || '');
   const { authUser } = useSelector((state: RootState) => state.auth);
-  const { wheelchairPatient, error } = useWheelchairPatient(authUser?.id);
+  const { gameSessions, details: wheelchairDetails } = useWheelchairPatient(
+    authUser?.id,
+  );
   const { userDetails } = useAppSelector((state) => state.auth);
 
-  const gameSessions = wheelchairPatient?.gameSessions
-    ? wheelchairPatient.gameSessions
-    : ([] as GameSession[]);
+  const sortedGameSessions = [...gameSessions].sort(
+    (a, b) => b.createdAt - a.createdAt,
+  );
+  const sortedData = [...data].sort((a, b) => b.createdAt - a.createdAt);
+
+  const allSessions: ViewSession[] = [...sortedData, ...sortedGameSessions];
 
   const headingStyle = {
     color: 'var(--chakra-colors-blackAlpha-800)',
@@ -56,33 +61,41 @@ const PatientPage: React.FC = () => {
       <Flex
         flexDirection={isGreaterThanLg ? 'row' : 'column'}
         flexBasis="100%"
-        flexWrap="nowrap"
-      >
+        flexWrap="nowrap">
         <Card
           marginRight={5}
           w={isGreaterThanLg ? '25%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}
-        >
+          loading={loading}>
           <Stack
             spacing={4}
             direction={isGreaterThanLg ? 'column' : 'row'}
             w="100%"
-            alignItems="flex-start"
-          >
+            alignItems="flex-start">
             <LabeledValue
               label="Workouts this week"
-              value={details.sessionsThisWeek}
+              value={
+                femfitDetails.sessionsThisWeek +
+                wheelchairDetails.sessionsThisWeek
+              }
               icon={AiOutlineCalendar}
             />
+            {/* TODO: Only shpw the one relevant for patient type */}
             <LabeledValue
-              label="Since last exercise"
-              value={details.lastSessionDelta}
+              label="Since last femfit exercise"
+              value={femfitDetails.lastSessionDelta}
+              icon={AiOutlineClockCircle}
+            />
+            <LabeledValue
+              label="Since last wheelchair exercise"
+              value={wheelchairDetails.lastSessionDelta}
               icon={AiOutlineClockCircle}
             />
             <LabeledValue
               label="Total workouts"
-              value={details.sessionsTotal}
+              value={
+                femfitDetails.sessionsTotal + wheelchairDetails.sessionsTotal
+              }
               icon={AiOutlineStock}
             />
           </Stack>
@@ -90,20 +103,24 @@ const PatientPage: React.FC = () => {
         <Card
           w={isGreaterThanLg ? '75%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}
-        >
-          <WeeklySessionsChart sessions={data} numWeeks={12} />
+          loading={loading}>
+          <WeeklySessionsChart sessions={allSessions} numWeeks={12} />
         </Card>
       </Flex>
 
+      {/* TODO: Only show the ones relevant for the patient type */}
+
       <h1 style={headingStyle}>Overview of Femfit exercises</h1>
       <Card loading={loading} minH="36">
-        <FemfitExerciseTable sessions={data} patientId={patientId!} />
+        <FemfitExerciseTable sessions={sortedData} patientId={patientId!} />
       </Card>
 
       <h1 style={headingStyle}>Overview of Wheelchair exercises</h1>
       <Card loading={loading} minH="36">
-        <WheelchairExerciseTable sessions={gameSessions} patientId={patientId!} />
+        <WheelchairExerciseTable
+          sessions={sortedGameSessions}
+          patientId={patientId!}
+        />
       </Card>
 
       {userDetails?.roles.includes(UserRole.PHYSICIAN) && (

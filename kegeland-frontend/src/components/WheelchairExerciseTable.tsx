@@ -3,8 +3,9 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import moment from 'moment';
 import React from 'react';
 
-import DataTable from './DataTable';
 import { GameSession } from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
+
+import DataTable from './DataTable';
 
 type ExerciseTableProps = {
   sessions: GameSession[];
@@ -35,6 +36,5 @@ const ExerciseTable: React.FC<ExerciseTableProps> = ({ sessions }) => {
 
   return <DataTable data={sessions} columns={columns} />;
 };
-
 
 export default ExerciseTable;

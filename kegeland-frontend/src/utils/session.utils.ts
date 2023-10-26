@@ -1,10 +1,7 @@
 import { groupBy, reduce } from 'lodash';
 import moment from 'moment';
 
-import {
-  LeanSession,
-  ViewSession,
-} from '../state/ducks/sessions/sessions.interface';
+import { ViewSession } from '../state/ducks/sessions/sessions.interface';
 
 export const groupByWeek = (sessions: ViewSession[], numWeeks: number) => {
   const currWeek = moment().week();
@@ -41,7 +38,10 @@ export const getNumSessionsThisWeek = (sessions: ViewSession[]) => {
 
 export const getLastSessionTimeDelta = (sessions: ViewSession[]) => {
   if (sessions.length > 0) {
-    return moment(sessions[0].createdAt).fromNow();
+    const sortedSessions = [...sessions].sort(
+      (a, b) => b.createdAt - a.createdAt,
+    );
+    return moment(sortedSessions[0].createdAt).fromNow();
   }
   return 0;
 };

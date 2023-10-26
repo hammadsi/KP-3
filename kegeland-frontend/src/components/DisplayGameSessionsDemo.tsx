@@ -79,8 +79,8 @@ const DisplayGameSessionsDemo: React.FC = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {Array.isArray(session.questionaires?.preGame) ? (
-                    session.questionaires.preGame.map((q, qIndex) => (
+                {Array.isArray(session.questionnaires?.preGame) ? (
+                    session.questionnaires.preGame.map((q, qIndex) => (
                     <tr key={qIndex}>
                         <td style={questionnaireCellStyle}>{q.question}</td>
                         <td style={questionnaireCellStyle}>{q.answer}</td>
@@ -105,8 +105,8 @@ const DisplayGameSessionsDemo: React.FC = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {Array.isArray(session.questionaires?.postGame) ? (
-                    session.questionaires.postGame.map((q, qIndex) => (
+                {Array.isArray(session.questionnaires?.postGame) ? (
+                    session.questionnaires.postGame.map((q, qIndex) => (
                     <tr key={qIndex}>
                         <td style={questionnaireCellStyle}>{q.question}</td>
                         <td style={questionnaireCellStyle}>{q.answer}</td>

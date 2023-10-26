@@ -21,7 +21,7 @@ export type GameSession = {
   startTime: Date;
   endTime: Date;
   exerciseTime: number;
-  questionaires: {
+  questionnaires: {
     preGame: Questionaire[];
     postGame: Questionaire[];
   };
@@ -83,7 +83,7 @@ export type GameSessionData = {
   startTime: Date;
   endTime: Date;
   exerciseTime: number;
-  questionaires: {
+  questionnaires: {
     preGame: Questionaire[];
     postGame: Questionaire[];
   };

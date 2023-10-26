@@ -1,14 +1,12 @@
 import { Button, Center, Flex, Text } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
-
 import useAddEmptyGameSession from '../hooks/useAddEmptyGameSession';
 import useUpdateGameSession from '../hooks/useUpdateGameSession';
-
 import { RootState } from '../state/store';
-import { useSelector } from 'react-redux';
 import { GameSessionData } from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
 
 const GamePage: React.FC = () => {
@@ -22,7 +20,7 @@ const GamePage: React.FC = () => {
       if (authUser) {
         // Create a new game session first
         const sessionId = await addGameSession(authUser?.id);
-        console.log('Session id', sessionId)
+        console.log('Session id', sessionId);
 
         // Default payload for the game session
         const defaultSessionData = {
@@ -39,17 +37,17 @@ const GamePage: React.FC = () => {
             speeds: [],
             imus: [],
             // Include other fields like IMUData if necessary
-          }
+          },
         } as GameSessionData;
 
         if (sessionId) {
           await updateSession({
             patientId: authUser!.id, // Assuming authUser.id is the patient ID
-            sessionId: sessionId,
-            sessionData: defaultSessionData
+            sessionId,
+            sessionData: defaultSessionData,
           });
         } else {
-          console.error("Session ID is null.");
+          console.error('Session ID is null.');
           // Handle the error state appropriately
         }
 
@@ -63,7 +61,6 @@ const GamePage: React.FC = () => {
     <Center>
       <Flex
         flexDirection="column"
-
         justifyContent="center"
         alignItems="center"
         textAlign="center">

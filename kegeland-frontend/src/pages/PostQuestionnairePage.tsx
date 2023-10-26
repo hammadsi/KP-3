@@ -1,14 +1,13 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import withSpinner from '../hoc/withSpinner';
 import SliderQuestion from '../components/SliderQuestion';
 import FreeTextQuestion from '../components/FreeTextQuestion';
 import RadioQuestion from '../components/RadioQuestion';
 import withLayout from '../hoc/withLayout';
-
-import { useSelector } from 'react-redux';
 import { RootState } from '../state/store';
 import useUpdateGameSession from '../hooks/useUpdateGameSession';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
@@ -17,7 +16,7 @@ const PostQuestionnairePage: React.FC = () => {
   const location = useLocation();
   const sessionState = location.state as { sessionId: string };
   const sessionId = sessionState?.sessionId;
-  
+
   const navigate = useNavigate();
   const [radioAnswer, setRadioAnswer] = useState('');
   const [sliderAnswer, setSliderAnswer] = useState(0);
@@ -28,27 +27,41 @@ const PostQuestionnairePage: React.FC = () => {
   const { updateSession } = useUpdateGameSession();
 
   const endSession = async () => {
-    const currentSession = wheelchairPatient?.gameSessions.find(session => session.sessionId === sessionId);
-  
+    const currentSession = wheelchairPatient?.gameSessions.find(
+      (session) => session.sessionId === sessionId,
+    );
+
     if (currentSession && authUser) {
       const questionnaireData = {
-        ...currentSession.questionnaires,  // Spreads existing questionnaire data including preGame
+        ...currentSession.questionnaires, // Spreads existing questionnaire data including preGame
         postGame: [
-          { question: 'Motivation level?', type: 'scale' as 'scale', answer: sliderAnswer.toString() },
-          { question: 'Recommend session?', type: 'radio' as 'radio', answer: radioAnswer },
-          { question: 'Feedback?', type: 'freeText' as 'freeText', answer: freeTextAnswer }
-        ]
+          {
+            question: 'Motivation level?',
+            type: 'scale' as 'scale',
+            answer: sliderAnswer.toString(),
+          },
+          {
+            question: 'Recommend session?',
+            type: 'radio' as 'radio',
+            answer: radioAnswer,
+          },
+          {
+            question: 'Feedback?',
+            type: 'freeText' as 'freeText',
+            answer: freeTextAnswer,
+          },
+        ],
       };
-  
+
       const updateData = {
         patientId: authUser.id,
-        sessionId: sessionId,
+        sessionId,
         sessionData: {
           ...currentSession,
-          questionnaires: questionnaireData
-        }
+          questionnaires: questionnaireData,
+        },
       };
-  
+
       try {
         await updateSession(updateData);
         navigate('/'); // Or navigate to any page you wish
@@ -57,8 +70,6 @@ const PostQuestionnairePage: React.FC = () => {
       }
     }
   };
-  
-
 
   function checkIfAllIsFIlled(): boolean {
     if (

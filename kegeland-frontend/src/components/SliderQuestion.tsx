@@ -30,8 +30,7 @@ const SliderQuestion: React.FC<SliderQuestionProps> = ({
         fontWeight="semibold"
         color="gray.600"
         paddingBottom={2}
-        marginStart={0}
-      >
+        marginStart={0}>
         {question}
       </Text>
       <Slider
@@ -41,8 +40,7 @@ const SliderQuestion: React.FC<SliderQuestionProps> = ({
         max={5}
         onChange={handleSliderChange}
         step={1}
-        size="lg"
-      >
+        size="lg">
         <SliderMark value={1} mt="3" ml="-1" mb="10" fontSize="m">
           1
         </SliderMark>

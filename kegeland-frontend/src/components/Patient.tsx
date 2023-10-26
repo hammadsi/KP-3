@@ -21,8 +21,7 @@ const Patient: React.FC<PatientProps> = ({ name, id }) => {
       boxShadow={'md'}
       rounded={'md'}
       overflow={'wrap'}
-      justifyContent="center"
-    >
+      justifyContent="center">
       <Flex p={6} direction="column" alignItems="center">
         <Avatar />
         <Stack spacing={0} align={'center'} mb={5}>
@@ -40,8 +39,7 @@ const Patient: React.FC<PatientProps> = ({ name, id }) => {
               boxShadow: 's',
               borderColor: 'black',
               borderWidth: '2px',
-            }}
-          >
+            }}>
             Show profile
           </Button>
         </Link>

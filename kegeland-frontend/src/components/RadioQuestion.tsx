@@ -26,8 +26,7 @@ const RadioQuestion: React.FC<RadioQuestionProps> = ({
         fontWeight="semibold"
         color="gray.600"
         paddingBottom={2}
-        marginStart={0}
-      >
+        marginStart={0}>
         {question}
       </Text>
       <RadioGroup onChange={handleAnswerChange} value={radioValue}>

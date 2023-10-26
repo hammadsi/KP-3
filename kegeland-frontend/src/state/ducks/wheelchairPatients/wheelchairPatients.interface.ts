@@ -81,6 +81,7 @@ export type UpdateGameSessionData = {
 };
 
 export type GameSessionData = {
+  createdAt: number;
   startTime: Date;
   endTime: Date;
   exerciseTime: number;

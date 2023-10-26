@@ -9,7 +9,6 @@ export type LeanSession = {
   sensor: SensorType;
   createdAt: number;
 };
-
 export type ViewSession = LeanSession | GameSession;
 
 export interface Session extends LeanSession {

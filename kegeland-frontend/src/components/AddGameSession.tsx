@@ -19,6 +19,7 @@ const mockWheelchairPatient: WheelchairPatient = {
   },
   gameSessions: [
     {
+      createdAt: Date.now(),
       id: '28ceabH5I9zm1BguEbcB',
       startTime: new Date(),
       endTime: new Date(),
@@ -26,8 +27,8 @@ const mockWheelchairPatient: WheelchairPatient = {
       questionaires: {
         preGame: [
           {
-            question: 'How do you feel?',
-            answer: 'Good',
+            question: 'How tired are you?',
+            answer: 'Not tired',
           },
         ],
         postGame: [

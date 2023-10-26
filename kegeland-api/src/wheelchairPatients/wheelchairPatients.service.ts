@@ -113,7 +113,7 @@ export class WheelchairPatientsService {
         .collection('gameSessions');
 
       const newSession = {
-        createdAt: firestore.Timestamp.now(),
+        createdAt: firestore.Timestamp.now().seconds,
       };
 
       const newSessionRef = await gameSessionsCollection.add(newSession);

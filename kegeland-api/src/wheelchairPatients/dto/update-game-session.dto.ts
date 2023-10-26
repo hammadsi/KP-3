@@ -4,9 +4,16 @@ import {
     IsString, 
     IsArray, 
     ValidateNested, 
-    IsDate 
+    IsDate, 
+    IsEnum
 } from 'class-validator';
 import { Type } from 'class-transformer';
+
+export enum QuestionType {
+    freeText = 'freeText',
+    scale = 'scale',
+    radio = 'radio'
+}
 
 class QuestionDto {
     @IsString()
@@ -14,6 +21,9 @@ class QuestionDto {
 
     @IsString()
     answer: string;
+
+    @IsEnum(QuestionType)
+    type: QuestionType;
 }
 
 class LapDto {
@@ -62,7 +72,7 @@ class TimeSeriesDataDto {
     // Add other fields like IMUData if necessary.
   }
 
-export class UpdateGameSessionDto {
+  export class UpdateGameSessionDto {
     @IsOptional()
     @IsDate()
     @Type(() => Date)
@@ -78,16 +88,10 @@ export class UpdateGameSessionDto {
     exerciseTime?: number;
 
     @IsOptional()
-    @IsArray()
-    @ValidateNested({ each: true })
-    @Type(() => QuestionDto)
-    preGame?: QuestionDto[];
-
-    @IsOptional()
-    @IsArray()
-    @ValidateNested({ each: true })
-    @Type(() => QuestionDto)
-    postGame?: QuestionDto[];
+    questionnaires?: {
+      preGame: QuestionDto[];
+      postGame: QuestionDto[];
+    };
 
     @IsOptional()
     @IsArray()
@@ -100,3 +104,4 @@ export class UpdateGameSessionDto {
     @Type(() => TimeSeriesDataDto)
     timeSeriesData?: TimeSeriesDataDto;
 }
+

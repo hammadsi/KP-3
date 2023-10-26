@@ -1,21 +1,74 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import withSpinner from '../hoc/withSpinner';
 import SliderQuestion from '../components/SliderQuestion';
 import FreeTextQuestion from '../components/FreeTextQuestion';
 import RadioQuestion from '../components/RadioQuestion';
 import withLayout from '../hoc/withLayout';
+import { RootState } from '../state/store';
+import useUpdateGameSession from '../hooks/useUpdateGameSession';
+import useWheelchairPatient from '../hooks/useWheelchairPatient';
 
 const PostQuestionnairePage: React.FC = () => {
+  const location = useLocation();
+  const sessionState = location.state as { sessionId: string };
+  const sessionId = sessionState?.sessionId;
+
   const navigate = useNavigate();
   const [radioAnswer, setRadioAnswer] = useState('');
   const [sliderAnswer, setSliderAnswer] = useState(0);
   const [freeTextAnswer, setFreeTextAnswer] = useState('');
 
-  const endSession = () => {
-    navigate('/');
+  const { authUser } = useSelector((state: RootState) => state.auth);
+  const { wheelchairPatient } = useWheelchairPatient(authUser?.id);
+  const { updateSession } = useUpdateGameSession();
+
+  const endSession = async () => {
+    const currentSession = wheelchairPatient?.gameSessions.find(
+      (session) => session.sessionId === sessionId,
+    );
+
+    if (currentSession && authUser) {
+      const questionnaireData = {
+        ...currentSession.questionnaires, // Spreads existing questionnaire data including preGame
+        postGame: [
+          {
+            question: 'Motivation level?',
+            type: 'scale' as 'scale',
+            answer: sliderAnswer.toString(),
+          },
+          {
+            question: 'Recommend session?',
+            type: 'radio' as 'radio',
+            answer: radioAnswer,
+          },
+          {
+            question: 'Feedback?',
+            type: 'freeText' as 'freeText',
+            answer: freeTextAnswer,
+          },
+        ],
+      };
+
+      const updateData = {
+        patientId: authUser.id,
+        sessionId,
+        sessionData: {
+          ...currentSession,
+          questionnaires: questionnaireData,
+        },
+      };
+
+      try {
+        await updateSession(updateData);
+        navigate('/'); // Or navigate to any page you wish
+      } catch (error) {
+        console.error('Error updating post-game session:', error);
+      }
+    }
   };
 
   function checkIfAllIsFIlled(): boolean {
@@ -46,14 +99,12 @@ const PostQuestionnairePage: React.FC = () => {
       justifyContent="center"
       alignItems="center"
       textAlign="center"
-      flexDirection="column"
-    >
+      flexDirection="column">
       <Text
         fontSize={26}
         fontWeight="semibold"
         color="gray.600"
-        marginBottom={4}
-      >
+        marginBottom={4}>
         Post Questionnaire
       </Text>
       {/* Insert all of the questions here */}
@@ -78,8 +129,7 @@ const PostQuestionnairePage: React.FC = () => {
         <Button
           isDisabled={!checkIfAllIsFIlled()}
           marginTop={4}
-          onClick={endSession}
-        >
+          onClick={endSession}>
           End session
         </Button>
       </Box>

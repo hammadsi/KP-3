@@ -13,9 +13,12 @@ const useAddEmptyGameSession = () => {
     setLoading(true);
     setError(null);
     try {
-      await dispatch(addEmptyGameSession(patientId));
+      const actionResult = await dispatch(addEmptyGameSession(patientId));
+      const sessionId = (actionResult.payload as { id: string }).id;
+      return sessionId;
     } catch (e: any) {
       setError(`Failed to add empty game session: ${e.message}`);
+      return null;
     } finally {
       setLoading(false);
     }

@@ -59,8 +59,7 @@ const GraphOptionsModal: React.FC<GraphOptionsProps> = ({
                         value={val.plotType}
                         onChange={(event) =>
                           updatePlot(label, event.target.value as ChartType)
-                        }
-                      >
+                        }>
                         <option value="line">Line plot</option>
                         <option value="bar">Bar plot</option>
                         <option value="scatter">Scatter plot</option>

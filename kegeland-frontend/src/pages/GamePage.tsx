@@ -11,7 +11,7 @@ import { GameSessionData } from '../state/ducks/wheelchairPatients/wheelchairPat
 
 const GamePage: React.FC = () => {
   const navigate = useNavigate();
-  const { addGameSession, loading, error } = useAddEmptyGameSession();
+  const { addGameSession, error } = useAddEmptyGameSession();
   const { authUser } = useSelector((state: RootState) => state.auth);
   const { updateSession } = useUpdateGameSession();
 

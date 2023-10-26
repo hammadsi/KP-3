@@ -31,7 +31,6 @@ const PreQuestionnairePage: React.FC = () => {
     const currentSession = wheelchairPatient?.gameSessions.find(
       (session) => session.id === sessionId,
     );
-    console.log('Current session id', currentSession?.id);
 
     const questionnaireData = {
       preGame: [
@@ -61,7 +60,6 @@ const PreQuestionnairePage: React.FC = () => {
       );
     }
 
-    console.log('Questionnaire data', questionnaireData);
     // Update the session
     if (currentSession) {
       const updateData = {

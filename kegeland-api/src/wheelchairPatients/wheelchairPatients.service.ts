@@ -1,6 +1,6 @@
 import { FirebaseService } from 'src/firebase/firebase.service';
 import { firestore } from 'firebase-admin';
-import { UpdateGameSessionDto } from './dto/update-game-session.dto';
+import { HeartRateDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { GameSession } from './entities/wheelchairPatient.entity'
 import { UpdatePhysicalStateDto } from './dto/update-physicalstate.dto';
@@ -198,6 +198,34 @@ export class WheelchairPatientsService {
       });
 
       return { id, ...transformedSession };
+    } catch (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+  }
+
+  async addHeartRateToGameSession(patientId: string, sessionId: string, heartRateData: HeartRateDto) {
+    try {
+      const gameSessionDocRef = this.firebaseService.firestore
+        .collection('patients')
+        .doc(patientId)
+        .collection('gameSessions')
+        .doc(sessionId);
+  
+      // Check if the game session exists
+      const docSnapshot = await gameSessionDocRef.get();
+      if (!docSnapshot.exists) {
+        throw new NotFoundException(`Game session with ID ${sessionId} not found`);
+      }
+  
+      // Add the new heart rate data
+      await gameSessionDocRef.update({
+        heartRates: firestore.FieldValue.arrayUnion({
+          heartRate: heartRateData.heartRate,
+          timestamp: firestore.Timestamp.fromDate(heartRateData.timestamp)
+        })
+      });
+  
+      return { success: true };
     } catch (error) {
       throw new InternalServerErrorException(error.message);
     }

@@ -8,9 +8,12 @@ public class DataCollector : MonoBehaviour
 {
     private GameSession gameSession;
     public float heartRateInterval = 1.0f; // Interval time in seconds
+    public ApiManager apiManager;
+
 
     private void Start()
     {
+        apiManager = FindObjectOfType<ApiManager>();
         gameSession = new GameSession();
         gameSession.laps = new List<Lap>();
         gameSession.timeSeriesData = new TimeSeriesData
@@ -49,19 +52,14 @@ public class DataCollector : MonoBehaviour
         }
     }
 
-
     private void OnApplicationQuit()
     {
-        // Stop the heart rate collection coroutine
-        StopCoroutine(CollectHeartRate());
-
-        // Send gameSession to API
         SendDataToAPI();
     }
 
-    private void SendDataToAPI()
-    {
-        // Logic to send gameSession to API
-        // Serialize gameSession to JSON and then send to API
-    }
+private void SendDataToAPI()
+{
+    string gameSessionJson = JsonUtility.ToJson(gameSession);
+    StartCoroutine(apiManager.UpdateGameSession(apiManager.patientID, "sessionId", gameSessionJson));
+}
 }

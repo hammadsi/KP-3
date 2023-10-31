@@ -24,3 +24,8 @@ export type FetchSessionsDto = {
   sensor?: SensorType;
   userId?: string;
 };
+
+export type FetchSessionDto = {
+  patientId: string;
+  exerciseId: string;
+};

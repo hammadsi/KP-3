@@ -15,7 +15,7 @@ type ExercisePageParams = {
   exerciseId: string;
 };
 
-const ExercisePage: React.FC = () => {
+const WheelChairPage: React.FC = () => {
   const patientId = "2P9gfi0u1foJiyoK3ovJ";
   const exerciseId = "28ceabH5I9zm1BguEbcB";
 
@@ -25,6 +25,8 @@ const ExercisePage: React.FC = () => {
   );
   const [visible, setVisible] = useState(false);
 
+  console.log("Se under her:")
+  console.log(patientId, exerciseId)
   console.log(sensor, session)
 
   return (
@@ -54,4 +56,4 @@ const ExercisePage: React.FC = () => {
   );
 };
 
-export default withLayout(withSpinner(ExercisePage, 300));
+export default withLayout(withSpinner(WheelChairPage, 300));

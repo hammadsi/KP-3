@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 10691.807, g: 9274.809, b: 9066.74, a: 1}
+  m_IndirectSpecularColor: {r: 10685.119, g: 9269.797, b: 9064.779, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5767,6 +5767,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartRateInterval: 1
+  apiManager: {fileID: 0}
 --- !u!114 &1065444801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5779,8 +5780,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1e8c97693be6864d9054681afb1cc76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patientID: 2
-  bearerToken: 2
+  patientID: 
+  bearerToken: 
 --- !u!1 &1075120533
 GameObject:
   m_ObjectHideFlags: 0

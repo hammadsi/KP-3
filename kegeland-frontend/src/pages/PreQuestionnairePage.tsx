@@ -61,19 +61,31 @@ const PreQuestionnairePage: React.FC = () => {
     }
 
     // Update the session
+
+    const bearerToken = localStorage.getItem('access_token');
+    if (!bearerToken) {
+      throw new Error(
+        "Bearer token is not found in local storage, can't proceed.",
+      );
+    }
+
+    // Construct the URL to launch Unity
+    const unityUrl = `VRWheelchairSim://?patientId=${authUser.id}&bearerToken=${bearerToken}`;
+
+    // Update the session
     if (currentSession) {
       const updateData = {
         patientId: authUser.id,
         id: currentSession.id,
         sessionData: {
           ...currentSession,
-          questionnaires: questionnaireData, // Update this part with the questionnaire answers
+          questionnaires: questionnaireData,
         },
       };
 
       try {
         await updateSession(updateData);
-        window.location.href = `VRWheelchairSim://`;
+        window.location.href = unityUrl; // Launch Unity with the required parameters
         navigate('/game/post', { state: { sessionId } });
       } catch (error) {
         console.error('Error updating session:', error);

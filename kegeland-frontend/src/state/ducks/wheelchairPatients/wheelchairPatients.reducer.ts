@@ -54,7 +54,7 @@ const wheelchairPatientsSlice = createSlice({
       .addCase(updateGameSession.fulfilled, (state, action) => {
         if (state.wheelchairPatient) {
           const sessionIndex = state.wheelchairPatient.gameSessions.findIndex(
-            (session) => session.sessionId === action.payload.sessionId,
+            (session) => session.id === action.payload.id,
           );
           if (sessionIndex > -1) {
             state.wheelchairPatient.gameSessions[sessionIndex] = action.payload;

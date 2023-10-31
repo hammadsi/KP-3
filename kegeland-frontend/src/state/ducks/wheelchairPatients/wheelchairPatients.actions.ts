@@ -41,11 +41,11 @@ export const updateGameSession = createAsyncThunk(
   'wheelchairpatients/updateGameSession',
   async (payload: {
     patientId: string;
-    sessionId: string;
+    id: string;
     sessionData: GameSessionData;
   }) =>
     apiCaller<GameSession>({
-      url: `wheelchairPatients/${payload.patientId}/gameSessions/${payload.sessionId}`,
+      url: `wheelchairPatients/${payload.patientId}/gameSessions/${payload.id}`,
       method: 'PUT',
       data: payload.sessionData,
     }),

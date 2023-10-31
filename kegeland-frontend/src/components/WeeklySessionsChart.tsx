@@ -4,17 +4,17 @@ import 'chart.js/auto';
 import { useTheme } from '@chakra-ui/react';
 import { merge } from 'lodash';
 
-import { LeanSession } from '../state/ducks/sessions/sessions.interface';
+import { ViewSession } from '../state/ducks/sessions/sessions.interface';
 import { groupByWeek } from '../utils/session.utils';
 import { CustomTheme } from '../types';
 
 type WeeklySessionsChartProps = {
-  sessions: LeanSession[];
+  sessions: ViewSession[];
   numWeeks: number;
 };
 
 const initChartData = (
-  sessions: LeanSession[],
+  sessions: ViewSession[],
   numWeeks: number,
   color: string,
 ): ChartData<'bar'> => {

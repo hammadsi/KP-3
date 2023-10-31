@@ -89,7 +89,7 @@ describe('Sessions', () => {
         userId: '_id',
         answeredAt: timestamp(),
         answers: [1, 2, 3],
-        sessionId: '_id',
+        id: '_id',
       };
       const res = await questionnairesService.createAnswer('_id', data);
       expect(res).toStrictEqual({ id: '_id2', ...data });
@@ -99,7 +99,7 @@ describe('Sessions', () => {
         userId: '_id',
         answeredAt: timestamp(),
         answers: [1, 2, 3],
-        sessionId: '_id',
+        id: '_id',
       };
       const res = await questionnairesService.updateAnswer('_id', '_id', data);
       expect(res).toStrictEqual({ id: '_id', ...data });

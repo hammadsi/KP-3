@@ -41,6 +41,7 @@ const useGraphProfile = (sensor: Sensor, session: Session) => {
   const handleHideLabel = (_event: ChartEvent, item: LegendItem) => {
     const key = item.text;
     const idx = getLabelIndex(sensor, key);
+
     if (profile && idx !== undefined) {
       const isHidden = chartRef.current?.data.datasets[idx].hidden;
       const newProfile = set(

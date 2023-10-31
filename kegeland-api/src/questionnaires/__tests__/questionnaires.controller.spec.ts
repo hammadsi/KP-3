@@ -113,10 +113,10 @@ describe('QuestionnairesController', () => {
       });
 
       await request(app.getHttpServer()).get(
-        '/questionnaires/2/answers?sessionId=1234',
+        '/questionnaires/2/answers?id=1234',
       );
       expect(spyService.findAllAnswers).toHaveBeenCalledWith('2', {
-        sessionId: '1234',
+        id: '1234',
       });
     });
 
@@ -128,7 +128,7 @@ describe('QuestionnairesController', () => {
     it('should call createAnswer in controller', async () => {
       const body: CreateAnswerDto = {
         userId: '1234',
-        sessionId: '5678',
+        id: '5678',
         answeredAt: 1234,
         answers: [1, 2, 3, 4],
       };
@@ -141,7 +141,7 @@ describe('QuestionnairesController', () => {
     it('should call updateAnswer in controller', async () => {
       const updateBody: UpdateAnswerDto = {
         userId: '1234',
-        sessionId: '5678',
+        id: '5678',
         answeredAt: 1234,
       };
 
@@ -155,7 +155,7 @@ describe('QuestionnairesController', () => {
     it('should remove unvalidField when updateAnswer is called in controller', async () => {
       const invalidBody: any = {
         userId: '1234',
-        sessionId: '5678',
+        id: '5678',
         answeredAt: 1234,
         invalidField: 'not valid field',
       };

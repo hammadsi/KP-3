@@ -18,10 +18,10 @@ export class SessionsService {
    * @param id of session to be found
    * @returns Session object
    */
-  async findOneByPatientAndExercise(patientiID: string, exerciseID: string): Promise<Session> {
+  async findOneByPatientAndExercise(patientID: string, exerciseID: string): Promise<Session> {
     const snapshot = await this.firebaseService.firestore
-      .collection('sessions')
-      .doc(patientiID)
+      .collection('patients')
+      .doc(patientID)
       .collection('gameSessions')
       .doc(exerciseID)
       .get();

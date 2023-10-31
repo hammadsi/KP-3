@@ -25,9 +25,6 @@ const WheelChairPage: React.FC = () => {
   );
   const [visible, setVisible] = useState(false);
 
-  console.log("Se under her:")
-  console.log(patientId, exerciseId)
-  console.log(sensor, session)
 
   return (
     <>
@@ -35,7 +32,6 @@ const WheelChairPage: React.FC = () => {
         {sensor && session && (
           <ExerciseGraph sensor={sensor!} session={session!} />
         )}
-        {patientId}
       </Card>
       <Button
         onClick={() => {

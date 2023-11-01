@@ -37,10 +37,6 @@ public class HeartRateData
 {
     public int heartRate;
     public string timestamp;
-    public override string ToString()
-    {
-        return $"HR: {heartRate}, Timestamp: {timestamp}";
-    }
 }
 
 [Serializable]

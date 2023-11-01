@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 10685.119, g: 9269.797, b: 9064.779, a: 1}
+  m_IndirectSpecularColor: {r: 10414.056, g: 8925.41, b: 8366.302, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5623,6 +5623,7 @@ GameObject:
   - component: {fileID: 1065444799}
   - component: {fileID: 1065444801}
   - component: {fileID: 1065444800}
+  - component: {fileID: 1065444802}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5767,7 +5768,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heartRateInterval: 1
-  apiManager: {fileID: 0}
 --- !u!114 &1065444801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5782,6 +5782,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patientID: 
   bearerToken: 
+  sessionId: 
+--- !u!114 &1065444802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065444791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 752a8ecefcb13a64abe829ea755db3be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1075120533
 GameObject:
   m_ObjectHideFlags: 0

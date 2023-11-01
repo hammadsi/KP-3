@@ -16,14 +16,16 @@ public class ParameterHandler : MonoBehaviour
 
         string patientID = ParseUrlParameter(url, "patientId");
         string bearerToken = ParseUrlParameter(url, "bearerToken");
+        string sessionId = ParseUrlParameter(url, "sessionId");
 
-        if (!string.IsNullOrEmpty(patientID) && !string.IsNullOrEmpty(bearerToken))
+        if (!string.IsNullOrEmpty(patientID) && !string.IsNullOrEmpty(bearerToken) && !string.IsNullOrEmpty(sessionId))
         {
             ApiManager apiManager = FindObjectOfType<ApiManager>();
             if (apiManager != null)
             {
                 apiManager.patientID = patientID;
                 apiManager.bearerToken = bearerToken;
+                apiManager.sessionId = sessionId; // Set the sessionId in ApiManager
                 debugText.gameObject.SetActive(false);
             }
             else

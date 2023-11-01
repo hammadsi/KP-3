@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -8,8 +9,15 @@ public class ApiManager : MonoBehaviour
     public string patientID;
     public string bearerToken;
 
+    public string sessionId;
+    LogManager logManager;
+
     void Start()
     {
+        logManager = FindObjectOfType<LogManager>();
+        logManager.Log("User ID: " + patientID);
+        logManager.Log("Game Session ID: " + sessionId);
+        logManager.Log("Bearer Token: " + bearerToken);
         if (string.IsNullOrEmpty(bearerToken))
         {
             Debug.LogError("Bearer token is not set!");
@@ -17,7 +25,7 @@ public class ApiManager : MonoBehaviour
         }
 
         // Example of sending a GET request to fetch patient data
-        StartCoroutine(GetRequest(new System.Uri($"{apiUrl}/wheelchairPatients/{patientID}")));
+        //StartCoroutine(GetRequest(new System.Uri($"{apiUrl}/wheelchairPatients/{patientID}")));
     }
 
     private void SetCommonHeaders(UnityWebRequest webRequest)
@@ -38,6 +46,8 @@ public class ApiManager : MonoBehaviour
 
     public IEnumerator PostRequest(System.Uri uri, string jsonData)
     {
+        logManager.Log("Sending POST request to: " + uri.ToString());
+        logManager.Log("Data: " + jsonData);
         using (UnityWebRequest webRequest = new UnityWebRequest(uri, "POST"))
         {
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
@@ -51,6 +61,8 @@ public class ApiManager : MonoBehaviour
 
     public IEnumerator PutRequest(System.Uri uri, string jsonData)
     {
+        logManager.Log("Sending PUT request to: " + uri.ToString());
+        logManager.Log("Data: " + jsonData);
         using (UnityWebRequest webRequest = new UnityWebRequest(uri, "PUT"))
         {
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
@@ -66,16 +78,16 @@ public class ApiManager : MonoBehaviour
     {
         if (webRequest.result == UnityWebRequest.Result.ConnectionError)
         {
-            Debug.LogError("Error: " + webRequest.error);
+            logManager.LogError("Error: " + webRequest.error);
         }
         else if (webRequest.responseCode >= 200 && webRequest.responseCode < 300)
         {
-            Debug.Log("Response: " + webRequest.downloadHandler.text);
+            logManager.Log("Response: " + webRequest.downloadHandler.text);
             ProcessResponse(webRequest.downloadHandler.text);
         }
         else
         {
-            Debug.LogError("HTTP Error: " + webRequest.responseCode);
+            logManager.LogError("HTTP Error: " + webRequest.responseCode);
         }
     }
 
@@ -100,5 +112,12 @@ public class ApiManager : MonoBehaviour
     {
         System.Uri uri = new System.Uri($"{apiUrl}/{patientId}/gameSessions/{sessionId}");
         yield return PutRequest(uri, jsonData);
+    }
+
+    public IEnumerator addHeartRateToGameSession(string patientId, string sessionId, HeartRateData heartRateData) 
+    {
+        string uri = $"{apiUrl}/{patientId}/gameSessions/{sessionId}/heartRate";
+        string jsonData = JsonUtility.ToJson(heartRateData);
+        yield return PostRequest(new Uri(uri), jsonData);
     }
 }

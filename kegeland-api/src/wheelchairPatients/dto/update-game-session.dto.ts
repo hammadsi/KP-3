@@ -35,7 +35,7 @@ class LapDto {
     timeStamp: Date;
 }
 
-class HeartRateDto {
+export class HeartRateDto {
     @IsNumber()
     heartRate: number;
 

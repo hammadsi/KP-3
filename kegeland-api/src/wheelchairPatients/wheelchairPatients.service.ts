@@ -44,7 +44,7 @@ export class WheelchairPatientsService {
 
     if (session.laps) {
         session.laps.forEach(lap => {
-            lap.timeStamp = this.convertToJsDate(lap.timeStamp);
+            lap.timestamp = this.convertToJsDate(lap.timestamp);
         });
     }
 
@@ -271,7 +271,7 @@ export class WheelchairPatientsService {
       // Prepare the lap data for update
       const lapUpdate = {
         lapTime: lap.lapTime,
-        timeStamp: firestore.Timestamp.fromDate(lap.timeStamp)
+        timestamp: firestore.Timestamp.fromDate(lap.timestamp)
       };
   
       // Update the game session document with the new lap data

@@ -68,7 +68,7 @@ class Lap {
 
   @Expose()
   @IsDate()
-  timeStamp: Date;
+  timestamp: Date;
 }
 
 class HeartRate {

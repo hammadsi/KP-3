@@ -32,7 +32,7 @@ export class LapDto {
 
     @IsDate()
     @Type(() => Date)
-    timeStamp: Date;
+    timestamp: Date;
 }
 
 export class HeartRateDto {

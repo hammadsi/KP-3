@@ -11,6 +11,7 @@ import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
 import useUpdateGameSession from '../hooks/useUpdateGameSession';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
+import useAddHeartRate from '../hooks/useAddHeartRate';
 
 const PreQuestionnairePage: React.FC = () => {
   const location = useLocation();
@@ -25,6 +26,7 @@ const PreQuestionnairePage: React.FC = () => {
   const { authUser } = useSelector((state: RootState) => state.auth);
   const { wheelchairPatient } = useWheelchairPatient(authUser?.id);
   const { updateSession } = useUpdateGameSession();
+  // const { addHeartRate } = useAddHeartRate();
 
   const startUnitySession = async () => {
     // Fetch the current session by id from the wheelchairPatient's array of gameSessions
@@ -62,6 +64,7 @@ const PreQuestionnairePage: React.FC = () => {
 
     // Update the session
     if (currentSession) {
+
       const updateData = {
         patientId: authUser.id,
         id: currentSession.id,
@@ -73,6 +76,11 @@ const PreQuestionnairePage: React.FC = () => {
 
       try {
         await updateSession(updateData);
+
+        const heartRate = 80; // the heart rate value
+        const timestamp = new Date(); // current time
+        // For manual testing, you can use the following code to add a heart rate to the session
+        // await addHeartRate(authUser.id, sessionId, heartRate, timestamp);
         window.location.href = `VRWheelchairSim://`;
         navigate('/game/post', { state: { sessionId } });
       } catch (error) {

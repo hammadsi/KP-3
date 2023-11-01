@@ -85,28 +85,20 @@ const PatientPage: React.FC = () => {
           const parts = line.split(',');
 
           if (parts.length === 7) {
-            const [
-              timeStamp,
-              x_accel,
-              x_gyro,
-              y_accel,
-              y_gyro,
-              z_accel,
-              z_gyro,
-            ] = parts;
+            const [timeStamp, xAccel, xGyro, yAccel, yGyro, zAccel, zGyro] =
+              parts;
             imuData.push({
               timeStamp: parseFloat(timeStamp),
-              x_accel: parseFloat(x_accel),
-              x_gyro: parseFloat(x_gyro),
-              y_accel: parseFloat(y_accel),
-              y_gyro: parseFloat(y_gyro),
-              z_accel: parseFloat(z_accel),
-              z_gyro: parseFloat(z_gyro),
+              x_accel: parseFloat(xAccel),
+              x_gyro: parseFloat(xGyro),
+              y_accel: parseFloat(yAccel),
+              y_gyro: parseFloat(yGyro),
+              z_accel: parseFloat(zAccel),
+              z_gyro: parseFloat(zGyro),
             });
           }
         }
 
-        console.log('Parsed IMU data:', imuData);
         // TODO: Update the Firestore with Update calls to the API when endpoints are ready.
         setUploadStatus('done');
       };

@@ -200,22 +200,27 @@ const PatientPage: React.FC = () => {
         </Button>
       )}
 
-      <Center marginTop={4}>
-        <input
-          type="file"
-          id="imuData"
-          name="imuData"
-          accept=".csv"
-          onChange={handleFileSelection}
-        />
-        <Button
-          onClick={triggerFileUpload}
-          ml={4}
-          isDisabled={!selectedFile}
-          colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
-          {uploadStatus === 'done' ? 'Uploaded' : 'Upload Selected File'}
-        </Button>
-      </Center>
+
+      {/*Move this into the Exercise Session Page when the issue is done */}
+      <Card>
+        <h2 style={headingStyle}> Upload IMU data for session</h2>
+        <Center marginTop={12}>
+          <input
+            type="file"
+            id="imuData"
+            name="imuData"
+            accept=".csv"
+            onChange={handleFileSelection}
+          />
+          <Button
+            onClick={triggerFileUpload}
+            ml={4}
+            isDisabled={!selectedFile}
+            colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
+            {uploadStatus === 'done' ? 'Uploaded' : 'Upload selected IMU Data'}
+          </Button>
+        </Center>
+      </Card>
     </Box>
   );
 };

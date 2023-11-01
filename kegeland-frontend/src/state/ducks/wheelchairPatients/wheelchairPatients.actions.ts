@@ -6,6 +6,7 @@ import {
   GameSession,
   GameSessionData,
   HeartRate,
+  Lap,
   Speed,
   UpdateWheelchairPatientData,
   WheelchairPatient,
@@ -82,3 +83,18 @@ export const addSpeedToGameSession = createAsyncThunk(
       data: payload.speedData,
     }),
 );
+
+export const addLapToGameSession = createAsyncThunk(
+  'wheelchairpatients/addLapToGameSession',
+  async (payload: {
+    patientId: string;
+    sessionId: string;
+    lapData: Lap;
+  }) =>
+    apiCaller<{ sessionId: string; lap: Lap }>({ // Adjust the response type based on your API
+      url: `wheelchairPatients/${payload.patientId}/gameSessions/${payload.sessionId}/lap`,
+      method: 'POST',
+      data: payload.lapData,
+    }),
+);
+

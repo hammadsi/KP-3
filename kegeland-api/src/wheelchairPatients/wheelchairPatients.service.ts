@@ -31,23 +31,34 @@ export class WheelchairPatientsService {
   private transformGameSessionTimestamps(session: GameSession): GameSession {
     session.startTime = this.convertToJsDate(session.startTime);
     session.endTime = this.convertToJsDate(session.endTime);
+
+    // Helper function to convert each timestamp in time series data
+    const convertTimestampInArray = (dataEntries) => {
+        return dataEntries.map(dataEntry => {
+            if (dataEntry.timestamp) {
+                return { ...dataEntry, timestamp: this.convertToJsDate(dataEntry.timestamp) };
+            }
+            return dataEntry;
+        });
+    };
+
     if (session.laps) {
-      session.laps.forEach(lap => {
-        lap.timeStamp = this.convertToJsDate(lap.timeStamp);
-      });
+        session.laps.forEach(lap => {
+            lap.timeStamp = this.convertToJsDate(lap.timeStamp);
+        });
     }
-    if (session.heartRates) {
-      session.heartRates.forEach(hr => {
-        hr.timestamp = this.convertToJsDate(hr.timestamp);
-      });
+
+    if (session.timeSeriesData) {
+        if (session.timeSeriesData.heartRates) {
+            session.timeSeriesData.heartRates = convertTimestampInArray(session.timeSeriesData.heartRates);
+        }
+        if (session.timeSeriesData.speeds) {
+            session.timeSeriesData.speeds = convertTimestampInArray(session.timeSeriesData.speeds);
+        }
     }
-    if (session.speeds) {
-      session.speeds.forEach(speed => {
-        speed.timestamp = this.convertToJsDate(speed.timestamp);
-      });
-    }
+
     return session;
-  }
+}
 
   /**
    * Function for finding a specific patient by its ID
@@ -172,13 +183,13 @@ export class WheelchairPatientsService {
             timeStamp: firestore.Timestamp.fromDate(lap.timeStamp),
           };
         }) || [],
-        heartRates: gameSession.timeSeriesData.heartRates?.map(hr => {
-          if (!(hr.timestamp instanceof Date)) {
+        heartRates: gameSession.timeSeriesData.heartRates?.map(heartRate => {
+          if (!(heartRate.timestamp instanceof Date)) {
               throw new Error("hr.timestamp is not a valid Date object");
           }
           return {
-            ...hr,
-            timestamp: firestore.Timestamp.fromDate(hr.timestamp),
+            ...heartRate,
+            timestamp: firestore.Timestamp.fromDate(heartRate.timestamp),
           };
         }) || [],
         speeds: gameSession.timeSeriesData.speeds?.map(speed => {
@@ -217,15 +228,20 @@ export class WheelchairPatientsService {
         throw new NotFoundException(`Game session with ID ${sessionId} not found`);
       }
   
-      // Add the new heart rate data
-      await gameSessionDocRef.update({
-        heartRates: firestore.FieldValue.arrayUnion({
-          heartRate: heartRateData.heartRate,
-          timestamp: firestore.Timestamp.fromDate(heartRateData.timestamp)
-        })
-      });
+      // Prepare the heart rate data for update
+      const heartRateUpdate = {
+        heartRate: heartRateData.heartRate,
+        timestamp: firestore.Timestamp.fromDate(heartRateData.timestamp)
+      };
   
-      return { success: true };
+      // Update the TimeSeriesData field with the new heart rate data
+      const timeSeriesDataUpdate = {};
+      timeSeriesDataUpdate['timeSeriesData.heartRates'] = firestore.FieldValue.arrayUnion(heartRateUpdate);
+  
+      // Add the new heart rate data within the TimeSeriesData field
+      await gameSessionDocRef.update(timeSeriesDataUpdate);
+  
+      return { heartRate: heartRateUpdate };
     } catch (error) {
       throw new InternalServerErrorException(error.message);
     }

@@ -69,7 +69,7 @@ export class WheelchairPatientsController {
   }
 
   @Post(':patientId/gameSessions/:sessionId/heartRate')
-  async addHeartRateToSession(
+  async addHeartRateToGameSession(
     @Param('patientId') patientId: string,
     @Param('sessionId') sessionId: string,
     @Body() heartRateData: HeartRateDto,

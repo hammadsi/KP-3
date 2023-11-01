@@ -1,6 +1,6 @@
 import { FirebaseService } from 'src/firebase/firebase.service';
 import { firestore } from 'firebase-admin';
-import { HeartRateDto, SpeedDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
+import { HeartRateDto, LapDto, SpeedDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { GameSession } from './entities/wheelchairPatient.entity'
 import { UpdatePhysicalStateDto } from './dto/update-physicalstate.dto';
@@ -254,6 +254,36 @@ export class WheelchairPatientsService {
     }
   }
 
+  async addLapToGameSession(patientId: string, sessionId: string, lap: LapDto) {
+    try {
+      const gameSessionDocRef = this.firebaseService.firestore
+        .collection('patients')
+        .doc(patientId)
+        .collection('gameSessions')
+        .doc(sessionId);
   
+      // Check if the game session exists
+      const docSnapshot = await gameSessionDocRef.get();
+      if (!docSnapshot.exists) {
+        throw new NotFoundException(`Game session with ID ${sessionId} not found`);
+      }
+
+      // Prepare the lap data for update
+      const lapUpdate = {
+        lapTime: lap.lapTime,
+        timeStamp: firestore.Timestamp.fromDate(lap.timeStamp)
+      };
+  
+      // Update the game session document with the new lap data
+      const lapUpdateOperation = {};
+      lapUpdateOperation['laps'] = firestore.FieldValue.arrayUnion(lapUpdate);
+
+      await gameSessionDocRef.update(lapUpdateOperation);
+  
+      return { sessionId, lap: lapUpdate };
+    } catch (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+  }
 }
 

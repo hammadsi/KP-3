@@ -7,7 +7,7 @@ import { Roles } from '../roles/roles.decorator';
 import { RolesGuard } from '../roles/roles.guard';
 import { WheelchairPatientsService } from './wheelchairPatients.service';
 import { UpdatePhysicalStateDto } from './dto/update-physicalstate.dto';
-import { HeartRateDto, SpeedDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
+import { HeartRateDto, LapDto, SpeedDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
 
 @ApiTags('WheelchairPatients')
 @Controller('wheelchairPatients')
@@ -84,6 +84,15 @@ export class WheelchairPatientsController {
     @Body() speedData: SpeedDto,
   ) {
     return this.wheelchairPatientsService.addSpeedToGameSession(patientId, sessionId, speedData);
+  }
+
+  @Post(':patientId/gameSessions/:sessionId/lap')
+  async addLapToGameSession(
+    @Param('patientId') patientId: string,
+    @Param('sessionId') sessionId: string,
+    @Body() lapData: LapDto,
+  ) {
+    return this.wheelchairPatientsService.addLapToGameSession(patientId, sessionId, lapData);
   }
 }
 

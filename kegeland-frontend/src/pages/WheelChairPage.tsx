@@ -19,7 +19,7 @@ const WheelChairPage: React.FC = () => {
   const patientId = "2P9gfi0u1foJiyoK3ovJ";
   const exerciseId = "28ceabH5I9zm1BguEbcB";
 
-  const { sensor, session, loading } = useExercise(
+  const { answers, questionnaire, sensor, session, loading } = useExercise(
     patientId!,
     exerciseId!,
   );
@@ -45,7 +45,10 @@ const WheelChairPage: React.FC = () => {
       </Button>
       <Collapse in={visible}>
         <Card loading={loading} h="100%">
-          123
+          <QuestionnaireResults
+            answers={answers}
+            questionnaire={questionnaire}
+          />
         </Card>
       </Collapse>
     </>

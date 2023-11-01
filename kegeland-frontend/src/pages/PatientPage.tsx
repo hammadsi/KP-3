@@ -1,4 +1,13 @@
-import { Button, Box, Flex, Stack, useMediaQuery } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import {
+  Button,
+  Box,
+  Flex,
+  Stack,
+  useMediaQuery,
+  Center,
+} from '@chakra-ui/react';
+
 import { useParams } from 'react-router-dom';
 import {
   AiOutlineClockCircle,
@@ -49,8 +58,70 @@ const PatientPage: React.FC = () => {
     margin: '25px 0 10px 0',
   };
 
+  // New code for file upload
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploadStatus, setUploadStatus] = useState<'idle' | 'done'>('idle');
+
+  const handleFileSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
+
+  const triggerFileUpload = () => {
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const text = event?.target?.result?.toString();
+        if (!text) {
+          console.error('Could not read file.');
+          return;
+        }
+        const lines = text.split('\n');
+        const imuData = [];
+
+        for (let i = 1; i < lines.length; i++) {
+          const line = lines[i];
+          const parts = line.split(',');
+
+          if (parts.length === 7) {
+            const [
+              timeStamp,
+              x_accel,
+              x_gyro,
+              y_accel,
+              y_gyro,
+              z_accel,
+              z_gyro,
+            ] = parts;
+            imuData.push({
+              timeStamp: parseFloat(timeStamp),
+              x_accel: parseFloat(x_accel),
+              x_gyro: parseFloat(x_gyro),
+              y_accel: parseFloat(y_accel),
+              y_gyro: parseFloat(y_gyro),
+              z_accel: parseFloat(z_accel),
+              z_gyro: parseFloat(z_gyro),
+            });
+          }
+        }
+
+        console.log('Parsed IMU data:', imuData);
+        // TODO: Update the Firestore with Update calls to the API when endpoints are ready.
+        setUploadStatus('done');
+      };
+
+      reader.onerror = function (event) {
+        console.error('An error occurred while reading the file:', event);
+        setUploadStatus('idle');
+      };
+
+      reader.readAsText(selectedFile);
+    }
+  };
+
   const startUnitySession = () => {
-    // Open the Unity game using the custom URI scheme
     window.location.href = `VRWheelchairSim:// -patientID ${patientId} -bearerToken ${localStorage.getItem(
       'id_token',
     )}`;
@@ -128,6 +199,28 @@ const PatientPage: React.FC = () => {
           Start session
         </Button>
       )}
+
+
+      {/*Move this into the Exercise Session Page when the issue is done */}
+      <Card>
+        <h2 style={headingStyle}> Upload IMU data for session</h2>
+        <Center marginTop={12}>
+          <input
+            type="file"
+            id="imuData"
+            name="imuData"
+            accept=".csv"
+            onChange={handleFileSelection}
+          />
+          <Button
+            onClick={triggerFileUpload}
+            ml={4}
+            isDisabled={!selectedFile}
+            colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
+            {uploadStatus === 'done' ? 'Uploaded' : 'Upload selected IMU Data'}
+          </Button>
+        </Center>
+      </Card>
     </Box>
   );
 };

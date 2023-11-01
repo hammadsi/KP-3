@@ -26,6 +26,28 @@ class QuestionDto {
     type: QuestionType;
 }
 
+class IMUReadingDto {
+    @IsNumber()
+    x: number;
+  
+    @IsNumber()
+    y: number;
+  
+    @IsNumber()
+    z: number;
+}
+  
+export class IMUDataDto {
+@ValidateNested()
+@Type(() => IMUReadingDto)
+accelerometer: IMUReadingDto;
+
+@ValidateNested()
+@Type(() => IMUReadingDto)
+gyroscope: IMUReadingDto;
+}
+  
+
 export class LapDto {
     @IsNumber()
     lapTime: number;
@@ -107,5 +129,11 @@ class TimeSeriesDataDto {
     @ValidateNested()
     @Type(() => TimeSeriesDataDto)
     timeSeriesData?: TimeSeriesDataDto;
+
+    @IsOptional()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => IMUDataDto)
+    IMUData?: IMUDataDto[];
 }
 

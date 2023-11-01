@@ -11,9 +11,9 @@ import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
 import useUpdateGameSession from '../hooks/useUpdateGameSession';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
-//import useAddHeartRate from '../hooks/useAddHeartRate';
-//import useAddSpeed from '../hooks/useAddSpeed';
-//import useAddLap from '../hooks/useAddLap';
+// import useAddHeartRate from '../hooks/useAddHeartRate';
+// import useAddSpeed from '../hooks/useAddSpeed';
+// import useAddLap from '../hooks/useAddLap';
 
 const PreQuestionnairePage: React.FC = () => {
   const location = useLocation();
@@ -69,7 +69,6 @@ const PreQuestionnairePage: React.FC = () => {
 
     // Update the session
     if (currentSession) {
-
       const updateData = {
         patientId: authUser.id,
         id: currentSession.id,

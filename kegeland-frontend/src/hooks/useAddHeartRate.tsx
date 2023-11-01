@@ -14,7 +14,7 @@ const useAddHeartRate = () => {
     patientId: string,
     sessionId: string,
     heartRate: number,
-    timestamp: Date
+    timestamp: Date,
   ) => {
     setLoading(true);
     setError(null);
@@ -23,8 +23,8 @@ const useAddHeartRate = () => {
         addHeartRateToGameSession({
           patientId,
           sessionId,
-          heartRateData: { heartRate, timestamp }
-        })
+          heartRateData: { heartRate, timestamp },
+        }),
       );
     } catch (e: any) {
       setError(`Failed to add heart rate: ${e.message}`);

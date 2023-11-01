@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { addSpeedToGameSession } from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
+
 import useAppDispatch from './useAppDispatch';
 
 const useAddSpeed = () => {
@@ -13,7 +14,7 @@ const useAddSpeed = () => {
     sessionId: string,
     leftSpeed: number,
     rightSpeed: number,
-    timestamp: Date
+    timestamp: Date,
   ) => {
     setLoading(true);
     setError(null);
@@ -22,8 +23,8 @@ const useAddSpeed = () => {
         addSpeedToGameSession({
           patientId,
           sessionId,
-          speedData: { leftSpeed, rightSpeed, timestamp }
-        })
+          speedData: { leftSpeed, rightSpeed, timestamp },
+        }),
       );
     } catch (e: any) {
       setError(`Failed to add speed data: ${e.message}`);

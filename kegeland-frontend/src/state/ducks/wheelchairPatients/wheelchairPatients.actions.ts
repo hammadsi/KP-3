@@ -62,7 +62,8 @@ export const addHeartRateToGameSession = createAsyncThunk(
     sessionId: string;
     heartRateData: HeartRate;
   }) =>
-    apiCaller<HeartRate>({ // Replace with your actual response type
+    apiCaller<HeartRate>({
+      // Replace with your actual response type
       url: `wheelchairPatients/${payload.patientId}/gameSessions/${payload.sessionId}/heartRate`,
       method: 'POST',
       data: payload.heartRateData,
@@ -72,12 +73,9 @@ export const addHeartRateToGameSession = createAsyncThunk(
 // For manual testing purposes
 export const addSpeedToGameSession = createAsyncThunk(
   'wheelchairpatients/addSpeedToGameSession',
-  async (payload: {
-    patientId: string;
-    sessionId: string;
-    speedData: Speed;
-  }) =>
-    apiCaller<Speed>({ // Replace Speed with your actual response type if different
+  async (payload: { patientId: string; sessionId: string; speedData: Speed }) =>
+    apiCaller<Speed>({
+      // Replace Speed with your actual response type if different
       url: `wheelchairPatients/${payload.patientId}/gameSessions/${payload.sessionId}/speed`,
       method: 'POST',
       data: payload.speedData,
@@ -86,15 +84,11 @@ export const addSpeedToGameSession = createAsyncThunk(
 
 export const addLapToGameSession = createAsyncThunk(
   'wheelchairpatients/addLapToGameSession',
-  async (payload: {
-    patientId: string;
-    sessionId: string;
-    lapData: Lap;
-  }) =>
-    apiCaller<{ sessionId: string; lap: Lap }>({ // Adjust the response type based on your API
+  async (payload: { patientId: string; sessionId: string; lapData: Lap }) =>
+    apiCaller<{ sessionId: string; lap: Lap }>({
+      // Adjust the response type based on your API
       url: `wheelchairPatients/${payload.patientId}/gameSessions/${payload.sessionId}/lap`,
       method: 'POST',
       data: payload.lapData,
     }),
 );
-

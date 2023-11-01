@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { addLapToGameSession } from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
-import useAppDispatch from './useAppDispatch';
 
+import { addLapToGameSession } from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
+
+import useAppDispatch from './useAppDispatch';
 
 const useAddLap = () => {
   const dispatch = useAppDispatch();
@@ -12,7 +13,7 @@ const useAddLap = () => {
     patientId: string,
     sessionId: string,
     lapTime: number,
-    timestamp: Date
+    timestamp: Date,
   ) => {
     setLoading(true);
     setError(null);
@@ -22,8 +23,8 @@ const useAddLap = () => {
           patientId,
           sessionId,
           lapData: { lapTime, timestamp },
-        })
-      ).unwrap();  // Using unwrap to handle the returned promise correctly.
+        }),
+      ).unwrap(); // Using unwrap to handle the returned promise correctly.
     } catch (e: any) {
       setError(`Failed to add lap data: ${e.message}`);
     } finally {

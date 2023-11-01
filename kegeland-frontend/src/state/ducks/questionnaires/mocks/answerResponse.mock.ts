@@ -5,11 +5,11 @@ const answerResponce: Answer[] = [
     createdAt: 1667501744,
     userId: 'uid',
     answers: [3, 1],
-    sessionId: 'eid',
+    id: 'eid',
   },
   {
     createdAt: 1667501745,
-    sessionId: 'eid',
+    id: 'eid',
     userId: 'uid',
     answers: [3, 1],
   },

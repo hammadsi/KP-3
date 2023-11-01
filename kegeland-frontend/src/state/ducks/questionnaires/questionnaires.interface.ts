@@ -13,7 +13,7 @@ export type Questionnaire = {
 
 export type Answer = {
   userId: string;
-  sessionId: string;
+  id: string;
   createdAt: number;
   answers: number[];
 };
@@ -33,5 +33,5 @@ export type FetchAssignedQuestionnaireDTO = {
 
 export type FetchQuestionnaireAnswersDTO = {
   questionnaireId: string;
-  sessionId: string;
+  id: string;
 };

@@ -10,7 +10,7 @@ describe('Test session-actions', () => {
     const qid = '1';
     const data: UploadAnswersDto = {
       questionnaireId: qid,
-      sessionId: '1',
+      id: '1',
       answers: [answerBefore, answerAfter],
     };
 
@@ -22,7 +22,7 @@ describe('Test session-actions', () => {
     apiSpy.mock.calls.forEach((call, idx) => {
       const res = {
         url: `questionnaires/${qid}/answers`,
-        data: {sessionId: '1', ...data.answers[idx]},
+        data: {id: '1', ...data.answers[idx]},
         method: 'POST',
       };
       expect(call[0]).toStrictEqual(res);

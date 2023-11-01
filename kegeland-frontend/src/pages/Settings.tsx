@@ -9,12 +9,17 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { MdConstruction } from 'react-icons/md';
-const NotImplemented: React.FC = () => {
+
+import withLayout from '../hoc/withLayout';
+import withSpinner from '../hoc/withSpinner';
+
+const Settings: React.FC = () => {
   const navigate = useNavigate();
+
   return (
     <Flex
-      w="100vw"
-      h="100vh"
+      w="60wv"
+      h="80vh"
       justifyContent="center"
       alignItems="center"
       textAlign="center"
@@ -28,7 +33,7 @@ const NotImplemented: React.FC = () => {
         </Wrap>
       </Heading>
       <Text fontSize={26} fontWeight="semibold" color="gray.600">
-        This page is a planned feature in the future.
+        Settings is a planned feature in the future.
       </Text>
 
       <Box>
@@ -40,4 +45,4 @@ const NotImplemented: React.FC = () => {
   );
 };
 
-export default NotImplemented;
+export default withLayout(withSpinner(Settings));

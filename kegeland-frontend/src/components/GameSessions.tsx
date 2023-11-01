@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import { RootState } from '../state/store';
 
@@ -24,10 +25,10 @@ const GameSessions: React.FC = () => {
     <div>
       <h3>Game Sessions</h3>
       {wheelchairPatient.gameSessions.map((session, index) => (
-        <div key={session.sessionId}>
+        <div key={session.id}>
           <h4>Session {index + 1}</h4>
           <p>
-            <strong>Session ID:</strong> {session.sessionId}
+            <strong>Session ID:</strong> {session.id}
           </p>
           <p>
             <strong>Start Time:</strong>{' '}
@@ -43,8 +44,8 @@ const GameSessions: React.FC = () => {
 
           <h5>Pre-Game Questionnaires</h5>
           <ul>
-            {Array.isArray(session.questionaires?.preGame) ? (
-              session.questionaires.preGame.map((q, qIndex) => (
+            {Array.isArray(session.questionnaires?.preGame) ? (
+              session.questionnaires.preGame.map((q, qIndex) => (
                 <li key={qIndex}>
                   Q: {q.question} | A: {q.answer}
                 </li>
@@ -56,8 +57,8 @@ const GameSessions: React.FC = () => {
 
           <h5>Post-Game Questionnaires</h5>
           <ul>
-            {Array.isArray(session.questionaires?.postGame) ? (
-              session.questionaires.postGame.map((q, qIndex) => (
+            {Array.isArray(session.questionnaires?.postGame) ? (
+              session.questionnaires.postGame.map((q, qIndex) => (
                 <li key={qIndex}>
                   Q: {q.question} | A: {q.answer}
                 </li>

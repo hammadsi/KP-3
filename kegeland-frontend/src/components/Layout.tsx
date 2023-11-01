@@ -42,8 +42,7 @@ const Layout: React.FC<LayoutProps> = ({ user, children }) => {
           h="100%"
           flexBasis={openSidebar ? 'calc(100% - 300px)' : '100%'}
           transition="flex-basis 100ms"
-          justifyContent="flex-start"
-        >
+          justifyContent="flex-start">
           <Header toggleSidebar={toggle} isSidebarOpen={openSidebar} />
           <Flex
             zIndex={999}
@@ -54,8 +53,7 @@ const Layout: React.FC<LayoutProps> = ({ user, children }) => {
             overflowX="hidden"
             marginX="auto"
             w={{ base: '100%', md: '90%' }}
-            maxW="8xl"
-          >
+            maxW="8xl">
             {children}
           </Flex>
         </Flex>

@@ -5,10 +5,11 @@ import {
   AiOutlinePlayCircle,
   AiOutlineRise,
   AiOutlineSetting,
+  AiOutlineFund,
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
-import { User } from '../state/ducks/auth/auth.interface';
+import { User, UserRole } from '../state/ducks/auth/auth.interface';
 import useAppDispatch from '../hooks/useAppDispatch';
 import { signOutUser } from '../state/ducks/auth/auth.actions';
 import { ThemeMode } from '../types';
@@ -40,8 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
       maxW="300px"
       boxShadow="md"
       zIndex={1001}
-      transition="width 200ms, top 50ms"
-    >
+      transition="width 200ms, top 50ms">
       <ScaleFade in={isOpen}>
         <Box paddingY={2}>
           <Logo />
@@ -54,37 +54,59 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
             <Link to="/myprofile">
               <UserAvatar user={user} />
             </Link>
-          }
-        >
-          <Menu.Item
-            mode={mode}
-            title="Patients"
-            to={'/'}
-            icon={AiOutlineTeam}
-          />
-          <Menu.Item
-            mode={mode}
-            title="Game"
-            to={'/game'}
-            icon={AiOutlinePlayCircle}
-          />
-          <Menu.Item
-            mode={mode}
-            title="Edit Questionnaires"
-            to={'/not-implemented'}
-            icon={AiOutlineProfile}
-          />
-          <Menu.Item
-            mode={mode}
-            title="Edit Exercises"
-            to={'/not-implemented'}
-            icon={AiOutlineRise}
-          />
+          }>
+          {user.roles.includes(UserRole.PHYSICIAN) && (
+            <>
+              <Menu.Item
+                mode={mode}
+                title="Patients"
+                to={'/'}
+                icon={AiOutlineTeam}
+                isSelected={
+                  window.location.pathname === '/' ||
+                  window.location.pathname.startsWith('/patient')
+                }
+              />
+              <Menu.Item
+                mode={mode}
+                title="Edit Questionnaires"
+                to={'/not-implemented'}
+                icon={AiOutlineProfile}
+                isSelected={window.location.pathname === '/not-implemented'}
+              />
+              <Menu.Item
+                mode={mode}
+                title="Edit Exercises"
+                to={'/not-implemented'}
+                icon={AiOutlineRise}
+                isSelected={window.location.pathname === '/not-implemented'}
+              />
+            </>
+          )}
+          {user.roles.includes(UserRole.PATIENT) && (
+            <>
+              <Menu.Item
+                mode={mode}
+                title="Exercises"
+                to={'/'}
+                icon={AiOutlineFund}
+                isSelected={window.location.pathname === '/'}
+              />
+              <Menu.Item
+                mode={mode}
+                title="Game"
+                to={'/game'}
+                icon={AiOutlinePlayCircle}
+                isSelected={window.location.pathname.startsWith('/game')}
+              />
+            </>
+          )}
           <Menu.Item
             mode={mode}
             title="Settings"
-            to={'/not-implemented'}
+            to={'/settings'}
             icon={AiOutlineSetting}
+            isSelected={window.location.pathname === '/settings'}
           />
         </Menu>
         <VStack width="full" transition="bottom 200ms">
@@ -94,8 +116,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
             transition="all 300ms"
             color="primary.600"
             _hover={{ color: 'primary.300' }}
-            onClick={() => dispatch(signOutUser())}
-          >
+            onClick={() => dispatch(signOutUser())}>
             Sign out
           </Button>
         </VStack>

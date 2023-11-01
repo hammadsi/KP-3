@@ -4,7 +4,7 @@ export const dbMock = {
     {
       id: "p1",
       name: "John Doe",
-      age: 30,
+      birthdate: "2000-09-28T12:00:00",
       gender: 'M',
       currentPhysicalState: {
         height: 180,
@@ -16,7 +16,7 @@ export const dbMock = {
       },
       gameSessions: [
         {
-          sessionId: "s1",
+          id: "s1",
           exerciseTime: 60,
           startTime: timestamp(),
           endTime: timestamp(),
@@ -114,7 +114,7 @@ export const dbMock = {
       userId: '_id',
       answeredAt: timestamp(),
       answers: [1, 2, 3],
-      sessionId: '_id',
+      id: '_id',
     },
   ],
 };

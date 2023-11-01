@@ -26,7 +26,7 @@ class QuestionDto {
     type: QuestionType;
 }
 
-class LapDto {
+export class LapDto {
     @IsNumber()
     lapTime: number;
 
@@ -44,7 +44,7 @@ export class HeartRateDto {
     timestamp: Date;
 }
 
-class SpeedDto {
+export class SpeedDto {
     @IsNumber()
     leftSpeed: number;
 

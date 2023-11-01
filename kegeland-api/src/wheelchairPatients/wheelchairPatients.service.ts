@@ -1,6 +1,6 @@
 import { FirebaseService } from 'src/firebase/firebase.service';
 import { firestore } from 'firebase-admin';
-import { HeartRateDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
+import { HeartRateDto, SpeedDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { GameSession } from './entities/wheelchairPatient.entity'
 import { UpdatePhysicalStateDto } from './dto/update-physicalstate.dto';
@@ -219,5 +219,41 @@ export class WheelchairPatientsService {
       throw new InternalServerErrorException(error.message);
     }
   }
+
+  async addSpeedToGameSession(patientId: string, sessionId: string, speedData: SpeedDto) {
+    try {
+      const gameSessionDocRef = this.firebaseService.firestore
+        .collection('patients')
+        .doc(patientId)
+        .collection('gameSessions')
+        .doc(sessionId);
+  
+      // Check if the game session exists
+      const docSnapshot = await gameSessionDocRef.get();
+      if (!docSnapshot.exists) {
+        throw new NotFoundException(`Game session with ID ${sessionId} not found`);
+      }
+  
+      // Prepare the speed data for update
+      const speedUpdate = {
+        leftSpeed: speedData.leftSpeed,
+        rightSpeed: speedData.rightSpeed,
+        timestamp: firestore.Timestamp.fromDate(speedData.timestamp)
+      };
+  
+      // Update the TimeSeriesData field with the new speed data
+      const timeSeriesDataUpdate = {};
+      timeSeriesDataUpdate['timeSeriesData.speeds'] = firestore.FieldValue.arrayUnion(speedUpdate);
+  
+      // Add the new speed data within the TimeSeriesData field
+      await gameSessionDocRef.update(timeSeriesDataUpdate);
+  
+      return { speed: speedUpdate };
+    } catch (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+  }
+
+  
 }
 

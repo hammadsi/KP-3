@@ -12,6 +12,8 @@ import withSpinner from '../hoc/withSpinner';
 import useUpdateGameSession from '../hooks/useUpdateGameSession';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import useAddHeartRate from '../hooks/useAddHeartRate';
+import useAddSpeed from '../hooks/useAddSpeed';
+import { add } from 'lodash';
 
 const PreQuestionnairePage: React.FC = () => {
   const location = useLocation();
@@ -27,6 +29,7 @@ const PreQuestionnairePage: React.FC = () => {
   const { wheelchairPatient } = useWheelchairPatient(authUser?.id);
   const { updateSession } = useUpdateGameSession();
   // const { addHeartRate } = useAddHeartRate();
+  const { addSpeed } = useAddSpeed();
 
   const startUnitySession = async () => {
     // Fetch the current session by id from the wheelchairPatient's array of gameSessions
@@ -77,10 +80,20 @@ const PreQuestionnairePage: React.FC = () => {
       try {
         await updateSession(updateData);
 
+        // For manual testing, you can use the following code to add a speed to the session
+        /*
+        const leftSpeed = 7; // the left speed value
+        const rightSpeed = 7; // the right speed value
+        const timestamp = new Date(); // current time
+        await addSpeed(authUser.id, sessionId, leftSpeed, rightSpeed, timestamp);
+        */
+
+        // For manual testing, you can use the following code to add a heart rate to the session
+        /*
         const heartRate = 80; // the heart rate value
         const timestamp = new Date(); // current time
-        // For manual testing, you can use the following code to add a heart rate to the session
-        // await addHeartRate(authUser.id, sessionId, heartRate, timestamp);
+        await addHeartRate(authUser.id, sessionId, heartRate, timestamp);
+        */
         window.location.href = `VRWheelchairSim://`;
         navigate('/game/post', { state: { sessionId } });
       } catch (error) {

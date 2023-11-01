@@ -11,6 +11,9 @@ import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
 import useUpdateGameSession from '../hooks/useUpdateGameSession';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
+// import useAddHeartRate from '../hooks/useAddHeartRate';
+// import useAddSpeed from '../hooks/useAddSpeed';
+// import useAddLap from '../hooks/useAddLap';
 
 const PreQuestionnairePage: React.FC = () => {
   const location = useLocation();
@@ -25,6 +28,10 @@ const PreQuestionnairePage: React.FC = () => {
   const { authUser } = useSelector((state: RootState) => state.auth);
   const { wheelchairPatient } = useWheelchairPatient(authUser?.id);
   const { updateSession } = useUpdateGameSession();
+
+  // const { addHeartRate } = useAddHeartRate();
+  // const { addSpeed } = useAddSpeed();
+  // const { addLap } = useAddLap();
 
   const startUnitySession = async () => {
     // Fetch the current session by id from the wheelchairPatient's array of gameSessions

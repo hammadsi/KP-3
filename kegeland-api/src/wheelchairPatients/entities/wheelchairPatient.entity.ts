@@ -68,7 +68,7 @@ class Lap {
 
   @Expose()
   @IsDate()
-  timeStamp: Date;
+  timestamp: Date;
 }
 
 class HeartRate {
@@ -93,6 +93,21 @@ class Speed {
   @Expose()
   @IsDate()
   timestamp: Date;
+}
+export class TimeSeriesData {
+  @Expose()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => HeartRate)
+  heartRates: HeartRate[];
+
+  @Expose()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => Speed)
+  speeds: Speed[];
+
+  // Add any other fields like IMUData if necessary
 }
 
 export class GameSession {
@@ -126,16 +141,9 @@ export class GameSession {
   laps: Lap[];
 
   @Expose()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => HeartRate)
-  heartRates: HeartRate[];
-
-  @Expose()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => Speed)
-  speeds: Speed[];
+  @ValidateNested()
+  @Type(() => TimeSeriesData)
+  timeSeriesData: TimeSeriesData;
 }
 
 export class WheelchairPatientEntity {

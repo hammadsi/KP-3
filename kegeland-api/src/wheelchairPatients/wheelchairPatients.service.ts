@@ -174,33 +174,6 @@ export class WheelchairPatientsService {
         startTime: firestore.Timestamp.fromDate(gameSession.startTime),
         endTime: firestore.Timestamp.fromDate(gameSession.endTime),
         exerciseTime: gameSession.exerciseTime || 0,
-        laps: gameSession.laps?.map(lap => {
-          if (!(lap.timeStamp instanceof Date)) {
-              throw new Error("lap.timeStamp is not a valid Date object");
-          }
-          return {
-            ...lap,
-            timeStamp: firestore.Timestamp.fromDate(lap.timeStamp),
-          };
-        }) || [],
-        heartRates: gameSession.timeSeriesData.heartRates?.map(heartRate => {
-          if (!(heartRate.timestamp instanceof Date)) {
-              throw new Error("hr.timestamp is not a valid Date object");
-          }
-          return {
-            ...heartRate,
-            timestamp: firestore.Timestamp.fromDate(heartRate.timestamp),
-          };
-        }) || [],
-        speeds: gameSession.timeSeriesData.speeds?.map(speed => {
-          if (!(speed.timestamp instanceof Date)) {
-              throw new Error("speed.timestamp is not a valid Date object");
-          }
-          return {
-            ...speed,
-            timestamp: firestore.Timestamp.fromDate(speed.timestamp),
-          };
-        }) || [],
       };
 
       await gameSessionDoc.update({

@@ -7,4 +7,3 @@ export enum PatientType {
   WHEELCHAIR = 'wheelchair',
   FEMFIT = 'femfit',
 }
-

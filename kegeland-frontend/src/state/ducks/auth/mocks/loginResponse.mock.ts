@@ -1,10 +1,11 @@
-import { LoginResponse, UserRole } from '../auth.interface';
+import { LoginResponse, PatientType, UserRole } from '../auth.interface';
 
 const loginResponseMock: LoginResponse = {
   id: 'uid3',
   email: 'ola.nordmann@gmail.org',
   details: {
     roles: [UserRole.PATIENT],
+    patientType: [PatientType.WHEELCHAIR],
     name: {
       lastName: 'Nordmann',
       firstName: 'Ola',

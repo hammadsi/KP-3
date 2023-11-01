@@ -44,7 +44,6 @@ export type Lap = {
 export type TimeSeriesData = {
   heartRates: HeartRate[];
   speeds: Speed[];
-  imus: IMUData[]; // Define the IMUData type based on actual data structure
 };
 
 export type HeartRate = {
@@ -56,10 +55,6 @@ export type Speed = {
   leftSpeed: number;
   rightSpeed: number;
   timestamp: Date;
-};
-
-export type IMUData = {
-  // Define properties based on your requirements and data structure
 };
 
 export type WheelchairPatientsState = {

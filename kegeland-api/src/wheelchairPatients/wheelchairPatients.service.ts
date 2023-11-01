@@ -1,6 +1,6 @@
 import { FirebaseService } from 'src/firebase/firebase.service';
 import { firestore } from 'firebase-admin';
-import { UpdateGameSessionDto } from './dto/update-game-session.dto';
+import { HeartRateDto, LapDto, SpeedDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { GameSession } from './entities/wheelchairPatient.entity'
 import { UpdatePhysicalStateDto } from './dto/update-physicalstate.dto';
@@ -31,23 +31,34 @@ export class WheelchairPatientsService {
   private transformGameSessionTimestamps(session: GameSession): GameSession {
     session.startTime = this.convertToJsDate(session.startTime);
     session.endTime = this.convertToJsDate(session.endTime);
+
+    // Helper function to convert each timestamp in time series data
+    const convertTimestampInArray = (dataEntries) => {
+        return dataEntries.map(dataEntry => {
+            if (dataEntry.timestamp) {
+                return { ...dataEntry, timestamp: this.convertToJsDate(dataEntry.timestamp) };
+            }
+            return dataEntry;
+        });
+    };
+
     if (session.laps) {
-      session.laps.forEach(lap => {
-        lap.timeStamp = this.convertToJsDate(lap.timeStamp);
-      });
+        session.laps.forEach(lap => {
+            lap.timestamp = this.convertToJsDate(lap.timestamp);
+        });
     }
-    if (session.heartRates) {
-      session.heartRates.forEach(hr => {
-        hr.timestamp = this.convertToJsDate(hr.timestamp);
-      });
+
+    if (session.timeSeriesData) {
+        if (session.timeSeriesData.heartRates) {
+            session.timeSeriesData.heartRates = convertTimestampInArray(session.timeSeriesData.heartRates);
+        }
+        if (session.timeSeriesData.speeds) {
+            session.timeSeriesData.speeds = convertTimestampInArray(session.timeSeriesData.speeds);
+        }
     }
-    if (session.speeds) {
-      session.speeds.forEach(speed => {
-        speed.timestamp = this.convertToJsDate(speed.timestamp);
-      });
-    }
+
     return session;
-  }
+}
 
   /**
    * Function for finding a specific patient by its ID
@@ -163,33 +174,6 @@ export class WheelchairPatientsService {
         startTime: firestore.Timestamp.fromDate(gameSession.startTime),
         endTime: firestore.Timestamp.fromDate(gameSession.endTime),
         exerciseTime: gameSession.exerciseTime || 0,
-        laps: gameSession.laps?.map(lap => {
-          if (!(lap.timeStamp instanceof Date)) {
-              throw new Error("lap.timeStamp is not a valid Date object");
-          }
-          return {
-            ...lap,
-            timeStamp: firestore.Timestamp.fromDate(lap.timeStamp),
-          };
-        }) || [],
-        heartRates: gameSession.timeSeriesData.heartRates?.map(hr => {
-          if (!(hr.timestamp instanceof Date)) {
-              throw new Error("hr.timestamp is not a valid Date object");
-          }
-          return {
-            ...hr,
-            timestamp: firestore.Timestamp.fromDate(hr.timestamp),
-          };
-        }) || [],
-        speeds: gameSession.timeSeriesData.speeds?.map(speed => {
-          if (!(speed.timestamp instanceof Date)) {
-              throw new Error("speed.timestamp is not a valid Date object");
-          }
-          return {
-            ...speed,
-            timestamp: firestore.Timestamp.fromDate(speed.timestamp),
-          };
-        }) || [],
       };
 
       await gameSessionDoc.update({
@@ -198,6 +182,105 @@ export class WheelchairPatientsService {
       });
 
       return { id, ...transformedSession };
+    } catch (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+  }
+
+  async addHeartRateToGameSession(patientId: string, sessionId: string, heartRateData: HeartRateDto) {
+    try {
+      const gameSessionDocRef = this.firebaseService.firestore
+        .collection('patients')
+        .doc(patientId)
+        .collection('gameSessions')
+        .doc(sessionId);
+  
+      // Check if the game session exists
+      const docSnapshot = await gameSessionDocRef.get();
+      if (!docSnapshot.exists) {
+        throw new NotFoundException(`Game session with ID ${sessionId} not found`);
+      }
+  
+      // Prepare the heart rate data for update
+      const heartRateUpdate = {
+        heartRate: heartRateData.heartRate,
+        timestamp: firestore.Timestamp.fromDate(heartRateData.timestamp)
+      };
+  
+      // Update the TimeSeriesData field with the new heart rate data
+      const timeSeriesDataUpdate = {};
+      timeSeriesDataUpdate['timeSeriesData.heartRates'] = firestore.FieldValue.arrayUnion(heartRateUpdate);
+  
+      // Add the new heart rate data within the TimeSeriesData field
+      await gameSessionDocRef.update(timeSeriesDataUpdate);
+  
+      return { heartRate: heartRateUpdate };
+    } catch (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+  }
+
+  async addSpeedToGameSession(patientId: string, sessionId: string, speedData: SpeedDto) {
+    try {
+      const gameSessionDocRef = this.firebaseService.firestore
+        .collection('patients')
+        .doc(patientId)
+        .collection('gameSessions')
+        .doc(sessionId);
+  
+      // Check if the game session exists
+      const docSnapshot = await gameSessionDocRef.get();
+      if (!docSnapshot.exists) {
+        throw new NotFoundException(`Game session with ID ${sessionId} not found`);
+      }
+  
+      // Prepare the speed data for update
+      const speedUpdate = {
+        leftSpeed: speedData.leftSpeed,
+        rightSpeed: speedData.rightSpeed,
+        timestamp: firestore.Timestamp.fromDate(speedData.timestamp)
+      };
+  
+      // Update the TimeSeriesData field with the new speed data
+      const timeSeriesDataUpdate = {};
+      timeSeriesDataUpdate['timeSeriesData.speeds'] = firestore.FieldValue.arrayUnion(speedUpdate);
+  
+      // Add the new speed data within the TimeSeriesData field
+      await gameSessionDocRef.update(timeSeriesDataUpdate);
+  
+      return { speed: speedUpdate };
+    } catch (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+  }
+
+  async addLapToGameSession(patientId: string, sessionId: string, lap: LapDto) {
+    try {
+      const gameSessionDocRef = this.firebaseService.firestore
+        .collection('patients')
+        .doc(patientId)
+        .collection('gameSessions')
+        .doc(sessionId);
+  
+      // Check if the game session exists
+      const docSnapshot = await gameSessionDocRef.get();
+      if (!docSnapshot.exists) {
+        throw new NotFoundException(`Game session with ID ${sessionId} not found`);
+      }
+
+      // Prepare the lap data for update
+      const lapUpdate = {
+        lapTime: lap.lapTime,
+        timestamp: firestore.Timestamp.fromDate(lap.timestamp)
+      };
+  
+      // Update the game session document with the new lap data
+      const lapUpdateOperation = {};
+      lapUpdateOperation['laps'] = firestore.FieldValue.arrayUnion(lapUpdate);
+
+      await gameSessionDocRef.update(lapUpdateOperation);
+  
+      return { sessionId, lap: lapUpdate };
     } catch (error) {
       throw new InternalServerErrorException(error.message);
     }

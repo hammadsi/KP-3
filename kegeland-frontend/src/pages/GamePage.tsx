@@ -35,8 +35,6 @@ const GamePage: React.FC = () => {
           timeSeriesData: {
             heartRates: [],
             speeds: [],
-            imus: [],
-            // Include other fields like IMUData if necessary
           },
         } as GameSessionData;
 

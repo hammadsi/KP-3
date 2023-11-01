@@ -60,9 +60,6 @@ const mockWheelchairPatient: WheelchairPatient = {
             timestamp: new Date('2023-10-18T12:10:00'),
           },
         ],
-        imus: [
-          // Add your IMUData mock here
-        ],
       },
     },
   ],

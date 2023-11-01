@@ -5,10 +5,16 @@ import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 
 import Card from '../components/Card';
 import ExerciseGraph from '../components/ExerciseGraph';
+import Graph from '../components/Graph';
 import QuestionnaireResults from '../components/QuestionnaireResults';
 import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
 import useExercise from '../hooks/useExercise';
+import { useSelector } from 'react-redux';
+import { RootState } from '../state/store';
+import useWheelchairPatient from '../hooks/useWheelchairPatient';
+
+
 
 type ExercisePageParams = {
   patientId: string;
@@ -16,8 +22,27 @@ type ExercisePageParams = {
 };
 
 const WheelChairPage: React.FC = () => {
-  const patientId = "2P9gfi0u1foJiyoK3ovJ";
-  const exerciseId = "28ceabH5I9zm1BguEbcB";
+  //const patientId = "2P9gfi0u1foJiyoK3ovJ";
+  //const exerciseId = "28ceabH5I9zm1BguEbcB";
+
+  const patientId = "Wwy4sqcl7dYGvvkHA5mmdWBEa713";
+  const exerciseId = "DtSmNvXL12fzoYdQFmCE";
+
+  const { wheelchairPatient } = useWheelchairPatient(patientId);
+
+  console.log("wheelchairPatient:", wheelchairPatient);
+  console.log("wheelchairPatient:", wheelchairPatient?.gameSessions);
+
+  let gameSession;
+
+  if (wheelchairPatient) {
+    gameSession = wheelchairPatient!.gameSessions.find(session => session.id === exerciseId);
+  }
+  
+  console.log("gameSession:", gameSession);
+  console.log("gameSession:", gameSession?.timeSeriesData.heartRates);
+
+
 
   const { answers, questionnaire, sensor, session, loading } = useExercise(
     patientId!,
@@ -30,7 +55,7 @@ const WheelChairPage: React.FC = () => {
     <>
       <Card loading={loading} minH="lg">
         {sensor && session && (
-          <ExerciseGraph sensor={sensor!} session={session!} />
+          <Graph session={gameSession} />
         )}
       </Card>
       <Button

@@ -61,7 +61,10 @@ const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({questionnair
                     ? item.answer + "/5" 
                     : item.answer; 
                 return (
-                    <p>{item.question} <span style={{fontStyle: 'italic', fontWeight: 'bold'}}>{answer}</span></p>
+                  <Flex flexDirection="column" alignItems="start" marginY={1}>
+                    <p style={{fontWeight: 'bold'}}>{item.question}</p>
+                    <span style={{fontStyle: 'italic'}}>{answer}</span>
+                  </Flex>
                   );
                 })}
               </Flex>
@@ -79,7 +82,10 @@ const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({questionnair
                     ? item.answer + "/5" 
                     : item.answer; 
                 return (
-                    <p>{item.question} <span style={{fontStyle: 'italic', fontWeight: 'bold'}}>{answer}</span></p>
+                  <Flex flexDirection="column" alignItems="start" marginY={1}>
+                    <p style={{fontWeight: 'bold'}}>{item.question}</p>
+                    <span style={{fontStyle: 'italic'}}>{answer}</span>
+                  </Flex>
                   );
                 })}
               </Flex>

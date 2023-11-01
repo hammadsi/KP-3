@@ -29,9 +29,9 @@ const PreQuestionnairePage: React.FC = () => {
   const { wheelchairPatient } = useWheelchairPatient(authUser?.id);
   const { updateSession } = useUpdateGameSession();
 
-  const { addHeartRate } = useAddHeartRate();
-  const { addSpeed } = useAddSpeed();
-  const { addLap } = useAddLap();
+  // const { addHeartRate } = useAddHeartRate();
+  // const { addSpeed } = useAddSpeed();
+  // const { addLap } = useAddLap();
 
   const startUnitySession = async () => {
     // Fetch the current session by id from the wheelchairPatient's array of gameSessions

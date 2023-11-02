@@ -5,7 +5,7 @@ public class LogManager : MonoBehaviour
 {
     private string logFilePath;
 
-    void Start()
+    void Awake()
     {
         logFilePath = Path.Combine(Application.persistentDataPath, "debug_logs.txt");
         Debug.Log("Logs are being saved to: " + logFilePath);

@@ -120,4 +120,21 @@ public class ApiManager : MonoBehaviour
         string jsonData = JsonUtility.ToJson(heartRateData);
         yield return PostRequest(new Uri(uri), jsonData);
     }
+
+    public IEnumerator AddWheelSpeedToGameSession(string patientId, string sessionId, SpeedData speedData) 
+    {
+        string uri = $"{apiUrl}/{patientId}/gameSessions/{sessionId}/speed";
+        string jsonData = JsonUtility.ToJson(speedData);
+        yield return PostRequest(new Uri(uri), jsonData);
+    }
+
+    public IEnumerator AddLapToGameSession(string patientId, string sessionId, Lap lapData) 
+    {
+        string uri = $"{apiUrl}/{patientId}/gameSessions/{sessionId}/lap";
+        string jsonData = JsonUtility.ToJson(lapData);
+        yield return PostRequest(new Uri(uri), jsonData);
+    }
+
 }
+
+

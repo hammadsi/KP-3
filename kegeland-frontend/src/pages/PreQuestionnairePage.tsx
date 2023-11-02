@@ -70,7 +70,7 @@ const PreQuestionnairePage: React.FC = () => {
     }
 
     // Construct the URL to launch Unity
-    const unityUrl = `VRWheelchairSim://?patientId=${authUser.id}&bearerToken=${bearerToken}`;
+    const unityUrl = `VRWheelchairSim://?patientId=${authUser.id}&bearerToken=${bearerToken}&sessionId=${sessionId}`;
 
     // Update the session
     if (currentSession) {

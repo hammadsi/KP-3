@@ -6,5 +6,5 @@ export class FindAnswersDto {
   userId?: string;
   @IsOptional()
   @IsString()
-  sessionId?: string;
+  id?: string;
 }

@@ -15,6 +15,12 @@ export enum Gender {
   O = 'O'
 }
 
+export enum QuestionType {
+  freeText = 'freeText',
+  scale = 'scale',
+  radio = 'radio'
+}
+
 class CurrentPhysicalState {
   @Expose()
   @IsNumber()
@@ -49,6 +55,10 @@ class Question {
   @Expose()
   @IsString()
   answer: string;
+
+  @Expose()
+  @IsEnum(QuestionType)
+  type: QuestionType;
 }
 
 class Lap {
@@ -58,7 +68,7 @@ class Lap {
 
   @Expose()
   @IsDate()
-  timeStamp: Date;
+  timestamp: Date;
 }
 
 class HeartRate {
@@ -84,11 +94,26 @@ class Speed {
   @IsDate()
   timestamp: Date;
 }
+export class TimeSeriesData {
+  @Expose()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => HeartRate)
+  heartRates: HeartRate[];
 
-class GameSession {
+  @Expose()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => Speed)
+  speeds: Speed[];
+
+  // Add any other fields like IMUData if necessary
+}
+
+export class GameSession {
   @Expose()
   @IsString()
-  sessionId: string;
+  id: string;
 
   @Expose()
   @IsDate()
@@ -103,16 +128,11 @@ class GameSession {
   exerciseTime: number;
 
   @Expose()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => Question)
-  preGame: Question[];
-
-  @Expose()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => Question)
-  postGame: Question[];
+  @IsOptional()
+  questionnaires?: {
+    preGame: Question[];
+    postGame: Question[];
+  };
 
   @Expose()
   @IsArray()
@@ -121,16 +141,9 @@ class GameSession {
   laps: Lap[];
 
   @Expose()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => HeartRate)
-  heartRates: HeartRate[];
-
-  @Expose()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => Speed)
-  speeds: Speed[];
+  @ValidateNested()
+  @Type(() => TimeSeriesData)
+  timeSeriesData: TimeSeriesData;
 }
 
 export class WheelchairPatientEntity {
@@ -143,8 +156,8 @@ export class WheelchairPatientEntity {
   name: string;
 
   @Expose()
-  @IsNumber()
-  age: number;
+  @IsString()
+  birthdate: string;
 
   @Expose()
   @IsEnum(Gender)

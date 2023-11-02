@@ -13,7 +13,7 @@ export class UpdateAnswerDto {
 
   @IsOptional()
   @IsString()
-  sessionId?: string;
+  id?: string;
 
   @IsOptional()
   @IsNumber()

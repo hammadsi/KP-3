@@ -6,9 +6,13 @@ import {
 } from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
 import { clearWheelchairPatientsState } from '../state/ducks/wheelchairPatients/wheelchairPatients.reducer';
 import {
+  GameSession,
   UpdateWheelchairPatientData,
-  WheelchairPatient,
 } from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
+import {
+  getLastSessionTimeDelta,
+  getNumSessionsThisWeek,
+} from '../utils/session.utils';
 
 import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
@@ -77,10 +81,21 @@ const useWheelchairPatient = (patientId?: string) => {
     wheelchairPatients.wheelchairPatient,
   ]);
 
+  const gameSessions: GameSession[] = wheelchairPatients.wheelchairPatient
+    ?.gameSessions
+    ? wheelchairPatients.wheelchairPatient?.gameSessions
+    : [];
+
   return {
     wheelchairPatient: wheelchairPatients.wheelchairPatient,
+    gameSessions,
     error: error || wheelchairPatients.error,
     loading,
+    details: {
+      sessionsThisWeek: getNumSessionsThisWeek(gameSessions),
+      lastSessionDelta: getLastSessionTimeDelta(gameSessions),
+      sessionsTotal: gameSessions.length,
+    },
     updatePatientData: updatePatientDataById, // Include the update function in the returned object
   };
 };

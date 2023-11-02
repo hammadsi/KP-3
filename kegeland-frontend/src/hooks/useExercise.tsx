@@ -59,8 +59,8 @@ const useExercise = (patientId: string, exerciseId: string) => {
   useEffect(() => {
     if (questionnaires.questionnaire && sessions.session) {
       const questionnaireId = questionnaires.questionnaire.id;
-      const sessionId = sessions.session.id;
-      dispatch(fetchQuestionnaireAnswers({ questionnaireId, sessionId }));
+      const id = sessions.session.id;
+      dispatch(fetchQuestionnaireAnswers({ questionnaireId, id }));
     }
   }, [questionnaires.questionnaire, sessions.session]);
 

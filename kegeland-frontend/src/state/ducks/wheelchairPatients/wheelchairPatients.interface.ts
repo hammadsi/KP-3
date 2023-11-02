@@ -1,7 +1,7 @@
 export type WheelchairPatient = {
   id: string;
   name: string;
-  age: number;
+  birthdate: string;
   gender: 'M' | 'F' | 'O';
   currentPhysicalState: CurrentPhysicalState;
   gameSessions: GameSession[];
@@ -17,32 +17,33 @@ export type CurrentPhysicalState = {
 };
 
 export type GameSession = {
-  sessionId: string;
-  exerciseTime: number; // Calculated from startTime and endTime
+  createdAt: number;
+  id: string;
   startTime: Date;
   endTime: Date;
-  questionaires: {
-    preGame: Questionaire[];
-    postGame: Questionaire[];
+  exerciseTime: number;
+  questionnaires: {
+    preGame: Question[];
+    postGame: Question[];
   };
   laps: Lap[];
   timeSeriesData: TimeSeriesData;
 };
 
-export type Questionaire = {
+export type Question = {
   question: string;
+  type: 'freeText' | 'scale' | 'radio';
   answer: string;
 };
 
 export type Lap = {
   lapTime: number;
-  timeStamp: Date;
+  timestamp: Date;
 };
 
 export type TimeSeriesData = {
   heartRates: HeartRate[];
   speeds: Speed[];
-  imus: IMUData[]; // Define the IMUData type based on actual data structure
 };
 
 export type HeartRate = {
@@ -56,10 +57,6 @@ export type Speed = {
   timestamp: Date;
 };
 
-export type IMUData = {
-  // Define properties based on your requirements and data structure
-};
-
 export type WheelchairPatientsState = {
   loading: boolean;
   wheelchairPatient: WheelchairPatient | undefined;
@@ -70,4 +67,23 @@ export type WheelchairPatientsState = {
 export type UpdateWheelchairPatientData = {
   pid: WheelchairPatient['id'];
   currentPhysicalState: CurrentPhysicalState;
+};
+
+export type UpdateGameSessionData = {
+  patientId: string;
+  id: string;
+  sessionData: GameSessionData;
+};
+
+export type GameSessionData = {
+  createdAt: number;
+  startTime: Date;
+  endTime: Date;
+  exerciseTime: number;
+  questionnaires: {
+    preGame: Question[];
+    postGame: Question[];
+  };
+  laps: Lap[];
+  timeSeriesData: TimeSeriesData;
 };

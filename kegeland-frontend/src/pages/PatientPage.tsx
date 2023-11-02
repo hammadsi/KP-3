@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   Button,
   Box,
@@ -12,14 +13,21 @@ import {
   AiOutlineStock,
   AiOutlineCalendar,
 } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 
 import Card from '../components/Card';
 import LabeledValue from '../components/LabeledValue';
 import withLayout from '../hoc/withLayout';
 import usePatient from '../hooks/usePatient';
 import WeeklySessionsChart from '../components/WeeklySessionsChart';
-import ExerciseTable from '../components/ExerciseTable';
 import withSpinner from '../hoc/withSpinner';
+import useAppSelector from '../hooks/useAppSelector';
+import { PatientType, UserRole } from '../state/ducks/auth/auth.interface';
+import FemfitExerciseTable from '../components/FemfitExerciseTable';
+import WheelchairExerciseTable from '../components/WheelchairExerciseTable';
+import { RootState } from '../state/store';
+import useWheelchairPatient from '../hooks/useWheelchairPatient';
+import { ViewSession } from '../state/ducks/sessions/sessions.interface';
 
 type PatientPageParams = {
   patientId: string;
@@ -28,7 +36,19 @@ type PatientPageParams = {
 const PatientPage: React.FC = () => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const { patientId } = useParams<PatientPageParams>();
-  const { data, details, loading } = usePatient(patientId || '');
+  const { data, details: femfitDetails, loading } = usePatient(patientId || '');
+  const { authUser } = useSelector((state: RootState) => state.auth);
+  const { gameSessions, details: wheelchairDetails } = useWheelchairPatient(
+    authUser?.id,
+  );
+  const { userDetails } = useAppSelector((state) => state.auth);
+
+  const sortedGameSessions = [...gameSessions].sort(
+    (a, b) => b.createdAt - a.createdAt,
+  );
+  const sortedData = [...data].sort((a, b) => b.createdAt - a.createdAt);
+
+  const allSessions: ViewSession[] = [...sortedData, ...sortedGameSessions];
 
   const headingStyle = {
     color: 'var(--chakra-colors-blackAlpha-800)',
@@ -37,8 +57,62 @@ const PatientPage: React.FC = () => {
     margin: '25px 0 10px 0',
   };
 
+  // New code for file upload
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploadStatus, setUploadStatus] = useState<'idle' | 'done'>('idle');
+
+  const handleFileSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
+
+  const triggerFileUpload = () => {
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const text = event?.target?.result?.toString();
+        if (!text) {
+          console.error('Could not read file.');
+          return;
+        }
+        const lines = text.split('\n');
+        const imuData = [];
+
+        for (let i = 1; i < lines.length; i++) {
+          const line = lines[i];
+          const parts = line.split(',');
+
+          if (parts.length === 7) {
+            const [timeStamp, xAccel, xGyro, yAccel, yGyro, zAccel, zGyro] =
+              parts;
+            imuData.push({
+              timeStamp: parseFloat(timeStamp),
+              x_accel: parseFloat(xAccel),
+              x_gyro: parseFloat(xGyro),
+              y_accel: parseFloat(yAccel),
+              y_gyro: parseFloat(yGyro),
+              z_accel: parseFloat(zAccel),
+              z_gyro: parseFloat(zGyro),
+            });
+          }
+        }
+
+        // TODO: Update the Firestore with Update calls to the API when endpoints are ready.
+        setUploadStatus('done');
+      };
+
+      reader.onerror = function (event) {
+        console.error('An error occurred while reading the file:', event);
+        setUploadStatus('idle');
+      };
+
+      reader.readAsText(selectedFile);
+    }
+  };
+
   const startUnitySession = () => {
-    // Open the Unity game using the custom URI scheme
     window.location.href = `VRWheelchairSim:// -patientID ${patientId} -bearerToken ${localStorage.getItem(
       'id_token',
     )}`;
@@ -62,17 +136,28 @@ const PatientPage: React.FC = () => {
             alignItems="flex-start">
             <LabeledValue
               label="Workouts this week"
-              value={details.sessionsThisWeek}
+              value={
+                femfitDetails.sessionsThisWeek +
+                wheelchairDetails.sessionsThisWeek
+              }
               icon={AiOutlineCalendar}
             />
+            {/* TODO: Only shpw the one relevant for patient type */}
             <LabeledValue
-              label="Since last exercise"
-              value={details.lastSessionDelta}
+              label="Since last femfit exercise"
+              value={femfitDetails.lastSessionDelta}
+              icon={AiOutlineClockCircle}
+            />
+            <LabeledValue
+              label="Since last wheelchair exercise"
+              value={wheelchairDetails.lastSessionDelta}
               icon={AiOutlineClockCircle}
             />
             <LabeledValue
               label="Total workouts"
-              value={details.sessionsTotal}
+              value={
+                femfitDetails.sessionsTotal + wheelchairDetails.sessionsTotal
+              }
               icon={AiOutlineStock}
             />
           </Stack>
@@ -81,16 +166,57 @@ const PatientPage: React.FC = () => {
           w={isGreaterThanLg ? '75%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
           loading={loading}>
-          <WeeklySessionsChart sessions={data} numWeeks={12} />
+          <WeeklySessionsChart sessions={allSessions} numWeeks={12} />
         </Card>
       </Flex>
-      <h1 style={headingStyle}>OVERVIEW OF THE PATIENT'S EXERCISES</h1>
-      <Card loading={loading} minH="36">
-        <ExerciseTable sessions={data} patientId={patientId!} />
+
+      {userDetails?.patientType.includes(PatientType.FEMFIT) && (
+        <div>
+          <h1 style={headingStyle}>Overview of Femfit exercises</h1>
+          <Card loading={loading} minH="36">
+            <FemfitExerciseTable sessions={sortedData} patientId={patientId!} />
+          </Card>
+        </div>
+      )}
+
+      {userDetails?.patientType.includes(PatientType.WHEELCHAIR) && (
+        <div>
+          <h1 style={headingStyle}>Overview of Wheelchair exercises</h1>
+          <Card loading={loading} minH="36">
+            <WheelchairExerciseTable
+              sessions={sortedGameSessions}
+              patientId={patientId!}
+            />
+          </Card>
+        </div>
+      )}
+
+      {userDetails?.roles.includes(UserRole.PHYSICIAN) && (
+        <Button w="100%" marginTop={8} onClick={startUnitySession}>
+          Start session
+        </Button>
+      )}
+
+      {/* Move this into the Exercise Session Page when the issue is done */}
+      <Card>
+        <h2 style={headingStyle}> Upload IMU data for session</h2>
+        <Center marginTop={12}>
+          <input
+            type="file"
+            id="imuData"
+            name="imuData"
+            accept=".csv"
+            onChange={handleFileSelection}
+          />
+          <Button
+            onClick={triggerFileUpload}
+            ml={4}
+            isDisabled={!selectedFile}
+            colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
+            {uploadStatus === 'done' ? 'Uploaded' : 'Upload selected IMU Data'}
+          </Button>
+        </Center>
       </Card>
-      <Button w="100%" marginTop={8} onClick={startUnitySession}>
-        Start session
-      </Button>
     </Box>
   );
 };

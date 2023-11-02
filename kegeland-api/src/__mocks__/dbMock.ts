@@ -2,9 +2,9 @@ import { timestamp } from 'src/utils/timestamp';
 export const dbMock = {
   patients: [
     {
-      id: "p1",
-      name: "John Doe",
-      age: 30,
+      id: 'p1',
+      name: 'John Doe',
+      birthdate: '2000-09-28T12:00:00',
       gender: 'M',
       currentPhysicalState: {
         height: 180,
@@ -16,54 +16,55 @@ export const dbMock = {
       },
       gameSessions: [
         {
-          sessionId: "s1",
+          id: 's1',
           exerciseTime: 60,
           startTime: timestamp(),
           endTime: timestamp(),
           questionaires: {
             preGame: [
               {
-                question: "How do you feel?",
-                answer: "Good",
-              }
+                question: 'How do you feel?',
+                answer: 'Good',
+              },
             ],
             postGame: [
               {
-                question: "How do you feel now?",
-                answer: "Tired",
-              }
-            ]
+                question: 'How do you feel now?',
+                answer: 'Tired',
+              },
+            ],
           },
           laps: [
             {
               lapTime: 15,
               timeStamp: timestamp(),
-            }
+            },
           ],
           timeSeriesData: {
             heartRates: [
               {
                 heartRate: 80,
                 timestamp: timestamp(),
-              }
+              },
             ],
             speeds: [
               {
                 leftSpeed: 5,
                 rightSpeed: 5,
                 timestamp: timestamp(),
-              }
+              },
             ],
             imus: [],
-          }
-        }
+          },
+        },
       ],
-    }
+    },
   ],
   userDetails: [
     {
       id: '_id',
       roles: ['patient'],
+      patientType: ['wheelchair'],
       email: 'arne.bente@ntnu.no',
       name: {
         lastName: 'Arnhildsson',
@@ -114,7 +115,7 @@ export const dbMock = {
       userId: '_id',
       answeredAt: timestamp(),
       answers: [1, 2, 3],
-      sessionId: '_id',
+      id: '_id',
     },
   ],
 };

@@ -5,6 +5,11 @@ export enum UserRole {
   PHYSICIAN = 'physician',
 }
 
+export enum PatientType {
+  WHEELCHAIR = 'wheelchair',
+  FEMFIT = 'femfit',
+}
+
 export type AuthTokens = {
   accessToken: string;
   idToken: string;
@@ -20,6 +25,7 @@ export type Name = {
 export type UserDetails = {
   name: Name;
   roles: UserRole[];
+  patientType: PatientType[];
 };
 
 export type User = { id: string; email: string } & UserDetails;

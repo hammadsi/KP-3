@@ -3,6 +3,7 @@ import {
   Center,
   Container,
   FormControl,
+  Checkbox,
   FormLabel,
   Heading,
   HStack,
@@ -17,7 +18,11 @@ import { useNavigate } from 'react-router-dom';
 import { InputControl, SubmitButton } from 'formik-chakra-ui';
 
 import { signUpUser } from '../../state/ducks/auth/auth.actions';
-import { RegisterDTO, UserRole } from '../../state/ducks/auth/auth.interface';
+import {
+  PatientType,
+  RegisterDTO,
+  UserRole,
+} from '../../state/ducks/auth/auth.interface';
 import { clearError } from '../../state/ducks/auth/auth.reducer';
 import useAppSelector from '../../hooks/useAppSelector';
 import useAppDispatch from '../../hooks/useAppDispatch';
@@ -27,8 +32,9 @@ type FormData = {
   firstName: string;
   lastName: string;
   email: string;
+  patientType: PatientType[];
   gender: Gender;
-  birthofdate: Date;
+  birthdate: string;
   height: number;
   weight: number;
   password: string;
@@ -68,8 +74,9 @@ const RegisterPage = () => {
       lastName,
       email,
       password,
+      patientType,
       gender,
-      birthofdate,
+      birthdate,
       height,
       weight,
     } = data;
@@ -81,8 +88,9 @@ const RegisterPage = () => {
         lastName,
       },
       roles: [UserRole.PATIENT],
+      patientType,
       wheelchairPatient: {
-        age: 0,
+        birthdate,
         gender,
         currentPhysicalState: {
           height,
@@ -112,9 +120,10 @@ const RegisterPage = () => {
               initialValues={{
                 email: '',
                 password: '',
+                patientType: [] as PatientType[],
                 firstName: '',
                 lastName: '',
-                birthofdate: new Date(),
+                birthdate: '',
                 gender: 'O' as Gender,
                 height: 0,
                 weight: 0,
@@ -206,9 +215,9 @@ const RegisterPage = () => {
                           inputProps={{
                             type: 'date',
                           }}
-                          label="Birth of Date"
+                          label="Date of birth"
                           data-testid="lastname-input"
-                          name="birthofdate"
+                          name="birthdate"
                         />
                       </Box>
                     </HStack>
@@ -234,6 +243,61 @@ const RegisterPage = () => {
                         />
                       </Box>
                     </HStack>
+
+                    <Box>
+                      <FormControl>
+                        <FormLabel>What training tools will you use?</FormLabel>
+                        <Checkbox
+                          name="patientType"
+                          value={PatientType.FEMFIT}
+                          isChecked={formProps.values.patientType.includes(
+                            PatientType.FEMFIT,
+                          )}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              formProps.setFieldValue('patientType', [
+                                ...formProps.values.patientType,
+                                PatientType.FEMFIT,
+                              ]);
+                            } else {
+                              formProps.setFieldValue(
+                                'patientType',
+                                formProps.values.patientType.filter(
+                                  (type) => type !== PatientType.FEMFIT,
+                                ),
+                              );
+                            }
+                          }}>
+                          Femfit
+                        </Checkbox>
+                      </FormControl>
+                      <FormControl>
+                        <Checkbox
+                          name="patientType"
+                          value={PatientType.WHEELCHAIR}
+                          isChecked={formProps.values.patientType.includes(
+                            PatientType.WHEELCHAIR,
+                          )}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              formProps.setFieldValue('patientType', [
+                                ...formProps.values.patientType,
+                                PatientType.WHEELCHAIR,
+                              ]);
+                            } else {
+                              formProps.setFieldValue(
+                                'patientType',
+                                formProps.values.patientType.filter(
+                                  (type) => type !== PatientType.WHEELCHAIR,
+                                ),
+                              );
+                            }
+                          }}>
+                          Wheelchair
+                        </Checkbox>
+                      </FormControl>
+                    </Box>
+
                     <Box>
                       <InputControl
                         isRequired

@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsEnum, IsOptional, MinLength, ValidateNested } from 'class-validator';
 
-import { Role } from '../../roles/enums/role.enum';
+import { PatientType, Role } from '../../roles/enums/role.enum';
 import { FullName } from '../entities/user-details.entity';
 
 import { LoginCredentialsDto } from './login-credentials.dto';
@@ -18,6 +18,9 @@ export class RegisterCredentialsDto extends LoginCredentialsDto {
 
   @IsEnum(Role, { each: true })
   readonly roles: Role[];
+
+  @IsEnum(PatientType, { each: true })
+  readonly patientType: PatientType[];
 
   @IsOptional()
   @ValidateNested()

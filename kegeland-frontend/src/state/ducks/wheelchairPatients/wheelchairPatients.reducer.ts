@@ -7,8 +7,13 @@ import {
 } from '../../../utils/thunk.utils';
 
 import {
+  addEmptyGameSession,
   fetchWheelchairPatientById,
+  updateGameSession,
   updatePatientData,
+  addHeartRateToGameSession,
+  addSpeedToGameSession,
+  addLapToGameSession,
 } from './wheelchairPatients.actions';
 import { WheelchairPatientsState } from './wheelchairPatients.interface';
 
@@ -40,6 +45,36 @@ const wheelchairPatientsSlice = createSlice({
           state.wheelchairPatient.currentPhysicalState =
             action.payload.currentPhysicalState;
         }
+      })
+      .addCase(addEmptyGameSession.fulfilled, (state, action) => {
+        if (state.wheelchairPatient) {
+          if (!state.wheelchairPatient.gameSessions) {
+            state.wheelchairPatient.gameSessions = [];
+          }
+          state.wheelchairPatient.gameSessions.push(action.payload);
+        }
+      })
+      .addCase(updateGameSession.fulfilled, (state, action) => {
+        if (state.wheelchairPatient) {
+          const sessionIndex = state.wheelchairPatient.gameSessions.findIndex(
+            (session) => session.id === action.payload.id,
+          );
+          if (sessionIndex > -1) {
+            state.wheelchairPatient.gameSessions[sessionIndex] = action.payload;
+          }
+        }
+      })
+      .addCase(addHeartRateToGameSession.fulfilled, (state, action) => {
+        // For testing
+        console.log('Heart rate added:', action.payload.heartRate);
+      })
+      .addCase(addSpeedToGameSession.fulfilled, (state, action) => {
+        // For testing
+        console.log('Speed added:', action.payload);
+      })
+      .addCase(addLapToGameSession.fulfilled, (state, action) => {
+        // For testing
+        console.log('Lap added:', action.payload);
       })
       .addMatcher(
         (action) => isPendingAction(action, 'wheelchairPatients'),

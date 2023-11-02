@@ -6,7 +6,7 @@ import { WheelchairPatient } from '../wheelchairPatients.interface';
 const mockWheelchairPatient: WheelchairPatient = {
   id: '123',
   name: 'John Doe',
-  age: 30,
+  birthdate: '2000-09-28T12:00:00',
   gender: 'M',
   currentPhysicalState: {
     height: 175,
@@ -15,10 +15,11 @@ const mockWheelchairPatient: WheelchairPatient = {
     averageHeartRate: 75,
     maxWheelchairSpeed: 5,
     averageWheelchairSpeed: 3,
+    id,
   },
   gameSessions: [
     {
-      sessionId: 'session1',
+      id: 'session1',
       startTime: new Date('2023-09-28T12:00:00'),
       endTime: new Date('2023-09-28T13:00:00'),
       exerciseTime: 60, // minutes, for example

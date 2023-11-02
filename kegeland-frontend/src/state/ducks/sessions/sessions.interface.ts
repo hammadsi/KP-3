@@ -1,4 +1,5 @@
 import { SensorType } from '../sensors/sensors.interface';
+import { GameSession } from '../wheelchairPatients/wheelchairPatients.interface';
 
 export type SessionDataPoint = number | null;
 
@@ -8,6 +9,7 @@ export type LeanSession = {
   sensor: SensorType;
   createdAt: number;
 };
+export type ViewSession = LeanSession | GameSession | Session;
 
 export interface Session extends LeanSession {
   data: Record<string, SessionDataPoint[]>;

@@ -121,12 +121,14 @@ const PreQuestionnairePage: React.FC = () => {
       justifyContent="center"
       alignItems="center"
       textAlign="center"
-      flexDirection="column">
+      flexDirection="column"
+    >
       <Text
         fontSize={26}
         fontWeight="semibold"
         color="gray.600"
-        marginBottom={4}>
+        marginBottom={4}
+      >
         Pre Questionnaire
       </Text>
       {/* Insert all of the questions here */}
@@ -148,7 +150,8 @@ const PreQuestionnairePage: React.FC = () => {
         <Button
           isDisabled={!checkIfAllIsFIlled()}
           marginTop={4}
-          onClick={startUnitySession}>
+          onClick={startUnitySession}
+        >
           Start game
         </Button>
       </Box>

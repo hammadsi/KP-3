@@ -61,6 +61,7 @@ const mockWheelchairPatient: WheelchairPatient = {
           },
         ],
       },
+      IMUData: [],
     },
   ],
 };
@@ -131,7 +132,8 @@ const AddGameSession: React.FC = () => {
       <button
         onClick={handleAddSession}
         disabled={addLoading}
-        style={addLoading ? buttonDisabledStyle : buttonStyle}>
+        style={addLoading ? buttonDisabledStyle : buttonStyle}
+      >
         Add Empty Game Session
       </button>
       {addError && <p>Error: {addError}</p>}
@@ -139,7 +141,8 @@ const AddGameSession: React.FC = () => {
       <button
         onClick={handleUpdateSession}
         disabled={updateLoading}
-        style={updateLoading ? buttonDisabledStyle : buttonStyle}>
+        style={updateLoading ? buttonDisabledStyle : buttonStyle}
+      >
         Update Game Session
       </button>
       {updateError && <p>Error: {updateError}</p>}

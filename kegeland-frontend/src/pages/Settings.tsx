@@ -23,7 +23,8 @@ const Settings: React.FC = () => {
       justifyContent="center"
       alignItems="center"
       textAlign="center"
-      flexDirection="column">
+      flexDirection="column"
+    >
       <Heading fontSize="9xl" as="h1">
         <Wrap align="center" color="gray.700">
           <WrapItem>

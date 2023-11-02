@@ -21,7 +21,8 @@ const Card: React.FC<CardProps> = ({
       align="center"
       borderRadius={5}
       marginBottom={5}
-      {...props}>
+      {...props}
+    >
       <Skeleton isLoaded={!loading} {...containerProps} h="100%" w="100%">
         {children}
       </Skeleton>

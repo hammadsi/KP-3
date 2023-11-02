@@ -87,6 +87,10 @@ class IMUReading {
 
 class IMUData {
   @Expose()
+  @IsNumber()
+  timestamp: number;
+
+  @Expose()
   @ValidateNested()
   @Type(() => IMUReading)
   accelerometer: IMUReading;

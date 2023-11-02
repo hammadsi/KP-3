@@ -43,6 +43,7 @@ export type Lap = {
 };
 
 export type IMUData = {
+  timestamp: number;
   accelerometer: {
     x: number;
     y: number;

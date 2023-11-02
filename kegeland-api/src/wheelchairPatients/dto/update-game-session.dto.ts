@@ -38,6 +38,9 @@ class IMUReadingDto {
 }
   
 export class IMUDataDto {
+@IsNumber()
+timestamp: number;
+
 @ValidateNested()
 @Type(() => IMUReadingDto)
 accelerometer: IMUReadingDto;

@@ -305,14 +305,14 @@ export class WheelchairPatientsService {
         return {
           accelerometer: imuData.accelerometer,
           gyroscope: imuData.gyroscope,
-          // Assuming a timestamp is needed here, similar to other updates
-          timestamp: firestore.Timestamp.now() 
+          // This particular timestamp is a number, not a Date object
+          timestamp: imuData.timestamp
         };
       });
 
       // Append the IMU data to the Firestore document
       const imuUpdateOperation = {};
-      imuUpdateOperation['timeSeriesData.IMUData'] = firestore.FieldValue.arrayUnion(...imuUpdates);
+      imuUpdateOperation['IMUData'] = firestore.FieldValue.arrayUnion(...imuUpdates);
 
       await gameSessionDocRef.update(imuUpdateOperation);
 

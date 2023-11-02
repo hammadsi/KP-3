@@ -137,5 +137,6 @@ CheckNetIsolation LoopbackExempt -is -n="10247LuisQuintero.ExciteOMeter_k7zc7t0y
 - If the device has never been connected to the app, press `Pair` and it will prompt connection with Windows.
 - When the device is paired it will enable the option `Continue`. If a device starting with `Polar H10 ` is detected, it will jump to configure their characteristics. Otherwise, the second screen will be opened to explore their services and characteristics.
 - Adjust the toggles according to the variables that want to collect from the sensor (HR+RRi). Note that ECG and ACC cannot be simultaneously enabled, the device stops responding to requests when busy sending both streamings.
+- Run the **SetRegistry.bat** to add the unity executable to your registry, and thereby enabling the custom URI-scheme that allows for launching the game from the webapp.
 - Run the wheelchair game executable from the web app (see the respective folders for the setup instructions of kegeland-api and kegeland-frontend) , with both the wheelchair ergonomic controller and the Polar H10-belt connected.
 

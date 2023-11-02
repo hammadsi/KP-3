@@ -7,7 +7,6 @@ import {
   useMediaQuery,
   Center,
 } from '@chakra-ui/react';
-
 import { useParams } from 'react-router-dom';
 import {
   AiOutlineClockCircle,
@@ -23,7 +22,7 @@ import usePatient from '../hooks/usePatient';
 import WeeklySessionsChart from '../components/WeeklySessionsChart';
 import withSpinner from '../hoc/withSpinner';
 import useAppSelector from '../hooks/useAppSelector';
-import { UserRole } from '../state/ducks/auth/auth.interface';
+import { PatientType, UserRole } from '../state/ducks/auth/auth.interface';
 import FemfitExerciseTable from '../components/FemfitExerciseTable';
 import WheelchairExerciseTable from '../components/WheelchairExerciseTable';
 import { RootState } from '../state/store';
@@ -86,28 +85,20 @@ const PatientPage: React.FC = () => {
           const parts = line.split(',');
 
           if (parts.length === 7) {
-            const [
-              timeStamp,
-              x_accel,
-              x_gyro,
-              y_accel,
-              y_gyro,
-              z_accel,
-              z_gyro,
-            ] = parts;
+            const [timeStamp, xAccel, xGyro, yAccel, yGyro, zAccel, zGyro] =
+              parts;
             imuData.push({
               timeStamp: parseFloat(timeStamp),
-              x_accel: parseFloat(x_accel),
-              x_gyro: parseFloat(x_gyro),
-              y_accel: parseFloat(y_accel),
-              y_gyro: parseFloat(y_gyro),
-              z_accel: parseFloat(z_accel),
-              z_gyro: parseFloat(z_gyro),
+              x_accel: parseFloat(xAccel),
+              x_gyro: parseFloat(xGyro),
+              y_accel: parseFloat(yAccel),
+              y_gyro: parseFloat(yGyro),
+              z_accel: parseFloat(zAccel),
+              z_gyro: parseFloat(zGyro),
             });
           }
         }
 
-        console.log('Parsed IMU data:', imuData);
         // TODO: Update the Firestore with Update calls to the API when endpoints are ready.
         setUploadStatus('done');
       };
@@ -179,20 +170,26 @@ const PatientPage: React.FC = () => {
         </Card>
       </Flex>
 
-      {/* TODO: Only show the ones relevant for the patient type */}
+      {userDetails?.patientType.includes(PatientType.FEMFIT) && (
+        <div>
+          <h1 style={headingStyle}>Overview of Femfit exercises</h1>
+          <Card loading={loading} minH="36">
+            <FemfitExerciseTable sessions={sortedData} patientId={patientId!} />
+          </Card>
+        </div>
+      )}
 
-      <h1 style={headingStyle}>Overview of Femfit exercises</h1>
-      <Card loading={loading} minH="36">
-        <FemfitExerciseTable sessions={sortedData} patientId={patientId!} />
-      </Card>
-
-      <h1 style={headingStyle}>Overview of Wheelchair exercises</h1>
-      <Card loading={loading} minH="36">
-        <WheelchairExerciseTable
-          sessions={sortedGameSessions}
-          patientId={patientId!}
-        />
-      </Card>
+      {userDetails?.patientType.includes(PatientType.WHEELCHAIR) && (
+        <div>
+          <h1 style={headingStyle}>Overview of Wheelchair exercises</h1>
+          <Card loading={loading} minH="36">
+            <WheelchairExerciseTable
+              sessions={sortedGameSessions}
+              patientId={patientId!}
+            />
+          </Card>
+        </div>
+      )}
 
       {userDetails?.roles.includes(UserRole.PHYSICIAN) && (
         <Button w="100%" marginTop={8} onClick={startUnitySession}>
@@ -200,8 +197,7 @@ const PatientPage: React.FC = () => {
         </Button>
       )}
 
-
-      {/*Move this into the Exercise Session Page when the issue is done */}
+      {/* Move this into the Exercise Session Page when the issue is done */}
       <Card>
         <h2 style={headingStyle}> Upload IMU data for session</h2>
         <Center marginTop={12}>

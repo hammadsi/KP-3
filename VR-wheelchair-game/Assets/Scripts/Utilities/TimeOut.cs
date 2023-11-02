@@ -1,17 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System;
 
 using TMPro;
 
-
 // File system stuff
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 [System.Serializable]
 public class TimeOut : MonoBehaviour
@@ -35,16 +32,11 @@ public class TimeOut : MonoBehaviour
         timeOutCanvas = uiObjectGetter.getTimeOutCanvas();
         infoText = timeOutCanvas.transform.Find("Timeout Text").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         loadTimeSeconds = Time.realtimeSinceStartup;
-        
-        #if UNITY_EDITOR
         EditorApplication.playModeStateChanged += onPlayModeStateChange;
-        #endif
-
         timeOutCanvas.SetActive(false);
         StartCoroutine(PlayTime());
     }
 
-#if UNITY_EDITOR
     private void onPlayModeStateChange(PlayModeStateChange state)
     {
         if (state == PlayModeStateChange.ExitingPlayMode)
@@ -53,7 +45,6 @@ public class TimeOut : MonoBehaviour
             Debug.Log("Exited play mode!!!");
         }
     }
-#endif
     void PrematureQuit()
     {
         if (hasTimedOut) return;

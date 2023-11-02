@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using ExciteOMeter;
 
 using TMPro;
 public class ElapsedTime : MonoBehaviour
@@ -20,9 +19,6 @@ public class ElapsedTime : MonoBehaviour
 
 
     private TextMeshProUGUI timerText;
-
-    private DataCollector dataCollector;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -31,8 +27,6 @@ public class ElapsedTime : MonoBehaviour
         timerCanvas.SetActive(true);
         timerText = timerCanvas.transform.Find("Timer Text").gameObject.GetComponent<TMPro.TextMeshProUGUI>();
         timerIsRunning = false;
-        dataCollector = FindObjectOfType<DataCollector>();
-
     }
 
     public int getLapCount()
@@ -76,17 +70,10 @@ public class ElapsedTime : MonoBehaviour
         startTimer();
         return;
     }
-    public float getElapsedTime()
-    {
-        return elapsedTime;
-    }
 
     public void newLap()
     {
-
         float lapTime = restartTimer();
-        dataCollector.AddLapData(lapTime); // Log the lap time here
-
         if (lapTime <= 2.0f)
         {
             Debug.Log("Best time: " + bestTime);
@@ -116,13 +103,11 @@ public class ElapsedTime : MonoBehaviour
         //        bestTime = lapTime;
         //    }
         //}
-        return;
     }
 
     public void startTimer()
     {
         timerIsRunning = true;
-        return;
     }
 
     private float restartTimer()

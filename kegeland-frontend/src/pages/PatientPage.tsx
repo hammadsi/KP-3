@@ -7,7 +7,6 @@ import {
   useMediaQuery,
   Center,
 } from '@chakra-ui/react';
-
 import { useParams } from 'react-router-dom';
 import {
   AiOutlineClockCircle,
@@ -200,8 +199,7 @@ const PatientPage: React.FC = () => {
         </Button>
       )}
 
-
-      {/*Move this into the Exercise Session Page when the issue is done */}
+      {/* Move this into the Exercise Session Page when the issue is done */}
       <Card>
         <h2 style={headingStyle}> Upload IMU data for session</h2>
         <Center marginTop={12}>

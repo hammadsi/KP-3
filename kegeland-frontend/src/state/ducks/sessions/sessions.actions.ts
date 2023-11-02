@@ -2,7 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { apiCaller } from '../../../utils/apiCaller';
 
-import { FetchSessionDto, FetchSessionsDto, Session } from './sessions.interface';
+import {
+  FetchSessionDto,
+  FetchSessionsDto,
+  Session,
+} from './sessions.interface';
 
 export const fetchSessionById = createAsyncThunk(
   'sessions/fetchSessionById',
@@ -12,9 +16,8 @@ export const fetchSessionById = createAsyncThunk(
       method: 'GET',
     });
     return session;
-  }
+  },
 );
-
 
 export const fetchSessions = createAsyncThunk(
   'sessions/fetchSessions',

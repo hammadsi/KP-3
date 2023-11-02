@@ -8,7 +8,6 @@ import {
   FetchQuestionnaireAnswersDTO,
   Questionnaire,
 } from './questionnaires.interface';
-import { type } from 'os';
 
 export const fetchAssignedQuestionnaire = createAsyncThunk(
   'questionnaires/fetchAssignedQuestionnaire',

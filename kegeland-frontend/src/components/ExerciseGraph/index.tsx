@@ -20,7 +20,8 @@ type ExerciseGraphProps = {
 };
 
 const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ sensor, session }) => {
-  const { options, chartData, chartRef, updatePlot, resetPlot, updateXAxis } = useGraphProfile(sensor, session);
+  const { options, chartData, chartRef, updatePlot, resetPlot, updateXAxis } =
+    useGraphProfile(sensor, session);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (

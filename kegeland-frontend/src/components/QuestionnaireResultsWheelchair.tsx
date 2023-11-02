@@ -5,26 +5,17 @@ import {
   Grid,
   GridItem,
   Heading,
-  Progress,
   Text,
-  Tooltip,
   useMediaQuery,
 } from '@chakra-ui/react';
-
 
 type QuestionnaireResultsProps = {
   questionnaire: any;
 };
 
-const getMinValOffset = (minVal: string) => {
-  return `${Math.max(16 - Math.round(minVal.length / 2), 0) * 4}px`;
-};
-
-const getMaxValOffset = (maxVal: string) => {
-  return `${Math.max(8 - Math.round(maxVal.length / 2), 0) * 4}px`;
-};
-
-const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({questionnaire }) => {
+const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({
+  questionnaire,
+}) => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const render = () => {
     if (!questionnaire) {
@@ -48,44 +39,46 @@ const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({questionnair
             }
             gap={5}
             marginBottom={5}>
-            <GridItem  paddingX={2}>
+            <GridItem paddingX={2}>
               <Text fontSize={18} fontWeight="normal">
-                  Before:
+                Before:
               </Text>
               <Divider marginY={2} borderColor="primary.400" />
               <Flex flexDirection="column" alignItems="start">
                 {questionnaire.preGame.map((item: any) => {
-                const answer = item.type === 'radio' 
-                  ? item.answer.toUpperCase() 
-                  : item.type === 'scale' 
-                    ? item.answer + "/5" 
-                    : item.answer; 
-                return (
-                  <Flex flexDirection="column" alignItems="start" marginY={1}>
-                    <p style={{fontWeight: 'bold'}}>{item.question}</p>
-                    <span style={{fontStyle: 'italic'}}>{answer}</span>
-                  </Flex>
+                  const answer =
+                    item.type === 'radio'
+                      ? item.answer.toUpperCase()
+                      : item.type === 'scale'
+                      ? item.answer + '/5'
+                      : item.answer;
+                  return (
+                    <Flex flexDirection="column" alignItems="start" marginY={1}>
+                      <p style={{ fontWeight: 'bold' }}>{item.question}</p>
+                      <span style={{ fontStyle: 'italic' }}>{answer}</span>
+                    </Flex>
                   );
                 })}
               </Flex>
             </GridItem>
-            <GridItem  paddingX={2}>
+            <GridItem paddingX={2}>
               <Text fontSize={18} fontWeight="normal">
-                  After:
+                After:
               </Text>
               <Divider marginY={2} borderColor="primary.400" />
               <Flex flexDirection="column" alignItems="start">
                 {questionnaire.postGame.map((item: any) => {
-                const answer = item.type === 'radio' 
-                  ? item.answer.toUpperCase() 
-                  : item.type === 'scale' 
-                    ? item.answer + "/5" 
-                    : item.answer; 
-                return (
-                  <Flex flexDirection="column" alignItems="start" marginY={1}>
-                    <p style={{fontWeight: 'bold'}}>{item.question}</p>
-                    <span style={{fontStyle: 'italic'}}>{answer}</span>
-                  </Flex>
+                  const answer =
+                    item.type === 'radio'
+                      ? item.answer.toUpperCase()
+                      : item.type === 'scale'
+                      ? item.answer + '/5'
+                      : item.answer;
+                  return (
+                    <Flex flexDirection="column" alignItems="start" marginY={1}>
+                      <p style={{ fontWeight: 'bold' }}>{item.question}</p>
+                      <span style={{ fontStyle: 'italic' }}>{answer}</span>
+                    </Flex>
                   );
                 })}
               </Flex>

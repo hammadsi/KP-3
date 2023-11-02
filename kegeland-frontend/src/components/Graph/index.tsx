@@ -4,9 +4,11 @@ import { Chart as ChartJS, ChartOptions } from 'chart.js';
 import 'chart.js/auto';
 import { Divider, Box } from '@chakra-ui/react';
 import 'chartjs-adapter-moment';
-import GraphHeader from './GraphHeader';
-import { GameSession } from '../../state/ducks/wheelchairPatients/wheelchairPatients.interface';
 import { useRef } from 'react';
+
+import { GameSession } from '../../state/ducks/wheelchairPatients/wheelchairPatients.interface';
+
+import GraphHeader from './GraphHeader';
 
 ChartJS.register(zoomPlugin);
 
@@ -15,14 +17,18 @@ type ExerciseGraphProps = {
 };
 
 const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ session }) => {
-
-  const heartRates = session?.timeSeriesData.heartRates.map(hr => hr.heartRate);
-  const timestamps = session?.timeSeriesData.heartRates.map(hr => {
-    const date = new Date(hr.timestamp)
+  const heartRates = session?.timeSeriesData.heartRates.map(
+    (hr) => hr.heartRate,
+  );
+  const timestamps = session?.timeSeriesData.heartRates.map((hr) => {
+    const date = new Date(hr.timestamp);
     const hours = date.getUTCHours();
     const minutes = date.getUTCMinutes();
     const secondsVal = date.getUTCSeconds();
-    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secondsVal).padStart(2, '0')}`;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(
+      2,
+      '0',
+    )}:${String(secondsVal).padStart(2, '0')}`;
   });
 
   const chartRef = useRef(null);
@@ -35,9 +41,9 @@ const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ session }) => {
         data: heartRates,
         borderColor: '#039be5',
         backgroundColor: '#039be5',
-        fill: false
-      }
-    ]
+        fill: false,
+      },
+    ],
   };
 
   const options: ChartOptions<'line'> = {
@@ -71,20 +77,14 @@ const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ session }) => {
         stacked: false,
         position: 'bottom',
       },
-    }
+    },
   };
-  
-  
-  
 
   return (
     <Box h="100%" w="100%">
       {session && (
         <>
-          <GraphHeader
-            date={session!.createdAt}
-            endTime={session!.endTime}
-          />
+          <GraphHeader date={session!.createdAt} endTime={session!.endTime} />
           <Divider borderColor="gray.300" marginY={4} />
           <div style={{ width: '99%' }}>
             <Chart

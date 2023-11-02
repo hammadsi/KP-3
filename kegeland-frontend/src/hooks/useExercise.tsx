@@ -35,17 +35,17 @@ const useExercise = (patientId: string, exerciseId: string) => {
   const sensor = useSessionSensorSelector(sessions.session);
 
   useEffect(() => {
-    dispatch(fetchSessionById({ patientId: patientId, exerciseId: exerciseId }))
-    .then((result) => {
-      if (result.payload) {
-        console.log("Fetched session:", result.payload);
-      } else {
-        console.error("Payload is undefined. Full result:", result);
-      }
-    })
-    .catch((error) => {
-      console.error("Error fetching session:", error);
-    });
+    dispatch(fetchSessionById({ patientId, exerciseId }))
+      .then((result) => {
+        if (result.payload) {
+          console.log('Fetched session:', result.payload);
+        } else {
+          console.error('Payload is undefined. Full result:', result);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching session:', error);
+      });
 
     return () => {
       dispatch(clearSensorsState());

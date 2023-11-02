@@ -1,4 +1,5 @@
 import { NonIndexRouteObject, Outlet, PathMatch } from 'react-router-dom';
+
 import LoginPage from '../pages/auth/LoginPage';
 import RegisterPage from '../pages/auth/RegisterPage';
 import ExercisePage from '../pages/ExercisePage';

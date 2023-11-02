@@ -62,7 +62,7 @@ const routes: RoutePathDefinition[] = [
   },
   {
     title: 'wheelchair',
-    path: '/wheelchair',
+    path: '/wheelchair/:id',
     element: <WheelChairPage />,
   },
   {

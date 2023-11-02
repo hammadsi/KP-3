@@ -29,6 +29,7 @@ import { RootState } from '../state/store';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import { ViewSession } from '../state/ducks/sessions/sessions.interface';
 
+
 type PatientPageParams = {
   patientId: string;
 };

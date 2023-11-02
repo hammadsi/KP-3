@@ -95,4 +95,3 @@ export class WheelchairPatientsController {
     return this.wheelchairPatientsService.addLapToGameSession(patientId, sessionId, lapData);
   }
 }
-

@@ -18,16 +18,12 @@ const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ session }) => {
 
   const heartRates = session?.timeSeriesData.heartRates.map(hr => hr.heartRate);
   const timestamps = session?.timeSeriesData.heartRates.map(hr => {
-    // @ts-ignore
-    const date = new Date(hr.timestamp._seconds * 1000)
+    const date = new Date(hr.timestamp)
     const hours = date.getUTCHours();
     const minutes = date.getUTCMinutes();
     const secondsVal = date.getUTCSeconds();
-
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secondsVal).padStart(2, '0')}`;
   });
-
-  console.log(typeof timestamps![0])
 
   const chartRef = useRef(null);
 

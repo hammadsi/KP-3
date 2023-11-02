@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR;
 using UnityEngine.InputSystem;
+using TMPro;
   
 
 
@@ -20,6 +21,12 @@ public class WheelchairController : MonoBehaviour
     [SerializeField] Transform frontrightTR;
     [SerializeField] Transform backleftTR;
     [SerializeField] Transform backrightTR;
+
+
+
+    [SerializeField] private TextMeshProUGUI leftWheelSpeedText;
+    [SerializeField] private TextMeshProUGUI rightWheelSpeedText;
+    
 
     public float Acceleration = 500f;
     public float BreakingForce = 300f;
@@ -90,6 +97,7 @@ public class WheelchairController : MonoBehaviour
         UpdateWheel(backleft, backleftTR);
         UpdateWheel(frontleft, frontleftTR);
         UpdateWheel(backright, backrightTR);
+        UpdateWheelSpeedText();
     }
 
     void UpdateWheel(WheelCollider col, Transform trans)
@@ -126,6 +134,13 @@ public class WheelchairController : MonoBehaviour
     leftWheelSpeed = maxWheelSpeed * (restoredJoystick.y + (wheelchairWidth / 2) * restoredJoystick.x);
     rightWheelSpeed = maxWheelSpeed * (restoredJoystick.y - (wheelchairWidth / 2) * restoredJoystick.x);
     }
+
+private void UpdateWheelSpeedText()
+{
+    leftWheelSpeedText.text = $"Left Wheel Speed: {leftWheelSpeed.ToString("F2")}";
+    rightWheelSpeedText.text = $"Right Wheel Speed: {rightWheelSpeed.ToString("F2")}";
+}
+
 
 
 }

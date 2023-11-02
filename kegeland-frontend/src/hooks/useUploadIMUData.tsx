@@ -1,7 +1,9 @@
 import { useState } from 'react';
+
 import { addIMUDataToGameSession } from '../state/ducks/wheelchairPatients/wheelchairPatients.actions';
-import useAppDispatch from './useAppDispatch';
 import { IMUData } from '../state/ducks/wheelchairPatients/wheelchairPatients.interface';
+
+import useAppDispatch from './useAppDispatch';
 
 const useUploadIMUData = () => {
   const dispatch = useAppDispatch();

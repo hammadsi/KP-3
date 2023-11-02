@@ -322,4 +322,3 @@ export class WheelchairPatientsService {
     }
   }
 }
-

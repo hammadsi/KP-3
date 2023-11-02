@@ -61,7 +61,7 @@ const mockWheelchairPatient: WheelchairPatient = {
           },
         ],
       },
-      IMUData: []
+      IMUData: [],
     },
   ],
 };

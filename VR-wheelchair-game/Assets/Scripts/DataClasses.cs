@@ -15,13 +15,9 @@ public class GameSession
 [Serializable]
 public class Lap
 {
-    public float lapTime { get; set; }
-    public string timestamp { get; set; }
+    public float lapTime;
+    public string timestamp;
 
-    public override string ToString()
-    {
-        return $"Lap Time: {lapTime}, Timestamp: {timestamp}";
-    }
 }
 
 [Serializable]
@@ -37,10 +33,6 @@ public class HeartRateData
 {
     public int heartRate;
     public string timestamp;
-    public override string ToString()
-    {
-        return $"HR: {heartRate}, Timestamp: {timestamp}";
-    }
 }
 
 [Serializable]

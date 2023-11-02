@@ -118,6 +118,7 @@ These set of applications are in charge of connecting to the physiological senso
 Requires *Minimum Windows 10, version 1803 (10.0; Build 171734)* 
 
 Download from Windows Store: https://www.microsoft.com/store/apps/9PFMNFQJB99Q
+**Temporatily removed from the Windows Store** see https://github.com/luisqtr/exciteometer-devices-UWP
 
 Some important notes about communication between `Excite-O-Meter|Devices` and Unity are:
 
@@ -136,5 +137,5 @@ CheckNetIsolation LoopbackExempt -is -n="10247LuisQuintero.ExciteOMeter_k7zc7t0y
 - If the device has never been connected to the app, press `Pair` and it will prompt connection with Windows.
 - When the device is paired it will enable the option `Continue`. If a device starting with `Polar H10 ` is detected, it will jump to configure their characteristics. Otherwise, the second screen will be opened to explore their services and characteristics.
 - Adjust the toggles according to the variables that want to collect from the sensor (HR+RRi). Note that ECG and ACC cannot be simultaneously enabled, the device stops responding to requests when busy sending both streamings.
-- Run the wheelchair game executable, with both the wheelchair ergonomic controller and the Polar H10-belt connected.
+- Run the wheelchair game executable from the web app (see the respective folders for the setup instructions of kegeland-api and kegeland-frontend) , with both the wheelchair ergonomic controller and the Polar H10-belt connected.
 

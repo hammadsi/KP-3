@@ -7,7 +7,6 @@ import {
   useMediaQuery,
   Center,
 } from '@chakra-ui/react';
-
 import { useParams } from 'react-router-dom';
 import {
   AiOutlineClockCircle,
@@ -23,7 +22,7 @@ import usePatient from '../hooks/usePatient';
 import WeeklySessionsChart from '../components/WeeklySessionsChart';
 import withSpinner from '../hoc/withSpinner';
 import useAppSelector from '../hooks/useAppSelector';
-import { UserRole } from '../state/ducks/auth/auth.interface';
+import { PatientType, UserRole } from '../state/ducks/auth/auth.interface';
 import FemfitExerciseTable from '../components/FemfitExerciseTable';
 import WheelchairExerciseTable from '../components/WheelchairExerciseTable';
 import { RootState } from '../state/store';
@@ -44,7 +43,11 @@ const PatientPage: React.FC = () => {
     authUser?.id,
   );
   const { userDetails } = useAppSelector((state) => state.auth);
-  const { uploadIMUData, loading: imuUploadLoading, error: imuUploadError } = useUploadIMUData();
+  const {
+    uploadIMUData,
+    loading: imuUploadLoading,
+    error: imuUploadError,
+  } = useUploadIMUData();
 
   const sortedGameSessions = [...gameSessions].sort(
     (a, b) => b.createdAt - a.createdAt,
@@ -96,10 +99,10 @@ const PatientPage: React.FC = () => {
               x_gyro,
               y_gyro,
               z_gyro,
-            ] = parts.map(part => parseFloat(part));
+            ] = parts.map((part) => parseFloat(part));
 
             imuData.push({
-              timestamp: timestamp,
+              timestamp,
               accelerometer: {
                 x: x_accel,
                 y: y_accel,
@@ -196,20 +199,26 @@ const PatientPage: React.FC = () => {
         </Card>
       </Flex>
 
-      {/* TODO: Only show the ones relevant for the patient type */}
+      {userDetails?.patientType.includes(PatientType.FEMFIT) && (
+        <div>
+          <h1 style={headingStyle}>Overview of Femfit exercises</h1>
+          <Card loading={loading} minH="36">
+            <FemfitExerciseTable sessions={sortedData} patientId={patientId!} />
+          </Card>
+        </div>
+      )}
 
-      <h1 style={headingStyle}>Overview of Femfit exercises</h1>
-      <Card loading={loading} minH="36">
-        <FemfitExerciseTable sessions={sortedData} patientId={patientId!} />
-      </Card>
-
-      <h1 style={headingStyle}>Overview of Wheelchair exercises</h1>
-      <Card loading={loading} minH="36">
-        <WheelchairExerciseTable
-          sessions={sortedGameSessions}
-          patientId={patientId!}
-        />
-      </Card>
+      {userDetails?.patientType.includes(PatientType.WHEELCHAIR) && (
+        <div>
+          <h1 style={headingStyle}>Overview of Wheelchair exercises</h1>
+          <Card loading={loading} minH="36">
+            <WheelchairExerciseTable
+              sessions={sortedGameSessions}
+              patientId={patientId!}
+            />
+          </Card>
+        </div>
+      )}
 
       {userDetails?.roles.includes(UserRole.PHYSICIAN) && (
         <Button w="100%" marginTop={8} onClick={startUnitySession}>
@@ -217,8 +226,7 @@ const PatientPage: React.FC = () => {
         </Button>
       )}
 
-
-      {/*Move this into the Exercise Session Page when the issue is done */}
+      {/* Move this into the Exercise Session Page when the issue is done */}
       <Card>
         <h2 style={headingStyle}> Upload IMU data for session</h2>
         <Center marginTop={12}>
@@ -229,14 +237,18 @@ const PatientPage: React.FC = () => {
             accept=".csv"
             onChange={handleFileSelection}
           />
-        <Button
-          onClick={triggerFileUpload}
-          ml={4}
-          isDisabled={!selectedFile || imuUploadLoading}
-          colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
-          {uploadStatus === 'done' ? 'Uploaded' : imuUploadLoading ? 'Uploading...' : 'Upload selected IMU Data'}
-        </Button>
-        {imuUploadError && <p>Error uploading data: {imuUploadError}</p>}
+          <Button
+            onClick={triggerFileUpload}
+            ml={4}
+            isDisabled={!selectedFile || imuUploadLoading}
+            colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
+            {uploadStatus === 'done'
+              ? 'Uploaded'
+              : imuUploadLoading
+              ? 'Uploading...'
+              : 'Upload selected IMU Data'}
+          </Button>
+          {imuUploadError && <p>Error uploading data: {imuUploadError}</p>}
         </Center>
       </Card>
     </Box>

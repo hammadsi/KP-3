@@ -104,4 +104,3 @@ export class WheelchairPatientsController {
     return this.wheelchairPatientsService.addIMUDataToGameSession(patientId, sessionId, imuData);
   }
 }
-

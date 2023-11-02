@@ -28,6 +28,7 @@ import WheelchairExerciseTable from '../components/WheelchairExerciseTable';
 import { RootState } from '../state/store';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import { ViewSession } from '../state/ducks/sessions/sessions.interface';
+import useUploadIMUData from '../hooks/useUploadIMUData';
 
 type PatientPageParams = {
   patientId: string;
@@ -42,6 +43,11 @@ const PatientPage: React.FC = () => {
     authUser?.id,
   );
   const { userDetails } = useAppSelector((state) => state.auth);
+  const {
+    uploadIMUData,
+    loading: imuUploadLoading,
+    error: imuUploadError,
+  } = useUploadIMUData();
 
   const sortedGameSessions = [...gameSessions].sort(
     (a, b) => b.createdAt - a.createdAt,
@@ -71,7 +77,7 @@ const PatientPage: React.FC = () => {
   const triggerFileUpload = () => {
     if (selectedFile) {
       const reader = new FileReader();
-      reader.onload = function (event) {
+      reader.onload = async function (event) {
         const text = event?.target?.result?.toString();
         if (!text) {
           console.error('Could not read file.');
@@ -85,20 +91,36 @@ const PatientPage: React.FC = () => {
           const parts = line.split(',');
 
           if (parts.length === 7) {
-            const [timeStamp, xAccel, xGyro, yAccel, yGyro, zAccel, zGyro] =
-              parts;
+            const [timestamp, xAccel, yAccel, zAccel, xGyro, yGyro, zGyro] =
+              parts.map((part) => parseFloat(part));
+
             imuData.push({
-              timeStamp: parseFloat(timeStamp),
-              x_accel: parseFloat(xAccel),
-              x_gyro: parseFloat(xGyro),
-              y_accel: parseFloat(yAccel),
-              y_gyro: parseFloat(yGyro),
-              z_accel: parseFloat(zAccel),
-              z_gyro: parseFloat(zGyro),
+              timestamp,
+              accelerometer: {
+                x: xAccel,
+                y: yAccel,
+                z: zAccel,
+              },
+              gyroscope: {
+                x: xGyro,
+                y: yGyro,
+                z: zGyro,
+              },
             });
           }
         }
 
+        console.log('Parsed IMU data:', imuData);
+        try {
+          const patientId = 'Wwy4sqcl7dYGvvkHA5mmdWBEa713';
+          const sessionId = 'faDFwwohudvgI5GjBsM9';
+
+          await uploadIMUData(patientId, sessionId, imuData);
+          setUploadStatus('done');
+        } catch (error) {
+          console.error('Error uploading IMU data:', error);
+          setUploadStatus('idle');
+        }
         // TODO: Update the Firestore with Update calls to the API when endpoints are ready.
         setUploadStatus('done');
       };
@@ -123,17 +145,20 @@ const PatientPage: React.FC = () => {
       <Flex
         flexDirection={isGreaterThanLg ? 'row' : 'column'}
         flexBasis="100%"
-        flexWrap="nowrap">
+        flexWrap="nowrap"
+      >
         <Card
           marginRight={5}
           w={isGreaterThanLg ? '25%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}>
+          loading={loading}
+        >
           <Stack
             spacing={4}
             direction={isGreaterThanLg ? 'column' : 'row'}
             w="100%"
-            alignItems="flex-start">
+            alignItems="flex-start"
+          >
             <LabeledValue
               label="Workouts this week"
               value={
@@ -165,7 +190,8 @@ const PatientPage: React.FC = () => {
         <Card
           w={isGreaterThanLg ? '75%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}>
+          loading={loading}
+        >
           <WeeklySessionsChart sessions={allSessions} numWeeks={12} />
         </Card>
       </Flex>
@@ -211,10 +237,16 @@ const PatientPage: React.FC = () => {
           <Button
             onClick={triggerFileUpload}
             ml={4}
-            isDisabled={!selectedFile}
-            colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
-            {uploadStatus === 'done' ? 'Uploaded' : 'Upload selected IMU Data'}
+            isDisabled={!selectedFile || imuUploadLoading}
+            colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}
+          >
+            {uploadStatus === 'done'
+              ? 'Uploaded'
+              : imuUploadLoading
+              ? 'Uploading...'
+              : 'Upload selected IMU Data'}
           </Button>
+          {imuUploadError && <p>Error uploading data: {imuUploadError}</p>}
         </Center>
       </Card>
     </Box>

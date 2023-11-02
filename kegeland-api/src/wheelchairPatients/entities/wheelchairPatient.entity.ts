@@ -71,6 +71,36 @@ class Lap {
   timestamp: Date;
 }
 
+class IMUReading {
+  @Expose()
+  @IsNumber()
+  x: number;
+
+  @Expose()
+  @IsNumber()
+  y: number;
+
+  @Expose()
+  @IsNumber()
+  z: number;
+}
+
+class IMUData {
+  @Expose()
+  @IsNumber()
+  timestamp: number;
+
+  @Expose()
+  @ValidateNested()
+  @Type(() => IMUReading)
+  accelerometer: IMUReading;
+
+  @Expose()
+  @ValidateNested()
+  @Type(() => IMUReading)
+  gyroscope: IMUReading;
+}
+
 class HeartRate {
   @Expose()
   @IsNumber()
@@ -144,6 +174,12 @@ export class GameSession {
   @ValidateNested()
   @Type(() => TimeSeriesData)
   timeSeriesData: TimeSeriesData;
+
+  @Expose()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => IMUData)
+  IMUData: IMUData[];
 }
 
 export class WheelchairPatientEntity {

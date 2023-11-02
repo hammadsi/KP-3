@@ -11,10 +11,6 @@ import {
   fetchWheelchairPatientById,
   updateGameSession,
   updatePatientData,
-  addHeartRateToGameSession,
-  addSpeedToGameSession,
-  addLapToGameSession,
-  addIMUDataToGameSession,
 } from './wheelchairPatients.actions';
 import { WheelchairPatientsState } from './wheelchairPatients.interface';
 
@@ -64,18 +60,6 @@ const wheelchairPatientsSlice = createSlice({
             state.wheelchairPatient.gameSessions[sessionIndex] = action.payload;
           }
         }
-      })
-      .addCase(addIMUDataToGameSession.fulfilled, (state, action) => {
-        console.log('IMU data added:', action.payload);
-      })
-      .addCase(addHeartRateToGameSession.fulfilled, (state, action) => {
-        console.log('Heart rate added:', action.payload.heartRate);
-      })
-      .addCase(addSpeedToGameSession.fulfilled, (state, action) => {
-        console.log('Speed added:', action.payload);
-      })
-      .addCase(addLapToGameSession.fulfilled, (state, action) => {
-        console.log('Lap added:', action.payload);
       })
       .addMatcher(
         (action) => isPendingAction(action, 'wheelchairPatients'),

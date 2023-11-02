@@ -91,27 +91,20 @@ const PatientPage: React.FC = () => {
           const parts = line.split(',');
 
           if (parts.length === 7) {
-            const [
-              timestamp,
-              x_accel,
-              y_accel,
-              z_accel,
-              x_gyro,
-              y_gyro,
-              z_gyro,
-            ] = parts.map((part) => parseFloat(part));
+            const [timestamp, xAccel, yAccel, zAccel, xGyro, yGyro, zGyro] =
+              parts.map((part) => parseFloat(part));
 
             imuData.push({
               timestamp,
               accelerometer: {
-                x: x_accel,
-                y: y_accel,
-                z: z_accel,
+                x: xAccel,
+                y: yAccel,
+                z: zAccel,
               },
               gyroscope: {
-                x: x_gyro,
-                y: y_gyro,
-                z: z_gyro,
+                x: xGyro,
+                y: yGyro,
+                z: zGyro,
               },
             });
           }
@@ -152,17 +145,20 @@ const PatientPage: React.FC = () => {
       <Flex
         flexDirection={isGreaterThanLg ? 'row' : 'column'}
         flexBasis="100%"
-        flexWrap="nowrap">
+        flexWrap="nowrap"
+      >
         <Card
           marginRight={5}
           w={isGreaterThanLg ? '25%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}>
+          loading={loading}
+        >
           <Stack
             spacing={4}
             direction={isGreaterThanLg ? 'column' : 'row'}
             w="100%"
-            alignItems="flex-start">
+            alignItems="flex-start"
+          >
             <LabeledValue
               label="Workouts this week"
               value={
@@ -194,7 +190,8 @@ const PatientPage: React.FC = () => {
         <Card
           w={isGreaterThanLg ? '75%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}>
+          loading={loading}
+        >
           <WeeklySessionsChart sessions={allSessions} numWeeks={12} />
         </Card>
       </Flex>
@@ -241,7 +238,8 @@ const PatientPage: React.FC = () => {
             onClick={triggerFileUpload}
             ml={4}
             isDisabled={!selectedFile || imuUploadLoading}
-            colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
+            colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}
+          >
             {uploadStatus === 'done'
               ? 'Uploaded'
               : imuUploadLoading

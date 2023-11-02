@@ -67,23 +67,6 @@ const wheelchairPatientsSlice = createSlice({
       })
       .addCase(addIMUDataToGameSession.fulfilled, (state, action) => {
         console.log('IMU data added:', action.payload);
-      
-        // Assuming the payload would be the IMU data added to a session
-        if (state.wheelchairPatient && state.wheelchairPatient.gameSessions) {
-          // Find the session by ID
-          const session = state.wheelchairPatient.gameSessions.find(
-            s => s.id === action.meta.arg.sessionId
-          );
-      
-          // If session exists and action.payload is the added IMU data
-          if (session) {
-            if (!session.IMUData) {
-              session.IMUData = [];
-            }
-            // Assuming the backend response would be the newly added IMU data array
-            session.IMUData.push(...action.payload);
-          }
-        }
       })
       .addCase(addHeartRateToGameSession.fulfilled, (state, action) => {
         console.log('Heart rate added:', action.payload.heartRate);

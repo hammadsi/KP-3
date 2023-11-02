@@ -29,6 +29,7 @@ import WheelchairExerciseTable from '../components/WheelchairExerciseTable';
 import { RootState } from '../state/store';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import { ViewSession } from '../state/ducks/sessions/sessions.interface';
+import useUploadIMUData from '../hooks/useUploadIMUData';
 
 type PatientPageParams = {
   patientId: string;
@@ -43,6 +44,7 @@ const PatientPage: React.FC = () => {
     authUser?.id,
   );
   const { userDetails } = useAppSelector((state) => state.auth);
+  const { uploadIMUData, loading: imuUploadLoading, error: imuUploadError } = useUploadIMUData();
 
   const sortedGameSessions = [...gameSessions].sort(
     (a, b) => b.createdAt - a.createdAt,
@@ -72,7 +74,7 @@ const PatientPage: React.FC = () => {
   const triggerFileUpload = () => {
     if (selectedFile) {
       const reader = new FileReader();
-      reader.onload = function (event) {
+      reader.onload = async function (event) {
         const text = event?.target?.result?.toString();
         if (!text) {
           console.error('Could not read file.');
@@ -89,26 +91,40 @@ const PatientPage: React.FC = () => {
             const [
               timestamp,
               x_accel,
-              x_gyro,
               y_accel,
-              y_gyro,
               z_accel,
+              x_gyro,
+              y_gyro,
               z_gyro,
-            ] = parts;
+            ] = parts.map(part => parseFloat(part));
+
             imuData.push({
-              timestamp: parseFloat(timestamp),
-              x_accel: parseFloat(x_accel),
-              x_gyro: parseFloat(x_gyro),
-              y_accel: parseFloat(y_accel),
-              y_gyro: parseFloat(y_gyro),
-              z_accel: parseFloat(z_accel),
-              z_gyro: parseFloat(z_gyro),
+              timestamp: timestamp,
+              accelerometer: {
+                x: x_accel,
+                y: y_accel,
+                z: z_accel,
+              },
+              gyroscope: {
+                x: x_gyro,
+                y: y_gyro,
+                z: z_gyro,
+              },
             });
           }
         }
 
         console.log('Parsed IMU data:', imuData);
+        try {
+          const patientId = 'Wwy4sqcl7dYGvvkHA5mmdWBEa713';
+          const sessionId = 'faDFwwohudvgI5GjBsM9';
 
+          await uploadIMUData(patientId, sessionId, imuData);
+          setUploadStatus('done');
+        } catch (error) {
+          console.error('Error uploading IMU data:', error);
+          setUploadStatus('idle');
+        }
         // TODO: Update the Firestore with Update calls to the API when endpoints are ready.
         setUploadStatus('done');
       };
@@ -213,13 +229,14 @@ const PatientPage: React.FC = () => {
             accept=".csv"
             onChange={handleFileSelection}
           />
-          <Button
-            onClick={triggerFileUpload}
-            ml={4}
-            isDisabled={!selectedFile}
-            colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
-            {uploadStatus === 'done' ? 'Uploaded' : 'Upload selected IMU Data'}
-          </Button>
+        <Button
+          onClick={triggerFileUpload}
+          ml={4}
+          isDisabled={!selectedFile || imuUploadLoading}
+          colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
+          {uploadStatus === 'done' ? 'Uploaded' : imuUploadLoading ? 'Uploading...' : 'Upload selected IMU Data'}
+        </Button>
+        {imuUploadError && <p>Error uploading data: {imuUploadError}</p>}
         </Center>
       </Card>
     </Box>

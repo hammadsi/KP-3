@@ -23,8 +23,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ crumbs, ...props }) => {
         <BreadcrumbItem key={crumb.match.pattern.path}>
           <BreadcrumbLink
             href={crumb.match.pathname}
-            color={crumb.active ? 'primary.600' : 'gray.700'}
-          >
+            color={crumb.active ? 'primary.600' : 'gray.700'}>
             {crumb.active ? (
               <Text noOfLines={1} fontWeight="medium">
                 {crumb.title}
@@ -35,8 +34,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ crumbs, ...props }) => {
                 maxW="40"
                 width="full"
                 wordBreak="break-all"
-                fontWeight="normal"
-              >
+                fontWeight="normal">
                 {crumb.title}
               </Text>
             )}

@@ -32,8 +32,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useNavigate } from 'react-router-dom';
-import useAppSelector from '../hooks/useAppSelector';
+import { useNavigate } from 'react-router-dom'; 
+import useAppSelector from '../hooks/useAppSelector'; 
 import { UserRole } from '../state/ducks/auth/auth.interface';
 import Patient from './Patient';
 
@@ -69,15 +69,18 @@ const DataTable = <T extends { id?: string }>({
     if(userDetails?.roles.includes(UserRole.PATIENT)){
         navigate(`/wheelchair/${id}`);
     }
-    console.log(Array.isArray(data) && data.every(item => item instanceof Patient))
-    if (Array.isArray(data) && data.every(item => item instanceof Patient)) {
+    //console.log(data && Array.isArray(data) && data.length > 0 && data.every(item => item && item instanceof Patient))
+    
+    if (data && Array.isArray(data) && data.length > 0) {
       if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
-        const newPath = `${window.location.pathname}/patient/${id}`;
-        navigate(newPath);
-      }
-
+        navigate(`/patients/${id}`);
     }
+
+  }
+  
+  
   };
+  
 
 
 

@@ -45,6 +45,10 @@ class CurrentPhysicalState {
   @Expose()
   @IsNumber()
   averageWheelchairSpeed: number;
+
+  @Expose()
+  @IsOptional()
+  questionnaire: Question[];
 }
 
 class Question {

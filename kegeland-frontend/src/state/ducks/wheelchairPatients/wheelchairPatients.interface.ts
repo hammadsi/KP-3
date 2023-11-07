@@ -14,6 +14,7 @@ export type CurrentPhysicalState = {
   averageHeartRate: number;
   maxWheelchairSpeed: number;
   averageWheelchairSpeed: number;
+  questionnaire: Question[];
 };
 
 export type GameSession = {

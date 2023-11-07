@@ -36,18 +36,15 @@ const PreQuestionnairePage: React.FC = () => {
       preGame: [
         {
           question: 'Are you a wheelchair user?',
-          type: 'radio' as 'radio',
           answer: radioAnswer,
         },
         {
           question:
             'On a scale from 1 to 5, what is your current level of fitness?',
-          type: 'scale' as 'scale',
           answer: sliderAnswer.toString(),
         },
         {
           question: 'Do you have any other comments?',
-          type: 'freeText' as 'freeText',
           answer: freeTextAnswer,
         },
       ],

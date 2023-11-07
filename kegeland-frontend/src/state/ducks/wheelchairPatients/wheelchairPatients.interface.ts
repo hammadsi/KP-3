@@ -33,7 +33,6 @@ export type GameSession = {
 
 export type Question = {
   question: string;
-  type: 'freeText' | 'scale' | 'radio';
   answer: string;
 };
 

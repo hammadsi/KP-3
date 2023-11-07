@@ -55,10 +55,6 @@ class Question {
   @Expose()
   @IsString()
   answer: string;
-
-  @Expose()
-  @IsEnum(QuestionType)
-  type: QuestionType;
 }
 
 class Lap {

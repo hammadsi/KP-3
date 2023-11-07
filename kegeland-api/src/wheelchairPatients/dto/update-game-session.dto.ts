@@ -8,6 +8,7 @@ import {
     IsEnum
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import { isString } from 'lodash';
 
 export enum QuestionType {
     freeText = 'freeText',
@@ -21,9 +22,6 @@ class QuestionDto {
 
     @IsString()
     answer: string;
-
-    @IsEnum(QuestionType)
-    type: QuestionType;
 }
 
 class IMUReadingDto {

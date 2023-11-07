@@ -37,17 +37,14 @@ const PostQuestionnairePage: React.FC = () => {
         postGame: [
           {
             question: 'Motivation level?',
-            type: 'scale' as 'scale',
             answer: sliderAnswer.toString(),
           },
           {
             question: 'Recommend session?',
-            type: 'radio' as 'radio',
             answer: radioAnswer,
           },
           {
             question: 'Feedback?',
-            type: 'freeText' as 'freeText',
             answer: freeTextAnswer,
           },
         ],

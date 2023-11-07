@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
+
 import { fetchPatientById } from '../state/ducks/patients/patients.actions';
 import { clearPatientsState } from '../state/ducks/patients/patients.reducer';
+
 import useAppDispatch from './useAppDispatch';
 import useAppSelector from './useAppSelector';
 

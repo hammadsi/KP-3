@@ -1,6 +1,6 @@
 import { FirebaseService } from 'src/firebase/firebase.service';
 import { firestore } from 'firebase-admin';
-import { HeartRateDto, LapDto, SpeedDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
+import { HeartRateDto, IMUDataDto, LapDto, SpeedDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { GameSession } from './entities/wheelchairPatient.entity'
 import { UpdatePhysicalStateDto } from './dto/update-physicalstate.dto';
@@ -285,5 +285,40 @@ export class WheelchairPatientsService {
       throw new InternalServerErrorException(error.message);
     }
   }
-}
 
+  async addIMUDataToGameSession(patientId: string, sessionId: string, imuDataArray: IMUDataDto[]) {
+    try {
+      const gameSessionDocRef = this.firebaseService.firestore
+        .collection('patients')
+        .doc(patientId)
+        .collection('gameSessions')
+        .doc(sessionId);
+
+      // Check if the game session exists
+      const docSnapshot = await gameSessionDocRef.get();
+      if (!docSnapshot.exists) {
+        throw new NotFoundException(`Game session with ID ${sessionId} not found`);
+      }
+
+      // Prepare the IMU data updates
+      const imuUpdates = imuDataArray.map(imuData => {
+        return {
+          accelerometer: imuData.accelerometer,
+          gyroscope: imuData.gyroscope,
+          // This particular timestamp is a number, not a Date object
+          timestamp: imuData.timestamp
+        };
+      });
+
+      // Append the IMU data to the Firestore document
+      const imuUpdateOperation = {};
+      imuUpdateOperation['IMUData'] = firestore.FieldValue.arrayUnion(...imuUpdates);
+
+      await gameSessionDocRef.update(imuUpdateOperation);
+
+      return { sessionId, imuData: imuUpdates };
+    } catch (error) {
+      throw new InternalServerErrorException(error.message);
+    }
+  }
+}

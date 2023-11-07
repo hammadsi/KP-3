@@ -22,12 +22,13 @@ import usePatient from '../hooks/usePatient';
 import WeeklySessionsChart from '../components/WeeklySessionsChart';
 import withSpinner from '../hoc/withSpinner';
 import useAppSelector from '../hooks/useAppSelector';
-import { UserRole } from '../state/ducks/auth/auth.interface';
+import { PatientType, UserRole } from '../state/ducks/auth/auth.interface';
 import FemfitExerciseTable from '../components/FemfitExerciseTable';
 import WheelchairExerciseTable from '../components/WheelchairExerciseTable';
 import { RootState } from '../state/store';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import { ViewSession } from '../state/ducks/sessions/sessions.interface';
+import useUploadIMUData from '../hooks/useUploadIMUData';
 
 type PatientPageParams = {
   patientId: string;
@@ -42,6 +43,11 @@ const PatientPage: React.FC = () => {
     authUser?.id,
   );
   const { userDetails } = useAppSelector((state) => state.auth);
+  const {
+    uploadIMUData,
+    loading: imuUploadLoading,
+    error: imuUploadError,
+  } = useUploadIMUData();
 
   const sortedGameSessions = [...gameSessions].sort(
     (a, b) => b.createdAt - a.createdAt,
@@ -71,7 +77,7 @@ const PatientPage: React.FC = () => {
   const triggerFileUpload = () => {
     if (selectedFile) {
       const reader = new FileReader();
-      reader.onload = function (event) {
+      reader.onload = async function (event) {
         const text = event?.target?.result?.toString();
         if (!text) {
           console.error('Could not read file.');
@@ -85,28 +91,35 @@ const PatientPage: React.FC = () => {
           const parts = line.split(',');
 
           if (parts.length === 7) {
-            const [
-              timeStamp,
-              x_accel,
-              x_gyro,
-              y_accel,
-              y_gyro,
-              z_accel,
-              z_gyro,
-            ] = parts;
+            const [timestamp, xAccel, yAccel, zAccel, xGyro, yGyro, zGyro] =
+              parts.map((part) => parseFloat(part));
+
             imuData.push({
-              timeStamp: parseFloat(timeStamp),
-              x_accel: parseFloat(x_accel),
-              x_gyro: parseFloat(x_gyro),
-              y_accel: parseFloat(y_accel),
-              y_gyro: parseFloat(y_gyro),
-              z_accel: parseFloat(z_accel),
-              z_gyro: parseFloat(z_gyro),
+              timestamp,
+              accelerometer: {
+                x: xAccel,
+                y: yAccel,
+                z: zAccel,
+              },
+              gyroscope: {
+                x: xGyro,
+                y: yGyro,
+                z: zGyro,
+              },
             });
           }
         }
 
-        console.log('Parsed IMU data:', imuData);
+        try {
+          const patientId = 'Wwy4sqcl7dYGvvkHA5mmdWBEa713';
+          const sessionId = 'faDFwwohudvgI5GjBsM9';
+
+          await uploadIMUData(patientId, sessionId, imuData);
+          setUploadStatus('done');
+        } catch (error) {
+          console.error('Error uploading IMU data:', error);
+          setUploadStatus('idle');
+        }
         // TODO: Update the Firestore with Update calls to the API when endpoints are ready.
         setUploadStatus('done');
       };
@@ -178,20 +191,26 @@ const PatientPage: React.FC = () => {
         </Card>
       </Flex>
 
-      {/* TODO: Only show the ones relevant for the patient type */}
+      {userDetails?.patientType.includes(PatientType.FEMFIT) && (
+        <div>
+          <h1 style={headingStyle}>Overview of Femfit exercises</h1>
+          <Card loading={loading} minH="36">
+            <FemfitExerciseTable sessions={sortedData} patientId={patientId!} />
+          </Card>
+        </div>
+      )}
 
-      <h1 style={headingStyle}>Overview of Femfit exercises</h1>
-      <Card loading={loading} minH="36">
-        <FemfitExerciseTable sessions={sortedData} patientId={patientId!} />
-      </Card>
-
-      <h1 style={headingStyle}>Overview of Wheelchair exercises</h1>
-      <Card loading={loading} minH="36">
-        <WheelchairExerciseTable
-          sessions={sortedGameSessions}
-          patientId={patientId!}
-        />
-      </Card>
+      {userDetails?.patientType.includes(PatientType.WHEELCHAIR) && (
+        <div>
+          <h1 style={headingStyle}>Overview of Wheelchair exercises</h1>
+          <Card loading={loading} minH="36">
+            <WheelchairExerciseTable
+              sessions={sortedGameSessions}
+              patientId={patientId!}
+            />
+          </Card>
+        </div>
+      )}
 
       {userDetails?.roles.includes(UserRole.PHYSICIAN) && (
         <Button w="100%" marginTop={8} onClick={startUnitySession}>
@@ -212,10 +231,15 @@ const PatientPage: React.FC = () => {
           <Button
             onClick={triggerFileUpload}
             ml={4}
-            isDisabled={!selectedFile}
+            isDisabled={!selectedFile || imuUploadLoading}
             colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
-            {uploadStatus === 'done' ? 'Uploaded' : 'Upload selected IMU Data'}
+            {uploadStatus === 'done'
+              ? 'Uploaded'
+              : imuUploadLoading
+              ? 'Uploading...'
+              : 'Upload selected IMU Data'}
           </Button>
+          {imuUploadError && <p>Error uploading data: {imuUploadError}</p>}
         </Center>
       </Card>
     </Box>

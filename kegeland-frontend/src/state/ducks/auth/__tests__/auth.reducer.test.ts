@@ -3,7 +3,7 @@ import { refresh, signInUser, signOutUser, signUpUser } from '../auth.actions';
 import { initialState } from '../auth.reducer';
 import { apiCaller } from '../../../../utils/apiCaller';
 import loginResponseMock from '../mocks/loginResponse.mock';
-import { UserRole } from '../auth.interface';
+import { PatientType, UserRole } from '../auth.interface';
 import refreshResponseMock from '../mocks/refreshResponse.mock';
 import { retrieveTokens } from '../../../../utils/storage';
 
@@ -94,8 +94,24 @@ describe('Test auth slice', () => {
       signUpUser({
         name: { firstName: 'ola', lastName: 'Nordmann' },
         roles: [UserRole.PHYSICIAN],
+        patientType: [PatientType.WHEELCHAIR],
         email: 'ola.nordmann@gmail.com',
         password: '1234567',
+        wheelchairPatient: {
+          id: 'id',
+          name: 'name',
+          birthdate: '2021-01-01',
+          currentPhysicalState: {
+            averageHeartRate: 0,
+            averageWheelchairSpeed: 0,
+            height: 0,
+            maxHeartRate: 0,
+            maxWheelchairSpeed: 0,
+            weight: 0,
+          },
+          gameSessions: [],
+          gender: 'M',
+        },
       }),
     );
     const state = store.getState().auth;
@@ -110,8 +126,24 @@ describe('Test auth slice', () => {
       signUpUser({
         name: { firstName: 'ola', lastName: 'Nordmann' },
         roles: [UserRole.PHYSICIAN],
+        patientType: [PatientType.WHEELCHAIR],
         email: 'ola.nordmann@gmail.com',
         password: '1234567',
+        wheelchairPatient: {
+          id: 'id',
+          name: 'name',
+          birthdate: '2021-01-01',
+          currentPhysicalState: {
+            averageHeartRate: 0,
+            averageWheelchairSpeed: 0,
+            height: 0,
+            maxHeartRate: 0,
+            maxWheelchairSpeed: 0,
+            weight: 0,
+          },
+          gameSessions: [],
+          gender: 'M',
+        },
       }),
     );
     const state = store.getState().auth;

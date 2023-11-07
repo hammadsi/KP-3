@@ -1,7 +1,7 @@
 import { Expose, Type } from 'class-transformer';
 import { IsEnum, IsString } from 'class-validator';
 
-import { Role } from '../../roles/enums/role.enum';
+import { PatientType, Role } from '../../roles/enums/role.enum';
 
 export class FullName {
   @Expose()
@@ -26,8 +26,11 @@ export class UserDetailsEntity {
   @IsEnum(Role, { each: true })
   readonly roles: Role[];
 
+  @Expose()
+  @IsEnum(PatientType, { each: true })
+  readonly patientType: PatientType[];
+
   constructor(partial: Partial<UserDetailsEntity>) {
     Object.assign(this, partial);
   }
 }
-

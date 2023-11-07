@@ -45,6 +45,10 @@ class CurrentPhysicalState {
   @Expose()
   @IsNumber()
   averageWheelchairSpeed: number;
+
+  @Expose()
+  @IsOptional()
+  questionnaire: Question[];
 }
 
 class Question {
@@ -57,8 +61,12 @@ class Question {
   answer: string;
 
   @Expose()
-  @IsEnum(QuestionType)
-  type: QuestionType;
+  @IsString()
+  category: string;
+
+  @Expose()
+  @IsString()
+  chronology: number;
 }
 
 class Lap {

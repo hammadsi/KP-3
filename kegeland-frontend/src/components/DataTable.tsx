@@ -69,11 +69,14 @@ const DataTable = <T extends { id?: string }>({
     if(userDetails?.roles.includes(UserRole.PATIENT)){
         navigate(`/wheelchair/${id}`);
     }
-    //console.log(data && Array.isArray(data) && data.length > 0 && data.every(item => item && item instanceof Patient))
     
     if (data && Array.isArray(data) && data.length > 0) {
       if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
-        navigate(`/patients/${id}`);
+        if(window.location.href.includes('patients')) {
+          navigate(`/wheelchair/${id}`)
+        } else {
+          navigate(`/patients/${id}`);
+        }
     }
 
   }

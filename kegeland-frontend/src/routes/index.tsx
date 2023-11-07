@@ -132,9 +132,12 @@ const routes: RoutePathDefinition[] = [
         element: <PatientPage />,
       },
       {
-        title: 'Exercise',
         path: 'exercise/:exerciseId',
         element: <ExercisePage />,
+      },
+      {
+        path: 'wheelchair/:id',
+        element: <WheelChairPage />,
       },
     ],
   },

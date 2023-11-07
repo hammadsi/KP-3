@@ -39,10 +39,12 @@ const PatientPage: React.FC = () => {
   const { patientId } = useParams<PatientPageParams>();
   const { data, details: femfitDetails, loading } = usePatient(patientId || '');
   const { authUser } = useSelector((state: RootState) => state.auth);
-  const { gameSessions, details: wheelchairDetails } = useWheelchairPatient(
-    authUser?.id,
-  );
   const { userDetails } = useAppSelector((state) => state.auth);
+  const userIdToUse = userDetails?.roles.includes(UserRole.PATIENT)
+  ? authUser?.id
+  : patientId;
+  const { gameSessions, details: wheelchairDetails } = useWheelchairPatient(userIdToUse);
+
 
   const sortedGameSessions = [...gameSessions].sort(
     (a, b) => b.createdAt - a.createdAt,
@@ -50,7 +52,6 @@ const PatientPage: React.FC = () => {
   const sortedData = [...data].sort((a, b) => b.createdAt - a.createdAt);
 
   const allSessions: ViewSession[] = [...sortedData, ...sortedGameSessions];
-
   const headingStyle = {
     color: 'var(--chakra-colors-blackAlpha-800)',
     fontWeight: 'bold',

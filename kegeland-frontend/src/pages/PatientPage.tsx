@@ -144,17 +144,20 @@ const PatientPage: React.FC = () => {
       <Flex
         flexDirection={isGreaterThanLg ? 'row' : 'column'}
         flexBasis="100%"
-        flexWrap="nowrap">
+        flexWrap="nowrap"
+      >
         <Card
           marginRight={5}
           w={isGreaterThanLg ? '25%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}>
+          loading={loading}
+        >
           <Stack
             spacing={4}
             direction={isGreaterThanLg ? 'column' : 'row'}
             w="100%"
-            alignItems="flex-start">
+            alignItems="flex-start"
+          >
             <LabeledValue
               label="Workouts this week"
               value={
@@ -186,7 +189,8 @@ const PatientPage: React.FC = () => {
         <Card
           w={isGreaterThanLg ? '75%' : '100%'}
           minH={isGreaterThanLg ? 'md' : undefined}
-          loading={loading}>
+          loading={loading}
+        >
           <WeeklySessionsChart sessions={allSessions} numWeeks={12} />
         </Card>
       </Flex>
@@ -233,7 +237,8 @@ const PatientPage: React.FC = () => {
             onClick={triggerFileUpload}
             ml={4}
             isDisabled={!selectedFile || imuUploadLoading}
-            colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
+            colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}
+          >
             {uploadStatus === 'done'
               ? 'Uploaded'
               : imuUploadLoading

@@ -199,7 +199,6 @@ const PatientPage: React.FC = () => {
         </Button>
       )}
 
-      {/* Move this into the Exercise Session Page when the issue is done */}
       <Card>
         <h2 style={headingStyle}> Upload IMU data for session</h2>
         <Center marginTop={12}>

@@ -48,8 +48,6 @@ const PatientPage: React.FC = () => {
   const userIdToUse = userRole === UserRole.PATIENT ? authUser?.id : patientId;
   const userDetailsForPatient = useUserDetails(patientId);
   const patientType = userDetails?.patientType;
-  
-
   const { gameSessions, details: wheelchairDetails } = useWheelchairPatient(userIdToUse);
   
   const {

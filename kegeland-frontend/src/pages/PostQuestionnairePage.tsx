@@ -69,7 +69,7 @@ const PostQuestionnairePage: React.FC = () => {
           {
             question:
               'Did you experience any feelings of nausea during or after the exercise game?',
-            answer: answerPhysicalMeasures1,
+            answer: answerPhysicalMeasures1.toString(),
             category: 'Physical Measures',
             chronology: 1,
           },
@@ -100,14 +100,14 @@ const PostQuestionnairePage: React.FC = () => {
           {
             question:
               'How does this workout session compare to your usual exercise routines in terms of engagement and enjoyment?',
-            answer: answerUserExperience1, // endres
+            answer: answerUserExperience1.toString(),
             category: 'User experience',
             chronology: 1,
           },
           {
             question:
               'Do you have any feedback or ideas for the further development of this device? Please let us know, your thoughts are important!',
-            answer: answerFeedback1, // endres
+            answer: answerFeedback1.toString(), 
             category: 'Feedback',
             chronology: 1,
           },

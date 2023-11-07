@@ -108,6 +108,13 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
             icon={AiOutlineSetting}
             isSelected={window.location.pathname === '/settings'}
           />
+          <Menu.Item
+            mode={mode}
+            title="Questionnaire"
+            to={'/questionnaire'}
+            icon={AiOutlineSetting}
+            isSelected={window.location.pathname === '/questionnaire'}
+          />
         </Menu>
         <VStack width="full" transition="bottom 200ms">
           <Button

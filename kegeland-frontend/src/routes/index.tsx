@@ -10,6 +10,7 @@ import PatientPage from '../pages/PatientPage';
 import Settings from '../pages/Settings';
 import MyProfilePage from '../pages/profile/MyProfilePage';
 import GamePage from '../pages/GamePage';
+import QuestionnairePage from '../pages/QuestionnairePage';
 import { UserRole } from '../state/ducks/auth/auth.interface';
 import ProtectedRoutes from '../components/ProtectedRoutes';
 import useAppSelector from '../hooks/useAppSelector';
@@ -92,6 +93,11 @@ const routes: RoutePathDefinition[] = [
     title: 'Settings',
     path: 'settings',
     element: <Settings />,
+  },
+  {
+    title: 'Questionnaire',
+    path: '/questionnaire',
+    element: <QuestionnairePage />,
   },
   {
     path: '/game',

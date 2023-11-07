@@ -30,10 +30,7 @@ const WheelChairPage: React.FC = () => {
     );
   }
 
-  const {sensor, session, loading } = useExercise(
-    patientId!,
-    exerciseId!,
-  );
+  const { sensor, session, loading } = useExercise(patientId!, exerciseId!);
   const [visible, setVisible] = useState(false);
 
   return (

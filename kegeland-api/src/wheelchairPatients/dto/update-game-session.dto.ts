@@ -22,6 +22,12 @@ class QuestionDto {
 
     @IsString()
     answer: string;
+
+    @IsString()
+    category: string;
+
+    @IsString()
+    chronology: number;
 }
 
 class IMUReadingDto {

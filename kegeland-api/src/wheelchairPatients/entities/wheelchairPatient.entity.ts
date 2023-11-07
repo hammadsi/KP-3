@@ -55,6 +55,14 @@ class Question {
   @Expose()
   @IsString()
   answer: string;
+
+  @Expose()
+  @IsString()
+  category: string;
+
+  @Expose()
+  @IsString()
+  chronology: number;
 }
 
 class Lap {

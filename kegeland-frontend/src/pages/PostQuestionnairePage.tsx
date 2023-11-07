@@ -38,14 +38,20 @@ const PostQuestionnairePage: React.FC = () => {
           {
             question: 'Motivation level?',
             answer: sliderAnswer.toString(),
+            category: 'motivation',
+            chronology: 1,
           },
           {
             question: 'Recommend session?',
             answer: radioAnswer,
+            category: 'motivation',
+            chronology: 2,
           },
           {
             question: 'Feedback?',
             answer: freeTextAnswer,
+            category: 'motivation',
+            chronology: 3,
           },
         ],
       };

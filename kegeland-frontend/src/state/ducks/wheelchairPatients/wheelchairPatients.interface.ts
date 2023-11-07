@@ -34,6 +34,8 @@ export type GameSession = {
 export type Question = {
   question: string;
   answer: string;
+  category: string;
+  chronology: number;
 };
 
 export type Lap = {

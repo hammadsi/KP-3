@@ -37,15 +37,21 @@ const PreQuestionnairePage: React.FC = () => {
         {
           question: 'Are you a wheelchair user?',
           answer: radioAnswer,
+          category: 'motivation',
+          chronology: 1,
         },
         {
           question:
             'On a scale from 1 to 5, what is your current level of fitness?',
           answer: sliderAnswer.toString(),
+          category: 'motivation',
+          chronology: 1,
         },
         {
           question: 'Do you have any other comments?',
           answer: freeTextAnswer,
+          category: 'motivation',
+          chronology: 1,
         },
       ],
       postGame: [], // Assuming it's empty for now, since post-game questions might be filled later

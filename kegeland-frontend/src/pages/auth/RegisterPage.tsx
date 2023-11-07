@@ -99,6 +99,7 @@ const RegisterPage = () => {
           averageHeartRate: 0,
           maxWheelchairSpeed: 0,
           averageWheelchairSpeed: 0,
+          questionnaire: [],
         },
         gameSessions: [],
         id: '',

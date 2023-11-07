@@ -26,20 +26,6 @@ const SliderQuestionCustom: React.FC<SliderQuestionCustomProps> = ({
     parentCallBack(value); // Call the parent callback with the new value
   };
 
-  function generateSliderMarks() {
-    const sliderMarks = [];
-    for (let i = 6; i <= 20; i += 2) {
-      sliderMarks.push(
-        <SliderMark key={i} value={i} mt="3" ml="-1" mb="10" fontSize="sm">
-          {i}
-        </SliderMark>
-      );
-    }
-    return sliderMarks;
-  }
-
-  const sliderMarks = generateSliderMarks();
-
   return (
     <Card w="2xl" paddingTop={4} paddingBottom={8} textAlign={'left'}>
       <Text
@@ -58,21 +44,21 @@ const SliderQuestionCustom: React.FC<SliderQuestionCustomProps> = ({
         onChange={handleSliderChange}
         step={1}
         size="lg">
-          <SliderMark value={1} mt="3" ml="-1" mb="10" fontSize="m">
-            1 
-          </SliderMark>
-          <SliderMark value={2} mt="3" ml="-1" mb="10" fontSize="m">
-            2
-          </SliderMark>
-          <SliderMark value={3} mt="3" ml="-1" mb="10" fontSize="m">
-            3
-          </SliderMark>
-          <SliderMark value={4} mt="3" ml="-1" mb="10" fontSize="m">
-            4
-          </SliderMark>
-          <SliderMark value={5} mt="3" ml="-1" mb="10" fontSize="m">
-            5
-          </SliderMark>
+        <SliderMark value={1} mt="3" ml="-1" mb="10" fontSize="m">
+          1
+        </SliderMark>
+        <SliderMark value={2} mt="3" ml="-1" mb="10" fontSize="m">
+          2
+        </SliderMark>
+        <SliderMark value={3} mt="3" ml="-1" mb="10" fontSize="m">
+          3
+        </SliderMark>
+        <SliderMark value={4} mt="3" ml="-1" mb="10" fontSize="m">
+          4
+        </SliderMark>
+        <SliderMark value={5} mt="3" ml="-1" mb="10" fontSize="m">
+          5
+        </SliderMark>
         <SliderTrack>
           <SliderFilledTrack bg="blue.400" />
         </SliderTrack>

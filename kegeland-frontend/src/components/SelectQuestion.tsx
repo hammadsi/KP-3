@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Select, Text } from '@chakra-ui/react';
+
 import Card from './Card';
 
 interface SelectQuestionProps {
@@ -32,7 +33,9 @@ const SelectQuestion: React.FC<SelectQuestionProps> = ({
         {question}
       </Text>
       <Select value={selectedOption} onChange={handleSelectChange}>
-        <option value="" disabled hidden>Choose an option</option>
+        <option value="" disabled hidden>
+          Choose an option
+        </option>
         {options.map((option, index) => (
           <option key={index} value={option}>
             {option}

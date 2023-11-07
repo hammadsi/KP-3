@@ -32,7 +32,7 @@ const SliderQuestionCustom: React.FC<SliderQuestionCustomProps> = ({
       sliderMarks.push(
         <SliderMark key={i} value={i} mt="3" ml="-1" mb="10" fontSize="sm">
           {i}
-        </SliderMark>
+        </SliderMark>,
       );
     }
     return sliderMarks;

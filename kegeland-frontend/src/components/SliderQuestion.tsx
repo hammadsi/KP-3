@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Slider,
   SliderFilledTrack,
@@ -10,21 +10,24 @@ import {
 
 import Card from './Card';
 
-interface SliderQuestionProps {
+interface SliderQuestionCustomProps {
   question: string;
-  parentCallBack: Function;
+  parentCallBack: (value: number) => void; // Specify that the callback is a function that takes a number
 }
 
-const SliderQuestion: React.FC<SliderQuestionProps> = ({
+const SliderQuestionCustom: React.FC<SliderQuestionCustomProps> = ({
   question,
   parentCallBack,
 }) => {
+  const [sliderValue, setSliderValue] = useState(0); // Manage local state for slider value
+
   const handleSliderChange = (value: number) => {
-    parentCallBack(value);
+    setSliderValue(value); // Set local state
+    parentCallBack(value); // Call the parent callback with the new value
   };
 
   return (
-    <Card minW="lg" paddingTop={4} paddingBottom={8} textAlign={'left'}>
+    <Card w="2xl" paddingTop={4} paddingBottom={8} textAlign={'left'}>
       <Text
         fontSize={16}
         fontWeight="semibold"
@@ -35,7 +38,7 @@ const SliderQuestion: React.FC<SliderQuestionProps> = ({
       </Text>
       <Slider
         id="slider"
-        defaultValue={0}
+        value={sliderValue} // Use local state for value
         min={1}
         max={5}
         onChange={handleSliderChange}
@@ -65,4 +68,4 @@ const SliderQuestion: React.FC<SliderQuestionProps> = ({
   );
 };
 
-export default SliderQuestion;
+export default SliderQuestionCustom;

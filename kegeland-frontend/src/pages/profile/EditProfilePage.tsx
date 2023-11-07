@@ -40,6 +40,7 @@ const EditProfilePage = () => {
       averageHeartRate: 0,
       maxWheelchairSpeed: 0,
       averageWheelchairSpeed: 0,
+      questionnaire: [],
     },
   });
 

@@ -11,9 +11,6 @@ import withLayout from '../hoc/withLayout';
 import withSpinner from '../hoc/withSpinner';
 import useUpdateGameSession from '../hooks/useUpdateGameSession';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
-// import useAddHeartRate from '../hooks/useAddHeartRate';
-// import useAddSpeed from '../hooks/useAddSpeed';
-// import useAddLap from '../hooks/useAddLap';
 
 const PreQuestionnairePage: React.FC = () => {
   const location = useLocation();
@@ -29,10 +26,6 @@ const PreQuestionnairePage: React.FC = () => {
   const { wheelchairPatient } = useWheelchairPatient(authUser?.id);
   const { updateSession } = useUpdateGameSession();
 
-  // const { addHeartRate } = useAddHeartRate();
-  // const { addSpeed } = useAddSpeed();
-  // const { addLap } = useAddLap();
-
   const startUnitySession = async () => {
     // Fetch the current session by id from the wheelchairPatient's array of gameSessions
     const currentSession = wheelchairPatient?.gameSessions.find(
@@ -43,19 +36,22 @@ const PreQuestionnairePage: React.FC = () => {
       preGame: [
         {
           question: 'Are you a wheelchair user?',
-          type: 'radio' as 'radio',
           answer: radioAnswer,
+          category: 'motivation',
+          chronology: 1,
         },
         {
           question:
             'On a scale from 1 to 5, what is your current level of fitness?',
-          type: 'scale' as 'scale',
           answer: sliderAnswer.toString(),
+          category: 'motivation',
+          chronology: 1,
         },
         {
           question: 'Do you have any other comments?',
-          type: 'freeText' as 'freeText',
           answer: freeTextAnswer,
+          category: 'motivation',
+          chronology: 1,
         },
       ],
       postGame: [], // Assuming it's empty for now, since post-game questions might be filled later
@@ -68,37 +64,31 @@ const PreQuestionnairePage: React.FC = () => {
     }
 
     // Update the session
+
+    const bearerToken = localStorage.getItem('access_token');
+    if (!bearerToken) {
+      throw new Error(
+        "Bearer token is not found in local storage, can't proceed.",
+      );
+    }
+
+    // Construct the URL to launch Unity
+    const unityUrl = `VRWheelchairSim://?patientId=${authUser.id}&bearerToken=${bearerToken}&sessionId=${sessionId}`;
+
+    // Update the session
     if (currentSession) {
       const updateData = {
         patientId: authUser.id,
         id: currentSession.id,
         sessionData: {
           ...currentSession,
-          questionnaires: questionnaireData, // Update this part with the questionnaire answers
+          questionnaires: questionnaireData,
         },
       };
 
       try {
         await updateSession(updateData);
-        /*
-        // For manual testing, you can use the following code to add a lap to the session
-        const timestamp1 = new Date();
-        const timestamp2 = new Date(new Date().getTime() - 20000);
-        await addLap(authUser.id, sessionId, 10, timestamp1);
-        await addLap(authUser.id, sessionId, 20, timestamp2);
-        
-        // For manual testing, you can use the following code to add a speed to the session
-        const leftSpeed = 7; // the left speed value
-        const rightSpeed = 7; // the right speed value
-        await addSpeed(authUser.id, sessionId, leftSpeed, rightSpeed, timestamp1);
-        await addSpeed(authUser.id, sessionId, leftSpeed, rightSpeed, timestamp2);
-
-        // For manual testing, you can use the following code to add a heart rate to the session    
-        const heartRate = 80; // the heart rate value
-        await addHeartRate(authUser.id, sessionId, heartRate, timestamp1);
-        await addHeartRate(authUser.id, sessionId, heartRate, timestamp2);
-        */
-        window.location.href = `VRWheelchairSim://`;
+        window.location.href = unityUrl; // Launch Unity with the required parameters
         navigate('/game/post', { state: { sessionId } });
       } catch (error) {
         console.error('Error updating session:', error);

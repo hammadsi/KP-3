@@ -36,6 +36,7 @@ const GamePage: React.FC = () => {
             heartRates: [],
             speeds: [],
           },
+          IMUData: [],
         } as GameSessionData;
 
         if (sessionId) {

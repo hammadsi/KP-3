@@ -45,6 +45,10 @@ class CurrentPhysicalState {
   @Expose()
   @IsNumber()
   averageWheelchairSpeed: number;
+
+  @Expose()
+  @IsOptional()
+  questionnaire: Question[];
 }
 
 class Question {
@@ -57,8 +61,12 @@ class Question {
   answer: string;
 
   @Expose()
-  @IsEnum(QuestionType)
-  type: QuestionType;
+  @IsString()
+  category: string;
+
+  @Expose()
+  @IsString()
+  chronology: number;
 }
 
 class Lap {
@@ -69,6 +77,36 @@ class Lap {
   @Expose()
   @IsDate()
   timestamp: Date;
+}
+
+class IMUReading {
+  @Expose()
+  @IsNumber()
+  x: number;
+
+  @Expose()
+  @IsNumber()
+  y: number;
+
+  @Expose()
+  @IsNumber()
+  z: number;
+}
+
+class IMUData {
+  @Expose()
+  @IsNumber()
+  timestamp: number;
+
+  @Expose()
+  @ValidateNested()
+  @Type(() => IMUReading)
+  accelerometer: IMUReading;
+
+  @Expose()
+  @ValidateNested()
+  @Type(() => IMUReading)
+  gyroscope: IMUReading;
 }
 
 class HeartRate {
@@ -144,6 +182,12 @@ export class GameSession {
   @ValidateNested()
   @Type(() => TimeSeriesData)
   timeSeriesData: TimeSeriesData;
+
+  @Expose()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => IMUData)
+  IMUData: IMUData[];
 }
 
 export class WheelchairPatientEntity {

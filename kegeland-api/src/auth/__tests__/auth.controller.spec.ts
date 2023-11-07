@@ -6,8 +6,9 @@ import {
 } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { FirebaseAuthGuard } from 'src/firebase/firebase-auth.guard';
-import { Role } from 'src/roles/enums/role.enum';
+import { PatientType, Role } from 'src/roles/enums/role.enum';
 import { authServiceMock } from 'src/__mocks__';
+import { Gender } from 'src/wheelchairPatients/entities/wheelchairPatient.entity';
 
 import { AuthService } from '../auth.service';
 import { AuthController } from '../auth.controller';
@@ -15,7 +16,6 @@ import { LoginCredentialsDto } from '../dto/login-credentials.dto';
 import { RegisterCredentialsDto } from '../dto/register-credentials.dto';
 import { ResetPasswordDto } from '../dto/reset-password.dto';
 import { RefreshTokenDto } from '../dto/refresh-token.dto';
-import { Gender } from 'src/wheelchairPatients/entities/wheelchairPatient.entity';
 
 describe('QuestionnairesController', () => {
   let authController: AuthController;
@@ -73,8 +73,9 @@ describe('QuestionnairesController', () => {
         password: 'password',
         name: { firstName: 'Bruker', lastName: 'Brukarson' },
         roles: [Role.PATIENT],
+        patientType: [PatientType.WHEELCHAIR],
         wheelchairPatient: {
-          birthdate: "2021-01-01",
+          birthdate: '2021-01-01',
           gender: Gender.M,
           currentPhysicalState: {
             height: 120,
@@ -99,8 +100,9 @@ describe('QuestionnairesController', () => {
         password: 'pp',
         name: { firstName: 'Bruker', lastName: 'Brukarson' },
         roles: [Role.PATIENT],
+        patientType: [PatientType.WHEELCHAIR],
         wheelchairPatient: {
-          birthdate: "2021-01-01",
+          birthdate: '2021-01-01',
           gender: Gender.M,
           currentPhysicalState: {
             height: 120,
@@ -126,6 +128,7 @@ describe('QuestionnairesController', () => {
         email: 'user@kegeland.no',
         name: { firstName: 'Bruker', lastName: 'Brukarson' },
         roles: [Role.PATIENT],
+        patientType: [PatientType.WHEELCHAIR],
       };
       await request(app.getHttpServer())
         .post('/auth/register')
@@ -152,4 +155,3 @@ describe('QuestionnairesController', () => {
     });
   });
 });
-

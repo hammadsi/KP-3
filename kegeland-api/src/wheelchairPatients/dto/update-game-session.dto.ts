@@ -8,6 +8,7 @@ import {
     IsEnum
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import { isString } from 'lodash';
 
 export enum QuestionType {
     freeText = 'freeText',
@@ -22,9 +23,37 @@ class QuestionDto {
     @IsString()
     answer: string;
 
-    @IsEnum(QuestionType)
-    type: QuestionType;
+    @IsString()
+    category: string;
+
+    @IsString()
+    chronology: number;
 }
+
+class IMUReadingDto {
+    @IsNumber()
+    x: number;
+  
+    @IsNumber()
+    y: number;
+  
+    @IsNumber()
+    z: number;
+}
+  
+export class IMUDataDto {
+@IsNumber()
+timestamp: number;
+
+@ValidateNested()
+@Type(() => IMUReadingDto)
+accelerometer: IMUReadingDto;
+
+@ValidateNested()
+@Type(() => IMUReadingDto)
+gyroscope: IMUReadingDto;
+}
+  
 
 export class LapDto {
     @IsNumber()
@@ -107,5 +136,11 @@ class TimeSeriesDataDto {
     @ValidateNested()
     @Type(() => TimeSeriesDataDto)
     timeSeriesData?: TimeSeriesDataDto;
+
+    @IsOptional()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => IMUDataDto)
+    IMUData?: IMUDataDto[];
 }
 

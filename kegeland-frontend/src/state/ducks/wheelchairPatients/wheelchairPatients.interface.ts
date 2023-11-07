@@ -14,6 +14,7 @@ export type CurrentPhysicalState = {
   averageHeartRate: number;
   maxWheelchairSpeed: number;
   averageWheelchairSpeed: number;
+  questionnaire: Question[];
 };
 
 export type GameSession = {
@@ -28,17 +29,33 @@ export type GameSession = {
   };
   laps: Lap[];
   timeSeriesData: TimeSeriesData;
+  IMUData: IMUData[];
 };
 
 export type Question = {
   question: string;
-  type: 'freeText' | 'scale' | 'radio';
   answer: string;
+  category: string;
+  chronology: number;
 };
 
 export type Lap = {
   lapTime: number;
   timestamp: Date;
+};
+
+export type IMUData = {
+  timestamp: number;
+  accelerometer: {
+    x: number;
+    y: number;
+    z: number;
+  };
+  gyroscope: {
+    x: number;
+    y: number;
+    z: number;
+  };
 };
 
 export type TimeSeriesData = {
@@ -86,4 +103,5 @@ export type GameSessionData = {
   };
   laps: Lap[];
   timeSeriesData: TimeSeriesData;
+  IMUData: IMUData[];
 };

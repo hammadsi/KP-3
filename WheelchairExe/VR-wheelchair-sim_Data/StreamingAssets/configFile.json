@@ -1,7 +1,7 @@
 {
     "logSettings": {
         "sessionId": "SessionID",
-        "mainLogFolder": "C:/Users/emma/ONEDRI~1/74846~1.SEM/KUNDES~1/KP-3/WheelchairExe/VR-wheelchair-sim_Data/../LogFiles_ExciteOMeter/",
+        "mainLogFolder": "C:/Users/kenta/OneDrive/DOCUME~1/KP-3/WheelchairExe/VR-wheelchair-sim_Data/../LogFiles_ExciteOMeter/",
         "mainDebugFilename": "logDebug.txt",
         "sessionJsonFilename": "sessionData.json",
         "recordScreenshots": true,

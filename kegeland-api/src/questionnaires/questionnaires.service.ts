@@ -141,9 +141,10 @@ export class QuestionnairesService {
     if ('userId' in filters) {
       query = query.where('userId', '==', filters.userId);
     }
-    if ('id' in filters) {
-      query = query.where('id', '==', filters.id);
+    if ('sessionId' in filters) {
+      query = query.where('sessionId', '==', filters.id);
     }
+    
     const snapshots = await query.get();
     return snapshots.docs.map((doc) => ({
       id: doc.id,

@@ -2,15 +2,21 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { apiCaller } from '../../../utils/apiCaller';
 
-import { FetchSessionsDto, Session } from './sessions.interface';
+import {
+  FetchSessionDto,
+  FetchSessionsDto,
+  Session,
+} from './sessions.interface';
 
 export const fetchSessionById = createAsyncThunk(
   'sessions/fetchSessionById',
-  async (id: string) =>
-    apiCaller<Session>({
-      url: `sessions/${id}`,
+  async (params: FetchSessionDto) => {
+    const session = await apiCaller<Session>({
+      url: `sessions/${params.patientId}/gameSessions/${params.exerciseId}`,
       method: 'GET',
-    }),
+    });
+    return session;
+  },
 );
 
 export const fetchSessions = createAsyncThunk(

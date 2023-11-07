@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional } from "class-validator";
+import { IsNumber, IsOptional, IsString } from "class-validator";
 
 export class UpdatePhysicalStateDto {
     @IsOptional()
@@ -24,4 +24,22 @@ export class UpdatePhysicalStateDto {
     @IsOptional()
     @IsNumber()
     averageWheelchairSpeed?: number;
+
+    @IsOptional()
+    questionnaire?: QuestionDto[];
 }
+
+export class QuestionDto {
+    @IsString()
+    question: string;
+
+    @IsString()
+    answer: string;
+
+    @IsString()
+    category: string;
+
+    @IsString()
+    chronology: number;
+}
+

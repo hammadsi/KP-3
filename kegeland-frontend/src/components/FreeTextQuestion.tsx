@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input, Text } from '@chakra-ui/react';
 
 import Card from './Card';
 
 interface FreeTextQuestionProps {
   question: string;
-  parentCallBack: Function;
+  parentCallBack: (value: string) => void; // Specify that the callback is a function that takes a string
 }
 
 const FreeTextQuestion: React.FC<FreeTextQuestionProps> = ({
   question,
   parentCallBack,
 }) => {
-  const handleAnswerChange = (answer: string) => {
-    parentCallBack(answer);
+  const [answer, setAnswer] = useState(''); // Manage local state for the input value
+
+  const handleAnswerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newAnswer = event.target.value;
+    setAnswer(newAnswer); // Update local state
+    parentCallBack(newAnswer); // Call the parent callback with the new value
   };
 
   return (
-    <Card minW="lg" paddingTop={4} paddingBottom={8} textAlign={'left'}>
+    <Card w="2xl" paddingTop={4} paddingBottom={8} textAlign={'left'}>
       <Text
         fontSize={16}
         fontWeight="semibold"
@@ -26,7 +30,11 @@ const FreeTextQuestion: React.FC<FreeTextQuestionProps> = ({
         marginStart={0}>
         {question}
       </Text>
-      <Input type="text" onChange={(e) => handleAnswerChange(e.target.value)} />
+      <Input
+        type="text"
+        value={answer} // Use local state for value
+        onChange={handleAnswerChange}
+      />
     </Card>
   );
 };

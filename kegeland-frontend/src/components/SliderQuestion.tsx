@@ -23,8 +23,22 @@ const SliderQuestion: React.FC<SliderQuestionProps> = ({
     parentCallBack(value);
   };
 
+  function generateSliderMarks() {
+    const sliderMarks = [];
+    for (let i = 6; i <= 20; i += 2) {
+      sliderMarks.push(
+        <SliderMark value={i} mt="3" ml="-1" mb="10" fontSize="m">
+          {i}
+        </SliderMark>
+      );
+    }
+    return sliderMarks;
+  }
+
+  const sliderMarks = generateSliderMarks();
+
   return (
-    <Card minW="lg" paddingTop={4} paddingBottom={8} textAlign={'left'}>
+    <Card w="lg" paddingTop={4} paddingBottom={8} textAlign={'left'}>
       <Text
         fontSize={16}
         fontWeight="semibold"
@@ -36,26 +50,12 @@ const SliderQuestion: React.FC<SliderQuestionProps> = ({
       <Slider
         id="slider"
         defaultValue={0}
-        min={1}
-        max={5}
+        min={6}
+        max={20}
         onChange={handleSliderChange}
         step={1}
         size="lg">
-        <SliderMark value={1} mt="3" ml="-1" mb="10" fontSize="m">
-          1
-        </SliderMark>
-        <SliderMark value={2} mt="3" ml="-1" mb="10" fontSize="m">
-          2
-        </SliderMark>
-        <SliderMark value={3} mt="3" ml="-1" mb="10" fontSize="m">
-          3
-        </SliderMark>
-        <SliderMark value={4} mt="3" ml="-1" mb="10" fontSize="m">
-          4
-        </SliderMark>
-        <SliderMark value={5} mt="3" ml="-1" mb="10" fontSize="m">
-          5
-        </SliderMark>
+        {sliderMarks}
         <SliderTrack>
           <SliderFilledTrack bg="blue.400" />
         </SliderTrack>

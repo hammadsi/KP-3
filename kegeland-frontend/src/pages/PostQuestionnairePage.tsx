@@ -4,7 +4,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import withSpinner from '../hoc/withSpinner';
-import SliderQuestion from '../components/SliderQuestion';
+import SelectQuestion from '../components/SelectQuestion';
+import SliderQuestionCustom from '../components/SliderQuestionCustom';
 import FreeTextQuestion from '../components/FreeTextQuestion';
 import RadioQuestion from '../components/RadioQuestion';
 import withLayout from '../hoc/withLayout';
@@ -19,7 +20,16 @@ const PostQuestionnairePage: React.FC = () => {
 
   const navigate = useNavigate();
   const [radioAnswer, setRadioAnswer] = useState('');
-  const [sliderAnswer, setSliderAnswer] = useState(0);
+  const [answerBorgScale1, setAnswerBorgScale1] = useState(0);
+  const [answerBorgScale2, setAnswerBorgScale2] = useState(0);
+  const [answerBorgScale3, setAnswerBorgScale3] = useState(0);
+  const [answerPhysicalMeasures1, setaAswerPhysicalMeasures1] = useState("");
+  const [answerEnjoyment1, setAnswerEnjoyment1] = useState(0);
+  const [answerEnjoyment2, setAnswerEnjoyment2] = useState(0);
+  const [answerEnjoyment3, setAnswerEnjoyment3] = useState(0);
+  const [answerEnjoyment4, setAnswerEnjoyment4] = useState(0);
+  const [answerUserExperience1, setAnswerUserExperience1] = useState(0);
+  const [answerFeedback1, setFeedback1] = useState(0);
   const [freeTextAnswer, setFreeTextAnswer] = useState('');
 
   const { authUser } = useSelector((state: RootState) => state.auth);
@@ -36,19 +46,64 @@ const PostQuestionnairePage: React.FC = () => {
         ...currentSession.questionnaires, // Spreads existing questionnaire data including preGame
         postGame: [
           {
-            question: 'Motivation level?',
-            type: 'scale' as 'scale',
-            answer: sliderAnswer.toString(),
+            question: 'On a scale from 6-20: Please rate your perceived exertion after FIRST interval',
+            answer: answerBorgScale1.toString(),
+            category: 'Borg Scale',
+            chronology: 1
           },
           {
-            question: 'Recommend session?',
-            type: 'radio' as 'radio',
-            answer: radioAnswer,
+            question: 'On a scale from 6-20: Please rate your perceived exertion after SECOND interval',
+            answer: answerBorgScale2.toString(),
+            category: 'Borg Scale',
+            chronology: 2
           },
           {
-            question: 'Feedback?',
-            type: 'freeText' as 'freeText',
-            answer: freeTextAnswer,
+            question: 'On a scale from 6-20: Please rate your perceived exertion after the LAST interval',
+            answer: answerBorgScale3.toString(),
+            category: 'Borg Scale',
+            chronology: 3
+          },
+          {
+            question: 'Did you experience any feelings of nausea during or after the exercise game?',
+            answer: answerPhysicalMeasures1,
+            category: 'Physical Measures',
+            chronology: 1
+          },
+          {
+            question: 'I enjoyed the activity',
+            answer: answerEnjoyment1.toString(),
+            category: 'Enjoyment',
+            chronology: 1
+          },
+          {
+            question: 'I found the activity pleasurable.',
+            answer: answerEnjoyment2.toString(), 
+            category: 'Enjoyment',
+            chronology: 2
+          },
+          {
+            question: 'The activity was very pleasant',
+            answer: answerEnjoyment3.toString(), 
+            category: 'Enjoyment',
+            chronology: 3
+          },
+          {
+            question: 'The activity felt good',
+            answer: answerEnjoyment4.toString(), 
+            category: 'Enjoyment',
+            chronology: 4
+          },
+          {
+            question: 'How does this workout session compare to your usual exercise routines in terms of engagement and enjoyment?',
+            answer: answerUserExperience1, // endres
+            category: 'User experience',
+            chronology: 1
+          },
+          {
+            question: 'Do you have any feedback or ideas for the further development of this device? Please let us know, your thoughts are important!',
+            answer: answerFeedback1, // endres
+            category: 'Feedback',
+            chronology: 1
           },
         ],
       };
@@ -108,12 +163,30 @@ const PostQuestionnairePage: React.FC = () => {
         Post Questionnaire
       </Text>
       {/* Insert all of the questions here */}
-
-      <SliderQuestion
+      <SliderQuestionCustom
         question={
-          'On a scale from 1 to 5: How high was your motivation to put in effort during the workout session?'
+          'On a scale from 6-20: Please rate your perceived exertion after FIRST interval'
         }
         parentCallBack={handleSliderCallBack}
+      />
+      <SliderQuestionCustom
+        question={
+          'On a scale from 6-20: Please rate your perceived exertion after SECOND interval'
+        }
+        parentCallBack={handleSliderCallBack}
+      />
+      <SliderQuestionCustom
+        question={
+          'On a scale from 6-20: Please rate your perceived exertion after the LAST interval'
+        }
+        parentCallBack={handleSliderCallBack}
+      />
+      <SelectQuestion
+        question={
+          'Did you experience any feelings of nausea during or after the exercise game?'
+        }
+        options={['Not at all', 'A little', 'Moderately', 'Very']}
+        parentCallBack={handleRadioCallBack}
       />
       <RadioQuestion
         question={'Would you reccomend this workout session to others?'}

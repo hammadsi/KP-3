@@ -4,13 +4,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import withSpinner from '../hoc/withSpinner';
-import SliderQuestion from '../components/SliderQuestion';
+import SelectQuestion from '../components/SelectQuestion';
+import SliderQuestionCustom from '../components/SliderQuestionCustom';
 import FreeTextQuestion from '../components/FreeTextQuestion';
-import RadioQuestion from '../components/RadioQuestion';
 import withLayout from '../hoc/withLayout';
 import { RootState } from '../state/store';
 import useUpdateGameSession from '../hooks/useUpdateGameSession';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
+import SliderQuestion from '../components/SliderQuestion';
 
 const PostQuestionnairePage: React.FC = () => {
   const location = useLocation();
@@ -18,9 +19,18 @@ const PostQuestionnairePage: React.FC = () => {
   const sessionId = sessionState?.sessionId;
 
   const navigate = useNavigate();
-  const [radioAnswer, setRadioAnswer] = useState('');
-  const [sliderAnswer, setSliderAnswer] = useState(0);
-  const [freeTextAnswer, setFreeTextAnswer] = useState('');
+  const [answerBorgScale1, setAnswerBorgScale1] = useState(0);
+  const [answerBorgScale2, setAnswerBorgScale2] = useState(0);
+  const [answerBorgScale3, setAnswerBorgScale3] = useState(0);
+  const [answerPhysicalMeasures1, setAnswerPhysicalMeasures1] = useState('');
+  const [answerEnjoyment1, setAnswerEnjoyment1] = useState('');
+  const [answerEnjoyment2, setAnswerEnjoyment2] = useState('');
+  const [answerEnjoyment3, setAnswerEnjoyment3] = useState('');
+  const [answerEnjoyment4, setAnswerEnjoyment4] = useState('');
+  const [answerUserExperience1, setAnswerUserExperience1] = useState(0);
+  const [answerFeedback1, setAnswerFeedback1] = useState('');
+
+  const [questionCounter, setQuestionCounter] = useState(0);
 
   const { authUser } = useSelector((state: RootState) => state.auth);
   const { wheelchairPatient } = useWheelchairPatient(authUser?.id);
@@ -36,22 +46,70 @@ const PostQuestionnairePage: React.FC = () => {
         ...currentSession.questionnaires, // Spreads existing questionnaire data including preGame
         postGame: [
           {
-            question: 'Motivation level?',
-            answer: sliderAnswer.toString(),
-            category: 'motivation',
+            question:
+              'On a scale from 6-20: Please rate your perceived exertion after FIRST interval',
+            answer: answerBorgScale1.toString(),
+            category: 'Borg Scale',
             chronology: 1,
           },
           {
-            question: 'Recommend session?',
-            answer: radioAnswer,
-            category: 'motivation',
+            question:
+              'On a scale from 6-20: Please rate your perceived exertion after SECOND interval',
+            answer: answerBorgScale2.toString(),
+            category: 'Borg Scale',
             chronology: 2,
           },
           {
-            question: 'Feedback?',
-            answer: freeTextAnswer,
-            category: 'motivation',
+            question:
+              'On a scale from 6-20: Please rate your perceived exertion after the LAST interval',
+            answer: answerBorgScale3.toString(),
+            category: 'Borg Scale',
             chronology: 3,
+          },
+          {
+            question:
+              'Did you experience any feelings of nausea during or after the exercise game?',
+            answer: answerPhysicalMeasures1,
+            category: 'Physical Measures',
+            chronology: 1,
+          },
+          {
+            question: 'I enjoyed the activity',
+            answer: answerEnjoyment1.toString(),
+            category: 'Enjoyment',
+            chronology: 1,
+          },
+          {
+            question: 'I found the activity pleasurable.',
+            answer: answerEnjoyment2.toString(),
+            category: 'Enjoyment',
+            chronology: 2,
+          },
+          {
+            question: 'The activity was very pleasant',
+            answer: answerEnjoyment3.toString(),
+            category: 'Enjoyment',
+            chronology: 3,
+          },
+          {
+            question: 'The activity felt good',
+            answer: answerEnjoyment4.toString(),
+            category: 'Enjoyment',
+            chronology: 4,
+          },
+          {
+            question:
+              'How does this workout session compare to your usual exercise routines in terms of engagement and enjoyment?',
+            answer: answerUserExperience1, // endres
+            category: 'User experience',
+            chronology: 1,
+          },
+          {
+            question:
+              'Do you have any feedback or ideas for the further development of this device? Please let us know, your thoughts are important!',
+            answer: answerFeedback1, // endres
+            category: 'Feedback',
+            chronology: 1,
           },
         ],
       };
@@ -74,27 +132,44 @@ const PostQuestionnairePage: React.FC = () => {
     }
   };
 
-  function checkIfAllIsFIlled(): boolean {
-    if (
-      radioAnswer.length < 1 ||
-      sliderAnswer < 1 ||
-      freeTextAnswer.length < 1
-    ) {
-      return false;
+  function checkIfAllIsFIlled(questionCounter: number): boolean {
+    if (questionCounter === 0) {
+      if (
+        answerBorgScale1 === 0 ||
+        answerBorgScale2 === 0 ||
+        answerBorgScale3 === 0
+      ) {
+        return false;
+      }
+    }
+    if (questionCounter === 1) {
+      if (answerPhysicalMeasures1 === '') {
+        return false;
+      }
+    }
+    if (questionCounter === 2) {
+      if (
+        answerEnjoyment1 === '' ||
+        answerEnjoyment2 === '' ||
+        answerEnjoyment3 === '' ||
+        answerEnjoyment4 === ''
+      ) {
+        return false;
+      }
+    }
+    if (questionCounter === 3) {
+      if (answerUserExperience1 === 0) {
+        return false;
+      }
     }
     return true;
   }
 
-  const handleRadioCallBack = (childData: string) => {
-    setRadioAnswer(childData);
-  };
-
-  const handleSliderCallBack = (childData: number) => {
-    setSliderAnswer(childData);
-  };
-
-  const handleFreeTextCallBack = (childData: string) => {
-    setFreeTextAnswer(childData);
+  const handleValueChange = <T,>(
+    setValue: React.Dispatch<React.SetStateAction<T>>,
+    value: T,
+  ) => {
+    setValue(value);
   };
 
   return (
@@ -110,31 +185,144 @@ const PostQuestionnairePage: React.FC = () => {
         marginBottom={4}>
         Post Questionnaire
       </Text>
-      {/* Insert all of the questions here */}
-
-      <SliderQuestion
-        question={
-          'On a scale from 1 to 5: How high was your motivation to put in effort during the workout session?'
-        }
-        parentCallBack={handleSliderCallBack}
-      />
-      <RadioQuestion
-        question={'Would you reccomend this workout session to others?'}
-        parentCallBack={handleRadioCallBack}
-      />
-      <FreeTextQuestion
-        question={
-          'Do you have any feedback or ideas for the further development of this device? Please let us know, your thoughts are important!'
-        }
-        parentCallBack={handleFreeTextCallBack}
-      />
+      {questionCounter === 0 && (
+        <>
+          <SliderQuestionCustom
+            question={
+              'On a scale from 6-20: Please rate your perceived exertion after FIRST interval'
+            }
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerBorgScale1, value)
+            }
+          />
+          <SliderQuestionCustom
+            question={
+              'On a scale from 6-20: Please rate your perceived exertion after SECOND interval'
+            }
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerBorgScale2, value)
+            }
+          />
+          <SliderQuestionCustom
+            question={
+              'On a scale from 6-20: Please rate your perceived exertion after the LAST interval'
+            }
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerBorgScale3, value)
+            }
+          />
+        </>
+      )}
+      {questionCounter === 1 && (
+        <>
+          <SelectQuestion
+            question={
+              'Did you experience any feelings of nausea during or after the exercise game?'
+            }
+            options={['Not at all', 'A little', 'Moderately', 'Very']}
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerPhysicalMeasures1, value)
+            }
+          />
+        </>
+      )}
+      {questionCounter === 2 && (
+        <>
+          <SelectQuestion
+            question={'I enjoyed the activity'}
+            options={[
+              'Strongly disagree',
+              'Disagree',
+              'Neutral',
+              'Agree',
+              'Strongly agree',
+            ]}
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerEnjoyment1, value)
+            }
+          />
+          <SelectQuestion
+            question={'I found the activity pleasurable.'}
+            options={[
+              'Strongly disagree',
+              'Disagree',
+              'Neutral',
+              'Agree',
+              'Strongly agree',
+            ]}
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerEnjoyment2, value)
+            }
+          />
+          <SelectQuestion
+            question={'The activity was very pleasant'}
+            options={[
+              'Strongly disagree',
+              'Disagree',
+              'Neutral',
+              'Agree',
+              'Strongly agree',
+            ]}
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerEnjoyment3, value)
+            }
+          />
+          <SelectQuestion
+            question={'The activity felt good'}
+            options={[
+              'Strongly disagree',
+              'Disagree',
+              'Neutral',
+              'Agree',
+              'Strongly agree',
+            ]}
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerEnjoyment4, value)
+            }
+          />
+        </>
+      )}
+      {questionCounter === 3 && (
+        <>
+          <SliderQuestion
+            question={
+              'On a scaler from 1-5: How does this workout session compare to your usual exercise routines in terms of engagement and enjoyment?'
+            }
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerUserExperience1, value)
+            }
+          />
+          <FreeTextQuestion
+            question={
+              'Do you have any feedback or ideas for the further development of this device? Please let us know, your thoughts are important!'
+            }
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerFeedback1, value)
+            }
+          />
+        </>
+      )}
       <Box>
-        <Button
-          isDisabled={!checkIfAllIsFIlled()}
-          marginTop={4}
-          onClick={endSession}>
-          End session
-        </Button>
+        {questionCounter < 3 && (
+          <>
+            <Button
+              isDisabled={!checkIfAllIsFIlled(questionCounter)}
+              marginTop={4}
+              onClick={() => setQuestionCounter(questionCounter + 1)}>
+              Continue
+            </Button>
+          </>
+        )}
+        {questionCounter === 3 && (
+          <>
+            <Button
+              isDisabled={!checkIfAllIsFIlled(questionCounter)}
+              marginTop={4}
+              onClick={endSession}>
+              End session
+            </Button>
+          </>
+        )}
       </Box>
     </Flex>
   );

@@ -16,6 +16,7 @@ import useAppSelector from '../hooks/useAppSelector';
 import EditProfilePage from '../pages/profile/EditProfilePage';
 import PostQuestionnairePage from '../pages/PostQuestionnairePage';
 import PreQuestionnairePage from '../pages/PreQuestionnairePage';
+import WheelChairPage from '../pages/WheelChairPage';
 
 export interface RoutePathDefinition
   extends Omit<NonIndexRouteObject, 'children'> {
@@ -58,6 +59,11 @@ const routes: RoutePathDefinition[] = [
     title: 'Register',
     path: '/register',
     element: <RegisterPage />,
+  },
+  {
+    title: 'wheelchair',
+    path: '/wheelchair',
+    element: <WheelChairPage />,
   },
   {
     title: 'MyProfile',

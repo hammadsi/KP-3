@@ -8,7 +8,7 @@ export class Session {
   sensor: string;
 
   @IsString()
-  userId: string;
+  heartRates: string;
 
   @IsObject()
   data: Record<string, number[]>;

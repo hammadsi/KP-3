@@ -80,7 +80,7 @@ const PostQuestionnairePage: React.FC = () => {
             chronology: 1,
           },
           {
-            question: 'I found the activity pleasurable.',
+            question: 'I found the activity pleasurable',
             answer: answerEnjoyment2.toString(),
             category: 'Enjoyment',
             chronology: 2,
@@ -107,7 +107,7 @@ const PostQuestionnairePage: React.FC = () => {
           {
             question:
               'Do you have any feedback or ideas for the further development of this device? Please let us know, your thoughts are important!',
-            answer: answerFeedback1.toString(), 
+            answer: answerFeedback1.toString(),
             category: 'Feedback',
             chronology: 1,
           },

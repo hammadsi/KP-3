@@ -50,7 +50,6 @@ const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({
         </Flex>
       );
     }
-    // Handling for other types of items can be similar
     return (
       <Flex flexDirection="column" alignItems="start" marginY={1}>
         <Text fontWeight="600" noOfLines={[2, 3]} textAlign="left">

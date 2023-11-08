@@ -19,8 +19,8 @@ const WheelChairPage: React.FC = () => {
   // const patientId = "2P9gfi0u1foJiyoK3ovJ";
   // const exerciseId = "28ceabH5I9zm1BguEbcB";
 
-  const patientId = 'Wwy4sqcl7dYGvvkHA5mmdWBEa713';
-  const exerciseId = 'DtSmNvXL12fzoYdQFmCE';
+  const patientId = '8Y4QPZYLeHW2TowHnpOjlgxZ2aW2';
+  const exerciseId = 'EHPJAh79rI83KnEGmYdu';
 
   const { wheelchairPatient } = useWheelchairPatient(patientId);
   let gameSession;

@@ -80,7 +80,7 @@ const PostQuestionnairePage: React.FC = () => {
             chronology: 1,
           },
           {
-            question: 'I found the activity pleasurable.',
+            question: 'I found the activity pleasurable',
             answer: answerEnjoyment2.toString(),
             category: 'Enjoyment',
             chronology: 2,

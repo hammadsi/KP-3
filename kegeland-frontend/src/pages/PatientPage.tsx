@@ -29,9 +29,7 @@ import { RootState } from '../state/store';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import { ViewSession } from '../state/ducks/sessions/sessions.interface';
 import useUserDetails from '../hooks/useUserDetails';
-
 import useUploadIMUData from '../hooks/useUploadIMUData';
-import { log } from 'console';
 
 type PatientPageParams = {
   patientId: string;
@@ -44,12 +42,15 @@ const PatientPage: React.FC = () => {
   const { authUser } = useSelector((state: RootState) => state.auth);
   const { userDetails } = useAppSelector((state) => state.auth);
   // Determine the user's role
-  const userRole = userDetails?.roles.includes(UserRole.PHYSICIAN) ? UserRole.PHYSICIAN : UserRole.PATIENT;
+  const userRole = userDetails?.roles.includes(UserRole.PHYSICIAN)
+    ? UserRole.PHYSICIAN
+    : UserRole.PATIENT;
   const userIdToUse = userRole === UserRole.PATIENT ? authUser?.id : patientId;
   const userDetailsForPatient = useUserDetails(patientId);
   const patientType = userDetails?.patientType;
-  const { gameSessions, details: wheelchairDetails } = useWheelchairPatient(userIdToUse);
-  
+  const { gameSessions, details: wheelchairDetails } =
+    useWheelchairPatient(userIdToUse);
+
   const {
     uploadIMUData,
     loading: imuUploadLoading,
@@ -196,17 +197,29 @@ const PatientPage: React.FC = () => {
           <WeeklySessionsChart sessions={allSessions} numWeeks={12} />
         </Card>
       </Flex>
-      
-      
-      {((userRole === UserRole.PATIENT && patientType?.includes(PatientType.FEMFIT)) || userRole === UserRole.PHYSICIAN && userDetailsForPatient.patient?.patientType.includes(PatientType.FEMFIT)) && (
+
+      {((userRole === UserRole.PATIENT &&
+        patientType?.includes(PatientType.FEMFIT)) ||
+        (userRole === UserRole.PHYSICIAN &&
+          userDetailsForPatient.patient?.patientType.includes(
+            PatientType.FEMFIT,
+          ))) && (
         <div>
           <h1 style={headingStyle}>Overview of Femfit exercises</h1>
           <Card loading={loading} minH="36">
-            <FemfitExerciseTable sessions={sortedData} patientId={userIdToUse!} />
+            <FemfitExerciseTable
+              sessions={sortedData}
+              patientId={userIdToUse!}
+            />
           </Card>
         </div>
       )}
-      {((userRole === UserRole.PATIENT && patientType?.includes(PatientType.WHEELCHAIR)) || userRole === UserRole.PHYSICIAN && userDetailsForPatient.patient?.patientType.includes(PatientType.WHEELCHAIR)) && (
+      {((userRole === UserRole.PATIENT &&
+        patientType?.includes(PatientType.WHEELCHAIR)) ||
+        (userRole === UserRole.PHYSICIAN &&
+          userDetailsForPatient.patient?.patientType.includes(
+            PatientType.WHEELCHAIR,
+          ))) && (
         <div>
           <h1 style={headingStyle}>Overview of Wheelchair exercises</h1>
           <Card loading={loading} minH="36">
@@ -217,8 +230,6 @@ const PatientPage: React.FC = () => {
           </Card>
         </div>
       )}
-    
-      
 
       {userDetails?.roles.includes(UserRole.PHYSICIAN) && (
         <Button w="100%" marginTop={8} onClick={startUnitySession}>

@@ -32,11 +32,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useNavigate } from 'react-router-dom'; 
-import useAppSelector from '../hooks/useAppSelector'; 
-import { UserRole } from '../state/ducks/auth/auth.interface';
-import Patient from './Patient';
+import { useNavigate } from 'react-router-dom';
 
+import useAppSelector from '../hooks/useAppSelector';
+import { UserRole } from '../state/ducks/auth/auth.interface';
 
 export type DataTableProps<T extends object> = {
   data: T[];
@@ -66,26 +65,20 @@ const DataTable = <T extends { id?: string }>({
 
   const navigate = useNavigate();
   const handleRowClick = (id?: string) => {
-    if(userDetails?.roles.includes(UserRole.PATIENT)){
-        navigate(`/wheelchair/${id}`);
+    if (userDetails?.roles.includes(UserRole.PATIENT)) {
+      navigate(`/wheelchair/${id}`);
     }
-    
+
     if (data && Array.isArray(data) && data.length > 0) {
       if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
-        if(window.location.href.includes('patients')) {
-          navigate(`/wheelchair/${id}`)
+        if (window.location.href.includes('patients')) {
+          navigate(`/wheelchair/${id}`);
         } else {
           navigate(`/patients/${id}`);
         }
+      }
     }
-
-  }
-  
-  
   };
-  
-
-
 
   return (
     <Flex flexDirection="column" height="100%">

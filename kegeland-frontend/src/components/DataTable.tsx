@@ -34,6 +34,9 @@ import {
 } from '@tanstack/react-table';
 import { useNavigate } from 'react-router-dom';
 
+import useAppSelector from '../hooks/useAppSelector';
+import { UserRole } from '../state/ducks/auth/auth.interface';
+
 export type DataTableProps<T extends object> = {
   data: T[];
   columns: ColumnDef<T, any>[];
@@ -44,6 +47,7 @@ const DataTable = <T extends { id?: string }>({
   columns,
 }: DataTableProps<T>) => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
+  const { userDetails } = useAppSelector((state) => state.auth);
   const table = useReactTable<T>({
     data,
     columns,
@@ -61,11 +65,18 @@ const DataTable = <T extends { id?: string }>({
 
   const navigate = useNavigate();
   const handleRowClick = (id?: string) => {
-    if (window.location.pathname === '/') {
-      navigate(`/patients/${id}`);
-    } else if (window.location.pathname.startsWith('/patients')) {
-      const newPath = `${window.location.pathname}/exercise/${id}`;
-      navigate(newPath);
+    if (userDetails?.roles.includes(UserRole.PATIENT)) {
+      navigate(`/wheelchair/${id}`);
+    }
+
+    if (data && Array.isArray(data) && data.length > 0) {
+      if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
+        if (window.location.href.includes('patients')) {
+          navigate(`/wheelchair/${id}`);
+        } else {
+          navigate(`/patients/${id}`);
+        }
+      }
     }
   };
 

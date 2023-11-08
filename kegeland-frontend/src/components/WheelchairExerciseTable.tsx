@@ -26,10 +26,6 @@ const ExerciseTable: React.FC<ExerciseTableProps> = ({ sessions }) => {
             }),
           ]
         : []),
-      // columnHelper.accessor('sensor', {
-      //   header: 'Sensor',
-      //   cell: (props) => capitalize(props.getValue()),
-      // }),
     ],
     [isGreaterThanMd],
   );

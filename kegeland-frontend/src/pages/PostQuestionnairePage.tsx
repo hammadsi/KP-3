@@ -107,7 +107,7 @@ const PostQuestionnairePage: React.FC = () => {
           {
             question:
               'Do you have any feedback or ideas for the further development of this device? Please let us know, your thoughts are important!',
-            answer: answerFeedback1.toString(), 
+            answer: answerFeedback1.toString(),
             category: 'Feedback',
             chronology: 1,
           },

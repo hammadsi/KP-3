@@ -159,7 +159,6 @@ const PatientPage: React.FC = () => {
           Start session
         </Button>
       )}
-      
     </Box>
   );
 };

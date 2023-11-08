@@ -44,80 +44,80 @@ const WheelChairPage: React.FC = () => {
   const [visible, setVisible] = useState(false);
 
   // New code for file upload
- const [selectedFile, setSelectedFile] = useState<File | null>(null);
- const [uploadStatus, setUploadStatus] = useState<'idle' | 'done'>('idle');
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploadStatus, setUploadStatus] = useState<'idle' | 'done'>('idle');
 
- const {
-  uploadIMUData,
-  loading: imuUploadLoading,
-  error: imuUploadError,
-} = useUploadIMUData();
+  const {
+    uploadIMUData,
+    loading: imuUploadLoading,
+    error: imuUploadError,
+  } = useUploadIMUData();
 
- const handleFileSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
-   const file = e.target.files?.[0];
-   if (file) {
-     setSelectedFile(file);
-   }
- };
+  const handleFileSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
 
- const triggerFileUpload = () => {
-   if (selectedFile) {
-     const reader = new FileReader();
-     reader.onload = async function (event) {
-       const text = event?.target?.result?.toString();
-       if (!text) {
-         console.error('Could not read file.');
-         return;
-       }
-       const lines = text.split('\n');
-       const imuData = [];
+  const triggerFileUpload = () => {
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = async function (event) {
+        const text = event?.target?.result?.toString();
+        if (!text) {
+          console.error('Could not read file.');
+          return;
+        }
+        const lines = text.split('\n');
+        const imuData = [];
 
-       for (let i = 1; i < lines.length; i++) {
-         const line = lines[i];
-         const parts = line.split(',');
+        for (let i = 1; i < lines.length; i++) {
+          const line = lines[i];
+          const parts = line.split(',');
 
-         if (parts.length === 7) {
-           const [timestamp, xAccel, yAccel, zAccel, xGyro, yGyro, zGyro] =
-             parts.map((part) => parseFloat(part));
+          if (parts.length === 7) {
+            const [timestamp, xAccel, yAccel, zAccel, xGyro, yGyro, zGyro] =
+              parts.map((part) => parseFloat(part));
 
-           imuData.push({
-             timestamp,
-             accelerometer: {
-               x: xAccel,
-               y: yAccel,
-               z: zAccel,
-             },
-             gyroscope: {
-               x: xGyro,
-               y: yGyro,
-               z: zGyro,
-             },
-           });
-         }
-       }
+            imuData.push({
+              timestamp,
+              accelerometer: {
+                x: xAccel,
+                y: yAccel,
+                z: zAccel,
+              },
+              gyroscope: {
+                x: xGyro,
+                y: yGyro,
+                z: zGyro,
+              },
+            });
+          }
+        }
 
-       try {
-         const patientId = 'Wwy4sqcl7dYGvvkHA5mmdWBEa713';
-         const sessionId = 'faDFwwohudvgI5GjBsM9';
+        try {
+          const patientId = 'Wwy4sqcl7dYGvvkHA5mmdWBEa713';
+          const sessionId = 'faDFwwohudvgI5GjBsM9';
 
-         await uploadIMUData(patientId, sessionId, imuData);
-         setUploadStatus('done');
-       } catch (error) {
-         console.error('Error uploading IMU data:', error);
-         setUploadStatus('idle');
-       }
-       // TODO: Update the Firestore with Update calls to the API when endpoints are ready.
-       setUploadStatus('done');
-     };
+          await uploadIMUData(patientId, sessionId, imuData);
+          setUploadStatus('done');
+        } catch (error) {
+          console.error('Error uploading IMU data:', error);
+          setUploadStatus('idle');
+        }
+        // TODO: Update the Firestore with Update calls to the API when endpoints are ready.
+        setUploadStatus('done');
+      };
 
-     reader.onerror = function (event) {
-       console.error('An error occurred while reading the file:', event);
-       setUploadStatus('idle');
-     };
+      reader.onerror = function (event) {
+        console.error('An error occurred while reading the file:', event);
+        setUploadStatus('idle');
+      };
 
-     reader.readAsText(selectedFile);
-   }
- };
+      reader.readAsText(selectedFile);
+    }
+  };
 
   return (
     <>

@@ -170,7 +170,7 @@ const PatientPage: React.FC = () => {
               }
               icon={AiOutlineCalendar}
             />
-            {/* TODO: Only shpw the one relevant for patient type */}
+            {/* TODO: Only show the one relevant for patient type */}
             <LabeledValue
               label="Since last femfit exercise"
               value={femfitDetails.lastSessionDelta}

@@ -29,7 +29,6 @@ import { RootState } from '../state/store';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import { ViewSession } from '../state/ducks/sessions/sessions.interface';
 import useUserDetails from '../hooks/useUserDetails';
-import useUploadIMUData from '../hooks/useUploadIMUData';
 
 type PatientPageParams = {
   patientId: string;
@@ -51,12 +50,6 @@ const PatientPage: React.FC = () => {
   const { gameSessions, details: wheelchairDetails } =
     useWheelchairPatient(userIdToUse);
 
-  const {
-    uploadIMUData,
-    loading: imuUploadLoading,
-    error: imuUploadError,
-  } = useUploadIMUData();
-
   const sortedGameSessions = [...gameSessions].sort(
     (a, b) => b.createdAt - a.createdAt,
   );
@@ -68,76 +61,6 @@ const PatientPage: React.FC = () => {
     fontWeight: 'bold',
     fontSize: '24px',
     margin: '25px 0 10px 0',
-  };
-
-  // New code for file upload
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [uploadStatus, setUploadStatus] = useState<'idle' | 'done'>('idle');
-
-  const handleFileSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setSelectedFile(file);
-    }
-  };
-
-  const triggerFileUpload = () => {
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.onload = async function (event) {
-        const text = event?.target?.result?.toString();
-        if (!text) {
-          console.error('Could not read file.');
-          return;
-        }
-        const lines = text.split('\n');
-        const imuData = [];
-
-        for (let i = 1; i < lines.length; i++) {
-          const line = lines[i];
-          const parts = line.split(',');
-
-          if (parts.length === 7) {
-            const [timestamp, xAccel, yAccel, zAccel, xGyro, yGyro, zGyro] =
-              parts.map((part) => parseFloat(part));
-
-            imuData.push({
-              timestamp,
-              accelerometer: {
-                x: xAccel,
-                y: yAccel,
-                z: zAccel,
-              },
-              gyroscope: {
-                x: xGyro,
-                y: yGyro,
-                z: zGyro,
-              },
-            });
-          }
-        }
-
-        try {
-          const patientId = 'Wwy4sqcl7dYGvvkHA5mmdWBEa713';
-          const sessionId = 'faDFwwohudvgI5GjBsM9';
-
-          await uploadIMUData(patientId, sessionId, imuData);
-          setUploadStatus('done');
-        } catch (error) {
-          console.error('Error uploading IMU data:', error);
-          setUploadStatus('idle');
-        }
-        // TODO: Update the Firestore with Update calls to the API when endpoints are ready.
-        setUploadStatus('done');
-      };
-
-      reader.onerror = function (event) {
-        console.error('An error occurred while reading the file:', event);
-        setUploadStatus('idle');
-      };
-
-      reader.readAsText(selectedFile);
-    }
   };
 
   const startUnitySession = () => {
@@ -236,31 +159,7 @@ const PatientPage: React.FC = () => {
           Start session
         </Button>
       )}
-
-      <Card>
-        <h2 style={headingStyle}> Upload IMU data for session</h2>
-        <Center marginTop={12}>
-          <input
-            type="file"
-            id="imuData"
-            name="imuData"
-            accept=".csv"
-            onChange={handleFileSelection}
-          />
-          <Button
-            onClick={triggerFileUpload}
-            ml={4}
-            isDisabled={!selectedFile || imuUploadLoading}
-            colorScheme={uploadStatus === 'done' ? 'green' : 'blue'}>
-            {uploadStatus === 'done'
-              ? 'Uploaded'
-              : imuUploadLoading
-              ? 'Uploading...'
-              : 'Upload selected IMU Data'}
-          </Button>
-          {imuUploadError && <p>Error uploading data: {imuUploadError}</p>}
-        </Center>
-      </Card>
+      
     </Box>
   );
 };

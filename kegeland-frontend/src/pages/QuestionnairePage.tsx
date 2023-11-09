@@ -2,7 +2,6 @@ import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
 import withSpinner from '../hoc/withSpinner';
 import SelectQuestion from '../components/SelectQuestion';
 import withLayout from '../hoc/withLayout';

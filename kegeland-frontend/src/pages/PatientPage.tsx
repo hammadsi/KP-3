@@ -1,5 +1,12 @@
-import React from 'react';
-import { Box, Flex, Stack, useMediaQuery } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import {
+  Button,
+  Box,
+  Flex,
+  Stack,
+  useMediaQuery,
+  Collapse,
+} from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import {
   AiOutlineClockCircle,
@@ -7,6 +14,7 @@ import {
   AiOutlineCalendar,
 } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
+import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 
 import Card from '../components/Card';
 import LabeledValue from '../components/LabeledValue';
@@ -25,6 +33,7 @@ import {
   ViewSession,
 } from '../state/ducks/sessions/sessions.interface';
 import useUserDetails from '../hooks/useUserDetails';
+import QuestionnaireResults from '../components/QuestionnaireResultsWheelchair';
 
 type PatientPageParams = {
   patientId: string;
@@ -36,13 +45,12 @@ const PatientPage: React.FC = () => {
   const { patientId } = useParams<PatientPageParams>();
   const { authUser } = useSelector((state: RootState) => state.auth);
   const { userDetails } = useAppSelector((state) => state.auth);
+  const [visible, setVisible] = useState(false);
   // Determine the user's role
   const userRole = userDetails?.roles.includes(UserRole.PHYSICIAN)
     ? UserRole.PHYSICIAN
     : UserRole.PATIENT;
   const userIdToUse = userRole === UserRole.PATIENT ? authUser?.id : patientId;
-
-  console.log('userIdToUse', userIdToUse);
 
   let sortedFemfitData: LeanSession[] = [];
   let femfitDataDetails;
@@ -72,6 +80,7 @@ const PatientPage: React.FC = () => {
   const {
     gameSessions,
     details: wheelchairDetails,
+    wheelchairPatient,
     loading,
   } = useWheelchairPatient(userIdToUse);
 
@@ -175,6 +184,25 @@ const PatientPage: React.FC = () => {
           </Card>
         </div>
       )}
+      <Button
+        w="100%"
+        onClick={() => {
+          setVisible(!visible);
+        }}>
+        {visible ? <ArrowUpIcon /> : <ArrowDownIcon />}
+        {visible
+          ? '  Hide questionnaire results'
+          : '  Show questionnaire results'}
+      </Button>
+      <Collapse in={visible}>
+        <Card h="100%">
+          <QuestionnaireResults
+            questionnaire={
+              wheelchairPatient?.currentPhysicalState.questionnaire
+            }
+          />
+        </Card>
+      </Collapse>
     </Box>
   );
 };

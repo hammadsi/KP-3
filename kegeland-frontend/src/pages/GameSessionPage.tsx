@@ -100,7 +100,6 @@ const GameSessionPage: React.FC = () => {
           console.error('Error uploading IMU data:', error);
           setUploadStatus('idle');
         }
-        // TODO: Update the Firestore with Update calls to the API when endpoints are ready.
         setUploadStatus('done');
       };
 
@@ -129,10 +128,12 @@ const GameSessionPage: React.FC = () => {
       </Button>
       <Collapse in={visible}>
         <Card loading={loading} h="100%">
-          <QuestionnaireResults questionnaire={gameSession?.questionnaires} />
+          <QuestionnaireResults
+            questionnaire={gameSession?.questionnaires.postGame}
+          />
         </Card>
       </Collapse>
-      <Card>
+      <Card marginTop={6}>
         <h2 style={headingStyle}> Upload IMU data for session</h2>
         <Center marginTop={12}>
           <input

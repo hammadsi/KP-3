@@ -12,18 +12,14 @@ import useExercise from '../hooks/useExercise';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import useUploadIMUData from '../hooks/useUploadIMUData';
 
-type ExercisePageParams = {
+type GameSessionPageParams = {
   patientId: string;
-  exerciseId: string;
+  id: string;
 };
 
-const WheelChairPage: React.FC = () => {
-  // const patientId = "2P9gfi0u1foJiyoK3ovJ";
-  // const exerciseId = "28ceabH5I9zm1BguEbcB";
-  // const { patientId, exerciseId } = useParams<ExercisePageParams>();
-
-  const patientId = '8Y4QPZYLeHW2TowHnpOjlgxZ2aW2';
-  const exerciseId = 'EHPJAh79rI83KnEGmYdu';
+const GameSessionPage: React.FC = () => {
+  const { patientId, id } = useParams<GameSessionPageParams>();
+  const { wheelchairPatient } = useWheelchairPatient(patientId);
 
   const headingStyle = {
     color: 'var(--chakra-colors-blackAlpha-800)',
@@ -32,15 +28,16 @@ const WheelChairPage: React.FC = () => {
     margin: '25px 0 10px 0',
   };
 
-  const { wheelchairPatient } = useWheelchairPatient(patientId);
   let gameSession;
+  const sessionId = id;
+  
   if (wheelchairPatient) {
     gameSession = wheelchairPatient!.gameSessions.find(
-      (session) => session.id === exerciseId,
+      (session) => session.id === sessionId,
     );
   }
 
-  const { sensor, session, loading } = useExercise(patientId!, exerciseId!);
+  const { sensor, session, loading } = useExercise(patientId!, sessionId!);
   const [visible, setVisible] = useState(false);
 
   // New code for file upload
@@ -97,10 +94,7 @@ const WheelChairPage: React.FC = () => {
         }
 
         try {
-          const patientId = 'Wwy4sqcl7dYGvvkHA5mmdWBEa713';
-          const sessionId = 'faDFwwohudvgI5GjBsM9';
-
-          await uploadIMUData(patientId, sessionId, imuData);
+          await uploadIMUData(patientId!, sessionId!, imuData);
           setUploadStatus('done');
         } catch (error) {
           console.error('Error uploading IMU data:', error);
@@ -166,4 +160,4 @@ const WheelChairPage: React.FC = () => {
   );
 };
 
-export default withLayout(withSpinner(WheelChairPage, 300));
+export default withLayout(withSpinner(GameSessionPage, 300));

@@ -40,11 +40,13 @@ import { UserRole } from '../state/ducks/auth/auth.interface';
 export type DataTableProps<T extends object> = {
   data: T[];
   columns: ColumnDef<T, any>[];
+  patientId: string
 };
 
 const DataTable = <T extends { id?: string }>({
   data,
   columns,
+  patientId,
 }: DataTableProps<T>) => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const { userDetails } = useAppSelector((state) => state.auth);
@@ -66,15 +68,15 @@ const DataTable = <T extends { id?: string }>({
   const navigate = useNavigate();
   const handleRowClick = (id?: string) => {
     if (userDetails?.roles.includes(UserRole.PATIENT)) {
-      navigate(`/wheelchair/${id}`);
+      navigate(`/wheelchair/${patientId}/${id}`); //"id" here represents the gameSessionID (sent from the WheelchairExerciseTable)
     }
 
     if (data && Array.isArray(data) && data.length > 0) {
       if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
         if (window.location.href.includes('patients')) {
-          navigate(`/wheelchair/${id}`);
+          navigate(`/wheelchair/${patientId}/${id}`); //"id" here represents the gameSessionID (sent from the WheelchairExerciseTable)
         } else {
-          navigate(`/patients/${id}`);
+          navigate(`/patients/${id}`); //"id" here represents the patientID (sent from the patient table)
         }
       }
     }

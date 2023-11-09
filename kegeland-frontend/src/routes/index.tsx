@@ -63,7 +63,7 @@ const routes: RoutePathDefinition[] = [
   },
   {
     title: 'wheelchair',
-    path: '/wheelchair/:id',
+    path: '/wheelchair/:patientId/:id',
     element: <GameSessionPage />,
   },
   {
@@ -142,7 +142,7 @@ const routes: RoutePathDefinition[] = [
         element: <ExercisePage />,
       },
       {
-        path: 'wheelchair/:id',
+        path: ':id',
         element: <GameSessionPage />,
       },
     ],

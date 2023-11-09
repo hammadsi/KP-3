@@ -32,7 +32,7 @@ const PatientsTable: React.FC<PatientsTableProps> = ({ patients }) => {
     [isGreaterThanLg],
   );
 
-  return <DataTable data={patients} columns={columns} />;
+  return <DataTable data={patients} columns={columns} patientId={""}/>;
 };
 
 export default PatientsTable;

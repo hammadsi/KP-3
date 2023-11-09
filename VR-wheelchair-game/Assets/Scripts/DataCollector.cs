@@ -11,10 +11,13 @@ public class DataCollector : MonoBehaviour
     public float wheelSpeedInterval = 1.0f; // Interval time in seconds
     private ApiManager apiManager;
 
+    private WheelchairController wheelchairController;
+
 
     private void Start()
     {
         apiManager = FindObjectOfType<ApiManager>();
+        wheelchairController = FindObjectOfType<WheelchairController>();
         gameSession = new GameSession();
         gameSession.laps = new List<Lap>();
         gameSession.timeSeriesData = new TimeSeriesData
@@ -53,8 +56,8 @@ public class DataCollector : MonoBehaviour
     IEnumerator CollectWheelSpeeds() {
         while (true) {
             SpeedData newSpeedData = new SpeedData {
-                leftSpeed = UnityEngine.Random.Range(0f, 10f), // Random speed for left wheel
-                rightSpeed = UnityEngine.Random.Range(0f, 10f), // Random speed for right wheel
+                leftSpeed = wheelchairController.leftWheelSpeed,
+                rightSpeed = wheelchairController.rightWheelSpeed,
                 timestamp = DateTime.UtcNow.ToString("o")
             };
             gameSession.timeSeriesData.speeds.Add(newSpeedData);

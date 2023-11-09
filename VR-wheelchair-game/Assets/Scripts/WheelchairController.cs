@@ -39,8 +39,8 @@ public class WheelchairController : MonoBehaviour
     private Vector2 joystick;
     private bool controller = false;
 
-    private float leftWheelSpeed;
-    private float rightWheelSpeed;
+    public float leftWheelSpeed;
+    public float rightWheelSpeed;
     private float deadZoneRadius = 0.1f;  // Adjustments probably needed
 
     float wheelchairWidth = 0.5f;  // Adjust based on actual wheelchair width
@@ -124,6 +124,7 @@ public class WheelchairController : MonoBehaviour
     }
 }
 
+// Should be reworked
     private void WheelSpeedLoop()
     {
     Vector2 rawJoystick = ErgometerInputDevice.current.leftStick.ReadValue();

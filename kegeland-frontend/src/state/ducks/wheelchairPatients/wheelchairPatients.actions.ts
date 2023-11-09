@@ -8,6 +8,7 @@ import {
   HeartRate,
   IMUData,
   Lap,
+  Question,
   Speed,
   UpdateWheelchairPatientData,
   WheelchairPatient,
@@ -105,5 +106,19 @@ export const addIMUDataToGameSession = createAsyncThunk(
       url: `wheelchairPatients/${payload.patientId}/gameSessions/${payload.sessionId}/imuData`,
       method: 'POST',
       data: payload.imuData,
+    }),
+);
+
+export const updatePostGameQuestionnaire = createAsyncThunk(
+  'wheelchairpatients/updatePostGameQuestionnaire',
+  async (payload: {
+    patientId: string;
+    sessionId: string;
+    questionnaire: Question[];
+  }) =>
+    apiCaller<Question[]>({
+      url: `wheelchairPatients/${payload.patientId}/gameSessions/${payload.sessionId}/postGameQuestionnaire`,
+      method: 'PUT',
+      data: payload.questionnaire,
     }),
 );

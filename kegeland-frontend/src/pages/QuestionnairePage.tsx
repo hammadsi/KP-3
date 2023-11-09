@@ -46,7 +46,6 @@ const QuestionnairePage: React.FC = () => {
   const [questionCounter, setQuestionCounter] = useState(0);
 
   const registerAnswers = async () => {
-
     if (authUser && wheelchairPatient) {
       const questionnaireData = [
         {
@@ -130,58 +129,58 @@ const QuestionnairePage: React.FC = () => {
           chronology: 1,
         },
         {
-          question: "I feel guilty when I don’t exercise.",
+          question: 'I feel guilty when I don’t exercise.',
           answer: answerBREQ21.toString(),
-          category: "BREQ-2",
+          category: 'BREQ-2',
           chronology: 1,
         },
         {
-          question: "I exercise because it’s fun.",
+          question: 'I exercise because it’s fun.',
           answer: answerBREQ22.toString(),
-          category: "BREQ-2",
+          category: 'BREQ-2',
           chronology: 2,
         },
         {
-          question: "It’s important to me to exercise regularly.",
+          question: 'It’s important to me to exercise regularly.',
           answer: answerBREQ23.toString(),
-          category: "BREQ-2",
+          category: 'BREQ-2',
           chronology: 3,
         },
         {
-          question: "I can’t see why I should bother exercising.",
+          question: 'I can’t see why I should bother exercising.',
           answer: answerBREQ24.toString(),
-          category: "BREQ-2",
+          category: 'BREQ-2',
           chronology: 4,
         },
         {
-          question: "I think it is important to make the effort to exercise regularly.",
+          question:
+            'I think it is important to make the effort to exercise regularly.',
           answer: answerBREQ25.toString(),
-          category: "BREQ-2",
+          category: 'BREQ-2',
           chronology: 5,
         },
         {
-          question: "I get pleasure and satisfaction from participating in exercise.",
+          question:
+            'I get pleasure and satisfaction from participating in exercise.',
           answer: answerBREQ26.toString(),
-          category: "BREQ-2",
+          category: 'BREQ-2',
           chronology: 6,
         },
         {
-          question: "I think exercising is a waste of time.",
+          question: 'I think exercising is a waste of time.',
           answer: answerBREQ27.toString(),
-          category: "BREQ-2",
+          category: 'BREQ-2',
           chronology: 7,
-        },          
+        },
         {
-          question:
-            'Do you have any previous experience with exercise games?',
-          answer: answerExerciseGames1.toString(), 
+          question: 'Do you have any previous experience with exercise games?',
+          answer: answerExerciseGames1.toString(),
           category: 'Exercise games',
           chronology: 1,
         },
         {
-          question:
-            'Do you enjoy exercise games?',
-          answer: answerExerciseGames2.toString(), 
+          question: 'Do you enjoy exercise games?',
+          answer: answerExerciseGames2.toString(),
           category: 'Exercise games',
           chronology: 2,
         },
@@ -244,10 +243,7 @@ const QuestionnairePage: React.FC = () => {
       }
     }
     if (questionCounter === 4) {
-      if (
-        answerExerciseGames1 === '' ||
-        answerExerciseGames2 === '' 
-      ) {
+      if (answerExerciseGames1 === '' || answerExerciseGames2 === '') {
         return false;
       }
     }
@@ -260,7 +256,7 @@ const QuestionnairePage: React.FC = () => {
   ) => {
     setValue(value);
   };
-  
+
   const subheader = {
     fontSize: 20,
     fontWeight: 'semibold',
@@ -274,7 +270,7 @@ const QuestionnairePage: React.FC = () => {
     color: 'gray.600',
     marginBottom: 4,
     maxWidth: '600px',
-    width: '50%',    
+    width: '50%',
   };
 
   return (
@@ -295,16 +291,25 @@ const QuestionnairePage: React.FC = () => {
           <Text {...subheader}>
             International Physical Activity Questionnaire
           </Text>
-          <Text {...description} textAlign="left" style={{ width: description.maxWidth }}>
-            We are interested in finding out about the kinds of physical activities that people do as part of 
-            their everyday lives. <br /><br /> The questions will ask you about the time you spent being physically 
-            active in the last 7 days. Please answer each question even if you do not consider yourself to 
-            be an active person. Please think about the activities you do at work, as part of your house and 
-            yard work, to get from place to place, and in your spare time for recreation, exercise or sport.<br /><br />
-            Think about all the vigorous activities that you did in the last 7 days. Vigorous physical 
-            activities refer to activities that take hard physical effort and make you breathe much harder 
-            than normal. Think only about those physical activities that you did for at least 10 minutes at 
-            a time.
+          <Text
+            {...description}
+            textAlign="left"
+            style={{ width: description.maxWidth }}>
+            We are interested in finding out about the kinds of physical
+            activities that people do as part of their everyday lives. <br />
+            <br /> The questions will ask you about the time you spent being
+            physically active in the last 7 days. Please answer each question
+            even if you do not consider yourself to be an active person. Please
+            think about the activities you do at work, as part of your house and
+            yard work, to get from place to place, and in your spare time for
+            recreation, exercise or sport.
+            <br />
+            <br />
+            Think about all the vigorous activities that you did in the last 7
+            days. Vigorous physical activities refer to activities that take
+            hard physical effort and make you breathe much harder than normal.
+            Think only about those physical activities that you did for at least
+            10 minutes at a time.
           </Text>
           <SelectQuestion
             question="During the last 7 days, on how many days did you do vigorous physical activities like heavy lifting, digging, aerobics, or fast bicycling?"
@@ -314,7 +319,25 @@ const QuestionnairePage: React.FC = () => {
 
           <SelectQuestion
             question="How much time did you usually spend doing vigorous physical activities on one of those days?"
-            options={['0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5', '5.5', '6', '6.5', '7', '7.5', '8']}
+            options={[
+              '0',
+              '0.5',
+              '1',
+              '1.5',
+              '2',
+              '2.5',
+              '3',
+              '3.5',
+              '4',
+              '4.5',
+              '5',
+              '5.5',
+              '6',
+              '6.5',
+              '7',
+              '7.5',
+              '8',
+            ]}
             parentCallBack={(value) => handleValueChange(setAnswerIPAQ2, value)}
           />
 
@@ -326,7 +349,25 @@ const QuestionnairePage: React.FC = () => {
 
           <SelectQuestion
             question="How much time did you usually spend doing moderate physical activities on one of those days?"
-            options={['0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5', '5.5', '6', '6.5', '7', '7.5', '8']}
+            options={[
+              '0',
+              '0.5',
+              '1',
+              '1.5',
+              '2',
+              '2.5',
+              '3',
+              '3.5',
+              '4',
+              '4.5',
+              '5',
+              '5.5',
+              '6',
+              '6.5',
+              '7',
+              '7.5',
+              '8',
+            ]}
             parentCallBack={(value) => handleValueChange(setAnswerIPAQ4, value)}
           />
 
@@ -338,23 +379,64 @@ const QuestionnairePage: React.FC = () => {
 
           <SelectQuestion
             question="How much time did you usually spend walking on one of those days?"
-            options={['0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5', '5.5', '6', '6.5', '7', '7.5', '8']}
+            options={[
+              '0',
+              '0.5',
+              '1',
+              '1.5',
+              '2',
+              '2.5',
+              '3',
+              '3.5',
+              '4',
+              '4.5',
+              '5',
+              '5.5',
+              '6',
+              '6.5',
+              '7',
+              '7.5',
+              '8',
+            ]}
             parentCallBack={(value) => handleValueChange(setAnswerIPAQ6, value)}
           />
 
           <SelectQuestion
             question="During the last 7 days, how much time did you spend sitting on a weekday?"
-            options={['0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5', '5.5', '6', '6.5', '7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5', '12']}
+            options={[
+              '0',
+              '0.5',
+              '1',
+              '1.5',
+              '2',
+              '2.5',
+              '3',
+              '3.5',
+              '4',
+              '4.5',
+              '5',
+              '5.5',
+              '6',
+              '6.5',
+              '7',
+              '7.5',
+              '8',
+              '8.5',
+              '9',
+              '9.5',
+              '10',
+              '10.5',
+              '11',
+              '11.5',
+              '12',
+            ]}
             parentCallBack={(value) => handleValueChange(setAnswerIPAQ7, value)}
           />
-
         </>
       )}
       {questionCounter === 1 && (
         <>
-          <Text {...subheader}>
-            Workout habits and preferences
-          </Text>
+          <Text {...subheader}>Workout habits and preferences</Text>
           <SliderQuestion
             question={
               'What is your current level of fitness? (1 = Unfit, 5 = Fit) '
@@ -367,14 +449,19 @@ const QuestionnairePage: React.FC = () => {
       )}
       {questionCounter === 2 && (
         <>
-          <Text {...subheader}>
-            Enjoyment of the exercise
-          </Text>
-          <Text {...description} textAlign="left" style={{ width: description.maxWidth }}>
-            We are interested in understanding how much people enjoy engaging in physical activities. <br /><br />
-            The questions will ask about your feelings of enjoyment related to physical activity in your 
-            everyday life. Please consider all types of physical activities you engage in, including those at 
-            work, during house and yard work, for transportation, and for leisure or exercise
+          <Text {...subheader}>Enjoyment of the exercise</Text>
+          <Text
+            {...description}
+            textAlign="left"
+            style={{ width: description.maxWidth }}>
+            We are interested in understanding how much people enjoy engaging in
+            physical activities. <br />
+            <br />
+            The questions will ask about your feelings of enjoyment related to
+            physical activity in your everyday life. Please consider all types
+            of physical activities you engage in, including those at work,
+            during house and yard work, for transportation, and for leisure or
+            exercise
           </Text>
           <SelectQuestion
             question={'I enjoy it'}
@@ -432,13 +519,17 @@ const QuestionnairePage: React.FC = () => {
       )}
       {questionCounter === 3 && (
         <>
-          <Text {...subheader}>
-          </Text>
-          <Text {...description} textAlign="left" style={{ width: description.maxWidth }}>
-            We are interested in the reasons underlying peoples' decisions to engage, or not engage in 
-            physical exercise. <br /><br /> Using the scale below, please indicate to what extent each of the following 
-            items is true for you. Please note that there are no right or wrong answers and no trick 
-            questions. We simply want to know how you personally feel about exercise
+          <Text {...subheader}></Text>
+          <Text
+            {...description}
+            textAlign="left"
+            style={{ width: description.maxWidth }}>
+            We are interested in the reasons underlying peoples' decisions to
+            engage, or not engage in physical exercise. <br />
+            <br /> Using the scale below, please indicate to what extent each of
+            the following items is true for you. Please note that there are no
+            right or wrong answers and no trick questions. We simply want to
+            know how you personally feel about exercise
           </Text>
           <SelectQuestion
             question="I feel guilty when I don’t exercise."
@@ -447,9 +538,11 @@ const QuestionnairePage: React.FC = () => {
               '1',
               '2 (Sometimes true for me)',
               '3',
-              '4 (Very true for me)'
+              '4 (Very true for me)',
             ]}
-            parentCallBack={(value) => handleValueChange(setAnswerBREQ21, value)}
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerBREQ21, value)
+            }
           />
 
           <SelectQuestion
@@ -459,9 +552,11 @@ const QuestionnairePage: React.FC = () => {
               '1',
               '2 (Sometimes true for me)',
               '3',
-              '4 (Very true for me)'
+              '4 (Very true for me)',
             ]}
-            parentCallBack={(value) => handleValueChange(setAnswerBREQ22, value)}
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerBREQ22, value)
+            }
           />
 
           <SelectQuestion
@@ -471,9 +566,11 @@ const QuestionnairePage: React.FC = () => {
               '1',
               '2 (Sometimes true for me)',
               '3',
-              '4 (Very true for me)'
+              '4 (Very true for me)',
             ]}
-            parentCallBack={(value) => handleValueChange(setAnswerBREQ23, value)}
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerBREQ23, value)
+            }
           />
 
           <SelectQuestion
@@ -483,9 +580,11 @@ const QuestionnairePage: React.FC = () => {
               '1',
               '2 (Sometimes true for me)',
               '3',
-              '4 (Very true for me)'
+              '4 (Very true for me)',
             ]}
-            parentCallBack={(value) => handleValueChange(setAnswerBREQ24, value)}
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerBREQ24, value)
+            }
           />
 
           <SelectQuestion
@@ -495,9 +594,11 @@ const QuestionnairePage: React.FC = () => {
               '1',
               '2 (Sometimes true for me)',
               '3',
-              '4 (Very true for me)'
+              '4 (Very true for me)',
             ]}
-            parentCallBack={(value) => handleValueChange(setAnswerBREQ25, value)}
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerBREQ25, value)
+            }
           />
 
           <SelectQuestion
@@ -507,9 +608,11 @@ const QuestionnairePage: React.FC = () => {
               '1',
               '2 (Sometimes true for me)',
               '3',
-              '4 (Very true for me)'
+              '4 (Very true for me)',
             ]}
-            parentCallBack={(value) => handleValueChange(setAnswerBREQ26, value)}
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerBREQ26, value)
+            }
           />
 
           <SelectQuestion
@@ -519,23 +622,22 @@ const QuestionnairePage: React.FC = () => {
               '1',
               '2 (Sometimes true for me)',
               '3',
-              '4 (Very true for me)'
+              '4 (Very true for me)',
             ]}
-            parentCallBack={(value) => handleValueChange(setAnswerBREQ27, value)}
+            parentCallBack={(value) =>
+              handleValueChange(setAnswerBREQ27, value)
+            }
           />
         </>
       )}
       {questionCounter === 4 && (
         <>
-          <Text {...subheader}>
-            Exercise games
-          </Text>
+          <Text {...subheader}>Exercise games</Text>
           <SelectQuestion
-            question={'Do you have any previous experience with exercise games?'}
-            options={[
-              'Yes',
-              'No',
-            ]}
+            question={
+              'Do you have any previous experience with exercise games?'
+            }
+            options={['Yes', 'No']}
             parentCallBack={(value) =>
               handleValueChange(setAnswerExerciseGames1, value)
             }

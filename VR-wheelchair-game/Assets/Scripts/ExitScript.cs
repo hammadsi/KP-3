@@ -54,14 +54,14 @@ public class ExitScript : MonoBehaviour
         Time.timeScale = 1; // Resume the game time
         if (vrControllers) vrControllers.SetActive(true); // Enable VR controllers
         if (currentTimerCanvas) currentTimerCanvas.SetActive(true); // Show the timer canvas
-    
+
         // Check if the timeout has occurred before showing the timeout canvas
         TimeOut timeOutScript = vrUIUtils.GetComponent<TimeOut>();
         if (timeOutScript && timeOutScript.HasTimedOut)
         {
             if (currentTimeOutCanvas) currentTimeOutCanvas.SetActive(true); // Show the timeout canvas only if the timeout has occurred
         }
-    
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -69,6 +69,7 @@ public class ExitScript : MonoBehaviour
     // Call this function when the "Yes" button is clicked
     public void ExitGame()
     {
+        
         // This will close the application in a build
         Application.Quit();
 

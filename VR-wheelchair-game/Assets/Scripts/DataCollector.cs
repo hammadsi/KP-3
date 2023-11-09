@@ -68,6 +68,8 @@ public class DataCollector : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        gameSession.endTime = DateTime.UtcNow.ToString("o"); // Using ISO 8601 format
+
         //SendDataToAPI();
     }
 

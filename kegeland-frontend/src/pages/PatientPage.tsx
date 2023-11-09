@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Flex,
-  Stack,
-  useMediaQuery,
-} from '@chakra-ui/react';
+import { Box, Flex, Stack, useMediaQuery } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import {
   AiOutlineClockCircle,
@@ -25,7 +20,10 @@ import FemfitExerciseTable from '../components/FemfitExerciseTable';
 import WheelchairExerciseTable from '../components/WheelchairExerciseTable';
 import { RootState } from '../state/store';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
-import { LeanSession, ViewSession } from '../state/ducks/sessions/sessions.interface';
+import {
+  LeanSession,
+  ViewSession,
+} from '../state/ducks/sessions/sessions.interface';
 import useUserDetails from '../hooks/useUserDetails';
 
 type PatientPageParams = {
@@ -52,13 +50,16 @@ const PatientPage: React.FC = () => {
 
   const userDetailsForPatient = useUserDetails(userIdToUse);
   if (userDetailsForPatient.patient?.patientType.includes(PatientType.FEMFIT)) {
-    const { data, details: femfitDetails, loading } = usePatient(userIdToUse || '');
+    const {
+      data,
+      details: femfitDetails,
+      loading,
+    } = usePatient(userIdToUse || '');
     const sortedData = [...data].sort((a, b) => b.createdAt - a.createdAt);
     sortedFemfitData = sortedData;
     femfitDataDetails = femfitDetails;
     femfitLoading = loading;
-  }
-  else {
+  } else {
     femfitDataDetails = {
       sessionsThisWeek: 0,
       sessionsTotal: 0,
@@ -68,13 +69,20 @@ const PatientPage: React.FC = () => {
   }
 
   const patientType = userDetails?.patientType;
-  const { gameSessions, details: wheelchairDetails, loading } = useWheelchairPatient(userIdToUse);
+  const {
+    gameSessions,
+    details: wheelchairDetails,
+    loading,
+  } = useWheelchairPatient(userIdToUse);
 
   const sortedGameSessions = [...gameSessions].sort(
     (a, b) => b.createdAt - a.createdAt,
   );
-  
-  const allSessions: ViewSession[] = [...sortedFemfitData, ...sortedGameSessions];
+
+  const allSessions: ViewSession[] = [
+    ...sortedFemfitData,
+    ...sortedGameSessions,
+  ];
   const headingStyle = {
     color: 'var(--chakra-colors-blackAlpha-800)',
     fontWeight: 'bold',
@@ -120,7 +128,8 @@ const PatientPage: React.FC = () => {
             <LabeledValue
               label="Total workouts"
               value={
-                femfitDataDetails.sessionsTotal + wheelchairDetails.sessionsTotal
+                femfitDataDetails.sessionsTotal +
+                wheelchairDetails.sessionsTotal
               }
               icon={AiOutlineStock}
             />
@@ -163,7 +172,7 @@ const PatientPage: React.FC = () => {
               sessions={sortedGameSessions}
               patientId={userIdToUse!}
             />
-          </Card> 
+          </Card>
         </div>
       )}
     </Box>

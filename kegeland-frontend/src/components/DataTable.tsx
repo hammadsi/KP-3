@@ -40,7 +40,7 @@ import { UserRole } from '../state/ducks/auth/auth.interface';
 export type DataTableProps<T extends object> = {
   data: T[];
   columns: ColumnDef<T, any>[];
-  patientId: string
+  patientId: string;
 };
 
 const DataTable = <T extends { id?: string }>({
@@ -68,15 +68,15 @@ const DataTable = <T extends { id?: string }>({
   const navigate = useNavigate();
   const handleRowClick = (id?: string) => {
     if (userDetails?.roles.includes(UserRole.PATIENT)) {
-      navigate(`/wheelchair/${patientId}/${id}`); //"id" here represents the gameSessionID (sent from the WheelchairExerciseTable)
+      navigate(`/wheelchair/${patientId}/${id}`); // "id" here represents the gameSessionID (sent from the WheelchairExerciseTable)
     }
 
     if (data && Array.isArray(data) && data.length > 0) {
       if (userDetails?.roles.includes(UserRole.PHYSICIAN)) {
         if (window.location.href.includes('patients')) {
-          navigate(`/wheelchair/${patientId}/${id}`); //"id" here represents the gameSessionID (sent from the WheelchairExerciseTable)
+          navigate(`/wheelchair/${patientId}/${id}`); // "id" here represents the gameSessionID (sent from the WheelchairExerciseTable)
         } else {
-          navigate(`/patients/${id}`); //"id" here represents the patientID (sent from the patient table)
+          navigate(`/patients/${id}`); // "id" here represents the patientID (sent from the patient table)
         }
       }
     }

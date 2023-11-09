@@ -30,7 +30,7 @@ const GameSessionPage: React.FC = () => {
 
   let gameSession;
   const sessionId = id;
-  
+
   if (wheelchairPatient) {
     gameSession = wheelchairPatient!.gameSessions.find(
       (session) => session.id === sessionId,

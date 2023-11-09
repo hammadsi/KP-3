@@ -6,6 +6,7 @@ import {
   AiOutlineRise,
   AiOutlineSetting,
   AiOutlineFund,
+  AiOutlineQuestionCircle,
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
@@ -107,6 +108,13 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
             to={'/settings'}
             icon={AiOutlineSetting}
             isSelected={window.location.pathname === '/settings'}
+          />
+          <Menu.Item
+            mode={mode}
+            title="Questionnaire"
+            to={'/questionnaire'}
+            icon={AiOutlineQuestionCircle}
+            isSelected={window.location.pathname === '/questionnaire'}
           />
         </Menu>
         <VStack width="full" transition="bottom 200ms">

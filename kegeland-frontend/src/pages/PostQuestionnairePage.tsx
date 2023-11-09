@@ -183,7 +183,7 @@ const PostQuestionnairePage: React.FC = () => {
         fontWeight="semibold"
         color="gray.600"
         marginBottom={4}>
-        Post Questionnaire
+        Post Game Questionnaire
       </Text>
       {questionCounter === 0 && (
         <>
@@ -211,6 +211,10 @@ const PostQuestionnairePage: React.FC = () => {
               handleValueChange(setAnswerBorgScale3, value)
             }
           />
+          {/* Simply remove this button to make the questionnaire neccessary */}
+          <Button marginTop={4} onClick={() => navigate('/')}>
+            Skip Questionnaire
+          </Button>
         </>
       )}
       {questionCounter === 1 && (
@@ -228,6 +232,19 @@ const PostQuestionnairePage: React.FC = () => {
       )}
       {questionCounter === 2 && (
         <>
+          <Text
+            fontSize={18}
+            fontWeight="regular"
+            color="gray.600"
+            marginBottom={4}
+            maxWidth="600px"
+            width="50%"
+            textAlign="left"
+            style={{ width: '600' }}>
+            We are interested in understanding how much people enjoy engaging in
+            this activity. Think about the activity you just performed, and rank
+            the following statements
+          </Text>
           <SelectQuestion
             question={'I enjoyed the activity'}
             options={[

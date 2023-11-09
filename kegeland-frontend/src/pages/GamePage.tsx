@@ -28,7 +28,6 @@ const GamePage: React.FC = () => {
           endTime: new Date(), // You can adjust this according to your needs
           exerciseTime: 0, // Default exercise time
           questionnaires: {
-            preGame: [], // Empty array for pre-game questions
             postGame: [], // Empty array for post-game questions
           }, // Empty array for questionnaires
           laps: [], // Empty array for laps
@@ -50,7 +49,16 @@ const GamePage: React.FC = () => {
           // Handle the error state appropriately
         }
 
-        navigate('/game/pre', { state: { sessionId } });
+        const bearerToken = localStorage.getItem('access_token');
+        if (!bearerToken) {
+          throw new Error(
+            "Bearer token is not found in local storage, can't proceed.",
+          );
+        }
+
+        const unityUrl = `VRWheelchairSim://?patientId=${authUser.id}&bearerToken=${bearerToken}&sessionId=${sessionId}`; // Construct the URL to launch Unity
+        window.location.href = unityUrl; // Launch Unity with the required parameters
+        navigate('/game/post', { state: { sessionId } });
       }
     } catch (error) {
       console.error('Error while starting the game session:', error);

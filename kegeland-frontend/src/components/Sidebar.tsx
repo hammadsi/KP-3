@@ -100,6 +100,13 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
                 icon={AiOutlinePlayCircle}
                 isSelected={window.location.pathname.startsWith('/game')}
               />
+              <Menu.Item
+                mode={mode}
+                title="Questionnaire"
+                to={'/questionnaire'}
+                icon={AiOutlineQuestionCircle}
+                isSelected={window.location.pathname === '/questionnaire'}
+              />
             </>
           )}
           <Menu.Item
@@ -108,13 +115,6 @@ const Sidebar: React.FC<SidebarProps> = ({ user, mode, isOpen }) => {
             to={'/settings'}
             icon={AiOutlineSetting}
             isSelected={window.location.pathname === '/settings'}
-          />
-          <Menu.Item
-            mode={mode}
-            title="Questionnaire"
-            to={'/questionnaire'}
-            icon={AiOutlineQuestionCircle}
-            isSelected={window.location.pathname === '/questionnaire'}
           />
         </Menu>
         <VStack width="full" transition="bottom 200ms">

@@ -128,7 +128,9 @@ const GameSessionPage: React.FC = () => {
       </Button>
       <Collapse in={visible}>
         <Card loading={loading} h="100%">
-          <QuestionnaireResults questionnaire={gameSession?.questionnaires.postGame} />
+          <QuestionnaireResults
+            questionnaire={gameSession?.questionnaires.postGame}
+          />
         </Card>
       </Collapse>
       <Card marginTop={6}>

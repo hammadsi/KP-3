@@ -5,7 +5,6 @@ import {
   Flex,
   Stack,
   useMediaQuery,
-  Center,
   Collapse,
 } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
@@ -15,6 +14,7 @@ import {
   AiOutlineCalendar,
 } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
+import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 
 import Card from '../components/Card';
 import LabeledValue from '../components/LabeledValue';
@@ -33,7 +33,6 @@ import {
   ViewSession,
 } from '../state/ducks/sessions/sessions.interface';
 import useUserDetails from '../hooks/useUserDetails';
-import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 import QuestionnaireResults from '../components/QuestionnaireResultsWheelchair';
 
 type PatientPageParams = {
@@ -78,8 +77,12 @@ const PatientPage: React.FC = () => {
   }
 
   const patientType = userDetails?.patientType;
-  const { gameSessions, details: wheelchairDetails, wheelchairPatient, loading } =
-    useWheelchairPatient(userIdToUse);
+  const {
+    gameSessions,
+    details: wheelchairDetails,
+    wheelchairPatient,
+    loading,
+  } = useWheelchairPatient(userIdToUse);
 
   const sortedGameSessions = [...gameSessions].sort(
     (a, b) => b.createdAt - a.createdAt,
@@ -193,7 +196,11 @@ const PatientPage: React.FC = () => {
       </Button>
       <Collapse in={visible}>
         <Card h="100%">
-          <QuestionnaireResults questionnaire={wheelchairPatient?.currentPhysicalState.questionnaire} />
+          <QuestionnaireResults
+            questionnaire={
+              wheelchairPatient?.currentPhysicalState.questionnaire
+            }
+          />
         </Card>
       </Collapse>
     </Box>

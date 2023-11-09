@@ -140,7 +140,7 @@ When Prettier/ESlint errors occurr, run the commands
 ```
 yarn prettier . --write
 
-yarn prettier --write "src/**/*.{js,jsx,ts,tsx}"
+yarn prettier --write "src/**/*.{js,jsx,ts,tsx}"  
 
 yarn eslint --fix "src/**/*.{js,jsx,ts,tsx}"
 ```

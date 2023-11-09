@@ -35,7 +35,7 @@ const ExerciseTable: React.FC<ExerciseTableProps> = ({ sessions }) => {
     [isGreaterThanMd],
   );
 
-  return <DataTable data={sessions} columns={columns} />;
+  return <DataTable data={sessions} columns={columns} patientId="" />;
 };
 
 export default ExerciseTable;

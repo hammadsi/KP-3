@@ -12,9 +12,11 @@ type ExerciseTableProps = {
   patientId: string;
 };
 
-const ExerciseTable: React.FC<ExerciseTableProps> = ({ sessions }) => {
+const ExerciseTable: React.FC<ExerciseTableProps> = ({
+  sessions,
+  patientId,
+}) => {
   const [isGreaterThanMd] = useMediaQuery('(min-width: 48em)');
-
   const columnHelper = createColumnHelper<GameSession>();
   const columns = React.useMemo<ColumnDef<GameSession, any>[]>(
     () => [
@@ -30,7 +32,7 @@ const ExerciseTable: React.FC<ExerciseTableProps> = ({ sessions }) => {
     [isGreaterThanMd],
   );
 
-  return <DataTable data={sessions} columns={columns} />;
+  return <DataTable data={sessions} columns={columns} patientId={patientId} />;
 };
 
 export default ExerciseTable;

@@ -28,7 +28,10 @@ import FemfitExerciseTable from '../components/FemfitExerciseTable';
 import WheelchairExerciseTable from '../components/WheelchairExerciseTable';
 import { RootState } from '../state/store';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
-import { ViewSession } from '../state/ducks/sessions/sessions.interface';
+import {
+  LeanSession,
+  ViewSession,
+} from '../state/ducks/sessions/sessions.interface';
 import useUserDetails from '../hooks/useUserDetails';
 import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 import QuestionnaireResults from '../components/QuestionnaireResultsWheelchair';
@@ -37,10 +40,10 @@ type PatientPageParams = {
   patientId: string;
 };
 
+// NOTE: the following page might not work for displaying femfit sessions. The problem might be with loading the DataTable.
 const PatientPage: React.FC = () => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
   const { patientId } = useParams<PatientPageParams>();
-  const { data, details: femfitDetails, loading } = usePatient(patientId || '');
   const { authUser } = useSelector((state: RootState) => state.auth);
   const { userDetails } = useAppSelector((state) => state.auth);
   const [visible, setVisible] = useState(false);
@@ -49,28 +52,48 @@ const PatientPage: React.FC = () => {
     ? UserRole.PHYSICIAN
     : UserRole.PATIENT;
   const userIdToUse = userRole === UserRole.PATIENT ? authUser?.id : patientId;
-  const userDetailsForPatient = useUserDetails(patientId);
+
+  let sortedFemfitData: LeanSession[] = [];
+  let femfitDataDetails;
+  let femfitLoading = true;
+
+  const userDetailsForPatient = useUserDetails(userIdToUse);
+  if (userDetailsForPatient.patient?.patientType.includes(PatientType.FEMFIT)) {
+    const {
+      data,
+      details: femfitDetails,
+      loading,
+    } = usePatient(userIdToUse || '');
+    const sortedData = [...data].sort((a, b) => b.createdAt - a.createdAt);
+    sortedFemfitData = sortedData;
+    femfitDataDetails = femfitDetails;
+    femfitLoading = loading;
+  } else {
+    femfitDataDetails = {
+      sessionsThisWeek: 0,
+      sessionsTotal: 0,
+      lastSessionDelta: '',
+    };
+    femfitLoading = false;
+  }
+
   const patientType = userDetails?.patientType;
-  const { gameSessions, details: wheelchairDetails, wheelchairPatient } =
+  const { gameSessions, details: wheelchairDetails, wheelchairPatient, loading } =
     useWheelchairPatient(userIdToUse);
 
   const sortedGameSessions = [...gameSessions].sort(
     (a, b) => b.createdAt - a.createdAt,
   );
-  const sortedData = [...data].sort((a, b) => b.createdAt - a.createdAt);
 
-  const allSessions: ViewSession[] = [...sortedData, ...sortedGameSessions];
+  const allSessions: ViewSession[] = [
+    ...sortedFemfitData,
+    ...sortedGameSessions,
+  ];
   const headingStyle = {
     color: 'var(--chakra-colors-blackAlpha-800)',
     fontWeight: 'bold',
     fontSize: '24px',
     margin: '25px 0 10px 0',
-  };
-
-  const startUnitySession = () => {
-    window.location.href = `VRWheelchairSim:// -patientID ${patientId} -bearerToken ${localStorage.getItem(
-      'id_token',
-    )}`;
   };
 
   return (
@@ -92,7 +115,7 @@ const PatientPage: React.FC = () => {
             <LabeledValue
               label="Workouts this week"
               value={
-                femfitDetails.sessionsThisWeek +
+                femfitDataDetails.sessionsThisWeek +
                 wheelchairDetails.sessionsThisWeek
               }
               icon={AiOutlineCalendar}
@@ -100,7 +123,7 @@ const PatientPage: React.FC = () => {
             {/* TODO: Only show the one relevant for patient type */}
             <LabeledValue
               label="Since last femfit exercise"
-              value={femfitDetails.lastSessionDelta}
+              value={femfitDataDetails.lastSessionDelta}
               icon={AiOutlineClockCircle}
             />
             <LabeledValue
@@ -111,7 +134,8 @@ const PatientPage: React.FC = () => {
             <LabeledValue
               label="Total workouts"
               value={
-                femfitDetails.sessionsTotal + wheelchairDetails.sessionsTotal
+                femfitDataDetails.sessionsTotal +
+                wheelchairDetails.sessionsTotal
               }
               icon={AiOutlineStock}
             />
@@ -133,9 +157,9 @@ const PatientPage: React.FC = () => {
           ))) && (
         <div>
           <h1 style={headingStyle}>Overview of Femfit exercises</h1>
-          <Card loading={loading} minH="36">
+          <Card loading={femfitLoading} minH="36">
             <FemfitExerciseTable
-              sessions={sortedData}
+              sessions={sortedFemfitData}
               patientId={userIdToUse!}
             />
           </Card>
@@ -172,11 +196,6 @@ const PatientPage: React.FC = () => {
           <QuestionnaireResults questionnaire={wheelchairPatient?.currentPhysicalState.questionnaire} />
         </Card>
       </Collapse>
-      {userDetails?.roles.includes(UserRole.PHYSICIAN) && (
-        <Button w="100%" marginTop={8} onClick={startUnitySession}>
-          Start session
-        </Button>
-      )}
     </Box>
   );
 };

@@ -17,7 +17,7 @@ import useAppSelector from '../hooks/useAppSelector';
 import EditProfilePage from '../pages/profile/EditProfilePage';
 import PostQuestionnairePage from '../pages/PostQuestionnairePage';
 import PreQuestionnairePage from '../pages/PreQuestionnairePage';
-import WheelChairPage from '../pages/WheelChairPage';
+import GameSessionPage from '../pages/GameSessionPage';
 
 export interface RoutePathDefinition
   extends Omit<NonIndexRouteObject, 'children'> {
@@ -63,8 +63,8 @@ const routes: RoutePathDefinition[] = [
   },
   {
     title: 'wheelchair',
-    path: '/wheelchair/:id',
-    element: <WheelChairPage />,
+    path: '/wheelchair/:patientId/:id',
+    element: <GameSessionPage />,
   },
   {
     title: 'MyProfile',
@@ -142,8 +142,8 @@ const routes: RoutePathDefinition[] = [
         element: <ExercisePage />,
       },
       {
-        path: 'wheelchair/:id',
-        element: <WheelChairPage />,
+        path: ':id',
+        element: <GameSessionPage />,
       },
     ],
   },

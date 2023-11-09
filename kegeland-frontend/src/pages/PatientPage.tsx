@@ -6,6 +6,7 @@ import {
   Stack,
   useMediaQuery,
   Center,
+  Collapse,
 } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import {
@@ -29,6 +30,8 @@ import { RootState } from '../state/store';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import { ViewSession } from '../state/ducks/sessions/sessions.interface';
 import useUserDetails from '../hooks/useUserDetails';
+import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
+import QuestionnaireResults from '../components/QuestionnaireResultsWheelchair';
 
 type PatientPageParams = {
   patientId: string;
@@ -40,6 +43,7 @@ const PatientPage: React.FC = () => {
   const { data, details: femfitDetails, loading } = usePatient(patientId || '');
   const { authUser } = useSelector((state: RootState) => state.auth);
   const { userDetails } = useAppSelector((state) => state.auth);
+  const [visible, setVisible] = useState(false);
   // Determine the user's role
   const userRole = userDetails?.roles.includes(UserRole.PHYSICIAN)
     ? UserRole.PHYSICIAN
@@ -47,7 +51,7 @@ const PatientPage: React.FC = () => {
   const userIdToUse = userRole === UserRole.PATIENT ? authUser?.id : patientId;
   const userDetailsForPatient = useUserDetails(patientId);
   const patientType = userDetails?.patientType;
-  const { gameSessions, details: wheelchairDetails } =
+  const { gameSessions, details: wheelchairDetails, wheelchairPatient } =
     useWheelchairPatient(userIdToUse);
 
   const sortedGameSessions = [...gameSessions].sort(
@@ -153,7 +157,21 @@ const PatientPage: React.FC = () => {
           </Card>
         </div>
       )}
-
+      <Button
+        w="100%"
+        onClick={() => {
+          setVisible(!visible);
+        }}>
+        {visible ? <ArrowUpIcon /> : <ArrowDownIcon />}
+        {visible
+          ? '  Hide questionnaire results'
+          : '  Show questionnaire results'}
+      </Button>
+      <Collapse in={visible}>
+        <Card h="100%">
+          <QuestionnaireResults questionnaire={wheelchairPatient?.currentPhysicalState.questionnaire} />
+        </Card>
+      </Collapse>
       {userDetails?.roles.includes(UserRole.PHYSICIAN) && (
         <Button w="100%" marginTop={8} onClick={startUnitySession}>
           Start session

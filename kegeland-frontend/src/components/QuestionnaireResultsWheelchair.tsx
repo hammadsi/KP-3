@@ -20,6 +20,8 @@ const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({
 }) => {
   const [isGreaterThanLg] = useMediaQuery('(min-width: 62em)');
 
+  console.log(questionnaire)
+
   const renderQuestionItem = (item: any) => {
     if (item.category === 'Borg Scale') {
       const answer = parseInt(item.answer);
@@ -84,7 +86,7 @@ const QuestionnaireResults: React.FC<QuestionnaireResultsProps> = ({
             }
             gap={5}
             mb={5}>
-            {questionnaire.postGame.map((item: any, index: number) => (
+            {questionnaire.map((item: any, index: number) => (
               <GridItem colSpan={1} px={2} key={index} overflow="hidden">
                 {renderQuestionItem(item)}
               </GridItem>

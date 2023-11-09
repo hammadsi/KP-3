@@ -24,7 +24,6 @@ export type GameSession = {
   endTime: Date;
   exerciseTime: number;
   questionnaires: {
-    preGame: Question[];
     postGame: Question[];
   };
   laps: Lap[];
@@ -98,7 +97,6 @@ export type GameSessionData = {
   endTime: Date;
   exerciseTime: number;
   questionnaires: {
-    preGame: Question[];
     postGame: Question[];
   };
   laps: Lap[];

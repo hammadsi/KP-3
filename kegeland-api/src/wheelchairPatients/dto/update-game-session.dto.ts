@@ -122,7 +122,6 @@ class TimeSeriesDataDto {
 
     @IsOptional()
     questionnaires?: {
-      preGame: QuestionDto[];
       postGame: QuestionDto[];
     };
 

@@ -168,7 +168,6 @@ export class GameSession {
   @Expose()
   @IsOptional()
   questionnaires?: {
-    preGame: Question[];
     postGame: Question[];
   };
 

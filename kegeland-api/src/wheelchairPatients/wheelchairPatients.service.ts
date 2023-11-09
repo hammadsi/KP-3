@@ -165,7 +165,6 @@ export class WheelchairPatientsService {
 
       // Transforming Questionnaires
       const transformedQuestionnaires = {
-        preGame: gameSession.questionnaires?.preGame || [],
         postGame: gameSession.questionnaires?.postGame || []
       };
       // Transform Date objects to Firestore Timestamps

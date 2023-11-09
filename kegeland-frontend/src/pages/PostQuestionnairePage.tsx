@@ -211,10 +211,8 @@ const PostQuestionnairePage: React.FC = () => {
               handleValueChange(setAnswerBorgScale3, value)
             }
           />
-          {/*Simply remove this button to make the questionnaire neccessary*/}
-          <Button
-            marginTop={4}
-            onClick={() => navigate('/')}>
+          {/* Simply remove this button to make the questionnaire neccessary */}
+          <Button marginTop={4} onClick={() => navigate('/')}>
             Skip Questionnaire
           </Button>
         </>
@@ -236,15 +234,16 @@ const PostQuestionnairePage: React.FC = () => {
         <>
           <Text
             fontSize={18}
-            fontWeight='regular'
-            color='gray.600'
+            fontWeight="regular"
+            color="gray.600"
             marginBottom={4}
-            maxWidth='600px'
-            width='50%'
+            maxWidth="600px"
+            width="50%"
             textAlign="left"
             style={{ width: '600' }}>
-            We are interested in understanding how much people enjoy engaging in this activity. Think 
-about the activity you just performed, and rank the following statements
+            We are interested in understanding how much people enjoy engaging in
+            this activity. Think about the activity you just performed, and rank
+            the following statements
           </Text>
           <SelectQuestion
             question={'I enjoyed the activity'}

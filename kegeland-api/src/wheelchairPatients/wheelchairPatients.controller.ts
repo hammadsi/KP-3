@@ -7,7 +7,7 @@ import { Roles } from '../roles/roles.decorator';
 import { RolesGuard } from '../roles/roles.guard';
 import { WheelchairPatientsService } from './wheelchairPatients.service';
 import { UpdatePhysicalStateDto } from './dto/update-physicalstate.dto';
-import { HeartRateDto, IMUDataDto, LapDto, QuestionDto, SpeedDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
+import { HeartRateDto, IMUDataDto, LapDto, SpeedDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
 
 @ApiTags('WheelchairPatients')
 @Controller('wheelchairPatients')
@@ -102,14 +102,5 @@ export class WheelchairPatientsController {
     @Body() imuData: IMUDataDto[],
   ) {
     return this.wheelchairPatientsService.addIMUDataToGameSession(patientId, sessionId, imuData);
-  }
-
-  @Put(':patientId/gameSessions/:sessionId/postGameQuestionnaire')
-  async updatePostGameQuestionnaire(
-    @Param('patientId') patientId: string,
-    @Param('sessionId') sessionId: string,
-    @Body() questions: QuestionDto[]
-  ) {
-    return this.wheelchairPatientsService.updatePostGameQuestionnaire(patientId, sessionId, questions);
   }
 }

@@ -11,7 +11,6 @@ import {
   fetchWheelchairPatientById,
   updateGameSession,
   updatePatientData,
-  updatePostGameQuestionnaire,
 } from './wheelchairPatients.actions';
 import { WheelchairPatientsState } from './wheelchairPatients.interface';
 
@@ -59,19 +58,6 @@ const wheelchairPatientsSlice = createSlice({
           );
           if (sessionIndex > -1) {
             state.wheelchairPatient.gameSessions[sessionIndex] = action.payload;
-          }
-        }
-      })
-      .addCase(updatePostGameQuestionnaire.fulfilled, (state, action) => {
-        if (state.wheelchairPatient) {
-          const sessionIndex = state.wheelchairPatient.gameSessions.findIndex(
-            (session) => session.id === action.meta.arg.sessionId,
-          );
-          if (sessionIndex > -1) {
-            // Update the questionnaire of the game session
-            state.wheelchairPatient.gameSessions[
-              sessionIndex
-            ].questionnaires.postGame = action.payload;
           }
         }
       })

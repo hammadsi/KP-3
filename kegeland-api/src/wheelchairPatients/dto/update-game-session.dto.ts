@@ -16,7 +16,7 @@ export enum QuestionType {
     radio = 'radio'
 }
 
-class QuestionDto {
+export class QuestionDto {
     @IsString()
     question: string;
 

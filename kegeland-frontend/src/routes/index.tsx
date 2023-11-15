@@ -16,7 +16,6 @@ import ProtectedRoutes from '../components/ProtectedRoutes';
 import useAppSelector from '../hooks/useAppSelector';
 import EditProfilePage from '../pages/profile/EditProfilePage';
 import PostQuestionnairePage from '../pages/PostQuestionnairePage';
-import PreQuestionnairePage from '../pages/PreQuestionnairePage';
 import GameSessionPage from '../pages/GameSessionPage';
 
 export interface RoutePathDefinition
@@ -111,11 +110,6 @@ const routes: RoutePathDefinition[] = [
         title: 'Game',
         path: '/game',
         element: <GamePage />,
-      },
-      {
-        title: 'Pre',
-        path: '/game/pre',
-        element: <PreQuestionnairePage />,
       },
       {
         title: 'Post',

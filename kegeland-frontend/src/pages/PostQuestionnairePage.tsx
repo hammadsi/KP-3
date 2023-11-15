@@ -9,7 +9,7 @@ import SliderQuestionCustom from '../components/SliderQuestionCustom';
 import FreeTextQuestion from '../components/FreeTextQuestion';
 import withLayout from '../hoc/withLayout';
 import { RootState } from '../state/store';
-import useUpdatePostGameQuestionnaire from '../hooks/useUpdatePostGameQuestionnaire';
+import useUpdateGameSession from '../hooks/useUpdateGameSession';
 import useWheelchairPatient from '../hooks/useWheelchairPatient';
 import SliderQuestion from '../components/SliderQuestion';
 
@@ -34,8 +34,7 @@ const PostQuestionnairePage: React.FC = () => {
 
   const { authUser } = useSelector((state: RootState) => state.auth);
   const { wheelchairPatient } = useWheelchairPatient(authUser?.id);
-  const { updateQuestionnaire, loading, error } =
-    useUpdatePostGameQuestionnaire();
+  const { updateSession } = useUpdateGameSession();
 
   const endSession = async () => {
     const currentSession = wheelchairPatient?.gameSessions.find(
@@ -115,12 +114,17 @@ const PostQuestionnairePage: React.FC = () => {
         ],
       };
 
+      const updateData = {
+        patientId: authUser.id,
+        id: sessionId,
+        sessionData: {
+          ...currentSession,
+          questionnaires: questionnaireData,
+        },
+      };
+
       try {
-        await updateQuestionnaire(
-          authUser.id,
-          sessionId,
-          questionnaireData.postGame,
-        );
+        await updateSession(updateData);
         navigate('/'); // Or navigate to any page you wish
       } catch (error) {
         console.error('Error updating post-game session:', error);

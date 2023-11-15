@@ -1,6 +1,6 @@
 import { FirebaseService } from 'src/firebase/firebase.service';
 import { firestore } from 'firebase-admin';
-import { HeartRateDto, IMUDataDto, LapDto, QuestionDto, SpeedDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
+import { HeartRateDto, IMUDataDto, LapDto, SpeedDto, UpdateGameSessionDto } from './dto/update-game-session.dto';
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { GameSession } from './entities/wheelchairPatient.entity'
 import { UpdatePhysicalStateDto } from './dto/update-physicalstate.dto';
@@ -320,36 +320,4 @@ export class WheelchairPatientsService {
       throw new InternalServerErrorException(error.message);
     }
   }
-
-  /**
-   * Function for updating the postGame questionnaire of a specific game session
-   * @param patientId ID of the wheelchair patient
-   * @param sessionId ID of the game session to update
-   * @param questions Array of questions to update the postGame questionnaire with
-   */
-  async updatePostGameQuestionnaire(patientId: string, sessionId: string, questions: QuestionDto[]) {
-    try {
-      const gameSessionDocRef = this.firebaseService.firestore
-        .collection('patients')
-        .doc(patientId)
-        .collection('gameSessions')
-        .doc(sessionId);
-
-      // Check if the game session exists
-      const docSnapshot = await gameSessionDocRef.get();
-      if (!docSnapshot.exists) {
-        throw new NotFoundException(`Game session with ID ${sessionId} not found`);
-      }
-
-      // Update the postGame questionnaire
-      await gameSessionDocRef.update({
-        'questionnaires.postGame': questions
-      });
-
-      return { sessionId, postGame: questions };
-    } catch (error) {
-      throw new InternalServerErrorException(error.message);
-    }
-  }
-
 }

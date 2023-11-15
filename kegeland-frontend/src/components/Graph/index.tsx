@@ -5,9 +5,7 @@ import 'chart.js/auto';
 import { Divider, Box } from '@chakra-ui/react';
 import 'chartjs-adapter-moment';
 import { useRef } from 'react';
-
 import { GameSession } from '../../state/ducks/wheelchairPatients/wheelchairPatients.interface';
-
 import GraphHeader from './GraphHeader';
 
 ChartJS.register(zoomPlugin);
@@ -22,7 +20,7 @@ const ExerciseGraph: React.FC<ExerciseGraphProps> = ({ session }) => {
   );
   const timestamps = session?.timeSeriesData.heartRates.map((hr) => {
     const date = new Date(hr.timestamp);
-    const hours = date.getUTCHours();
+    const hours = date.getUTCHours() + 1;
     const minutes = date.getUTCMinutes();
     const secondsVal = date.getUTCSeconds();
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(

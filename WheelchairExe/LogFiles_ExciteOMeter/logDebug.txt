@@ -1,0 +1,51 @@
+datetime,Event
+231116144020.120,New App Execution
+231116144031.638,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231116144041.647,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231116144051.671,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231116144150.495,New App Execution
+datetime,Event
+231116144301.246,New App Execution
+datetime,Event
+231116151736.313,New App Execution
+datetime,Event
+231116152259.935,New App Execution
+datetime,Event
+231116153115.043,New App Execution
+datetime,Event
+231116153857.647,New App Execution
+datetime,Event
+231116154209.693,New App Execution
+datetime,Event
+231116155305.687,New App Execution
+datetime,Event
+231116160004.234,New App Execution
+datetime,Event
+231116160446.433,New App Execution
+datetime,Event
+231116161044.465,New App Execution
+231116161055.882,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231116161105.957,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231116161115.966,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231116161125.990,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231116161136.015,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231116161146.023,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231116161156.066,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231116161206.107,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231116161216.133,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+231116161226.174,ExciteOMeter >> No incoming data RRInterval was found to calculate feature SDNN
+datetime,Event
+231116161345.053,New App Execution
+datetime,Event
+231116161628.186,New App Execution
+datetime,Event
+231116161711.655,New App Execution
+datetime,Event
+231116161928.369,New App Execution
+datetime,Event
+231116162054.657,New App Execution
+datetime,Event
+231116162227.601,New App Execution
+datetime,Event
+231116162330.603,New App Execution

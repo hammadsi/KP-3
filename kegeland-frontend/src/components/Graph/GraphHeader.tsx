@@ -1,6 +1,7 @@
 import { HStack } from '@chakra-ui/react';
 import moment from 'moment';
 import { MdOutlineWatchLater } from 'react-icons/md';
+
 import LabeledValue from '../LabeledValue';
 
 type GraphHeaderProps = {
@@ -10,7 +11,7 @@ type GraphHeaderProps = {
 
 const GraphHeader: React.FC<GraphHeaderProps> = ({ date, endTime }) => {
   const dateFormat = new Date(date);
-  const formattedEndTime = endTime.toLocaleString(); 
+  const formattedEndTime = endTime.toLocaleString();
 
   function getDuration(startDate: number, endDate: Date) {
     const durationInMilliseconds = endDate.getTime() - startDate;

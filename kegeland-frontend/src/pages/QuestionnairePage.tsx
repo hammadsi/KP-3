@@ -524,7 +524,7 @@ const QuestionnairePage: React.FC = () => {
             {...description}
             textAlign="left"
             style={{ width: description.maxWidth }}>
-            We are interested in the reasons underlying peoples' decisions to
+            We are interested in the reasons underlying peoples decisions to
             engage, or not engage in physical exercise. <br />
             <br /> Using the scale below, please indicate to what extent each of
             the following items is true for you. Please note that there are no

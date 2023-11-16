@@ -5,7 +5,9 @@ import 'chart.js/auto';
 import { Divider, Box } from '@chakra-ui/react';
 import 'chartjs-adapter-moment';
 import { useRef } from 'react';
+
 import { GameSession } from '../../state/ducks/wheelchairPatients/wheelchairPatients.interface';
+
 import GraphHeader from './GraphHeader';
 
 ChartJS.register(zoomPlugin);

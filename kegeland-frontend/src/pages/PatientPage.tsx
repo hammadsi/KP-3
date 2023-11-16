@@ -51,29 +51,26 @@ const PatientPage: React.FC = () => {
     ? UserRole.PHYSICIAN
     : UserRole.PATIENT;
   const userIdToUse = userRole === UserRole.PATIENT ? authUser?.id : patientId;
+  const {
+    data,
+    details: femfitDetails,
+    loading: femfitLoading,
+  } = usePatient(userIdToUse || '');
 
   let sortedFemfitData: LeanSession[] = [];
   let femfitDataDetails;
-  let femfitLoading = true;
 
   const userDetailsForPatient = useUserDetails(userIdToUse);
   if (userDetailsForPatient.patient?.patientType.includes(PatientType.FEMFIT)) {
-    const {
-      data,
-      details: femfitDetails,
-      loading,
-    } = usePatient(userIdToUse || '');
     const sortedData = [...data].sort((a, b) => b.createdAt - a.createdAt);
     sortedFemfitData = sortedData;
     femfitDataDetails = femfitDetails;
-    femfitLoading = loading;
   } else {
     femfitDataDetails = {
       sessionsThisWeek: 0,
       sessionsTotal: 0,
       lastSessionDelta: '',
     };
-    femfitLoading = false;
   }
 
   const patientType = userDetails?.patientType;

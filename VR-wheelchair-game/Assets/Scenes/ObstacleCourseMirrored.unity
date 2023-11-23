@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 10668.775, g: 9252.799, b: 9045.115, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6325,7 +6325,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1065444791}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 752a8ecefcb13a64abe829ea755db3be, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c9aa9645f2e37c44a0bb35630db1bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1070677312
@@ -6354,7 +6354,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1070677312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c87ebd995e41b2c41ab0233de400dc12, type: 3}
+  m_Script: {fileID: 11500000, guid: ee0b19362c6cb0546961ea66a9cbf5ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   exitPromptPanel: {fileID: 121898681}
@@ -8105,6 +8105,8 @@ MonoBehaviour:
   CurrentAcceleration: 0
   CurrentBreakForce: 0
   CurrentTurnAngle: 0
+  leftWheelSpeed: 0
+  rightWheelSpeed: 0
 --- !u!54 &1377974349
 Rigidbody:
   m_ObjectHideFlags: 0
